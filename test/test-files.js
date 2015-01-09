@@ -1,1 +1,1 @@
-var tests = ["spec/Clinical.spec"];
+var tests = ["spec/Oui.spec","jsx!spec/List/List.spec"];

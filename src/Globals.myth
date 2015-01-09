@@ -1,0 +1,4 @@
+:root {
+  --loading-color: #e7e7e7;
+  --loading-bg: white;
+}

@@ -20,8 +20,9 @@
     "backbone": "~1.1.2",
     "jquery": "~2.1.1",
     "react": "~0.12.2",
-    "react.backbone": "~0.5.0",
-    "jsx-requirejs-plugin": "~0.5.1"
+    "react.backbone": "~0.6.0",
+    "jsx-requirejs-plugin": "~0.5.1",
+    "backbone-filtered-collection": "~0.4.0"
   },
   "devDependencies": {
     "almond": "~0.2.9",
@@ -30,6 +31,9 @@
     "sinonjs": "~1.10.2",
     "requirejs": "~2.1.14",
     "pretender": "~0.1.0",
-    "responsive": "~3.1.4"
+    "responsive": "~3.1.4",
+    "jsx-requirejs-plugin": "~0.5.1",
+    "requirejs-plugins": "~1.0.3",
+    "highlightjs": "~8.4.0"
   }
 }

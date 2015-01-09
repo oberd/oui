@@ -12,7 +12,7 @@ then
   against=HEAD
 else
   # Initial commit: diff against an empty tree object
-  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+  against=5ef4b89cd0f2f9a12c5afeae4068493f4442b7e1
 fi
 
 # If you want to allow non-ASCII filenames set this variable to true.

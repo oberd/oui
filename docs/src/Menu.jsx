@@ -11,7 +11,7 @@ define(function (require) {
         'active': this.props.active
       });
       return (
-        <li className={classes} onClick={this.props.onClick}>
+        <li className={classes} onClick={this.props.onClick} key={this.props.key}>
           <span className="icon">&#9733;</span>
           {this.props.name}
         </li>
@@ -19,9 +19,21 @@ define(function (require) {
     }
   });
   var ExamplesMenu = React.createClass({
+    componentDidMount: function () {
+      if (window.location.hash) {
+        var val = window.location.hash.toString().replace('#','');
+        var isFound = _.find(this.props.examples, function (ex) {
+          return ex.name === val;
+        });
+        if (isFound) {
+          this.props.onSelect(isFound);
+        }
+      }
+    },
     handleExample: function (example) {
       var self = this;
       return function () {
+        window.location.hash = '#' + example.name;
         if (self.props.onSelect) {
           self.props.onSelect(example);
         }
@@ -33,7 +45,7 @@ define(function (require) {
         <ul className="no-bullets">
         {_(this.props.examples).map(function (example) {
           example.active = example.name === self.props.value;
-          return <ExampleMenuItem key={example.module} {...example} onClick={self.handleExample(example)} />;
+          return <ExampleMenuItem key={example.name} {...example} onClick={self.handleExample(example)} />;
         })}
         </ul>
       );

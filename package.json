@@ -15,6 +15,7 @@
   "devDependencies": {
     "gulp": "^3.8.6",
     "gulp-concat": "^2.4.3",
+    "gulp-flatten": "0.0.4",
     "gulp-mocha-phantomjs": "^0.3.0",
     "gulp-myth": "^1.0.2",
     "gulp-rename": "^1.2.0",

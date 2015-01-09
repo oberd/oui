@@ -1,0 +1,42 @@
+@import '../Globals.myth';
+
+.oui-list-container {
+  display: block;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+.out-list > li {
+  display: block;
+  padding: 0.5em;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
+
+.oui-list-loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background: var(--loading-bg);
+  color: var(--loading-color);
+  transform: scale(0);
+  text-align: center;
+  line-height: 10em;
+  z-index: 2;
+}
+
+.list-loading-message.on {
+  transform: scale(1.0);
+}

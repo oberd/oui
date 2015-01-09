@@ -15,33 +15,42 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var clean = require('gulp-rimraf');
 var rjs = require('requirejs');
+var flatten = require('gulp-flatten');
 
 // Clean task (destroys all build artifacts)
 gulp.task('clean', function () {
   return gulp.src(['dist'], {read: false}).pipe(clean());
 });
 
+gulp.task('clean-docs', function () {
+  return gulp.src(['docs/css/dist'], {read: false}).pipe(clean());
+});
+
 // Require.js Optimizer
 gulp.task('requirejs', ['clean'], function (cb) {
   rjs.optimize({
-    baseUrl: 'src',
     paths: {
-      'jquery': '../bower_components/jquery/dist/jquery',
-      'underscore': '../bower_components/underscore/underscore',
-      'backbone': '../bower_components/backbone/backbone',
-      'react': '../bower_components/react/react-with-addons',
-      'react.backbone': '../bower_components/react.backbone/react.backbone',
-      'JSXTransformer': '../bower_components/react/JSXTransformer',
+      'Oui': 'src',
+      'jquery': 'bower_components/jquery/dist/jquery',
+      'underscore': 'bower_components/underscore/underscore',
+      'backbone': 'bower_components/backbone/backbone',
+      'react': 'bower_components/react/react-with-addons',
+      'react.backbone': 'bower_components/react.backbone/react.backbone',
+      'text': 'bower_components/requirejs-text/text',
+      'JSXTransformer': 'tools/JSXTransformer',
+      'jsx': 'bower_components/jsx-requirejs-plugin/js/jsx',
+      'backbone-filtered-collection': 'bower_components/backbone-filtered-collection/backbone-filtered-collection'
     },
     jsx: {
       fileExtension: '.jsx'
     },
+    stubModules: ['jsx'],
     shim: {
       'backbone': { 'deps': ['underscore', 'jquery'] }
     },
     optimize: 'none',
-    include: ['../bower_components/almond/almond', 'Clinical'],
-    exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone'],
+    include: ['bower_components/almond/almond', 'Oui/Oui'],
+    exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
     out: 'dist/oberd-ui.js',
     wrap: {
       'startFile': 'tools/wrap.start',
@@ -55,10 +64,14 @@ gulp.task('requirejs', ['clean'], function (cb) {
 
 gulp.task('test-config', function () {
   var all = [];
-  gulp.src(['test/spec/**/*.spec.js'])
+  gulp.src(['test/spec/**/*.spec.{js,jsx}'])
     .pipe(es.through(function (data) {
       var dir = path.relative(__dirname + '/test', path.dirname(data.path));
-      var name = path.basename(data.path, '.js');
+      var name = path.basename(data.path);
+      if (name.match(/jsx$/)) {
+        dir = 'jsx!' + dir;
+      }
+      name = name.replace(/\.(js|jsx)$/, '');
       all.push(dir + '/' + name);
       this.emit(data);
     }, function () {
@@ -86,33 +99,44 @@ gulp.task('min', ['requirejs'], function () {
     .pipe(size({ showFiles: true }));
 });
 
-gulp.task('myth-examples', function () {
-  return gulp.src('examples/styles.myth.css')
+gulp.task('myth-docs', ['clean-docs'], function () {
+  return gulp.src('docs/css/styles.myth')
     .pipe(myth())
-    .pipe(rename('styles.css'))
-    .pipe(gulp.dest('examples/css/dist'));
+    .pipe(rename({ extname: '.css' }))
+    .pipe(gulp.dest('docs/css/dist'));
 });
 
-gulp.task('myth-library', function () {
-  return gulp.src('src/**/*.myth.css')
-        .pipe(myth())
-        .pipe(gulp.dest('dist'))
-        .pipe(concat('all.css'))
-        .pipe(gulp.dest('dist'));
+gulp.task('myth-globals', ['clean'], function () {
+  return gulp
+    .src('src/*.myth')
+    .pipe(myth())
+    .pipe(rename({ extname: '.css' }))
+    .pipe(gulp.dest('dist/css'));
 });
-gulp.task('myth', ['myth-library', 'myth-examples']);
+
+gulp.task('myth-library', ['clean', 'myth-globals'], function () {
+  return gulp.src('src/**/*.myth')
+        .pipe(myth())
+        .pipe(flatten())
+        .pipe(rename({ extname: '.css' }))
+        .pipe(gulp.dest('dist/css'))
+        .pipe(concat('oui.css'))
+        .pipe(gulp.dest('dist/css'));
+});
+gulp.task('myth', ['myth-library', 'myth-docs']);
 
 gulp.task('build-test', ['test-config']);
-gulp.task('build', ['min']);
+gulp.task('build', ['myth', 'min']);
 
-gulp.task('serve', function () {
+gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.js', 'test/spec/**/*.js'], ['test']);
-  gulp.watch(['src/**/*.myth.css'], ['myth-library']);
-  gulp.watch(['examples/styles.myth.css'], ['myth-examples']);
-  var server = require('superstatic')();
+  gulp.watch(['src/**/*.myth'], ['myth-library']);
+  gulp.watch(['docs/**/*.myth'], ['myth-docs']);
+  var server = require('superstatic')({ "cache_control": false });
   server.listen(function () {
-    gutil.log('Examples accessible: http://localhost:' + server.port + '/examples/example.html');
-    gutil.log('Tests accessible: http://localhost:' + server.port + '/test/index.html');
+    var base = 'http://' + server.host + ':' + server.port;
+    gutil.log('Documentation accessible: ' + base + '/docs/index.html');
+    gutil.log('Tests accessible: ' + base + '/docs/index.html');
   });
 });
 

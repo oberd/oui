@@ -1,0 +1,91 @@
+.page-header {
+  background: #F5DB41;
+  margin: 0;
+  padding: 1em;
+  color: #685F21;
+  font-weight: normal;
+  font-size: 2em;
+  overflow: hidden;
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0,.65,.51,.99);
+  transform: translate3d(0, 0, 0);
+  position: relative;
+  height: 220px;
+}
+.page-header .subtitle {
+  font-size: 0.5em;
+  margin-top: 0.25em;
+}
+.out .page-header {
+  opacity: 0;
+}
+.page-header img, .page-header .subtitle {
+  opacity: 1;
+  transition: all 0.25s cubic-bezier(0,.65,.51,.99);
+  transform: translate3d(0, 0, 0);
+}
+.out .page-header img, .out .page-header .subtitle {
+  opacity: 0.4;
+  transform: translate3d(0, 100px, 100px);
+}
+.menu-item {
+  padding: 0.5em;
+  border: 1px solid #f0f0f0;
+  border-top: none;
+  margin: 0.5em;
+  color: #888888;
+  cursor: pointer;
+  transition: all 0.25s;
+  overflow: hidden;
+  position: relative;
+}
+.menu-item .icon {
+  display: block;
+  position: absolute;
+  left: -1em;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.4s;
+}
+.menu-item.active {
+  padding-left: 1.75em;
+  color: black;
+}
+.menu-item.active .icon {
+  margin-left: 0;
+  left: 0.5em;
+  opacity: 1;
+  transform: scale(1.0);
+}
+.menu-item:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+.menu-item:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.component-page {
+  padding: 1em;
+}
+.component-example {
+  padding: 3em;
+  box-shadow: inset 3px 3px 15px rgba(0,0,0,0.15);
+}
+.component-page .example-source {
+  height: 0;
+  overflow: hidden;
+}
+.component-page .example-source-toggle {
+  padding: 0.5em;
+  display: inline-block;
+  background: #f0f0f0;
+  border-radius: 10px;
+  color: #666666;
+  margin: 0.3em 0;
+  cursor: pointer;
+}
+.component-page .example-source.expanded {
+  height: auto;
+}
