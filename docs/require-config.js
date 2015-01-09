@@ -11,6 +11,7 @@ requirejs.config({
     'text': '../bower_components/requirejs-text/text',
     'backbone-filtered-collection': '../bower_components/backbone-filtered-collection/backbone-filtered-collection',
     'jsx': '../bower_components/jsx-requirejs-plugin/js/jsx',
+    'json': '../bower_components/requirejs-plugins/src/json',
     'mdown': '../bower_components/requirejs-plugins/src/mdown',
     'highlightjs': '../bower_components/highlightjs/highlight.pack',
     'markdownConverter': '../bower_components/requirejs-plugins/lib/Markdown.Converter'

@@ -13,7 +13,8 @@ define(function (require) {
       name: 'List',
       content: require('mdown!docs/List/Basic.md'),
       source: require('text!docs/List/Basic.jsx'),
-      component: require('jsx!docs/List/Basic')
+      component: require('jsx!docs/List/Basic'),
+      manifest: require('json!docs/List/manifest.json')
     }
   ];
 

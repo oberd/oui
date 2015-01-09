@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "collection",
+      "type": "Backbone.Collection",
+      "required": false,
+      "description": "Collection over which to iterate, drives row data"
+    }
+  ]
+}

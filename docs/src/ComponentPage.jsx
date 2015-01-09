@@ -26,6 +26,7 @@ define(function (require) {
       var Example = this.props.component;
       return (
         <div className="component-page" key={this.props.name}>
+          <h3>{this.props.name} Demo</h3>
           <div className="component-example">
             <Example />
           </div>
@@ -34,6 +35,19 @@ define(function (require) {
             <div className={sourceClasses}>
               <pre><code className="e4x" ref="code">{this.props.source}</code></pre>
             </div>
+            <h3>Properties</h3>
+            <table className="table table-striped">
+              <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              {_.map(this.props.manifest.properties, function (p) {
+                return (
+                  <tr key={p.name}>
+                    <td>{p.name}</td>
+                    <td>{p.type}</td>
+                    <td>{p.description}</td>
+                  </tr>
+                );
+              })}
+            </table>
             <div className="component-content">
               <div dangerouslySetInnerHTML={{__html: this.props.content}} />
             </div>
