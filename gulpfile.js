@@ -59,7 +59,7 @@ gulp.task('requirejs', ['clean'], function (cb) {
   }, function (buildResponse) {
     require('fs').writeFileSync(__dirname + '/dist/build-info.txt', buildResponse);
     cb();
-  }, cb);
+  });
 });
 
 gulp.task('test-config', function () {
