@@ -7,16 +7,7 @@ define(function (require) {
   var React = require('react.backbone');
   var DocsMenu = require('jsx!./Menu');
   var ComponentPage = require('jsx!./ComponentPage');
-
-  var examples = [
-    {
-      name: 'List',
-      content: require('mdown!docs/List/Basic.md'),
-      source: require('text!docs/List/Basic.jsx'),
-      component: require('jsx!docs/List/Basic'),
-      manifest: require('json!docs/List/manifest.json')
-    }
-  ];
+  var examples = require('./manifest');
 
   packageInfo = JSON.parse(packageInfo);
 

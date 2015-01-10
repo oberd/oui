@@ -8,14 +8,19 @@ Components should have these goals in mind:
 
 * Accessibile
 * Well tested
+* Keyboard Enabled
 * Progressively enhanced (with a baseline assumption of Javascript)
-* Browser support for IE8+
+* Browser support: IE8+
 
 ### Getting Started
 
 ```sh
 ./tools/init.sh
 ```
+
+### Contribution
+
+More information on creating your own component can be found in the [Contribution Guide](https://github.com/oberd/oui/blob/master/CONTRIBUTION.md)
 
 ### Development Commands
 
