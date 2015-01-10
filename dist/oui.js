@@ -1,4 +1,4 @@
-//Copyright 2012, etc.
+//Copyright 2015, Oberd (Universal Research Solutions)
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -490,9 +490,9 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/List/Row',['require','react'],function (require) {
+define('jsx!Oui/List/Row',['require','react.backbone'],function (require) {
   
-  var React = require('react');
+  var React = require('react.backbone');
   var Row = React.createBackboneClass({
     render: function () {
       return React.createElement("li", null, "Please customize this row component ", this.getModel().id);

@@ -1,5 +1,5 @@
 
-/Users/nathanbleigh/development/urs/oui/dist/oberd-ui.js
+/Users/nathanbleigh/development/urs/oui/dist/oui.js
 ----------------
 ./bower_components/almond/almond.js
 ./bower_components/jsx-requirejs-plugin/js/jsx.js
