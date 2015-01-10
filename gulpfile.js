@@ -51,7 +51,7 @@ gulp.task('requirejs', ['clean'], function (cb) {
     optimize: 'none',
     include: ['bower_components/almond/almond', 'Oui/Oui'],
     exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
-    out: 'dist/oberd-ui.js',
+    out: 'dist/oui.js',
     wrap: {
       'startFile': 'tools/wrap.start',
       'endFile': 'tools/wrap.end'

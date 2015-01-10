@@ -1,11 +1,11 @@
 {
-  "name": "clinical-sdk",
-  "version": "0.0.0",
-  "main": "dist/clinical-sdk.js",
+  "name": "oui",
+  "version": "0.0.1",
+  "main": "dist/oui.js",
   "scripts": {
     "test": "node node_modules/.bin/gulp test"
   },
-  "author": "",
+  "author": "Oberd 2015",
   "license": "ISC",
   "dependencies": {
     "event-stream": "^3.1.7",

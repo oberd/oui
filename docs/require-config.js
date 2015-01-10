@@ -14,10 +14,12 @@ requirejs.config({
     'json': '../bower_components/requirejs-plugins/src/json',
     'mdown': '../bower_components/requirejs-plugins/src/mdown',
     'highlightjs': '../bower_components/highlightjs/highlight.pack',
+    'chance': '../bower_components/chance/chance',
     'markdownConverter': '../bower_components/requirejs-plugins/lib/Markdown.Converter'
   },
   jsx: { fileExtension: '.jsx' },
   shim: {
-    'backbone': { deps: ['underscore', 'jquery'] }
+    'backbone': { deps: ['underscore', 'jquery'] },
+    'chance': { exports: 'chance' }
   }
 });

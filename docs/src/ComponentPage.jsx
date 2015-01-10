@@ -26,18 +26,22 @@ define(function (require) {
       var Example = this.props.component;
       return (
         <div className="component-page" key={this.props.name}>
-          <h3>{this.props.name} Demo</h3>
+          <h3>{this.props.name} Component</h3>
+          <h4>Demo</h4>
           <div className="component-example">
             <Example />
           </div>
-          <a className="example-source-toggle" onClick={this.toggleSource}>{sourceMessage}</a>
+          <a className="docs-button" onClick={this.toggleSource}>{sourceMessage}</a>
           <div className="component-docs">
             <div className={sourceClasses}>
               <pre><code className="e4x" ref="code">{this.props.source}</code></pre>
             </div>
-            <h3>Properties</h3>
+            <h4>Properties</h4>
             <table className="table table-striped">
-              <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <thead>
+                <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              </thead>
+              <tbody>
               {_.map(this.props.manifest.properties, function (p) {
                 return (
                   <tr key={p.name}>
@@ -47,6 +51,7 @@ define(function (require) {
                   </tr>
                 );
               })}
+              </tbody>
             </table>
             <div className="component-content">
               <div dangerouslySetInnerHTML={{__html: this.props.content}} />

@@ -100,7 +100,7 @@
   overflow: hidden;
 }
 
-.component-page .example-source-toggle {
+.component-page .docs-button {
   padding: 0.5em;
   display: inline-block;
   background: #f0f0f0;
@@ -108,6 +108,7 @@
   color: #666666;
   margin: 0.3em 0;
   cursor: pointer;
+  margin-right: 0.3em;
 }
 
 .component-page .example-source.expanded {

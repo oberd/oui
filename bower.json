@@ -1,8 +1,8 @@
 {
-  "name": "oberd-ui",
+  "name": "oui",
   "version": "0.0.1",
-  "description": "Oberd Multi-Purpose Frontend Components",
-  "main": "dist/clinical-sdk.js",
+  "description": "Oberd Generic Frontend Components",
+  "main": "dist/oui.js",
   "moduleType": [
     "amd",
     "es6",
@@ -34,6 +34,7 @@
     "responsive": "~3.1.4",
     "jsx-requirejs-plugin": "~0.5.1",
     "requirejs-plugins": "~1.0.3",
-    "highlightjs": "~8.4.0"
+    "highlightjs": "~8.4.0",
+    "chance": "~0.7.1"
   }
 }

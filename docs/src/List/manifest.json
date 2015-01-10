@@ -3,8 +3,13 @@
     {
       "name": "collection",
       "type": "Backbone.Collection",
-      "required": false,
+      "required": true,
       "description": "Collection over which to iterate, drives row data"
+    },{
+      "name": "row",
+      "type": "ReactBackbone",
+      "required": false,
+      "description": "Customized row element, (view for each model)"
     }
   ]
 }
