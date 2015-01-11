@@ -1,4 +1,8 @@
-### Oberd Oui!
+### Oui!
+
+UI components for building smart health applications
+
+[Github Repo](https://github.com/oberd/oui)
 
 [![Build Status](https://jenkins.medamine.com/buildStatus/icon?job=oui)](https://jenkins.medamine.com/job/oui/)
 
@@ -15,7 +19,7 @@ Designed for use with require.js, but there is basic support for browser globals
 
 ### Overview
 
-Oui has the goal of standardizing a User Interface platform for all Oberd Platform Applications.
+Oui has the goal of standardizing user interface components for all Oberd Platform Applications.
 
 Components should have these goals in mind:
 
