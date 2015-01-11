@@ -135,8 +135,8 @@ gulp.task('serve', ['build'], function () {
   var server = require('superstatic')({ "cache_control": false });
   server.listen(function () {
     var base = 'http://' + server.host + ':' + server.port;
-    gutil.log('Documentation accessible: ' + base + '/docs/index.html');
-    gutil.log('Tests accessible: ' + base + '/docs/index.html');
+    gutil.log('Documentation accessible: ' + base + '/docs');
+    gutil.log('Tests accessible: ' + base + '/test');
   });
 });
 

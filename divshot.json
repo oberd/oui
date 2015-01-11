@@ -1,0 +1,10 @@
+{
+  "name": "oui-docs",
+  "root": "./",
+  "exclude": ["node_modules/**"],
+  "clean_urls": true,
+  "error_page": "error.html",
+  "redirects": {
+    "/": "/docs"
+  }
+}

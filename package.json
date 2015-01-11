@@ -3,16 +3,18 @@
   "version": "0.0.1",
   "main": "dist/oui.js",
   "scripts": {
+    "deploy": "node node_modules/.bin/divshot push production",
+    "dist": "node node_modules/.bin/gulp dist",
     "test": "node node_modules/.bin/gulp test"
   },
   "author": "Oberd 2015",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "event-stream": "^3.1.7",
     "gulp-util": "^3.0.1",
-    "superstatic": "^1.1.6"
-  },
-  "devDependencies": {
+    "superstatic": "^1.1.6",
+    "divshot-cli": "^1.4.7",
     "gulp": "^3.8.6",
     "gulp-concat": "^2.4.3",
     "gulp-flatten": "0.0.4",
