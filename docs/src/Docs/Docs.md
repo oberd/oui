@@ -10,10 +10,7 @@ bower install --save https://github.com/oberd/oui.git
 
 ### Usage
 
-Designed for use with require.js, but there is basic support for browser globals if require.js (or another package loader) is unavailable.  With require.js, load the components directly from the `src` folder.  With browser globals, you will have to load all of the components in a concatenated file `dist/oui.js`  You can find example usage of specific components in the menu on the left.
-
-
-### Overview
+Designed for use with require.js, but supports browser globals if require.js unavailable.  With require.js, load the components directly from the `src` folder.
 
 Oui has the goal of standardizing a User Interface platform for all Oberd Platform Applications.
 
@@ -27,7 +24,7 @@ Components should have these goals in mind:
 
 ### Getting Started
 
-```
+```sh
 ./tools/init.sh
 ```
 
@@ -43,11 +40,11 @@ More information on creating your own component can be found in the [Contributio
 
 ### Directory Structure
 
-<pre>
+```
 |-- dist     # Compiled files for use with browser globals, compiled CSS
 |-- docs
 |   `-- src  # Example source code.
 |-- src      # Component source, one component per folder please.
 |-- test     # Specifications and test files
 `-- tools    # Random utilities and build tools
-</pre>
+```

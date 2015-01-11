@@ -22,16 +22,18 @@ define(function (require) {
         'example-source': true,
         'expanded': this.state.sourceExpanded
       });
-      var sourceMessage = this.state.sourceExpanded ? 'Hide Source':'Show Source';
+      var sourceMessage = this.state.sourceExpanded ? 'Hide Source':'View Source';
       var Example = this.props.component;
       return (
-        <div className="component-page" key={this.props.name}>
+        <div className="page-content component-page" key={this.props.name}>
           <h3>{this.props.name} Component</h3>
           <h4>Demo</h4>
           <div className="component-example">
-            <Example />
+            <a className="docs-button source-toggle" onClick={this.toggleSource}>{sourceMessage}</a>
+            <div>
+              <Example />
+            </div>
           </div>
-          <a className="docs-button" onClick={this.toggleSource}>{sourceMessage}</a>
           <div className="component-docs">
             <div className={sourceClasses}>
               <pre><code className="e4x" ref="code">{this.props.source}</code></pre>
