@@ -6,6 +6,7 @@ var gutil = require('gulp-util');
 var fs = require('fs');
 var es = require('event-stream');
 var path = require('path');
+var _ = require('underscore');
 
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -26,29 +27,43 @@ gulp.task('clean-docs', function () {
   return gulp.src(['docs/css/dist'], {read: false}).pipe(clean());
 });
 
+gulp.task('clean-docs-js', function () {
+  return gulp.src(['docs/js/build.js'], {read: false}).pipe(clean());
+});
+
+var requireConfig = {
+  paths: {
+    'Oui': 'src',
+    'docs': 'docs/src',
+    'jquery': 'bower_components/jquery/dist/jquery',
+    'underscore': 'bower_components/underscore/underscore',
+    'backbone': 'bower_components/backbone/backbone',
+    'react': 'bower_components/react/react-with-addons',
+    'react.backbone': 'bower_components/react.backbone/react.backbone',
+    'text': 'bower_components/requirejs-text/text',
+    'JSXTransformer': 'tools/JSXTransformer',
+    'jsx': 'bower_components/jsx-requirejs-plugin/js/jsx',
+    'backbone-filtered-collection': 'bower_components/backbone-filtered-collection/backbone-filtered-collection',
+    'json': 'bower_components/requirejs-plugins/src/json',
+    'mdown': 'bower_components/requirejs-plugins/src/mdown',
+    'highlightjs': 'bower_components/highlightjs/highlight.pack',
+    'chance': 'bower_components/chance/chance',
+    'markdownConverter': 'bower_components/requirejs-plugins/lib/Markdown.Converter'
+  },
+  jsx: {
+    fileExtension: '.jsx'
+  },
+  stubModules: ['jsx'],
+  shim: {
+    'backbone': { 'deps': ['underscore', 'jquery'] }
+  },
+  optimize: 'none'
+};
+
 // Require.js Optimizer
+
 gulp.task('requirejs', ['clean'], function (cb) {
-  rjs.optimize({
-    paths: {
-      'Oui': 'src',
-      'jquery': 'bower_components/jquery/dist/jquery',
-      'underscore': 'bower_components/underscore/underscore',
-      'backbone': 'bower_components/backbone/backbone',
-      'react': 'bower_components/react/react-with-addons',
-      'react.backbone': 'bower_components/react.backbone/react.backbone',
-      'text': 'bower_components/requirejs-text/text',
-      'JSXTransformer': 'tools/JSXTransformer',
-      'jsx': 'bower_components/jsx-requirejs-plugin/js/jsx',
-      'backbone-filtered-collection': 'bower_components/backbone-filtered-collection/backbone-filtered-collection'
-    },
-    jsx: {
-      fileExtension: '.jsx'
-    },
-    stubModules: ['jsx'],
-    shim: {
-      'backbone': { 'deps': ['underscore', 'jquery'] }
-    },
-    optimize: 'none',
+  rjs.optimize(_.extend(requireConfig, {
     include: ['bower_components/almond/almond', 'Oui/Oui'],
     exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
     out: 'dist/oui.js',
@@ -56,7 +71,16 @@ gulp.task('requirejs', ['clean'], function (cb) {
       'startFile': 'tools/wrap.start',
       'endFile': 'tools/wrap.end'
     }
-  }, function (buildResponse) {
+  }), function (buildResponse) {
+    require('fs').writeFileSync(__dirname + '/dist/build-info.txt', buildResponse);
+    cb();
+  });
+});
+gulp.task('requirejs-docs', ['clean-docs-js'], function (cb) {
+  rjs.optimize(_.extend(requireConfig, {
+    include: ['docs/main'],
+    out: 'docs/src/build.js'
+  }), function (buildResponse) {
     require('fs').writeFileSync(__dirname + '/dist/build-info.txt', buildResponse);
     cb();
   });
@@ -84,7 +108,7 @@ gulp.task('test-config', function () {
 // Headless testing for pre-commit hook
 //
 var mochaPhantomJS = require('gulp-mocha-phantomjs');
-gulp.task('test', ['build-test'], function () {
+gulp.task('test', ['build-test', 'build'], function () {
   return gulp.src('test/index.html').pipe(mochaPhantomJS());
 });
 
@@ -126,7 +150,7 @@ gulp.task('myth-library', ['clean', 'myth-globals'], function () {
 gulp.task('myth', ['myth-library', 'myth-docs']);
 
 gulp.task('build-test', ['test-config']);
-gulp.task('build', ['myth', 'min']);
+gulp.task('build', ['myth', 'min', 'requirejs-docs']);
 
 gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.js', 'test/spec/**/*.js'], ['test']);

@@ -11,10 +11,8 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "event-stream": "^3.1.7",
-    "gulp-util": "^3.0.1",
-    "superstatic": "^1.1.6",
     "divshot-cli": "^1.4.7",
+    "event-stream": "^3.1.7",
     "gulp": "^3.8.6",
     "gulp-concat": "^2.4.3",
     "gulp-flatten": "0.0.4",
@@ -24,7 +22,10 @@
     "gulp-rimraf": "^0.1.0",
     "gulp-size": "^0.4.0",
     "gulp-uglify": "^0.3.1",
+    "gulp-util": "^3.0.1",
     "mocha": "^1.20.1",
-    "requirejs": "^2.1.14"
+    "requirejs": "^2.1.14",
+    "superstatic": "^1.1.6",
+    "underscore": "^1.7.0"
   }
 }

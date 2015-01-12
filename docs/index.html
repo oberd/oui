@@ -11,8 +11,15 @@
 </head>
 <body>
   <div id="main" class="out"></div>
+  <script src="/__/env.js"></script>
   <script src="../bower_components/requirejs/require.js"></script>
   <script src="require-config.js"></script>
-  <script>require(['jsx!src/Documentation']);</script>
+  <script>
+  if (window.__env.ENV === 'production') {
+    require(['docs/build', 'jsx!docs/Documentation']);
+  } else {
+    require(['docs/main']);
+  }
+  </script>
 </body>
 </html>
