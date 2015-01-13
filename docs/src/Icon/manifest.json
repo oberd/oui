@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "name",
+      "type": "String",
+      "required": true,
+      "description": "Defines which icon to use out of the library."
+    },{
+      "name": "title",
+      "type": "String",
+      "required": false,
+      "description": "Set a title on the element (for accessibility)"
+    }
+  ]
+}

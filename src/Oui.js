@@ -2,6 +2,7 @@
 define(function (require) {
   'use strict';
   return {
-    List: require('jsx!./List/List')
+    List: require('jsx!./List/List'),
+    Icon: require('jsx!./Icon/Icon')
   };
 });

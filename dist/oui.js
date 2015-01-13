@@ -540,11 +540,32 @@ define('jsx!Oui/List/List',['require','react.backbone','jsx!./EmptyMessage','jsx
   return List;
 });
 
+
+/*global define */
+define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
+
+  
+  var React = require('react.backbone');
+
+  var Icon = React.createClass({displayName: 'Icon',
+    getDefaultProps: function () {
+      return { name: 'user' };
+    },
+    render: function () {
+      var className = 'icomoon icomoon-' + this.props.name;
+      delete this.props.name;
+      return React.createElement("span", React.__spread({},  this.props, {className: className}));
+    }
+  });
+  return Icon;
+});
+
 /*globals define:false */
-define('Oui/Oui',['require','jsx!./List/List'],function (require) {
+define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon'],function (require) {
   
   return {
-    List: require('jsx!./List/List')
+    List: require('jsx!./List/List'),
+    Icon: require('jsx!./Icon/Icon')
   };
 });
 

@@ -18,7 +18,7 @@ define(function (require) {
         };
       }
       var expectedComponents = [
-        'List'
+        'List', 'Icon'
       ];
       for (var i = 0; i < expectedComponents.length; i++) {
         it(expectedComponents[i], hasComponentTest(expectedComponents[i]));

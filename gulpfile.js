@@ -23,14 +23,6 @@ gulp.task('clean', function () {
   return gulp.src(['dist'], {read: false}).pipe(clean());
 });
 
-gulp.task('clean-docs', function () {
-  return gulp.src(['docs/css/dist'], {read: false}).pipe(clean());
-});
-
-gulp.task('clean-docs-js', function () {
-  return gulp.src(['docs/js/build.js'], {read: false}).pipe(clean());
-});
-
 var requireConfig = {
   paths: {
     'Oui': 'src',
@@ -76,6 +68,13 @@ gulp.task('requirejs', ['clean'], function (cb) {
     cb();
   });
 });
+
+gulp.task('clean-docs', function () {
+  return gulp.src(['docs/css/dist'], {read: false}).pipe(clean());
+});
+gulp.task('clean-docs-js', function () {
+  return gulp.src(['docs/js/build.js'], {read: false}).pipe(clean());
+});
 gulp.task('requirejs-docs', ['clean-docs-js'], function (cb) {
   rjs.optimize(_.extend(requireConfig, {
     include: ['docs/main'],
@@ -86,6 +85,9 @@ gulp.task('requirejs-docs', ['clean-docs-js'], function (cb) {
   });
 });
 
+// Traverses test folder looking for matching test files and
+// dumps them for running
+//
 gulp.task('test-config', function () {
   var all = [];
   gulp.src(['test/spec/**/*.spec.{js,jsx}'])
@@ -105,13 +107,6 @@ gulp.task('test-config', function () {
     }));
 });
 
-// Headless testing for pre-commit hook
-//
-var mochaPhantomJS = require('gulp-mocha-phantomjs');
-gulp.task('test', ['build-test', 'build'], function () {
-  return gulp.src('test/index.html').pipe(mochaPhantomJS());
-});
-
 // Uglify for the minified version
 //
 gulp.task('min', ['requirejs'], function () {
@@ -123,13 +118,14 @@ gulp.task('min', ['requirejs'], function () {
     .pipe(size({ showFiles: true }));
 });
 
+// Stylesheet compilation
+//
 gulp.task('myth-docs', ['clean-docs'], function () {
   return gulp.src('docs/css/styles.myth')
     .pipe(myth())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('docs/css/dist'));
 });
-
 gulp.task('myth-globals', ['clean'], function () {
   return gulp
     .src('src/*.myth')
@@ -137,7 +133,6 @@ gulp.task('myth-globals', ['clean'], function () {
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
 });
-
 gulp.task('myth-library', ['clean', 'myth-globals'], function () {
   return gulp.src('src/**/*.myth')
         .pipe(myth())
@@ -149,8 +144,33 @@ gulp.task('myth-library', ['clean', 'myth-globals'], function () {
 });
 gulp.task('myth', ['myth-library', 'myth-docs']);
 
+// Copy icon fonts
+gulp.task('icomoon-fonts', ['clean'], function () {
+  return gulp.src(['assets/icomoon/fonts/*']).pipe(gulp.dest('dist/fonts'));
+});
+
+// Add conditional support for IE7 via separate files in dist
+//
+gulp.task('ie7-js', ['clean'], function () {
+  return gulp.src(['assets/icomoon/ie7/*.js']).pipe(concat('ie7.js')).pipe(gulp.dest('dist'));
+});
+gulp.task('ie7-css', ['clean'], function () {
+  return gulp.src(['assets/icomoon/ie7/*.css'])
+    .pipe(concat('ie7.css'))
+    .pipe(gulp.dest('dist'));
+});
+gulp.task('ie7', ['ie7-js', 'ie7-css']);
+
+
+// Headless testing for pre-commit hook
+//
+var mochaPhantomJS = require('gulp-mocha-phantomjs');
+gulp.task('test', ['build-test', 'build'], function () {
+  return gulp.src('test/index.html').pipe(mochaPhantomJS());
+});
+
 gulp.task('build-test', ['test-config']);
-gulp.task('build', ['myth', 'min', 'requirejs-docs']);
+gulp.task('build', ['myth', 'min', 'requirejs-docs', 'ie7', 'icomoon-fonts']);
 
 gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.js', 'test/spec/**/*.js'], ['test']);

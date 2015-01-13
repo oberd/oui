@@ -1,3 +1,14 @@
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
 .page-header {
   background: #F5DB41;
   margin: 0;
@@ -107,4 +118,30 @@
 }
 .component-page .example-source.expanded {
   height: auto;
+}
+.icon-example {
+  position: relative;
+  display: block;
+  float: left;
+  padding: 0.5em;
+}
+.icon-example .icon-info {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  margin-left: -50px;
+  width: 150px;
+  padding: 0.5em;
+  font-size: 0.9em;
+  background: black;
+  text-align: center;
+  display: none;
+  color: white;
+}
+.icon-example .icon-info.expanded {
+  position: absolute;
+  display: block;
+}
+.icon-examples .icon-example .icomoon {
+  font-size: 1.5em;
 }

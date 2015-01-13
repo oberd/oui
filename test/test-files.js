@@ -1,1 +1,1 @@
-var tests = ["spec/Oui.spec","jsx!spec/List/List.spec"];
+var tests = ["spec/Oui.spec","jsx!spec/Icon/Icon.spec","jsx!spec/List/List.spec"];
