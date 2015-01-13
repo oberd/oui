@@ -165,11 +165,9 @@ gulp.task('ie7', ['ie7-js', 'ie7-css']);
 // Headless testing for pre-commit hook
 //
 var mochaPhantomJS = require('gulp-mocha-phantomjs');
-gulp.task('test', ['build-test', 'build'], function () {
+gulp.task('test', ['test-config'], function () {
   return gulp.src('test/index.html').pipe(mochaPhantomJS());
 });
-
-gulp.task('build-test', ['test-config']);
 gulp.task('build', ['myth', 'min', 'requirejs-docs', 'ie7', 'icomoon-fonts']);
 
 gulp.task('serve', ['build'], function () {
