@@ -48,6 +48,7 @@ More information on creating your own component can be found in the [Contributio
 ### Directory Structure
 
 <pre>
+|-- assets   # Any static assets for use in the compilation / build step
 |-- dist     # Compiled files for use with browser globals, compiled CSS
 |-- docs
 |   `-- src  # Example source code.
