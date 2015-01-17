@@ -131,15 +131,15 @@ gulp.task('myth-docs', ['myth-docs-clean'], function () {
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('docs/css/dist'));
 });
-gulp.task('myth-globals-clean', cleaner(['dist/css/*.css']));
+gulp.task('myth-globals-clean', cleaner(['dist/css/{Utility,Animation}.css']));
 gulp.task('myth-globals', ['myth-globals-clean'], function () {
   return gulp
-    .src('src/Utility.myth')
+    .src('src/{Utility,Animation}.myth')
     .pipe(myth())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
 });
-gulp.task('myth-library-clean', cleaner(['dist/css/**/*.css']));
+gulp.task('myth-library-clean', cleaner(['dist/css/oui.css']));
 gulp.task('myth-library', ['myth-library-clean', 'myth-globals'], function () {
   return gulp.src('src/**/*.myth')
         .pipe(myth())
