@@ -482,12 +482,13 @@ define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],func
     },
     render: function () {
       var classList = React.addons.classSet({
+        'off': !this.props.on,
         'on': this.props.on,
         'oui-loader': true
       });
       return (
         React.createElement("div", {className: classList}, 
-          React.createElement("span", {className: "oui-button-icon"}, React.createElement(Icon, {name: "refresh"}))
+          React.createElement("span", {className: "oui-button-icon circle text-center"}, React.createElement(Icon, {name: "refresh"}))
         )
       );
     }

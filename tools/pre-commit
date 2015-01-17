@@ -22,7 +22,6 @@ allownonascii=$(git config --bool hooks.allownonascii)
 exec 1>&2
 APP_DIR="$(dirname "$GIT_DIR")"
 
-$APP_DIR/node_modules/.bin/gulp build
 $APP_DIR/node_modules/.bin/gulp test
 
 exit $?

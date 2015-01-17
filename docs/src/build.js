@@ -1555,7 +1555,7 @@ define(
 define('mdown!docs/List/Basic.md',[],function () { return '<p>The list component simply takes a Backbone compatible collection as a property, and\ntransforms the collection into an on-screen list.  Note that the list items will obey\nthe typical backbone collection events such as add change update and remove.</p>\n\n<p>Example JSX:</p>\n\n<p><code>\n&lt;List collection={collection} /&gt;\n</code></p>';});
 
 
-define('text!docs/List/Basic.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var List = require(\'jsx!Oui/List/List\');\n  var Users = require(\'../ExampleData/Users\');\n\n  var users = new Users();\n  users.addRandom(2);\n\n  var Row = React.createBackboneClass({\n    render: function () {\n      return <li>{this.getModel().get(\'username\')}</li>;\n    }\n  });\n\n  var BasicListExample = React.createClass({\n    add: function () {\n      users.addRandom();\n    },\n    remove: function () {\n      users.removeRandom();\n    },\n    fetch: function () {\n      users.fakeFetch();\n    },\n    render: function () {\n      return (\n        <div>\n          <List collection={users} row={Row} />\n          <div>\n            <a onClick={this.add} className="docs-button">Add</a>\n            <a onClick={this.remove} className="docs-button">Remove</a>\n            <a onClick={this.fetch} className="docs-button">Fetch</a>\n          </div>\n        </div>\n      );\n    }\n  });\n  return BasicListExample;\n});\n';});
+define('text!docs/List/Basic.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var List = require(\'jsx!Oui/List/List\');\n  var Users = require(\'../ExampleData/Users\');\n\n  var users = new Users();\n  users.addRandom(2);\n\n  var Row = React.createBackboneClass({\n    render: function () {\n      return <li>{this.getModel().get(\'username\')}</li>;\n    }\n  });\n\n  var BasicListExample = React.createClass({\n    add: function () {\n      users.addRandom();\n    },\n    remove: function () {\n      users.removeRandom();\n    },\n    fetch: function () {\n      users.fakeFetch();\n    },\n    render: function () {\n      return (\n        <div>\n          <List collection={users} row={Row} />\n          <div>\n            <a onClick={this.add} className="docs-button">Add</a>\n            <a onClick={this.remove} className="docs-button">Remove</a>\n            <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>\n          </div>\n        </div>\n      );\n    }\n  });\n  return BasicListExample;\n});\n';});
 
 
 /*global define */
@@ -1605,12 +1605,13 @@ define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],func
     },
     render: function () {
       var classList = React.addons.classSet({
+        'off': !this.props.on,
         'on': this.props.on,
         'oui-loader': true
       });
       return (
         React.createElement("div", {className: classList}, 
-          React.createElement("span", {className: "oui-button-icon"}, React.createElement(Icon, {name: "refresh"}))
+          React.createElement("span", {className: "oui-button-icon circle text-center"}, React.createElement(Icon, {name: "refresh"}))
         )
       );
     }
@@ -3750,7 +3751,7 @@ define('jsx!docs/List/Basic',['require','react.backbone','jsx!Oui/List/List','..
           React.createElement("div", null, 
             React.createElement("a", {onClick: this.add, className: "docs-button"}, "Add"), 
             React.createElement("a", {onClick: this.remove, className: "docs-button"}, "Remove"), 
-            React.createElement("a", {onClick: this.fetch, className: "docs-button"}, "Fetch")
+            React.createElement("a", {onClick: this.fetch, className: "docs-button"}, "Simulate Fetch")
           )
         )
       );
