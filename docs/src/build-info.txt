@@ -12,7 +12,7 @@ mdown!docs/List/Basic.md
 text!docs/List/Basic.jsx
 jsx!Oui/List/EmptyMessage
 jsx!Oui/Icon/Icon
-jsx!Oui/List/LoadingMessage
+jsx!Oui/Loader/Loader
 ./src/Error/ImproperUse.js
 jsx!Oui/List/List
 ./bower_components/chance/chance.js
@@ -26,6 +26,13 @@ json!docs/../../assets/icomoon/selection.json
 ./docs/src/ExampleData/Icons.js
 jsx!docs/Icon/Icon
 json!docs/Icon/manifest.json
+mdown!docs/Loader/Loader.md
+text!docs/Loader/LoaderExample.jsx
+jsx!docs/../../src/Icon/Icon
+jsx!docs/../../src/Loader/Loader
+mdown!docs/ExampleData/Wasteland.md
+jsx!docs/Loader/LoaderExample
+json!docs/Loader/manifest.json
 ./docs/src/manifest.js
 mdown!docs/../../README.md
 jsx!docs/Documentation

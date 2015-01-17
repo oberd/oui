@@ -3,7 +3,7 @@ define(function (require) {
   'use strict';
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
-  var LoadingMessage = React.createClass({
+  var Loader = React.createClass({
     getDefaultProps: function () {
       return { on: false };
     },
@@ -15,10 +15,12 @@ define(function (require) {
       });
       return (
         <div className={classList}>
-          <span className="oui-button-icon circle text-center"><Icon name="refresh" /></span>
+          <span className="oui-button-icon u-circle text-center">
+            <span className="a-spin"><Icon name="refresh" /></span>
+          </span>
         </div>
       );
     }
   });
-  return LoadingMessage;
+  return Loader;
 });

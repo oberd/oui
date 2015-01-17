@@ -472,11 +472,11 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],function (require) {
+define('jsx!Oui/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
   
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
-  var LoadingMessage = React.createClass({displayName: 'LoadingMessage',
+  var Loader = React.createClass({displayName: 'Loader',
     getDefaultProps: function () {
       return { on: false };
     },
@@ -488,12 +488,14 @@ define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],func
       });
       return (
         React.createElement("div", {className: classList}, 
-          React.createElement("span", {className: "oui-button-icon circle text-center"}, React.createElement(Icon, {name: "refresh"}))
+          React.createElement("span", {className: "oui-button-icon u-circle text-center"}, 
+            React.createElement("span", {className: "a-spin"}, React.createElement(Icon, {name: "refresh"}))
+          )
         )
       );
     }
   });
-  return LoadingMessage;
+  return Loader;
 });
 
 /*global define */
@@ -517,13 +519,13 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!./LoadingMessage','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
   var React = require('react.backbone');
   var EmptyMessage = require('jsx!./EmptyMessage');
-  var LoadingMessage = require('jsx!./LoadingMessage');
+  var DefaultLoader = require('jsx!../Loader/Loader');
   var ImproperUseError = require('../Error/ImproperUse');
 
   var Row = React.createBackboneClass({
@@ -560,7 +562,7 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
       this.setState({ loading: false });
     },
     getDefaultProps: function () {
-      return { row: Row, empty: EmptyMessage, loader: LoadingMessage };
+      return { row: Row, empty: EmptyMessage, loader: DefaultLoader };
     },
     renderList: function () {
       var Row = this.props.row;

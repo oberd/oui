@@ -130,6 +130,10 @@
   position: relative;
 }
 
+.component-exapmle p {
+  z-index: 1;
+}
+
 .docs-button {
   padding: 0.5em 1em;
   display: inline-block;

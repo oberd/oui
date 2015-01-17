@@ -1595,11 +1595,11 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],function (require) {
+define('jsx!Oui/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
   
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
-  var LoadingMessage = React.createClass({displayName: 'LoadingMessage',
+  var Loader = React.createClass({displayName: 'Loader',
     getDefaultProps: function () {
       return { on: false };
     },
@@ -1611,12 +1611,14 @@ define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],func
       });
       return (
         React.createElement("div", {className: classList}, 
-          React.createElement("span", {className: "oui-button-icon circle text-center"}, React.createElement(Icon, {name: "refresh"}))
+          React.createElement("span", {className: "oui-button-icon u-circle text-center"}, 
+            React.createElement("span", {className: "a-spin"}, React.createElement(Icon, {name: "refresh"}))
+          )
         )
       );
     }
   });
-  return LoadingMessage;
+  return Loader;
 });
 
 /*global define */
@@ -1640,13 +1642,13 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!./LoadingMessage','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
   var React = require('react.backbone');
   var EmptyMessage = require('jsx!./EmptyMessage');
-  var LoadingMessage = require('jsx!./LoadingMessage');
+  var DefaultLoader = require('jsx!../Loader/Loader');
   var ImproperUseError = require('../Error/ImproperUse');
 
   var Row = React.createBackboneClass({
@@ -1683,7 +1685,7 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
       this.setState({ loading: false });
     },
     getDefaultProps: function () {
-      return { row: Row, empty: EmptyMessage, loader: LoadingMessage };
+      return { row: Row, empty: EmptyMessage, loader: DefaultLoader };
     },
     renderList: function () {
       var Row = this.props.row;
@@ -15698,9 +15700,115 @@ define("json!docs/Icon/manifest.json", function(){ return {
 }
 ;});
 
+
+define('mdown!docs/Loader/Loader.md',[],function () { return '<p>Place this lil component inside of a relatively positioned element, and get some killer loading action going!</p>';});
+
+
+define('text!docs/Loader/LoaderExample.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Loader = require(\'jsx!../../../src/Loader/Loader\');\n  var wasteland = require(\'mdown!../ExampleData/Wasteland.md\');\n\n  var LoaderExample = React.createClass({\n    getInitialState: function () {\n      return { loading: true };\n    },\n    toggleLoading: function () {\n      this.setState({ loading: !this.state.loading });\n    },\n    turnOff: function () {\n      this.setState({ loading: false });\n    },\n    render: function () {\n      var loadingOnOff = this.state.loading ? \'Off\' : \'On\';\n      return (\n        <div>\n          <div className="u-relative">\n            <Loader on={this.state.loading} />\n            <div className="u-zBody" dangerouslySetInnerHTML={{__html: wasteland}}></div>\n          </div>\n          <div>\n            <a onClick={this.toggleLoading} className="docs-button">Toggle {loadingOnOff}</a>\n          </div>\n        </div>\n      );\n    }\n  });\n  return LoaderExample;\n});\n';});
+
+
+/*global define */
+define('jsx!docs/../../src/Icon/Icon',['require','react.backbone'],function (require) {
+
+  
+  var React = require('react.backbone');
+
+  var Icon = React.createClass({displayName: 'Icon',
+    getDefaultProps: function () {
+      return { name: 'user' };
+    },
+    render: function () {
+      var className = 'icomoon icomoon-' + this.props.name;
+      delete this.props.name;
+      return React.createElement("span", React.__spread({},  this.props, {className: className}));
+    }
+  });
+  return Icon;
+});
+
+
+/*global define */
+define('jsx!docs/../../src/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
+  
+  var React = require('react');
+  var Icon = require('jsx!../Icon/Icon');
+  var Loader = React.createClass({displayName: 'Loader',
+    getDefaultProps: function () {
+      return { on: false };
+    },
+    render: function () {
+      var classList = React.addons.classSet({
+        'off': !this.props.on,
+        'on': this.props.on,
+        'oui-loader': true
+      });
+      return (
+        React.createElement("div", {className: classList}, 
+          React.createElement("span", {className: "oui-button-icon u-circle text-center"}, 
+            React.createElement("span", {className: "a-spin"}, React.createElement(Icon, {name: "refresh"}))
+          )
+        )
+      );
+    }
+  });
+  return Loader;
+});
+
+
+define('mdown!docs/ExampleData/Wasteland.md',[],function () { return '<p>April is the cruellest month, breeding\nLilacs out of the dead land, mixing\nMemory and desire, stirring\nDull roots with spring rain.\nWinter kept us warm, covering\nEarth in forgetful snow, feeding\nA little life with dried tubers.\nSummer surprised us, coming over the Starnbergersee\nWith a shower of rain; we stopped in the colonnade,\nAnd went on in sunlight, into the Hofgarten,\nAnd drank coffee, and talked for an hour.\nBin gar keine Russin, stamm’ aus Litauen, echt deutsch.\nAnd when we were children, staying at the arch-duke’s,\nMy cousin’s, he took me out on a sled,\nAnd I was frightened. He said, Marie,\nMarie, hold on tight. And down we went.\nIn the mountains, there you feel free.\nI read, much of the night, and go south in the winter.</p>';});
+
+
+/*global define */
+define('jsx!docs/Loader/LoaderExample',['require','react.backbone','jsx!../../../src/Loader/Loader','mdown!../ExampleData/Wasteland.md'],function (require) {
+  
+  var React = require('react.backbone');
+  var Loader = require('jsx!../../../src/Loader/Loader');
+  var wasteland = require('mdown!../ExampleData/Wasteland.md');
+
+  var LoaderExample = React.createClass({displayName: 'LoaderExample',
+    getInitialState: function () {
+      return { loading: true };
+    },
+    toggleLoading: function () {
+      this.setState({ loading: !this.state.loading });
+    },
+    turnOff: function () {
+      this.setState({ loading: false });
+    },
+    render: function () {
+      var loadingOnOff = this.state.loading ? 'Off' : 'On';
+      return (
+        React.createElement("div", null, 
+          React.createElement("div", {className: "u-relative"}, 
+            React.createElement(Loader, {on: this.state.loading}), 
+            React.createElement("div", {className: "u-zBody", dangerouslySetInnerHTML: {__html: wasteland}})
+          ), 
+          React.createElement("div", null, 
+            React.createElement("a", {onClick: this.toggleLoading, className: "docs-button"}, "Toggle ", loadingOnOff)
+          )
+        )
+      );
+    }
+  });
+  return LoaderExample;
+});
+
+
+define("json!docs/Loader/manifest.json", function(){ return {
+  "properties": [
+    {
+      "name": "on",
+      "type": "Boolean",
+      "required": true,
+      "description": "Loader only displays if set to 'on'"
+    }
+  ]
+}
+;});
+
 /*global define */
 
-define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Basic.jsx','jsx!docs/List/Basic','json!docs/List/manifest.json','mdown!docs/Icon/Icon.md','text!docs/Icon/Icon.jsx','jsx!docs/Icon/Icon','json!docs/Icon/manifest.json'],function (require) {
+define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Basic.jsx','jsx!docs/List/Basic','json!docs/List/manifest.json','mdown!docs/Icon/Icon.md','text!docs/Icon/Icon.jsx','jsx!docs/Icon/Icon','json!docs/Icon/manifest.json','mdown!docs/Loader/Loader.md','text!docs/Loader/LoaderExample.jsx','jsx!docs/Loader/LoaderExample','json!docs/Loader/manifest.json'],function (require) {
   
   return [
     {
@@ -15715,6 +15823,12 @@ define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Bas
       source: require('text!docs/Icon/Icon.jsx'),
       component: require('jsx!docs/Icon/Icon'),
       manifest: require('json!docs/Icon/manifest.json')
+    },{
+      name: 'Loader',
+      content: require('mdown!docs/Loader/Loader.md'),
+      source: require('text!docs/Loader/LoaderExample.jsx'),
+      component: require('jsx!docs/Loader/LoaderExample'),
+      manifest: require('json!docs/Loader/manifest.json')
     }
   ];
 });

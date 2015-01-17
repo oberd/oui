@@ -1,4 +1,4 @@
-/*globals define:false, describe, it, expect, sinon, beforeEach, afterEach, Pretender */
+/*globals define:false, describe, it, expect */
 define(function (require) {
   'use strict';
   var $ = require('jquery');

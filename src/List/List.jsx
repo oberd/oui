@@ -6,7 +6,7 @@ define(function (require) {
   var _ = require('underscore');
   var React = require('react.backbone');
   var EmptyMessage = require('jsx!./EmptyMessage');
-  var LoadingMessage = require('jsx!./LoadingMessage');
+  var DefaultLoader = require('jsx!../Loader/Loader');
   var ImproperUseError = require('../Error/ImproperUse');
 
   var Row = React.createBackboneClass({
@@ -43,7 +43,7 @@ define(function (require) {
       this.setState({ loading: false });
     },
     getDefaultProps: function () {
-      return { row: Row, empty: EmptyMessage, loader: LoadingMessage };
+      return { row: Row, empty: EmptyMessage, loader: DefaultLoader };
     },
     renderList: function () {
       var Row = this.props.row;

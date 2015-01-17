@@ -133,7 +133,7 @@ gulp.task('myth-docs', ['myth-docs-clean'], function () {
 gulp.task('myth-globals-clean', cleaner(['dist/css/*.css']));
 gulp.task('myth-globals', ['myth-globals-clean'], function () {
   return gulp
-    .src('src/*.myth')
+    .src('src/Utility.myth')
     .pipe(myth())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
@@ -142,9 +142,6 @@ gulp.task('myth-library-clean', cleaner(['dist/css/**/*.css']));
 gulp.task('myth-library', ['myth-library-clean', 'myth-globals'], function () {
   return gulp.src('src/**/*.myth')
         .pipe(myth())
-        .pipe(flatten())
-        .pipe(rename({ extname: '.css' }))
-        .pipe(gulp.dest('dist/css'))
         .pipe(concat('oui.css'))
         .pipe(gulp.dest('dist/css'));
 });
@@ -180,7 +177,7 @@ gulp.task('test', ['test-config'], function () {
 gulp.task('build', ['myth', 'min', 'requirejs', 'ie7', 'icomoon-fonts']);
 
 gulp.task('serve', ['build'], function () {
-  gulp.watch(['src/**/*.js', 'test/spec/**/*.js'], ['test']);
+  gulp.watch(['src/**/*.{js,jsx}', 'test/spec/**/*.{js,jsx}'], ['test']);
   gulp.watch(['src/**/*.myth'], ['myth-library']);
   gulp.watch(['docs/**/*.myth'], ['myth-docs']);
   var server = require('superstatic')({ "cache_control": false });

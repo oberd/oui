@@ -100,6 +100,9 @@
   box-shadow: 3px 3px 15px rgba(0,0,0,0.15);
   position: relative;
 }
+.component-exapmle p {
+  z-index: 1;
+}
 .docs-button {
   padding: 0.5em 1em;
   display: inline-block;
@@ -153,3 +156,4 @@
 .icon-examples .icon-example .icomoon {
   font-size: 1.5em;
 }
+

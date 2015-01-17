@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "on",
+      "type": "Boolean",
+      "required": true,
+      "description": "Loader only displays if set to 'on'"
+    }
+  ]
+}

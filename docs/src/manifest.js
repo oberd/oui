@@ -15,6 +15,12 @@ define(function (require) {
       source: require('text!docs/Icon/Icon.jsx'),
       component: require('jsx!docs/Icon/Icon'),
       manifest: require('json!docs/Icon/manifest.json')
+    },{
+      name: 'Loader',
+      content: require('mdown!docs/Loader/Loader.md'),
+      source: require('text!docs/Loader/LoaderExample.jsx'),
+      component: require('jsx!docs/Loader/LoaderExample'),
+      manifest: require('json!docs/Loader/manifest.json')
     }
   ];
 });

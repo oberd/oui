@@ -1,0 +1,41 @@
+@import '../Globals.myth';
+
+.oui-loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: color(var(--color-loading-bg) a(0%));
+  color: var(--color-loading);
+  transition: all 0.25s;
+  text-align: center;
+  z-index: var(--z-index-0);
+}
+.oui-loader.on {
+  transform: scale(1.0);
+  z-index: var(--z-index-2);
+  background: color(var(--color-loading-bg) a(50%));
+}
+.oui-button-icon {
+  display: inline-block;
+  position: relative;
+  background: #c0c0c0;
+  background-image: linear-gradient(#f0f0f0, #c0c0c0);
+  border: #c0c0c0 solid 1px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+  padding-left: 4px;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 33px;
+  text-shadow: 0px 1px white;
+}
+.oui-loader .oui-button-icon {
+  transition: all 0.15s;
+  color: var(--color-gray);
+}
+.off .oui-button-icon {
+  transform: translate3d(0, -100%, 0) scale(0);
+}
+.on .oui-button-icon {
+  transform: translate3d(0, 50%, 0) scale(1);
+}
