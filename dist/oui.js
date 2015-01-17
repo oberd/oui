@@ -591,11 +591,12 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
 });
 
 /*globals define:false */
-define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon'],function (require) {
+define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon','jsx!./Loader/Loader'],function (require) {
   
   return {
     List: require('jsx!./List/List'),
-    Icon: require('jsx!./Icon/Icon')
+    Icon: require('jsx!./Icon/Icon'),
+    Loader: require('jsx!./Loader/Loader')
   };
 });
 
