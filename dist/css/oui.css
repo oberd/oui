@@ -57,6 +57,27 @@
   position: relative;
   z-index: 10;
 }
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
 .icomoon {
   font-family: 'icomoon';
   speak: none;
@@ -2070,27 +2091,6 @@
     url('../fonts/icomoon.svg?ot8r61#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
-}
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
 }
 .oui-loader {
   position: absolute;

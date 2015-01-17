@@ -6,7 +6,7 @@ define(function (require) {
   var Loader = require('jsx!Oui/Loader/Loader');
   var TestUtils = React.addons.TestUtils;
 
-  describe.only('Component - Loader', function () {
+  describe('Component - Loader', function () {
 
     describe('dom structure', function () {
 
