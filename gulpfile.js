@@ -134,9 +134,9 @@ gulp.task('myth-docs', ['myth-docs-clean'], function () {
 gulp.task('myth-library-clean', cleaner(['dist/css/oui.css']));
 gulp.task('myth-library', ['myth-library-clean'], function () {
   return gulp.src('src/**/*.myth')
-        .pipe(myth())
-        .pipe(concat('oui.css'))
-        .pipe(gulp.dest('dist/css'));
+    .pipe(myth())
+    .pipe(concat('oui.css'))
+    .pipe(gulp.dest('dist/css'));
 });
 gulp.task('myth', ['myth-library', 'myth-docs']);
 
