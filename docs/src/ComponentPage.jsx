@@ -2,7 +2,9 @@
 
 define(function (require) {
   'use strict';
-  var hjs = require('highlightjs');
+  var _ = require('underscore');
+  var $ = require('jquery');
+  var hljs = require('highlightjs');
   var React = require('react.backbone');
   var ExampleRunner = React.createClass({
     getInitialState: function () {
@@ -13,11 +15,29 @@ define(function (require) {
     toggleSource: function () {
       this.setState({ sourceExpanded: !this.state.sourceExpanded });
     },
+    highlight: function () {
+      $(this.getDOMNode()).find('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+      });
+    },
+    componentDidMount: function () {
+      this.highlight();
+    },
     componentDidUpdate: function () {
-      hljs.highlightBlock(this.refs.code.getDOMNode());
+      this.highlight();
+    },
+    getPropertiesString: function () {
+      return _.map(this.props.manifest.properties, function (prop) {
+        return prop.required ? prop.name + '={' + prop.type + '}': '[' + prop.name + ']';
+      }).join(' ');
+    },
+    renderComponentPaster: function () {
+      return '<' + this.props.name + ' ' + this.getPropertiesString() + '/>';
     },
     render: function () {
-      if (!this.props.name) return <div></div>;
+      if (!this.props.name) {
+        return <div></div>;
+      }
       var sourceClasses = React.addons.classSet({
         'example-source': true,
         'expanded': this.state.sourceExpanded
@@ -27,6 +47,7 @@ define(function (require) {
       return (
         <div className="page-content component-page" key={this.props.name}>
           <h3>{this.props.name} Component</h3>
+          <pre><code className="e4x">{this.renderComponentPaster()}</code></pre>
           <h4>Demo</h4>
           <div className="component-example">
             <a className="docs-button source-toggle" onClick={this.toggleSource}>{sourceMessage}</a>
@@ -36,7 +57,7 @@ define(function (require) {
           </div>
           <div className="component-docs">
             <div className={sourceClasses}>
-              <pre><code className="e4x" ref="code">{this.props.source}</code></pre>
+              <pre><code className="e4x">{this.props.source}</code></pre>
             </div>
             <h4>Properties</h4>
             <table className="table table-striped">
@@ -45,10 +66,14 @@ define(function (require) {
               </thead>
               <tbody>
               {_.map(this.props.manifest.properties, function (p) {
+                var req = React.addons.classSet({
+                  'required': p.required
+                });
+                var type = p.required ? p.type : '[' + p.type + ']';
                 return (
-                  <tr key={p.name}>
+                  <tr key={p.name} className={req}>
                     <td>{p.name}</td>
-                    <td>{p.type}</td>
+                    <td>{type}</td>
                     <td>{p.description}</td>
                   </tr>
                 );

@@ -4,11 +4,33 @@ define('text!docs/../../bower.json',[],function () { return '{\n  "name": "oui",
 
 
 /*global define */
+define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
-define('jsx!docs/Menu',['require','underscore','react.backbone'],function (require) {
+  
+  var React = require('react.backbone');
+
+  var Icon = React.createClass({displayName: 'Icon',
+    getDefaultProps: function () {
+      return { name: 'user' };
+    },
+    render: function () {
+      var className = 'icomoon icomoon-' + this.props.name;
+      delete this.props.name;
+      return React.createElement("span", React.__spread({},  this.props, {className: className}));
+    }
+  });
+  return Icon;
+});
+
+
+/*global define, window */
+
+define('jsx!docs/Menu',['require','underscore','react.backbone','jsx!Oui/Icon/Icon'],function (require) {
   
   var _ = require('underscore');
   var React = require('react.backbone');
+  var Icon = require('jsx!Oui/Icon/Icon');
+
   var ExampleMenuItem = React.createClass({displayName: 'ExampleMenuItem',
     render: function () {
       var classes = React.addons.classSet({
@@ -17,7 +39,7 @@ define('jsx!docs/Menu',['require','underscore','react.backbone'],function (requi
       });
       return (
         React.createElement("li", {className: classes, onClick: this.props.onClick, key: this.props.key}, 
-          React.createElement("span", {className: "icon"}, "★"), 
+          React.createElement(Icon, {name: "caret-right"}), 
           this.props.name
         )
       );
@@ -70,9 +92,11 @@ return{aliases:["styl"],cI:!1,i:"("+l.join("|")+")",k:"if else for in",c:[e.QSM,
 
 /*global define */
 
-define('jsx!docs/ComponentPage',['require','highlightjs','react.backbone'],function (require) {
+define('jsx!docs/ComponentPage',['require','underscore','jquery','highlightjs','react.backbone'],function (require) {
   
-  var hjs = require('highlightjs');
+  var _ = require('underscore');
+  var $ = require('jquery');
+  var hljs = require('highlightjs');
   var React = require('react.backbone');
   var ExampleRunner = React.createClass({displayName: 'ExampleRunner',
     getInitialState: function () {
@@ -83,11 +107,29 @@ define('jsx!docs/ComponentPage',['require','highlightjs','react.backbone'],funct
     toggleSource: function () {
       this.setState({ sourceExpanded: !this.state.sourceExpanded });
     },
+    highlight: function () {
+      $(this.getDOMNode()).find('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+      });
+    },
+    componentDidMount: function () {
+      this.highlight();
+    },
     componentDidUpdate: function () {
-      hljs.highlightBlock(this.refs.code.getDOMNode());
+      this.highlight();
+    },
+    getPropertiesString: function () {
+      return _.map(this.props.manifest.properties, function (prop) {
+        return prop.required ? prop.name + '={' + prop.type + '}': '[' + prop.name + ']';
+      }).join(' ');
+    },
+    renderComponentPaster: function () {
+      return '<' + this.props.name + ' ' + this.getPropertiesString() + '/>';
     },
     render: function () {
-      if (!this.props.name) return React.createElement("div", null);
+      if (!this.props.name) {
+        return React.createElement("div", null);
+      }
       var sourceClasses = React.addons.classSet({
         'example-source': true,
         'expanded': this.state.sourceExpanded
@@ -97,6 +139,7 @@ define('jsx!docs/ComponentPage',['require','highlightjs','react.backbone'],funct
       return (
         React.createElement("div", {className: "page-content component-page", key: this.props.name}, 
           React.createElement("h3", null, this.props.name, " Component"), 
+          React.createElement("pre", null, React.createElement("code", {className: "e4x"}, this.renderComponentPaster())), 
           React.createElement("h4", null, "Demo"), 
           React.createElement("div", {className: "component-example"}, 
             React.createElement("a", {className: "docs-button source-toggle", onClick: this.toggleSource}, sourceMessage), 
@@ -106,7 +149,7 @@ define('jsx!docs/ComponentPage',['require','highlightjs','react.backbone'],funct
           ), 
           React.createElement("div", {className: "component-docs"}, 
             React.createElement("div", {className: sourceClasses}, 
-              React.createElement("pre", null, React.createElement("code", {className: "e4x", ref: "code"}, this.props.source))
+              React.createElement("pre", null, React.createElement("code", {className: "e4x"}, this.props.source))
             ), 
             React.createElement("h4", null, "Properties"), 
             React.createElement("table", {className: "table table-striped"}, 
@@ -115,10 +158,14 @@ define('jsx!docs/ComponentPage',['require','highlightjs','react.backbone'],funct
               ), 
               React.createElement("tbody", null, 
               _.map(this.props.manifest.properties, function (p) {
+                var req = React.addons.classSet({
+                  'required': p.required
+                });
+                var type = p.required ? p.type : '[' + p.type + ']';
                 return (
-                  React.createElement("tr", {key: p.name}, 
+                  React.createElement("tr", {key: p.name, className: req}, 
                     React.createElement("td", null, p.name), 
-                    React.createElement("td", null, p.type), 
+                    React.createElement("td", null, type), 
                     React.createElement("td", null, p.description)
                   )
                 );
@@ -1541,7 +1588,7 @@ define(
 });
 
 
-define('mdown!docs/List/Basic.md',[],function () { return '<p>The list component simply takes a Backbone compatible collection as a property, and\ntransforms the collection into an on-screen list.  Note that the list items will obey\nthe typical backbone collection events such as add change update and remove.</p>\n\n<p>Example JSX:</p>\n\n<p><code>\n&lt;List collection={collection} /&gt;\n</code></p>';});
+define('mdown!docs/List/Basic.md',[],function () { return '<p>The list component takes a Backbone compatible collection as a property, and transforms the collection into an on-screen list.  Note that the list items will obey the typical backbone collection events such as add change update and remove.</p>';});
 
 
 define('text!docs/List/Basic.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var List = require(\'jsx!Oui/List/List\');\n  var Users = require(\'../ExampleData/Users\');\n\n  var users = new Users();\n  users.addRandom(2);\n\n  var Row = React.createBackboneClass({\n    render: function () {\n      return <li>{this.getModel().get(\'username\')}</li>;\n    }\n  });\n\n  var BasicListExample = React.createClass({\n    add: function () {\n      users.addRandom();\n    },\n    remove: function () {\n      users.removeRandom();\n    },\n    fetch: function () {\n      users.fakeFetch();\n    },\n    render: function () {\n      return (\n        <div>\n          <List collection={users} row={Row} />\n          <div>\n            <a onClick={this.add} className="docs-button">Add</a>\n            <a onClick={this.remove} className="docs-button">Remove</a>\n            <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>\n          </div>\n        </div>\n      );\n    }\n  });\n  return BasicListExample;\n});\n';});
@@ -1560,26 +1607,6 @@ define('jsx!Oui/List/EmptyMessage',['require','react'],function (require) {
     }
   });
   return EmptyMessage;
-});
-
-
-/*global define */
-define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
-
-  
-  var React = require('react.backbone');
-
-  var Icon = React.createClass({displayName: 'Icon',
-    getDefaultProps: function () {
-      return { name: 'user' };
-    },
-    render: function () {
-      var className = 'icomoon icomoon-' + this.props.name;
-      delete this.props.name;
-      return React.createElement("span", React.__spread({},  this.props, {className: className}));
-    }
-  });
-  return Icon;
 });
 
 
@@ -15745,7 +15772,7 @@ define('jsx!docs/../../src/Loader/Loader',['require','react','jsx!../Icon/Icon']
 });
 
 
-define('mdown!docs/ExampleData/Wasteland.md',[],function () { return '<p>April is the cruellest month, breeding\nLilacs out of the dead land, mixing\nMemory and desire, stirring\nDull roots with spring rain.\nWinter kept us warm, covering\nEarth in forgetful snow, feeding\nA little life with dried tubers.\nSummer surprised us, coming over the Starnbergersee\nWith a shower of rain; we stopped in the colonnade,\nAnd went on in sunlight, into the Hofgarten,\nAnd drank coffee, and talked for an hour.\nBin gar keine Russin, stamm’ aus Litauen, echt deutsch.\nAnd when we were children, staying at the arch-duke’s,\nMy cousin’s, he took me out on a sled,\nAnd I was frightened. He said, Marie,\nMarie, hold on tight. And down we went.\nIn the mountains, there you feel free.\nI read, much of the night, and go south in the winter.</p>';});
+define('mdown!docs/ExampleData/Wasteland.md',[],function () { return '<p>April is the cruellest month, breeding<br/>\nLilacs out of the dead land, mixing<br/>\nMemory and desire, stirring<br/>\nDull roots with spring rain.<br/>\nWinter kept us warm, covering<br/>\nEarth in forgetful snow, feeding<br/>\nA little life with dried tubers.<br/>\nSummer surprised us, coming over the Starnbergersee<br/>\nWith a shower of rain; we stopped in the colonnade,<br/>\nAnd went on in sunlight, into the Hofgarten,<br/>\nAnd drank coffee, and talked for an hour.<br/>\nBin gar keine Russin, stamm’ aus Litauen, echt deutsch.<br/>\nAnd when we were children, staying at the arch-duke’s,<br/>\nMy cousin’s, he took me out on a sled,<br/>\nAnd I was frightened. He said, Marie,<br/>\nMarie, hold on tight. And down we went.<br/>\nIn the mountains, there you feel free.<br/>\nI read, much of the night, and go south in the winter.</p>';});
 
 
 /*global define */

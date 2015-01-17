@@ -1,9 +1,11 @@
-/*global define */
+/*global define, window */
 
 define(function (require) {
   'use strict';
   var _ = require('underscore');
   var React = require('react.backbone');
+  var Icon = require('jsx!Oui/Icon/Icon');
+
   var ExampleMenuItem = React.createClass({
     render: function () {
       var classes = React.addons.classSet({
@@ -12,7 +14,7 @@ define(function (require) {
       });
       return (
         <li className={classes} onClick={this.props.onClick} key={this.props.key}>
-          <span className="icon">&#9733;</span>
+          <Icon name="caret-right" />
           {this.props.name}
         </li>
       );

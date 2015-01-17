@@ -58,28 +58,29 @@
   padding: 0.5em;
   border: 1px solid #f0f0f0;
   border-top: none;
-  margin: 0.5em;
+  margin: 0 0.5em;
   color: #888888;
   cursor: pointer;
   transition: all 0.25s;
   overflow: hidden;
   position: relative;
 }
-.menu-item .icon {
+.menu-item .icomoon {
   display: block;
   position: absolute;
-  left: -1em;
+  right: -1em;
   transform: scale(0.8);
   opacity: 0;
   transition: all 0.4s;
+  font-size: 1.3em;
 }
 .menu-item.active {
-  padding-left: 1.75em;
+  padding-right: 1.75em;
   color: black;
 }
-.menu-item.active .icon {
-  margin-left: 0;
-  left: 0.5em;
+.menu-item.active .icomoon {
+  margin-right: 0;
+  right: 0.5em;
   opacity: 1;
   transform: scale(1.0);
 }
@@ -157,3 +158,12 @@
   font-size: 1.5em;
 }
 
+.table {
+  color: #666666;
+}
+.table .required {
+  color: black;
+}
+.table .required > td:first-child {
+  font-weight: bold;
+}
