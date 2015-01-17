@@ -18,11 +18,15 @@ var clean = require('gulp-rimraf');
 var rjs = require('requirejs');
 var flatten = require('gulp-flatten');
 
-// Clean task (destroys all build artifacts)
-gulp.task('clean', function () {
-  return gulp.src(['dist'], {read: false}).pipe(clean());
-});
+function cleaner(files) {
+  return function () {
+    return gulp.src(files, {read: false}).pipe(clean());
+  };
+}
 
+
+// Require.js Optimizer
+//
 var requireConfig = {
   paths: {
     'Oui': 'src',
@@ -52,43 +56,41 @@ var requireConfig = {
   optimize: 'none'
 };
 
-// Require.js Optimizer
+function rjsOptimize(options) {
+  return function (cb) {
+    rjs.optimize(_.extend(requireConfig, options), function (buildResponse) {
+      require('fs').writeFileSync(__dirname + '/' + options.buildInfoFile, buildResponse);
+      cb();
+    });
+  };
+}
 
-gulp.task('requirejs', ['clean'], function (cb) {
-  rjs.optimize(_.extend(requireConfig, {
-    include: ['bower_components/almond/almond', 'Oui/Oui'],
-    exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
-    out: 'dist/oui.js',
-    wrap: {
-      'startFile': 'tools/wrap.start',
-      'endFile': 'tools/wrap.end'
-    }
-  }), function (buildResponse) {
-    require('fs').writeFileSync(__dirname + '/dist/build-info.txt', buildResponse);
-    cb();
-  });
-});
+gulp.task('requirejs-lib-clean', cleaner(['dist/build-info.txt', 'dist-oui.js']));
+gulp.task('requirejs-lib', ['requirejs-lib-clean'], rjsOptimize({
+  include: ['bower_components/almond/almond', 'Oui/Oui'],
+  exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
+  out: 'dist/oui.js',
+  wrap: {
+    'startFile': 'tools/wrap.start',
+    'endFile': 'tools/wrap.end'
+  },
+  buildInfoFile: 'dist/build-info.txt'
+}));
 
-gulp.task('clean-docs', function () {
-  return gulp.src(['docs/css/dist'], {read: false}).pipe(clean());
-});
-gulp.task('clean-docs-js', function () {
-  return gulp.src(['docs/js/build.js'], {read: false}).pipe(clean());
-});
-gulp.task('requirejs-docs', ['clean-docs-js'], function (cb) {
-  rjs.optimize(_.extend(requireConfig, {
-    include: ['docs/main'],
-    out: 'docs/src/build.js'
-  }), function (buildResponse) {
-    require('fs').writeFileSync(__dirname + '/dist/build-info.txt', buildResponse);
-    cb();
-  });
-});
+gulp.task('requirejs-docs-clean', cleaner(['docs/src/build.js', 'docs/src/build-info.txt']));
+gulp.task('requirejs-docs', ['requirejs-docs-clean'], rjsOptimize({
+  include: ['docs/main'],
+  out: 'docs/src/build.js',
+  buildInfoFile: 'docs/src/build-info.txt'
+}));
+
+gulp.task('requirejs', ['requirejs-lib', 'requirejs-docs']);
 
 // Traverses test folder looking for matching test files and
 // dumps them for running
 //
-gulp.task('test-config', function () {
+gulp.task('test-config-clean', cleaner(['test/test-files.js']));
+gulp.task('test-config', ['test-config-clean'], function () {
   var all = [];
   gulp.src(['test/spec/**/*.spec.{js,jsx}'])
     .pipe(es.through(function (data) {
@@ -109,7 +111,8 @@ gulp.task('test-config', function () {
 
 // Uglify for the minified version
 //
-gulp.task('min', ['requirejs'], function () {
+gulp.task('min-clean', cleaner(['dist/oberd-ui.min.js']));
+gulp.task('min', ['min-clean', 'requirejs'], function () {
   return gulp
     .src('dist/oberd-ui.js')
     .pipe(uglify())
@@ -120,20 +123,23 @@ gulp.task('min', ['requirejs'], function () {
 
 // Stylesheet compilation
 //
-gulp.task('myth-docs', ['clean-docs'], function () {
+gulp.task('myth-docs-clean', cleaner(['docs/css/dist']));
+gulp.task('myth-docs', ['myth-docs-clean'], function () {
   return gulp.src('docs/css/styles.myth')
     .pipe(myth())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('docs/css/dist'));
 });
-gulp.task('myth-globals', ['clean'], function () {
+gulp.task('myth-globals-clean', cleaner(['dist/css/*.css']));
+gulp.task('myth-globals', ['myth-globals-clean'], function () {
   return gulp
     .src('src/*.myth')
     .pipe(myth())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
 });
-gulp.task('myth-library', ['clean', 'myth-globals'], function () {
+gulp.task('myth-library-clean', cleaner(['dist/css/**/*.css']));
+gulp.task('myth-library', ['myth-library-clean', 'myth-globals'], function () {
   return gulp.src('src/**/*.myth')
         .pipe(myth())
         .pipe(flatten())
@@ -145,16 +151,19 @@ gulp.task('myth-library', ['clean', 'myth-globals'], function () {
 gulp.task('myth', ['myth-library', 'myth-docs']);
 
 // Copy icon fonts
-gulp.task('icomoon-fonts', ['clean'], function () {
+gulp.task('icomoon-fonts-clean', cleaner(['dist/fonts']));
+gulp.task('icomoon-fonts', ['icomoon-fonts-clean'], function () {
   return gulp.src(['assets/icomoon/fonts/*']).pipe(gulp.dest('dist/fonts'));
 });
 
 // Add conditional support for IE7 via separate files in dist
 //
-gulp.task('ie7-js', ['clean'], function () {
+gulp.task('ie7-js-clean', cleaner(['dist/ie7.js']));
+gulp.task('ie7-js', ['ie7-js-clean'], function () {
   return gulp.src(['assets/icomoon/ie7/*.js']).pipe(concat('ie7.js')).pipe(gulp.dest('dist'));
 });
-gulp.task('ie7-css', ['clean'], function () {
+gulp.task('ie7-css-clean', cleaner(['dist/ie7.css']));
+gulp.task('ie7-css', ['ie7-css-clean'], function () {
   return gulp.src(['assets/icomoon/ie7/*.css'])
     .pipe(concat('ie7.css'))
     .pipe(gulp.dest('dist'));
@@ -168,7 +177,7 @@ var mochaPhantomJS = require('gulp-mocha-phantomjs');
 gulp.task('test', ['test-config'], function () {
   return gulp.src('test/index.html').pipe(mochaPhantomJS());
 });
-gulp.task('build', ['myth', 'min', 'requirejs-docs', 'ie7', 'icomoon-fonts']);
+gulp.task('build', ['myth', 'min', 'requirejs', 'ie7', 'icomoon-fonts']);
 
 gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.js', 'test/spec/**/*.js'], ['test']);
@@ -181,6 +190,5 @@ gulp.task('serve', ['build'], function () {
     gutil.log('Tests accessible: ' + base + '/test');
   });
 });
-
 gulp.task('default', ['build']);
 

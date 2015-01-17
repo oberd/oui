@@ -10,6 +10,16 @@
       "type": "ReactBackbone",
       "required": false,
       "description": "Customized row element, (view for each model)"
+    },{
+      "name": "empty",
+      "type": "React Class",
+      "required": false,
+      "description": "Empty message element to display in the case that the list is empty."
+    },{
+      "name": "loader",
+      "type": "React Class",
+      "required": false,
+      "description": "Loader element to display when content is being fetched from the server"
     }
   ]
 }

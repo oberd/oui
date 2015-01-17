@@ -1,3 +1,7 @@
+:root {
+  --color-header-bg: #F5DB41;
+  --color-header: #685F21;
+}
 .clearfix:after {
      visibility: hidden;
      display: block;
@@ -9,11 +13,12 @@
 .clearfix { display: inline-block; }
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
+
 .page-header {
-  background: #F5DB41;
+  background: var(--color-header-bg);
   margin: 0;
   padding: 1em;
-  color: #685F21;
+  color: var(--color-header);
   font-weight: normal;
   font-size: 2em;
   overflow: hidden;
@@ -22,6 +27,9 @@
   transform: translate3d(0, 0, 0);
   position: relative;
   height: 220px;
+}
+.header-link {
+  color: color(var(--color-header) tint(20%));
 }
 .page-container {
   max-width: 1024px;

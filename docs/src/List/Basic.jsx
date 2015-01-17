@@ -1,7 +1,6 @@
 /*global define */
 define(function (require) {
   'use strict';
-  var Backbone = require('backbone');
   var React = require('react.backbone');
   var List = require('jsx!Oui/List/List');
   var Users = require('../ExampleData/Users');
@@ -22,6 +21,9 @@ define(function (require) {
     remove: function () {
       users.removeRandom();
     },
+    fetch: function () {
+      users.fakeFetch();
+    },
     render: function () {
       return (
         <div>
@@ -29,6 +31,7 @@ define(function (require) {
           <div>
             <a onClick={this.add} className="docs-button">Add</a>
             <a onClick={this.remove} className="docs-button">Remove</a>
+            <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>
           </div>
         </div>
       );

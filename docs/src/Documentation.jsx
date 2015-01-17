@@ -1,8 +1,7 @@
-/*global define */
+/*global define, window, document */
 
 define(function (require) {
   'use strict';
-  var _ = require('underscore');
   var packageInfo = require('text!../../bower.json');
   var React = require('react.backbone');
   var DocsMenu = require('jsx!./Menu');
@@ -44,7 +43,7 @@ define(function (require) {
           <h4 className="text-center page-header">
             <div className="pointer" onClick={this.goHome}>
               <img src="oui.svg" width="250" />
-              <div className="subtitle">Oberd User Interface Library <br/> v{packageInfo.version}</div>
+              <div className="subtitle">Oberd User Interface Library <br/> v{packageInfo.version} <a className="header-link" href="/test">Tests</a></div>
             </div>
           </h4>
           <div className="page-container">

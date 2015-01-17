@@ -4,10 +4,10 @@ define(function (require) {
   var React = require('react');
   var EmptyMessage = React.createClass({
     getDefaultProps: function () {
-      return { message: 'No Records' };
+      return { message: 'No items found' };
     },
     render: function () {
-      return <div></div>;
+      return <div>{this.props.message}</div>;
     }
   });
   return EmptyMessage;

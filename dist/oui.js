@@ -441,10 +441,10 @@ define('jsx!Oui/List/EmptyMessage',['require','react'],function (require) {
   var React = require('react');
   var EmptyMessage = React.createClass({displayName: 'EmptyMessage',
     getDefaultProps: function () {
-      return { message: 'No Records' };
+      return { message: 'No items found' };
     },
     render: function () {
-      return React.createElement("div", null);
+      return React.createElement("div", null, this.props.message);
     }
   });
   return EmptyMessage;
@@ -452,9 +452,30 @@ define('jsx!Oui/List/EmptyMessage',['require','react'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/List/LoadingMessage',['require','react'],function (require) {
+define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
+
+  
+  var React = require('react.backbone');
+
+  var Icon = React.createClass({displayName: 'Icon',
+    getDefaultProps: function () {
+      return { name: 'user' };
+    },
+    render: function () {
+      var className = 'icomoon icomoon-' + this.props.name;
+      delete this.props.name;
+      return React.createElement("span", React.__spread({},  this.props, {className: className}));
+    }
+  });
+  return Icon;
+});
+
+
+/*global define */
+define('jsx!Oui/List/LoadingMessage',['require','react','jsx!../Icon/Icon'],function (require) {
   
   var React = require('react');
+  var Icon = require('jsx!../Icon/Icon');
   var LoadingMessage = React.createClass({displayName: 'LoadingMessage',
     getDefaultProps: function () {
       return { on: false };
@@ -462,9 +483,13 @@ define('jsx!Oui/List/LoadingMessage',['require','react'],function (require) {
     render: function () {
       var classList = React.addons.classSet({
         'on': this.props.on,
-        'oui-list-loader': true
+        'oui-loader': true
       });
-      return React.createElement("div", {className: classList}, "Loading...");
+      return (
+        React.createElement("div", {className: classList}, 
+          React.createElement("span", {className: "oui-button-icon"}, React.createElement(Icon, {name: "refresh"}))
+        )
+      );
     }
   });
   return LoadingMessage;
@@ -490,74 +515,76 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/List/Row',['require','react.backbone'],function (require) {
+
+define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!./LoadingMessage','../Error/ImproperUse'],function (require) {
   
+
+  var _ = require('underscore');
   var React = require('react.backbone');
+  var EmptyMessage = require('jsx!./EmptyMessage');
+  var LoadingMessage = require('jsx!./LoadingMessage');
+  var ImproperUseError = require('../Error/ImproperUse');
+
   var Row = React.createBackboneClass({
     render: function () {
       return React.createElement("li", null, "Please customize this row component ", this.getModel().id);
     }
   });
-  return Row;
-});
-
-
-/*global define */
-
-define('jsx!Oui/List/List',['require','react.backbone','jsx!./EmptyMessage','jsx!./LoadingMessage','../Error/ImproperUse','jsx!./Row'],function (require) {
-  
-
-  var React = require('react.backbone');
-  var EmptyMessage = require('jsx!./EmptyMessage');
-  var LoadingMessage = require('jsx!./LoadingMessage');
-  var ImproperUseError = require('../Error/ImproperUse');
-  var Row = require('jsx!./Row');
 
   var List = React.createBackboneClass({
+    getInitialState: function () {
+      return { loading: false };
+    },
     componentWillMount: function () {
+      this.startLoadingBind = _.bind(this.startLoading, this);
+      this.stopLoadingBind = _.bind(this.stopLoading, this);
       if (typeof this.props.collection === 'undefined') {
         throw new ImproperUseError('List requires a collection property.  Please provide a Backbone compatible collection.');
-        return;
       }
     },
-    getDefaultProps: function () {
-      return { row: Row };
+    bindLoading: function (onOrOff) {
+      this.getCollection()[onOrOff]('request', this.startLoadingBind);
+      this.getCollection()[onOrOff]('sync error', this.stopLoadingBind);
     },
-    render: function () {
+    componentDidMount: function () {
+      this.bindLoading('on');
+    },
+    componentWillUnmount: function () {
+      this.bindLoading('off');
+    },
+    startLoading: function () {
+      this.setState({ loading: true });
+    },
+    stopLoading: function () {
+      this.setState({ loading: false });
+    },
+    getDefaultProps: function () {
+      return { row: Row, empty: EmptyMessage, loader: LoadingMessage };
+    },
+    renderList: function () {
       var Row = this.props.row;
       return (
+        React.createElement("ul", {className: "oui-list"}, 
+          this.getCollection().map(function (m) {
+            return React.createElement(Row, {key: m.id, model: m});
+          })
+        )
+      );
+    },
+    render: function () {
+      var EmptyElement = this.props.empty;
+      var Loader = this.props.loader;
+      var listContent = this.getCollection().length ? this.renderList() : React.createElement(EmptyElement, null);
+      return (
         React.createElement("div", {className: "oui-list-container"}, 
-          React.createElement("ul", {className: "oui-list"}, 
-            this.getCollection().map(function (m) {
-              return React.createElement(Row, {key: m.id, model: m})
-            })
-          )
+          React.createElement(Loader, {on: this.state.loading}), 
+          listContent
         )
       );
     }
   });
 
   return List;
-});
-
-
-/*global define */
-define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
-
-  
-  var React = require('react.backbone');
-
-  var Icon = React.createClass({displayName: 'Icon',
-    getDefaultProps: function () {
-      return { name: 'user' };
-    },
-    render: function () {
-      var className = 'icomoon icomoon-' + this.props.name;
-      delete this.props.name;
-      return React.createElement("span", React.__spread({},  this.props, {className: className}));
-    }
-  });
-  return Icon;
 });
 
 /*globals define:false */

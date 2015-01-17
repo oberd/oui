@@ -1,4 +1,4 @@
-/*globals define:false, describe, it, expect, sinon, beforeEach, afterEach, Pretender */
+/*globals define:false, describe, it, expect, sinon */
 define(function (require) {
   'use strict';
   var $ = require('jquery');
@@ -7,15 +7,13 @@ define(function (require) {
   var List = require('jsx!Oui/List/List');
   var TestUtils = React.addons.TestUtils;
 
-  var BasicCollection = Backbone.Collection.extend({});
+  var BasicCollection = Backbone.Collection.extend({ url: '/foos' });
 
   describe('Component - List', function () {
 
     describe('collection interface', function () {
 
       it('should require paginate function', function () {
-
-        var collection = new Backbone.Collection([{ id: 1 }]);
         try {
           TestUtils.renderIntoDocument(<List />);
         } catch (e) {
@@ -63,6 +61,33 @@ define(function (require) {
         expectDomCount(1, '.oui-list li', ref);
         collection.add({ id: 2 });
         expectDomCount(2, '.oui-list li', ref);
+      });
+    });
+    describe('loader functionality', function () {
+      var CustomLoader = React.createClass({
+        getDefaultProps: function () {
+          return { on: false };
+        },
+        render: function () {
+          var className = this.props.on ? 'loader on' : 'loader';
+          return <div className={className}>Loading...</div>;
+        }
+      });
+      it('loader should start in off state', function () {
+        var collection = new BasicCollection([{ id: 1 }]);
+        var ref = TestUtils.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
+        expectDomCount(1, '.loader', ref);
+        expectDomCount(0, '.loader.on', ref);
+      });
+      it('loader should start be in on state during request', function () {
+        var collection = new BasicCollection([{ id: 1 }]);
+        var ref = TestUtils.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
+        var server = sinon.fakeServer.create();
+        collection.fetch();
+        expectDomCount(1, '.loader.on', ref);
+        server.requests[0].respond(200, { 'Content-Type': 'application/json' }, JSON.stringify([{ id: 1 }, { id: 2 }]));
+        expectDomCount(1, '.loader', ref);
+        expectDomCount(0, '.loader.on', ref);
       });
     });
 

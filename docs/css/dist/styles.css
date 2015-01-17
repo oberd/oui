@@ -35,6 +35,10 @@
   height: 220px;
 }
 
+.header-link {
+  color: rgb(134, 127, 77);
+}
+
 .page-container {
   max-width: 1024px;
   margin: 0 auto;

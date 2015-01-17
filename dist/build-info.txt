@@ -4,9 +4,8 @@
 ./bower_components/almond/almond.js
 ./bower_components/jsx-requirejs-plugin/js/jsx.js
 jsx!Oui/List/EmptyMessage
+jsx!Oui/Icon/Icon
 jsx!Oui/List/LoadingMessage
 ./src/Error/ImproperUse.js
-jsx!Oui/List/Row
 jsx!Oui/List/List
-jsx!Oui/Icon/Icon
 ./src/Oui.js
