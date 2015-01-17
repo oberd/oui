@@ -2,6 +2,7 @@
 
 define(function (require) {
   'use strict';
+  var Backbone = require('backbone');
   var manifest = require('json!../../../assets/icomoon/selection.json');
   var Icon = Backbone.Model.extend({});
   var Icons = Backbone.Collection.extend({

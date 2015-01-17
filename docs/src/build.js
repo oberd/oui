@@ -1,14 +1,3 @@
-//Copyright 2015, Oberd (Universal Research Solutions)
-
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD.
-        define(['jquery', 'underscore', 'backbone', 'react.backbone'], factory);
-    } else {
-        // Browser globals
-        root.Oui = factory(root.$, root._, root.Backbone, root.React);
-    }
-}(this, function ($, _, Backbone, React) {
 define('jsx',{load: function(id){throw new Error("Dynamic load not allowed: " + id);}});
 
 define('text!docs/../../bower.json',[],function () { return '{\n  "name": "oui",\n  "version": "0.0.1",\n  "description": "Oberd Generic Frontend Components",\n  "main": "dist/oui.js",\n  "moduleType": [\n    "amd",\n    "es6",\n    "globals"\n  ],\n  "license": "MIT",\n  "ignore": [\n    "**/.*",\n    "node_modules",\n    "bower_components",\n    "test",\n    "tests"\n  ],\n  "dependencies": {\n    "backbone": "~1.1.2",\n    "jquery": "~2.1.1",\n    "react": "~0.12.2",\n    "react.backbone": "~0.6.0",\n    "jsx-requirejs-plugin": "~0.5.1",\n    "backbone-filtered-collection": "~0.4.0"\n  },\n  "devDependencies": {\n    "almond": "~0.2.9",\n    "mocha": "~1.20.1",\n    "chai": "~1.9.1",\n    "sinonjs": "~1.10.2",\n    "requirejs": "~2.1.14",\n    "pretender": "~0.1.0",\n    "responsive": "~3.1.4",\n    "jsx-requirejs-plugin": "~0.5.1",\n    "requirejs-plugins": "~1.0.3",\n    "highlightjs": "~8.4.0",\n    "chance": "~0.7.1"\n  }\n}\n';});
@@ -15619,8 +15608,9 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 
 /*global define */
 
-define('docs/ExampleData/Icons',['require','json!../../../assets/icomoon/selection.json'],function (require) {
+define('docs/ExampleData/Icons',['require','backbone','json!../../../assets/icomoon/selection.json'],function (require) {
   
+  var Backbone = require('backbone');
   var manifest = require('json!../../../assets/icomoon/selection.json');
   var Icon = Backbone.Model.extend({});
   var Icons = Backbone.Collection.extend({
@@ -15912,26 +15902,3 @@ define('docs/main',['require','jsx!./Documentation'],function (require) {
   var Docs = require('jsx!./Documentation');
 });
 
-    //Register in the values from the outer closure for common dependencies
-    //as local almond modules
-    define('jquery', function () {
-        return $;
-    });
-    define('underscore', function () {
-        return _;
-    });
-    define('backbone', function () {
-        return Backbone;
-    });
-    define('react', function () {
-        return React;
-    });
-    define('react.backbone', function () {
-        return React;
-    });
-
-    //Use almond's special top-level, synchronous require to trigger factory
-    //functions, get the final module value, and export it as the public
-    //value.
-    return require('Oui/Oui');
-}));

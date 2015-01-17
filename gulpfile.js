@@ -81,6 +81,7 @@ gulp.task('requirejs-docs-clean', cleaner(['docs/src/build.js', 'docs/src/build-
 gulp.task('requirejs-docs', ['requirejs-docs-clean'], rjsOptimize({
   include: ['docs/main'],
   out: 'docs/src/build.js',
+  wrap: {},
   buildInfoFile: 'docs/src/build-info.txt'
 }));
 
