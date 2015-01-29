@@ -4,16 +4,15 @@ define(function (require) {
   var $ = require('jquery');
   var React = require('react.backbone');
   var Icon = require('jsx!Oui/Icon/Icon');
-  var TestUtils = React.addons.TestUtils;
+  var Helpers = require('jsx!../Helpers');
 
   describe('Component - Icon', function () {
 
     describe('dom structure', function () {
 
       it('should render with icomoon prefix class', function () {
-        var ref = TestUtils.renderIntoDocument(<Icon name="calendar" />);
-        var $ref = $(ref.getDOMNode());
-        expect($ref.is('.icomoon.icomoon-calendar')).to.eql(true);
+        var ref = Helpers.renderIntoDocument(<Icon name="calendar" />);
+        Helpers.expectMatch('.icomoon.icomoon-calendar', ref);
       });
     });
   });

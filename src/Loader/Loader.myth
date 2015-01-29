@@ -10,6 +10,9 @@
   text-align: center;
   z-index: var(--z-index-0);
 }
+.oui-loader .a-spin {
+  transform-origin: 39% 45%;
+}
 .oui-loader.on {
   transform: scale(1.0);
   z-index: var(--z-index-2);

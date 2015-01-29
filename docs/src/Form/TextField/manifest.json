@@ -1,0 +1,25 @@
+{
+  "properties": [
+    {
+      "name": "value",
+      "type": "String",
+      "required": false,
+      "description": "set initial value for the input"
+    },{
+      "name": "help",
+      "type": "ReactElement",
+      "required": false,
+      "description": "help line (element for display during focus)"
+    },{
+      "name": "placeholder",
+      "type": "String",
+      "required": false,
+      "description": "<input> placeholder polyfill"
+    },{
+      "name": "onChange",
+      "type": "function",
+      "required": false,
+      "description": "called onChange(value) when input value changes"
+    }
+  ]
+}

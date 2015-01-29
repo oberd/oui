@@ -1,9 +1,14 @@
 
 /Users/nathanbleigh/development/urs/oui/docs/src/build.js
 ----------------
+./bower_components/requirejs-text/text.js
 ./bower_components/jsx-requirejs-plugin/js/jsx.js
 text!docs/../../bower.json
-jsx!Oui/Icon/Icon
+./bower_components/underscore/underscore.js
+./bower_components/jquery/dist/jquery.js
+./bower_components/backbone/backbone.js
+./bower_components/react/react-with-addons.js
+./bower_components/react.backbone/react.backbone.js
 jsx!docs/Menu
 ./bower_components/highlightjs/highlight.pack.js
 jsx!docs/ComponentPage
@@ -12,6 +17,7 @@ jsx!docs/ComponentPage
 mdown!docs/List/Basic.md
 text!docs/List/Basic.jsx
 jsx!Oui/List/EmptyMessage
+jsx!Oui/Icon/Icon
 jsx!Oui/Loader/Loader
 ./src/Error/ImproperUse.js
 jsx!Oui/List/List
@@ -30,9 +36,18 @@ mdown!docs/Loader/Loader.md
 text!docs/Loader/LoaderExample.jsx
 jsx!docs/../../src/Icon/Icon
 jsx!docs/../../src/Loader/Loader
-mdown!docs/ExampleData/Wasteland.md
+mdown!docs/ExampleData/Lorem.md
 jsx!docs/Loader/LoaderExample
 json!docs/Loader/manifest.json
+mdown!docs/Form/TextField/TextField.md
+text!docs/Form/TextField/TextField.jsx
+./src/Error/InterfaceError.js
+./src/Form/Validators/AbstractValidator.js
+./src/Form/Validator.js
+./src/Form/Validators/RegExp.js
+jsx!Oui/Form/TextField
+jsx!docs/Form/TextField/TextField
+json!docs/Form/TextField/manifest.json
 ./docs/src/manifest.js
 mdown!docs/../../README.md
 jsx!docs/Documentation

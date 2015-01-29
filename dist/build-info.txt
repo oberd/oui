@@ -8,4 +8,9 @@ jsx!Oui/Icon/Icon
 jsx!Oui/Loader/Loader
 ./src/Error/ImproperUse.js
 jsx!Oui/List/List
+./src/Error/InterfaceError.js
+./src/Form/Validators/AbstractValidator.js
+./src/Form/Validator.js
+./src/Form/Validators/RegExp.js
+jsx!Oui/Form/TextField
 ./src/Oui.js

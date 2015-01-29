@@ -80,6 +80,7 @@ gulp.task('requirejs-lib', ['requirejs-lib-clean'], rjsOptimize({
 gulp.task('requirejs-docs-clean', cleaner(['docs/src/build.js', 'docs/src/build-info.txt']));
 gulp.task('requirejs-docs', ['requirejs-docs-clean'], rjsOptimize({
   include: ['docs/main'],
+  exclude: ['JSXTransformer'],
   out: 'docs/src/build.js',
   wrap: {},
   buildInfoFile: 'docs/src/build-info.txt'
@@ -173,7 +174,7 @@ gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.{js,jsx}', 'test/spec/**/*.{js,jsx}'], ['test']);
   gulp.watch(['src/**/*.myth'], ['myth-library']);
   gulp.watch(['docs/**/*.myth'], ['myth-docs']);
-  var server = require('superstatic')({ "cache_control": false });
+  var server = require('superstatic')({ "cache_control": false, "host": '0.0.0.0' });
   server.listen(function () {
     var base = 'http://' + server.host + ':' + server.port;
     gutil.log('Documentation accessible: ' + base + '/docs');

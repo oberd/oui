@@ -4,6 +4,9 @@ define(function (require) {
   return {
     List: require('jsx!./List/List'),
     Icon: require('jsx!./Icon/Icon'),
-    Loader: require('jsx!./Loader/Loader')
+    Loader: require('jsx!./Loader/Loader'),
+    Form: {
+      TextField: require('jsx!./Form/TextField')
+    }
   };
 });

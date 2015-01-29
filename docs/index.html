@@ -1,13 +1,22 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Oui!</title>
-  <link rel="stylesheet" type="text/css" href="../bower_components/responsive/build/responsive.css">
+  <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap-theme-oberd/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../bower_components/highlightjs/styles/docco.css">
   <link rel="stylesheet" type="text/css" href="css/dist/styles.css">
   <link rel="stylesheet" type="text/css" href="../dist/css/oui.css">
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+  <!--[if lt IE 9]>
+  <script src="../bower_components/es5-shim/es5-shim.js"></script>
+  <script src="../bower_components/es5-shim/es5-sham.js"></script>
+  <![endif]-->
 </head>
 <body>
   <div id="main" class="out"></div>
@@ -15,8 +24,8 @@
   <script src="../bower_components/requirejs/require.js"></script>
   <script src="require-config.js"></script>
   <script>
-  if (window.__env.ENV === 'production') {
-    require(['docs/build', 'jsx!docs/Documentation']);
+  if (1 || window.__env.ENV === 'production') {
+    require(['docs/build', 'docs/main']);
   } else {
     require(['docs/main']);
   }

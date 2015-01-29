@@ -10,3 +10,18 @@
   position: relative;
   z-index: var(--z-index--bodyCopy);
 }
+.u-translate-down {
+  transform: translate3d(0, 100%, 0);
+}
+.u-translate-up {
+  transform: translate3d(0, -100%, 0);
+}
+.u-translate-left {
+  transform: translate3d(-100%, 0, 0);
+}
+.u-translate-right {
+  transform: translate3d(100%, 0, 0);
+}
+.u-reset-translate {
+  transform: translate3d(0, 0, 0);
+}

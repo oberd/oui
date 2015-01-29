@@ -4,18 +4,17 @@ define(function (require) {
   'use strict';
   var _ = require('underscore');
   var React = require('react.backbone');
-  var Icon = require('jsx!Oui/Icon/Icon');
 
   var ExampleMenuItem = React.createClass({
     render: function () {
       var classes = React.addons.classSet({
-        'menu-item': true,
         'active': this.props.active
       });
       return (
-        <li className={classes} onClick={this.props.onClick} key={this.props.key}>
-          <Icon name="caret-right" />
-          {this.props.name}
+        <li role="presentation" className={classes} onClick={this.props.onClick} key={this.props.key}>
+          <a>
+            {this.props.name}
+          </a>
         </li>
       );
     }
@@ -44,10 +43,12 @@ define(function (require) {
     render: function () {
       var self = this;
       return (
-        <ul className="no-bullets">
+        <ul className="nav nav-pills nav-stacked">
         {_(this.props.examples).map(function (example) {
-          example.active = example.name === self.props.value;
-          return <ExampleMenuItem key={example.name} {...example} onClick={self.handleExample(example)} />;
+          var itemProps = {};
+          itemProps.active = example.name === self.props.value;
+          itemProps.name = example.name;
+          return <ExampleMenuItem key={example.name} {...itemProps} onClick={self.handleExample(example)} />;
         })}
         </ul>
       );

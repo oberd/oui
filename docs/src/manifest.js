@@ -21,6 +21,12 @@ define(function (require) {
       source: require('text!docs/Loader/LoaderExample.jsx'),
       component: require('jsx!docs/Loader/LoaderExample'),
       manifest: require('json!docs/Loader/manifest.json')
+    },{
+      name: 'TextField',
+      content: require('mdown!docs/Form/TextField/TextField.md'),
+      source: require('text!docs/Form/TextField/TextField.jsx'),
+      component: require('jsx!docs/Form/TextField/TextField'),
+      manifest: require('json!docs/Form/TextField/manifest.json')
     }
   ];
 });

@@ -46,12 +46,14 @@ define(function (require) {
               <div className="subtitle">Oberd User Interface Library <br/> v{packageInfo.version} <a className="header-link" href="/test">Tests</a></div>
             </div>
           </h4>
-          <div className="page-container">
+          <div className="container-fluid">
             <div className="row">
-              <div className="col-s-3">
-                <DocsMenu examples={this.props.examples} onSelect={this.handleExample} value={this.state.example.name} />
+              <div className="col-sm-3">
+                <div className="header-align--h3">
+                  <DocsMenu examples={this.props.examples} onSelect={this.handleExample} value={this.state.example.name} />
+                </div>
               </div>
-              <div className="col-s-9">
+              <div className="col-sm-9">
                 {page}
               </div>
             </div>

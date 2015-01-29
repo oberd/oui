@@ -3,7 +3,7 @@ define(function (require) {
   'use strict';
   var React = require('react.backbone');
   var Loader = require('jsx!../../../src/Loader/Loader');
-  var wasteland = require('mdown!../ExampleData/Wasteland.md');
+  var wasteland = require('mdown!../ExampleData/Lorem.md');
 
   var LoaderExample = React.createClass({
     getInitialState: function () {

@@ -5,7 +5,7 @@ define(function (require) {
   var Backbone = require('backbone');
   var React = require('react.backbone');
   var List = require('jsx!Oui/List/List');
-  var TestUtils = React.addons.TestUtils;
+  var Helpers = require('jsx!../Helpers');
 
   var BasicCollection = Backbone.Collection.extend({ url: '/foos' });
 
@@ -15,7 +15,7 @@ define(function (require) {
 
       it('should require paginate function', function () {
         try {
-          TestUtils.renderIntoDocument(<List />);
+          Helpers.renderIntoDocument(<List />);
         } catch (e) {
           expect(e.toString())
             .to.eql('Oui Error [ ImproperUse ] List requires a collection property.  Please provide a Backbone compatible collection.');
@@ -24,43 +24,50 @@ define(function (require) {
     });
 
     describe('dom structure', function () {
+      var Row = React.createBackboneClass({
+        render: function () {
+          return <li className="my-row">{this.getModel().id}</li>;
+        }
+      });
+      function getRef() {
+        var collection = new BasicCollection([{ id: 1}]);
+        return Helpers.renderIntoDocument(<List row={Row} collection={collection} />);
+      }
 
-      it('should render one .oui-list', expectDomCount(1, '.oui-list'));
+      it('should render one .oui-list', function () {
+        Helpers.expectDOMCount(1, '.oui-list', getRef());
+      });
 
-      it('should render one .oui-list li', expectDomCount(1, '.oui-list li'));
+      it('should render one .oui-list li', function () {
+        Helpers.expectDOMCount(1, '.oui-list li', getRef());
+      });
 
-      it('should allow customization of row via props', function () {
-
-        var Row = React.createBackboneClass({
-          render: function () {
-            return <li className="my-row">{this.getModel().id}</li>;
-          }
-        });
+      it('should allow customization of row via props', function (done) {
         var collection = new BasicCollection([{ id: 1 }]);
-        var ref = TestUtils.renderIntoDocument(<List row={Row} collection={collection} />);
-        expectDomCount(1, '.oui-list li.my-row', ref);
+        var ref = Helpers.renderIntoDocument(<List row={Row} collection={collection} />);
+        Helpers.expectDOMCount(1, '.oui-list li.my-row', ref);
         collection.add({ id: 2 });
-        expectDomCount(2, '.oui-list li.my-row', ref);
+        Helpers.expectDOMCountNextTick(2, '.oui-list li.my-row', ref, done);
       });
     });
 
     describe('backbone collection event reactions', function () {
 
-      it('should remove dom list node when model removed', function () {
+      it('should remove dom list node when model removed', function (done) {
 
         var collection = new BasicCollection([{ id: 1 }]);
-        var ref = TestUtils.renderIntoDocument(<List collection={collection} />);
-        expectDomCount(1, '.oui-list li', ref);
+        var ref = Helpers.renderIntoDocument(<List collection={collection} />);
+        Helpers.expectDOMCount(1, '.oui-list li', ref);
         collection.remove(collection.get(1));
-        expectDomCount(0, '.oui-list li', ref);
+        Helpers.expectDOMCountNextTick(0, '.oui-list li', ref, done);
       });
 
-      it('should add dom list node when model added', function () {
+      it('should add dom list node when model added', function (done) {
         var collection = new BasicCollection([{ id: 1 }]);
-        var ref = TestUtils.renderIntoDocument(<List collection={collection} />);
-        expectDomCount(1, '.oui-list li', ref);
+        var ref = Helpers.renderIntoDocument(<List collection={collection} />);
+        Helpers.expectDOMCount(1, '.oui-list li', ref);
         collection.add({ id: 2 });
-        expectDomCount(2, '.oui-list li', ref);
+        Helpers.expectDOMCountNextTick(2, '.oui-list li', ref, done);
       });
     });
     describe('loader functionality', function () {
@@ -75,30 +82,19 @@ define(function (require) {
       });
       it('loader should start in off state', function () {
         var collection = new BasicCollection([{ id: 1 }]);
-        var ref = TestUtils.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
-        expectDomCount(1, '.loader', ref);
-        expectDomCount(0, '.loader.on', ref);
+        var ref = Helpers.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
+        Helpers.expectDOMCount(1, '.loader', ref);
+        Helpers.expectDOMCount(0, '.loader.on', ref);
       });
-      it('loader should start be in on state during request', function () {
+      it('loader should start be in on state during request', function (done) {
         var collection = new BasicCollection([{ id: 1 }]);
-        var ref = TestUtils.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
+        var ref = Helpers.renderIntoDocument(<List collection={collection} loader={CustomLoader} />);
         var server = sinon.fakeServer.create();
         collection.fetch();
-        expectDomCount(1, '.loader.on', ref);
+        Helpers.expectDOMCount(1, '.loader.on', ref);
         server.requests[0].respond(200, { 'Content-Type': 'application/json' }, JSON.stringify([{ id: 1 }, { id: 2 }]));
-        expectDomCount(1, '.loader', ref);
-        expectDomCount(0, '.loader.on', ref);
+        Helpers.expectDOMCountNextTick(1, '.loader', ref, done);
       });
     });
-
-    function expectDomCount(count, selector, ref) {
-      return function () {
-        if (!ref) {
-          var collection = new BasicCollection([{ id: 1 }]);
-          ref = TestUtils.renderIntoDocument(<List collection={collection} />);
-        }
-        expect($(ref.getDOMNode()).find(selector)).to.have.length(count);
-      };
-    }
   });
 });
