@@ -105,6 +105,7 @@ gulp.task('test-config', ['test-config-clean'], function () {
       all.push(dir + '/' + name);
       this.emit(data);
     }, function () {
+      all = _.sortBy(all, function (p) { return p; });
       var testConfig = 'var tests = ' + JSON.stringify(all) + ';';
       fs.writeFileSync(__dirname + '/test/test-files.js', testConfig);
       this.emit('end');
