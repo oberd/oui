@@ -9,7 +9,7 @@ define(function (require) {
       expect(validator.addValidation).to.be.a('function');
     });
 
-    it('should call getValidationError on validator', function () {
+    it('should call getValidationError on validators, and return array of results', function () {
       var validator = new Validator();
       function StubValidator() {
         this.getValidationError = function () {}
