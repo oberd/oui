@@ -633,7 +633,7 @@ define('Oui/Form/Validator',['require','underscore','./Validators/AbstractValida
   var AbstractValidator = require('./Validators/AbstractValidator');
 
   function Validator() {
-    this._validations = [];aaa
+    this._validations = [];
   }
 
   Validator.prototype.addValidations = function (/* validator, validator2, ... */) {

@@ -49555,7 +49555,7 @@ define("json!docs/Loader/manifest.json", function(){ return {
 ;});
 
 
-define('mdown!docs/Form/TextField/TextField.md',[],function () { return '';});
+define('mdown!docs/Form/TextField/TextField.md',[],function () { return '<p>Accepting text input from the user is a vital and often overlooked part of building applications.  With this textfield, you can enable complex validations, while still retaining WIA accessibility.</p>';});
 
 
 define('text!docs/Form/TextField/TextField.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Icon = require(\'jsx!Oui/Icon/Icon\');\n  var TextField = require(\'jsx!Oui/Form/TextField\');\n  var Validator = require(\'Oui/Form/Validator\');\n  var RegExpValidator = require(\'Oui/Form/Validators/RegExp\');\n\n  var TextExample = React.createClass({\n    getInitialState: function () {\n      return { loading: true };\n    },\n    toggleLoading: function () {\n      this.setState({ loading: !this.state.loading });\n    },\n    turnOff: function () {\n      this.setState({ loading: false });\n    },\n    render: function () {\n      var search = <Icon name="search" />;\n      var user = <Icon name="user" />;\n      var regex = new Validator();\n      regex.addValidation(new RegExpValidator(/^[0-9]{5}$/, \'Please enter a valid 5 digit Zip Code\'));\n      return (\n        <div>\n          <h4>Styles</h4>\n          <TextField placeholder="Plain" />\n          <TextField placeholder="With Help Line" help="Please enter a value" />\n          <TextField icon={search} placeholder="Search Me" />\n          <TextField icon={user} placeholder="Large With Help Line" large help="Please enter a value" />\n          <h4>Pattern Property</h4>\n          <TextField placeholder="SSN" pattern="^\\d{3}-\\d{2}-\\d{4}$" title="Please enter your SSN (e.g. 123-45-5678)" />\n          <h4>Custom Validator Property</h4>\n          <TextField placeholder="Zip Code" validator={regex} maxLength="5" />\n        </div>\n      );\n    }\n  });\n  return TextExample;\n});\n';});
@@ -49603,7 +49603,7 @@ define('Oui/Form/Validator',['require','underscore','./Validators/AbstractValida
   var AbstractValidator = require('./Validators/AbstractValidator');
 
   function Validator() {
-    this._validations = [];aaa
+    this._validations = [];
   }
 
   Validator.prototype.addValidations = function (/* validator, validator2, ... */) {
@@ -49857,9 +49857,24 @@ define("json!docs/Form/TextField/manifest.json", function(){ return {
       "description": "set initial value for the input"
     },{
       "name": "help",
-      "type": "ReactElement",
+      "type": "String",
       "required": false,
       "description": "help line (element for display during focus)"
+    },{
+      "name": "pattern",
+      "type": "String(regex)",
+      "required": false,
+      "description": "polyfills HTML5 input pattern attribute"
+    },{
+      "name": "validator",
+      "type": "Oui/Form/Validator",
+      "required": false,
+      "description": "can be used to perform enable advanced validations"
+    },{
+      "name": "title",
+      "type": "String",
+      "required": false,
+      "description": "accessibility helper (doubles as error for pattern)"
     },{
       "name": "placeholder",
       "type": "String",
@@ -49870,6 +49885,11 @@ define("json!docs/Form/TextField/manifest.json", function(){ return {
       "type": "function",
       "required": false,
       "description": "called onChange(value) when input value changes"
+    },{
+      "name": "icon",
+      "type": "ReactElement",
+      "required": false,
+      "description": "icon to be pre-pended to the input"
     }
   ]
 }

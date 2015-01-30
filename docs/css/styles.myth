@@ -97,6 +97,9 @@ a {
 .component-page .example-source.expanded {
   height: auto;
 }
+.component-docs {
+  margin-top: 1em;
+}
 .icon-example {
   position: relative;
   display: block;

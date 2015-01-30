@@ -7,9 +7,24 @@
       "description": "set initial value for the input"
     },{
       "name": "help",
-      "type": "ReactElement",
+      "type": "String",
       "required": false,
       "description": "help line (element for display during focus)"
+    },{
+      "name": "pattern",
+      "type": "String(regex)",
+      "required": false,
+      "description": "polyfills HTML5 input pattern attribute"
+    },{
+      "name": "validator",
+      "type": "Oui/Form/Validator",
+      "required": false,
+      "description": "can be used to perform enable advanced validations"
+    },{
+      "name": "title",
+      "type": "String",
+      "required": false,
+      "description": "accessibility helper (doubles as error for pattern)"
     },{
       "name": "placeholder",
       "type": "String",
@@ -20,6 +35,11 @@
       "type": "function",
       "required": false,
       "description": "called onChange(value) when input value changes"
+    },{
+      "name": "icon",
+      "type": "ReactElement",
+      "required": false,
+      "description": "icon to be pre-pended to the input"
     }
   ]
 }
