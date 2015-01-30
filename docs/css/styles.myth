@@ -100,6 +100,16 @@ a {
 .component-docs {
   margin-top: 1em;
 }
+.list-example .list-item {
+  padding: 0.5em 1em;
+}
+.list-example .list-item.selected {
+  background: #f0f0f0;
+}
+.list-example .oui-list-container {
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
 .icon-example {
   position: relative;
   display: block;

@@ -519,10 +519,11 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
+  var $ = require('jquery');
   var React = require('react.backbone');
   var EmptyMessage = require('jsx!./EmptyMessage');
   var DefaultLoader = require('jsx!../Loader/Loader');
@@ -536,7 +537,15 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
 
   var List = React.createBackboneClass({
     getInitialState: function () {
-      return { loading: false };
+      return { loading: false, currentIndex: -1 };
+    },
+    getDefaultProps: function () {
+      return {
+        row: Row,
+        empty: EmptyMessage,
+        loader: DefaultLoader,
+        onSelect: function () {}
+      };
     },
     componentWillMount: function () {
       this.startLoadingBind = _.bind(this.startLoading, this);
@@ -548,6 +557,13 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
     bindLoading: function (onOrOff) {
       this.getCollection()[onOrOff]('request', this.startLoadingBind);
       this.getCollection()[onOrOff]('sync error', this.stopLoadingBind);
+      var $contain = $(this.refs.container.getDOMNode());
+      $contain[onOrOff]('keydown', function (e) {
+        if (e.which === 38 || e.which === 40 || e.which === 13) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     },
     componentDidMount: function () {
       this.bindLoading('on');
@@ -561,15 +577,45 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
     stopLoading: function () {
       this.setState({ loading: false });
     },
-    getDefaultProps: function () {
-      return { row: Row, empty: EmptyMessage, loader: DefaultLoader };
+    selectNext: function () {
+      this.setState({
+        currentIndex: this.clampIndex(this.state.currentIndex + 1)
+      });
+    },
+    selectPrevious: function () {
+      this.setState({
+        currentIndex: this.clampIndex(this.state.currentIndex - 1)
+      });
+    },
+    clampIndex: function (index) {
+      var length = this.getCollection().length;
+      if (index <= -1) {
+        index = length - 1;
+      }
+      return index % length;
+    },
+    handleKeyDown: function (e) {
+      if (e.which === 40) {
+        this.selectNext();
+      } else if (e.which === 38) {
+        this.selectPrevious();
+      } else if (e.which === 13) {
+        var model = this.getCollection().at(this.state.currentIndex);
+        if (model) {
+          this.props.onSelect(model);
+          this.setState({ currentIndex: -1 });
+        }
+      } else if (e.which === 27) {
+        this.setState({ currentIndex: -1 });
+      }
     },
     renderList: function () {
+      var selected = this.state.currentIndex;
       var Row = this.props.row;
       return (
         React.createElement("ul", {className: "oui-list"}, 
-          this.getCollection().map(function (m) {
-            return React.createElement(Row, {key: m.id, model: m});
+          this.getCollection().map(function (m, index) {
+            return React.createElement(Row, {key: m.id, model: m, selected: selected === index});
           })
         )
       );
@@ -579,7 +625,7 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
       var Loader = this.props.loader;
       var listContent = this.getCollection().length ? this.renderList() : React.createElement(EmptyElement, null);
       return (
-        React.createElement("div", {className: "oui-list-container"}, 
+        React.createElement("div", {ref: "container", className: "oui-list-container", tabIndex: "0", onKeyUp: this.handleKeyDown}, 
           React.createElement(Loader, {on: this.state.loading}), 
           listContent
         )

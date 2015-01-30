@@ -10,11 +10,18 @@ define(function (require) {
 
   var Row = React.createBackboneClass({
     render: function () {
-      return <li>{this.getModel().get('username')}</li>;
+      var cls = React.addons.classSet({
+        'list-item': true,
+        'selected' : this.props.selected
+      });
+      return <li className={cls}>{this.getModel().get('username')}</li>;
     }
   });
 
   var BasicListExample = React.createClass({
+    getInitialState: function () {
+      return { selectedUser: false };
+    },
     add: function () {
       users.addRandom();
     },
@@ -24,14 +31,25 @@ define(function (require) {
     fetch: function () {
       users.fakeFetch();
     },
+    handleListSelect: function (u) {
+      var self = this;
+      if (this.to) {
+        clearTimeout(this.to);
+      }
+      this.setState({ selectedUser: 'Selected: ' + u.get('username') });
+      this.to = setTimeout(function () {
+        self.setState({ selectedUser: false });
+      }, 500);
+    },
     render: function () {
       return (
-        <div>
-          <List collection={users} row={Row} />
+        <div className="list-example">
+          <List collection={users} row={Row} onSelect={this.handleListSelect} />
           <div>
             <a onClick={this.add} className="docs-button">Add</a>
             <a onClick={this.remove} className="docs-button">Remove</a>
             <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>
+            {this.state.selectedUser}
           </div>
         </div>
       );

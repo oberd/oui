@@ -20,6 +20,16 @@
       "type": "React Class",
       "required": false,
       "description": "Loader element to display when content is being fetched from the server"
+    },{
+      "name": "selectable",
+      "type": "bool",
+      "required": false,
+      "description": "If false, list items will not be selectable with keyboard (default true)"
+    },{
+      "name": "onSelect",
+      "type": "function",
+      "required": false,
+      "description": "Called with selected row model on keyboard enter"
     }
   ]
 }

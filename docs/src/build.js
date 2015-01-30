@@ -35302,7 +35302,7 @@ define(
 define('mdown!docs/List/Basic.md',[],function () { return '<p>The list component takes a Backbone compatible collection as a property, and transforms the collection into an on-screen list.  Note that the list items will obey the typical backbone collection events such as add change update and remove.</p>';});
 
 
-define('text!docs/List/Basic.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var List = require(\'jsx!Oui/List/List\');\n  var Users = require(\'../ExampleData/Users\');\n\n  var users = new Users();\n  users.addRandom(2);\n\n  var Row = React.createBackboneClass({\n    render: function () {\n      return <li>{this.getModel().get(\'username\')}</li>;\n    }\n  });\n\n  var BasicListExample = React.createClass({\n    add: function () {\n      users.addRandom();\n    },\n    remove: function () {\n      users.removeRandom();\n    },\n    fetch: function () {\n      users.fakeFetch();\n    },\n    render: function () {\n      return (\n        <div>\n          <List collection={users} row={Row} />\n          <div>\n            <a onClick={this.add} className="docs-button">Add</a>\n            <a onClick={this.remove} className="docs-button">Remove</a>\n            <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>\n          </div>\n        </div>\n      );\n    }\n  });\n  return BasicListExample;\n});\n';});
+define('text!docs/List/Basic.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var List = require(\'jsx!Oui/List/List\');\n  var Users = require(\'../ExampleData/Users\');\n\n  var users = new Users();\n  users.addRandom(2);\n\n  var Row = React.createBackboneClass({\n    render: function () {\n      var cls = React.addons.classSet({\n        \'list-item\': true,\n        \'selected\' : this.props.selected\n      });\n      return <li className={cls}>{this.getModel().get(\'username\')}</li>;\n    }\n  });\n\n  var BasicListExample = React.createClass({\n    getInitialState: function () {\n      return { selectedUser: false };\n    },\n    add: function () {\n      users.addRandom();\n    },\n    remove: function () {\n      users.removeRandom();\n    },\n    fetch: function () {\n      users.fakeFetch();\n    },\n    handleListSelect: function (u) {\n      var self = this;\n      if (this.to) {\n        clearTimeout(this.to);\n      }\n      this.setState({ selectedUser: \'Selected: \' + u.get(\'username\') });\n      this.to = setTimeout(function () {\n        self.setState({ selectedUser: false });\n      }, 500);\n    },\n    render: function () {\n      return (\n        <div className="list-example">\n          <List collection={users} row={Row} onSelect={this.handleListSelect} />\n          <div>\n            <a onClick={this.add} className="docs-button">Add</a>\n            <a onClick={this.remove} className="docs-button">Remove</a>\n            <a onClick={this.fetch} className="docs-button">Simulate Fetch</a>\n            {this.state.selectedUser}\n          </div>\n        </div>\n      );\n    }\n  });\n  return BasicListExample;\n});\n';});
 
 
 /*global define */
@@ -35389,10 +35389,11 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
+  var $ = require('jquery');
   var React = require('react.backbone');
   var EmptyMessage = require('jsx!./EmptyMessage');
   var DefaultLoader = require('jsx!../Loader/Loader');
@@ -35406,7 +35407,15 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
 
   var List = React.createBackboneClass({
     getInitialState: function () {
-      return { loading: false };
+      return { loading: false, currentIndex: -1 };
+    },
+    getDefaultProps: function () {
+      return {
+        row: Row,
+        empty: EmptyMessage,
+        loader: DefaultLoader,
+        onSelect: function () {}
+      };
     },
     componentWillMount: function () {
       this.startLoadingBind = _.bind(this.startLoading, this);
@@ -35418,6 +35427,13 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
     bindLoading: function (onOrOff) {
       this.getCollection()[onOrOff]('request', this.startLoadingBind);
       this.getCollection()[onOrOff]('sync error', this.stopLoadingBind);
+      var $contain = $(this.refs.container.getDOMNode());
+      $contain[onOrOff]('keydown', function (e) {
+        if (e.which === 38 || e.which === 40 || e.which === 13) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     },
     componentDidMount: function () {
       this.bindLoading('on');
@@ -35431,15 +35447,45 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
     stopLoading: function () {
       this.setState({ loading: false });
     },
-    getDefaultProps: function () {
-      return { row: Row, empty: EmptyMessage, loader: DefaultLoader };
+    selectNext: function () {
+      this.setState({
+        currentIndex: this.clampIndex(this.state.currentIndex + 1)
+      });
+    },
+    selectPrevious: function () {
+      this.setState({
+        currentIndex: this.clampIndex(this.state.currentIndex - 1)
+      });
+    },
+    clampIndex: function (index) {
+      var length = this.getCollection().length;
+      if (index <= -1) {
+        index = length - 1;
+      }
+      return index % length;
+    },
+    handleKeyDown: function (e) {
+      if (e.which === 40) {
+        this.selectNext();
+      } else if (e.which === 38) {
+        this.selectPrevious();
+      } else if (e.which === 13) {
+        var model = this.getCollection().at(this.state.currentIndex);
+        if (model) {
+          this.props.onSelect(model);
+          this.setState({ currentIndex: -1 });
+        }
+      } else if (e.which === 27) {
+        this.setState({ currentIndex: -1 });
+      }
     },
     renderList: function () {
+      var selected = this.state.currentIndex;
       var Row = this.props.row;
       return (
         React.createElement("ul", {className: "oui-list"}, 
-          this.getCollection().map(function (m) {
-            return React.createElement(Row, {key: m.id, model: m});
+          this.getCollection().map(function (m, index) {
+            return React.createElement(Row, {key: m.id, model: m, selected: selected === index});
           })
         )
       );
@@ -35449,7 +35495,7 @@ define('jsx!Oui/List/List',['require','underscore','react.backbone','jsx!./Empty
       var Loader = this.props.loader;
       var listContent = this.getCollection().length ? this.renderList() : React.createElement(EmptyElement, null);
       return (
-        React.createElement("div", {className: "oui-list-container"}, 
+        React.createElement("div", {ref: "container", className: "oui-list-container", tabIndex: "0", onKeyUp: this.handleKeyDown}, 
           React.createElement(Loader, {on: this.state.loading}), 
           listContent
         )
@@ -37479,11 +37525,18 @@ define('jsx!docs/List/Basic',['require','react.backbone','jsx!Oui/List/List','..
 
   var Row = React.createBackboneClass({
     render: function () {
-      return React.createElement("li", null, this.getModel().get('username'));
+      var cls = React.addons.classSet({
+        'list-item': true,
+        'selected' : this.props.selected
+      });
+      return React.createElement("li", {className: cls}, this.getModel().get('username'));
     }
   });
 
   var BasicListExample = React.createClass({displayName: 'BasicListExample',
+    getInitialState: function () {
+      return { selectedUser: false };
+    },
     add: function () {
       users.addRandom();
     },
@@ -37493,14 +37546,25 @@ define('jsx!docs/List/Basic',['require','react.backbone','jsx!Oui/List/List','..
     fetch: function () {
       users.fakeFetch();
     },
+    handleListSelect: function (u) {
+      var self = this;
+      if (this.to) {
+        clearTimeout(this.to);
+      }
+      this.setState({ selectedUser: 'Selected: ' + u.get('username') });
+      this.to = setTimeout(function () {
+        self.setState({ selectedUser: false });
+      }, 500);
+    },
     render: function () {
       return (
-        React.createElement("div", null, 
-          React.createElement(List, {collection: users, row: Row}), 
+        React.createElement("div", {className: "list-example"}, 
+          React.createElement(List, {collection: users, row: Row, onSelect: this.handleListSelect}), 
           React.createElement("div", null, 
             React.createElement("a", {onClick: this.add, className: "docs-button"}, "Add"), 
             React.createElement("a", {onClick: this.remove, className: "docs-button"}, "Remove"), 
-            React.createElement("a", {onClick: this.fetch, className: "docs-button"}, "Simulate Fetch")
+            React.createElement("a", {onClick: this.fetch, className: "docs-button"}, "Simulate Fetch"), 
+            this.state.selectedUser
           )
         )
       );
@@ -37599,6 +37663,16 @@ define("json!docs/List/manifest.json", function(){ return {
       "type": "React Class",
       "required": false,
       "description": "Loader element to display when content is being fetched from the server"
+    },{
+      "name": "selectable",
+      "type": "bool",
+      "required": false,
+      "description": "If false, list items will not be selectable with keyboard (default true)"
+    },{
+      "name": "onSelect",
+      "type": "function",
+      "required": false,
+      "description": "Called with selected row model on keyboard enter"
     }
   ]
 }
