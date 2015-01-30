@@ -2,12 +2,12 @@
   "properties": [
     {
       "name": "value",
-      "type": "String",
+      "type": "string",
       "required": false,
       "description": "set initial value for the input"
     },{
       "name": "help",
-      "type": "String",
+      "type": "string",
       "required": false,
       "description": "help line (element for display during focus)"
     },{

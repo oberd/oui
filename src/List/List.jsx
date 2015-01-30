@@ -6,9 +6,11 @@ define(function (require) {
   var _ = require('underscore');
   var $ = require('jquery');
   var React = require('react.backbone');
+
   var EmptyMessage = require('jsx!./EmptyMessage');
   var DefaultLoader = require('jsx!../Loader/Loader');
   var ImproperUseError = require('../Error/ImproperUse');
+  var PropTypes = React.PropTypes;
 
   var Row = React.createBackboneClass({
     render: function () {
@@ -17,6 +19,12 @@ define(function (require) {
   });
 
   var List = React.createBackboneClass({
+    propTypes: {
+      row: PropTypes.func,
+      empty: PropTypes.func,
+      loader: PropTypes.func,
+      onSelect: PropTypes.func
+    },
     getInitialState: function () {
       return { loading: false, currentIndex: -1 };
     },

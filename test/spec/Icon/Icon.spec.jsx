@@ -1,7 +1,6 @@
-/*globals define:false, describe, it, expect */
+/*globals define:false, describe, it */
 define(function (require) {
   'use strict';
-  var $ = require('jquery');
   var React = require('react.backbone');
   var Icon = require('jsx!Oui/Icon/Icon');
   var Helpers = require('jsx!../Helpers');

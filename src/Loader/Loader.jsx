@@ -4,6 +4,9 @@ define(function (require) {
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
   var Loader = React.createClass({
+    propTypes: {
+      on: React.PropTypes.bool
+    },
     getDefaultProps: function () {
       return { on: false };
     },

@@ -35310,6 +35310,9 @@ define('jsx!Oui/List/EmptyMessage',['require','react'],function (require) {
   
   var React = require('react');
   var EmptyMessage = React.createClass({displayName: 'EmptyMessage',
+    propTypes: {
+      message: React.PropTypes.string
+    },
     getDefaultProps: function () {
       return { message: 'No items found' };
     },
@@ -35347,6 +35350,9 @@ define('jsx!Oui/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
   var Loader = React.createClass({displayName: 'Loader',
+    propTypes: {
+      on: React.PropTypes.bool
+    },
     getDefaultProps: function () {
       return { on: false };
     },
@@ -35395,9 +35401,11 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
   var _ = require('underscore');
   var $ = require('jquery');
   var React = require('react.backbone');
+
   var EmptyMessage = require('jsx!./EmptyMessage');
   var DefaultLoader = require('jsx!../Loader/Loader');
   var ImproperUseError = require('../Error/ImproperUse');
+  var PropTypes = React.PropTypes;
 
   var Row = React.createBackboneClass({
     render: function () {
@@ -35406,6 +35414,12 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
   });
 
   var List = React.createBackboneClass({
+    propTypes: {
+      row: PropTypes.func,
+      empty: PropTypes.func,
+      loader: PropTypes.func,
+      onSelect: PropTypes.func
+    },
     getInitialState: function () {
       return { loading: false, currentIndex: -1 };
     },
@@ -49555,6 +49569,9 @@ define('jsx!docs/../../src/Loader/Loader',['require','react','jsx!../Icon/Icon']
   var React = require('react');
   var Icon = require('jsx!../Icon/Icon');
   var Loader = React.createClass({displayName: 'Loader',
+    propTypes: {
+      on: React.PropTypes.bool
+    },
     getDefaultProps: function () {
       return { on: false };
     },
@@ -49926,12 +49943,12 @@ define("json!docs/Form/TextField/manifest.json", function(){ return {
   "properties": [
     {
       "name": "value",
-      "type": "String",
+      "type": "string",
       "required": false,
       "description": "set initial value for the input"
     },{
       "name": "help",
-      "type": "String",
+      "type": "string",
       "required": false,
       "description": "help line (element for display during focus)"
     },{
