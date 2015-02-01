@@ -27,6 +27,12 @@ define(function (require) {
       source: require('text!docs/Form/TextField/TextField.jsx'),
       component: require('jsx!docs/Form/TextField/TextField'),
       manifest: require('json!docs/Form/TextField/manifest.json')
+    },{
+      name: 'Select',
+      content: require('mdown!docs/Form/Select/Select.md'),
+      source: require('text!docs/Form/Select/Select.jsx'),
+      component: require('jsx!docs/Form/Select/Select'),
+      manifest: require('json!docs/Form/Select/manifest.json')
     }
   ];
 });

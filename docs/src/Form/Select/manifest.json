@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "collection",
+      "type": "Backbone.Collection",
+      "required": true,
+      "description": "collection defining select options"
+    },{
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "description": "set initial value for the input"
+    },{
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "description": "defines first (null) option to display if no option selected"
+    }
+  ]
+}

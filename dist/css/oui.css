@@ -86,139 +86,6 @@
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.oui-form-control {
-  position: relative;
-  margin-top: 2em;
-}
-
-.oui-form-control.error .placeholder {
-  color: #7E5E8C;
-}
-
-/**
- * TextField (<input> element)
- */
-
-.oui-text input {
-  display: block;
-  background: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
-  font-size: 1.2em;
-  position: relative;
-  z-index: 10;
-  padding: 0.25em 0.5em;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.oui-text input:focus,
-.oui-text.large input:focus {
-  background: white;
-  border-color: #4d90fe;
-  outline-style: none;
-  outline-color: #4d90fe;
-  outline-width: 2px;
-  outline-offset: 1px;
-}
-
-.oui-text.large input {
-  height: 45px;
-  padding: 10px 16px;
-  line-height: 1.33em;
-  box-shadow: inset 0 1px 7px rgba(0, 0, 0, 0.2);
-}
-
-.oui-text.has-icon input {
-  padding-left: 1.6em;
-}
-
-.oui-text.has-icon.large input {
-  padding-left: 2.5em;
-}
-
-/**
- * Icon
- */
-
-.oui-text .icomoon {
-  position: absolute;
-  z-index: 20;
-  top: 0;
-  left: 0.6em;
-  line-height: 2.3em;
-  color: rgb(144, 158, 164);
-}
-
-.oui-text.large .icomoon {
-  font-size: 1.7em;
-  line-height: 1.9em;
-}
-
-/**
- * Help Line
- */
-
-.oui-text .help {
-  margin-left: 0.1em;
-  z-index: 0;
-  font-size: 0.9em;
-  line-height: 2em;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-.oui-text .help .errors {
-  color: #7E5E8C;
-}
-
-/**
- * Placeholder
- */
-
-.placeholder {
-  -webkit-font-smoothing: subpixel-antialiased;
-  position: absolute;
-  z-index: 20;
-  left: 1em;
-  color: rgb(171, 181, 186);
-  line-height: 2.3em;
-  display: block;
-  font-weight: normal;
-}
-
-.placeholder.u-translate-up {
-  -webkit-transform: translate3d(-0.9em, -80%, 0);
-  transform: translate3d(-0.9em, -80%, 0);
-}
-
-.has-icon .placeholder.u-translate-up {
-  -webkit-transform: translate3d(-2.5em, -80%, 0);
-  transform: translate3d(-2.5em, -80%, 0);
-}
-
-.large .placeholder {
-  font-size: 1.2em;
-  line-height: 2.75em;
-}
-
-.has-icon .placeholder {
-  left: 2.3em;
-}
-
-.has-icon.large .placeholder {
-  left: 2.8em;
-}
-
-.not-empty .placeholder {
-  color: inherit;
-}
-
-.not-empty .placeholder,
-.complete .placeholder,
-.error .placeholder {
-  font-size: 0.9em;
-}
 .icomoon {
   font-family: 'icomoon';
   speak: none;
@@ -2307,4 +2174,137 @@
 .on .oui-button-icon {
   -webkit-transform: translate3d(0, 50%, 0) scale(1);
   transform: translate3d(0, 50%, 0) scale(1);
+}
+.oui-form-control {
+  position: relative;
+  margin-top: 2em;
+}
+
+.oui-form-control.error .placeholder {
+  color: #7E5E8C;
+}
+
+/**
+ * TextField (<input> element)
+ */
+
+.oui-text input {
+  display: block;
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.2em;
+  position: relative;
+  z-index: 10;
+  padding: 0.25em 0.5em;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.oui-text input:focus,
+.oui-text.large input:focus {
+  background: white;
+  border-color: #4d90fe;
+  outline-style: none;
+  outline-color: #4d90fe;
+  outline-width: 2px;
+  outline-offset: 1px;
+}
+
+.oui-text.large input {
+  height: 45px;
+  padding: 10px 16px;
+  line-height: 1.33em;
+  box-shadow: inset 0 1px 7px rgba(0, 0, 0, 0.2);
+}
+
+.oui-text.has-icon input {
+  padding-left: 1.6em;
+}
+
+.oui-text.has-icon.large input {
+  padding-left: 2.5em;
+}
+
+/**
+ * Icon
+ */
+
+.oui-text .icomoon {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0.6em;
+  line-height: 2.3em;
+  color: rgb(144, 158, 164);
+}
+
+.oui-text.large .icomoon {
+  font-size: 1.7em;
+  line-height: 1.9em;
+}
+
+/**
+ * Help Line
+ */
+
+.oui-text .help {
+  margin-left: 0.1em;
+  z-index: 0;
+  font-size: 0.9em;
+  line-height: 2em;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.oui-text .help .errors {
+  color: #7E5E8C;
+}
+
+/**
+ * Placeholder
+ */
+
+.placeholder {
+  -webkit-font-smoothing: subpixel-antialiased;
+  position: absolute;
+  z-index: 20;
+  left: 1em;
+  color: rgb(171, 181, 186);
+  line-height: 2.3em;
+  display: block;
+  font-weight: normal;
+}
+
+.placeholder.u-translate-up {
+  -webkit-transform: translate3d(-0.9em, -80%, 0);
+  transform: translate3d(-0.9em, -80%, 0);
+}
+
+.has-icon .placeholder.u-translate-up {
+  -webkit-transform: translate3d(-2.5em, -80%, 0);
+  transform: translate3d(-2.5em, -80%, 0);
+}
+
+.large .placeholder {
+  font-size: 1.2em;
+  line-height: 2.75em;
+}
+
+.has-icon .placeholder {
+  left: 2.3em;
+}
+
+.has-icon.large .placeholder {
+  left: 2.8em;
+}
+
+.not-empty .placeholder {
+  color: inherit;
+}
+
+.not-empty .placeholder,
+.complete .placeholder,
+.error .placeholder {
+  font-size: 0.9em;
 }

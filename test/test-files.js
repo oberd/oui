@@ -1,1 +1,1 @@
-var tests = ["jsx!spec/Form/TextField.spec","jsx!spec/Icon/Icon.spec","jsx!spec/List/List.spec","jsx!spec/Loader/Loader.spec","spec/Form/Validator.spec","spec/Oui.spec"];
+var tests = ["jsx!spec/Form/Select.spec","jsx!spec/Form/TextField.spec","jsx!spec/Icon/Icon.spec","jsx!spec/List/List.spec","jsx!spec/Loader/Loader.spec","spec/Form/Validator.spec","spec/Oui.spec"];
