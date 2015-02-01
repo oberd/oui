@@ -7,6 +7,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="cleartype" content="on">
   <title>Oui!</title>
   <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap-theme-oberd/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../bower_components/highlightjs/styles/docco.css">
@@ -24,6 +29,7 @@
   <script src="../bower_components/requirejs/require.js"></script>
   <script src="require-config.js"></script>
   <script>
+  /*global window */
   if (window.__env.ENV === 'production') {
     require(['docs/build', 'docs/main']);
   } else {

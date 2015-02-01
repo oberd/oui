@@ -35331,6 +35331,9 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
   var React = require('react.backbone');
 
   var Icon = React.createClass({displayName: 'Icon',
+    propTypes: {
+      name: React.PropTypes.string
+    },
     getDefaultProps: function () {
       return { name: 'user' };
     },
@@ -49550,6 +49553,9 @@ define('jsx!docs/../../src/Icon/Icon',['require','react.backbone'],function (req
   var React = require('react.backbone');
 
   var Icon = React.createClass({displayName: 'Icon',
+    propTypes: {
+      name: React.PropTypes.string
+    },
     getDefaultProps: function () {
       return { name: 'user' };
     },
