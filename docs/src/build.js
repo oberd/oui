@@ -49992,9 +49992,178 @@ define("json!docs/Form/TextField/manifest.json", function(){ return {
 }
 ;});
 
+
+define('mdown!docs/Form/Select/Select.md',[],function () { return '<h3>Select</h3>';});
+
+
+define('text!docs/Form/Select/Select.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Users = require(\'../../ExampleData/Users\');\n  var Select = require(\'jsx!Oui/Form/Select\');\n\n  var users = new Users();\n  users.addRandom(5);\n  var SelectExample = React.createClass({\n    render: function () {\n      return (\n        <div>\n          <Select title="Select a user" collection={users} optionAttribute="username" />\n          <Select value={users.at(3).id} collection={users} optionAttribute="username" />\n        </div>\n      );\n    }\n  });\n  return SelectExample;\n});\n';});
+
+
+/*global define */
+define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone'],function (require) {
+  
+  var ImproperUseError = require('Oui/Error/ImproperUse');
+  var Backbone = require('backbone');
+  var React = require('react.backbone');
+
+  var counter = 0;
+
+  var Select = React.createBackboneClass({
+    propTypes: {
+      collection: React.PropTypes.instanceOf(Backbone.Collection).isRequired,
+      title: React.PropTypes.string,
+      placeholder: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.bool
+      ]),
+      label: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.bool
+      ]),
+      optionAttribute: React.PropTypes.string,
+      onChange: React.PropTypes.func
+    },
+    componentWillMount: function () {
+      this.props.inputId = 'oui_select_' + counter;
+      if (typeof this.props.collection === 'undefined') {
+        throw new ImproperUseError('Select requires a collection property.  Please provide a Backbone compatible collection.');
+      }
+      counter++;
+    },
+    getDefaultProps: function () {
+      return { optionAttribute: 'label', onChange: function () {} };
+    },
+    getInitialState: function () {
+      return { value: this.props.value };
+    },
+    getClassList: function () {
+      return React.addons.classSet({
+        'oui-form-control': true
+      });
+    },
+    onSelect: function (e) {
+      this.setState({ value: e.target.value });
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(this.getCollection().get(e.target.value));
+      }
+    },
+    renderOption: function (model) {
+      var id = model.id;
+      var data = model.toJSON();
+      return (
+        React.createElement("option", {key: id, value: id}, 
+          data[this.props.optionAttribute]
+        )
+      );
+    },
+    renderOptions: function () {
+      return this.getCollection().map(this.renderOption, this);
+    },
+    renderPlaceholder: function () {
+      var placeProp = false;
+      if (typeof this.props.placeholder !== 'undefined') {
+        placeProp = this.props.placeholder;
+      } else if (this.props.title) {
+        placeProp = this.props.title + '...';
+      }
+      return placeProp ?
+        React.createElement("option", null, placeProp) : '';
+    },
+    renderLabel: function () {
+      var label = '';
+      var inputId = this.props.inputId;
+      var labelProp = this.props.title || false;
+      if (typeof this.props.label !== 'undefined') {
+        labelProp = this.props.label;
+      }
+      if (labelProp){
+        label = React.createElement("label", {htmlFor: inputId}, labelProp);
+      }
+      return label;
+    },
+    render: function () {
+      var classList = this.getClassList();
+      var options = this.renderOptions();
+      var placeholderOption = this.renderPlaceholder();
+      var label = this.renderLabel();
+      return (
+        React.createElement("div", {className: classList}, 
+          label, 
+          React.createElement("select", {onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
+            placeholderOption, 
+            options
+          )
+        )
+      );
+    }
+  });
+  return Select;
+});
+
+
+/*global define */
+define('jsx!docs/Form/Select/Select',['require','react.backbone','../../ExampleData/Users','jsx!Oui/Form/Select'],function (require) {
+  
+  var React = require('react.backbone');
+  var Users = require('../../ExampleData/Users');
+  var Select = require('jsx!Oui/Form/Select');
+
+  var users = new Users();
+  users.addRandom(5);
+  var SelectExample = React.createClass({displayName: 'SelectExample',
+    render: function () {
+      return (
+        React.createElement("div", null, 
+          React.createElement(Select, {title: "Select a user", collection: users, optionAttribute: "username"}), 
+          React.createElement(Select, {value: users.at(3).id, collection: users, optionAttribute: "username"})
+        )
+      );
+    }
+  });
+  return SelectExample;
+});
+
+
+define("json!docs/Form/Select/manifest.json", function(){ return {
+  "properties": [
+    {
+      "name": "collection",
+      "type": "Backbone.Collection",
+      "required": true,
+      "description": "collection defining select options"
+    },{
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "description": "set initial value for the input"
+    },{
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "description": "defines first (null) option to display if no option selected"
+    },{
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "text of prepended label element"
+    },{
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "description": "shorthand attribute to fill in label and placeholder"
+    },{
+      "name": "onChange",
+      "type": "function",
+      "required": false,
+      "description": "function will be called on value change with selected model"
+    }
+  ]
+}
+;});
+
 /*global define */
 
-define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Basic.jsx','jsx!docs/List/Basic','json!docs/List/manifest.json','mdown!docs/Icon/Icon.md','text!docs/Icon/Icon.jsx','jsx!docs/Icon/Icon','json!docs/Icon/manifest.json','mdown!docs/Loader/Loader.md','text!docs/Loader/LoaderExample.jsx','jsx!docs/Loader/LoaderExample','json!docs/Loader/manifest.json','mdown!docs/Form/TextField/TextField.md','text!docs/Form/TextField/TextField.jsx','jsx!docs/Form/TextField/TextField','json!docs/Form/TextField/manifest.json'],function (require) {
+define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Basic.jsx','jsx!docs/List/Basic','json!docs/List/manifest.json','mdown!docs/Icon/Icon.md','text!docs/Icon/Icon.jsx','jsx!docs/Icon/Icon','json!docs/Icon/manifest.json','mdown!docs/Loader/Loader.md','text!docs/Loader/LoaderExample.jsx','jsx!docs/Loader/LoaderExample','json!docs/Loader/manifest.json','mdown!docs/Form/TextField/TextField.md','text!docs/Form/TextField/TextField.jsx','jsx!docs/Form/TextField/TextField','json!docs/Form/TextField/manifest.json','mdown!docs/Form/Select/Select.md','text!docs/Form/Select/Select.jsx','jsx!docs/Form/Select/Select','json!docs/Form/Select/manifest.json'],function (require) {
   
   return [
     {
@@ -50021,6 +50190,12 @@ define('docs/manifest',['require','mdown!docs/List/Basic.md','text!docs/List/Bas
       source: require('text!docs/Form/TextField/TextField.jsx'),
       component: require('jsx!docs/Form/TextField/TextField'),
       manifest: require('json!docs/Form/TextField/manifest.json')
+    },{
+      name: 'Select',
+      content: require('mdown!docs/Form/Select/Select.md'),
+      source: require('text!docs/Form/Select/Select.jsx'),
+      component: require('jsx!docs/Form/Select/Select'),
+      manifest: require('json!docs/Form/Select/manifest.json')
     }
   ];
 });

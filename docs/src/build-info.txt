@@ -48,6 +48,11 @@ text!docs/Form/TextField/TextField.jsx
 jsx!Oui/Form/TextField
 jsx!docs/Form/TextField/TextField
 json!docs/Form/TextField/manifest.json
+mdown!docs/Form/Select/Select.md
+text!docs/Form/Select/Select.jsx
+jsx!Oui/Form/Select
+jsx!docs/Form/Select/Select
+json!docs/Form/Select/manifest.json
 ./docs/src/manifest.js
 mdown!docs/../../README.md
 jsx!docs/Documentation

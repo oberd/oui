@@ -11,8 +11,8 @@ define(function (require) {
     render: function () {
       return (
         <div>
-          <Select placeholder="Select a user..." collection={users} labelAttribute="username" />
-          <Select placeholder="Select a user..." value={users.at(3).id} collection={users} labelAttribute="username" />
+          <Select title="Select a user" collection={users} optionAttribute="username" />
+          <Select value={users.at(3).id} collection={users} optionAttribute="username" />
         </div>
       );
     }

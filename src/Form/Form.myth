@@ -7,6 +7,9 @@
 .oui-form-control.error .placeholder {
   color: var(--color-error);
 }
+.oui-form-control label {
+  display: block;
+}
 /**
  * TextField (<input> element)
  */
