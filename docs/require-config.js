@@ -6,6 +6,7 @@ requirejs.config({
     'underscore': '../bower_components/underscore/underscore',
     'backbone': '../bower_components/backbone/backbone',
     'react': '../bower_components/react/react-with-addons',
+    'react-router': '../bower_components/react-router/build/global/ReactRouter',
     'react.backbone': '../bower_components/react.backbone/react.backbone',
     'JSXTransformer': '../bower_components/react/JSXTransformer',
     'text': '../bower_components/requirejs-text/text',

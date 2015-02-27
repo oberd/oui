@@ -36,6 +36,7 @@ var requireConfig = {
     'backbone': 'bower_components/backbone/backbone',
     'react': 'bower_components/react/react-with-addons',
     'react.backbone': 'bower_components/react.backbone/react.backbone',
+    'react-router': 'bower_components/react-router/build/global/ReactRouter',
     'text': 'bower_components/requirejs-text/text',
     'JSXTransformer': 'tools/JSXTransformer',
     'jsx': 'bower_components/jsx-requirejs-plugin/js/jsx',

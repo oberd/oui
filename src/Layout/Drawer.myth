@@ -1,0 +1,39 @@
+@import '../Globals.myth';
+:root {
+  --size-sidebar-w: 200px;
+}
+.oui-drawer-container {
+  position: relative;
+}
+.oui-sidebar {
+  z-index: var(--z-index-3);
+  width: var(--size-sidebar-w);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #f5f5f5;
+  transform: translate3d(-100%, 0, 0);
+}
+.hamburger-time {
+  padding: 1.15em;
+  display: inline-block;
+  cursor: pointer;
+}
+/* Menu */
+.oui-menu-item {
+  display: block;
+  padding: 0.75em;
+  margin-top: 0.25em;
+  color: inherit;
+}
+.oui-menu-item .icomoon {
+  vertical-align: middle;
+}
+/* Expanded Styles */
+.oui-drawer-container.expanded .oui-sidebar {
+  transform: translate3d(0, 0, 0);
+}
+.oui-drawer-container.expanded .oui-drawer-content {
+  margin-left: var(--size-sidebar-w);
+}
