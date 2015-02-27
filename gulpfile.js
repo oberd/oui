@@ -49,7 +49,6 @@ var requireConfig = {
   jsx: {
     fileExtension: '.jsx'
   },
-  stubModules: ['jsx'],
   shim: {
     'backbone': { 'deps': ['underscore', 'jquery'] }
   },
@@ -70,6 +69,7 @@ gulp.task('requirejs-lib', ['requirejs-lib-clean'], rjsOptimize({
   include: ['bower_components/almond/almond', 'Oui/Oui'],
   exclude: ['jquery', 'underscore', 'backbone', 'react', 'react.backbone', 'backbone-filtered-collection', 'JSXTransformer', 'text'],
   out: 'dist/oui.js',
+  stubModules: ['jsx'],
   wrap: {
     'startFile': 'tools/wrap.start',
     'endFile': 'tools/wrap.end'

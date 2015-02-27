@@ -7,9 +7,9 @@ define(function (require) {
   var $ = require('jquery');
   var React = require('react.backbone');
 
-  var EmptyMessage = require('jsx!./EmptyMessage');
-  var DefaultLoader = require('jsx!../Loader/Loader');
-  var ImproperUseError = require('../Error/ImproperUse');
+  var EmptyMessage = require('jsx!Oui/List/EmptyMessage');
+  var DefaultLoader = require('jsx!Oui/Loader/Loader');
+  var ImproperUseError = require('Oui/Error/ImproperUse');
   var PropTypes = React.PropTypes;
 
   var Row = React.createBackboneClass({

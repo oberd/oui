@@ -34,7 +34,6 @@ jsx!docs/Icon/Icon
 json!docs/Icon/manifest.json
 mdown!docs/Loader/Loader.md
 text!docs/Loader/LoaderExample.jsx
-jsx!docs/../../src/Icon/Icon
 jsx!docs/../../src/Loader/Loader
 mdown!docs/ExampleData/Lorem.md
 jsx!docs/Loader/LoaderExample

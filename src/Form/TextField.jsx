@@ -5,8 +5,8 @@ define(function (require) {
   var _ = require('underscore');
   var React = require('react');
 
-  var Validator = require('./Validator');
-  var RegExpValidator = require('./Validators/RegExp');
+  var Validator = require('Oui/Form/Validator');
+  var RegExpValidator = require('Oui/Form/Validators/RegExp');
 
   var counter = 0;
 

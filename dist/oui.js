@@ -478,10 +478,10 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
+define('jsx!Oui/Loader/Loader',['require','react','jsx!Oui/Icon/Icon'],function (require) {
   
   var React = require('react');
-  var Icon = require('jsx!../Icon/Icon');
+  var Icon = require('jsx!Oui/Icon/Icon');
   var Loader = React.createClass({displayName: 'Loader',
     propTypes: {
       on: React.PropTypes.bool
@@ -528,16 +528,16 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!Oui/List/EmptyMessage','jsx!Oui/Loader/Loader','Oui/Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
   var $ = require('jquery');
   var React = require('react.backbone');
 
-  var EmptyMessage = require('jsx!./EmptyMessage');
-  var DefaultLoader = require('jsx!../Loader/Loader');
-  var ImproperUseError = require('../Error/ImproperUse');
+  var EmptyMessage = require('jsx!Oui/List/EmptyMessage');
+  var DefaultLoader = require('jsx!Oui/Loader/Loader');
+  var ImproperUseError = require('Oui/Error/ImproperUse');
   var PropTypes = React.PropTypes;
 
   var Row = React.createBackboneClass({
@@ -729,10 +729,10 @@ define('Oui/Form/Validator',['require','underscore','./Validators/AbstractValida
 
 /*global define */
 
-define('Oui/Form/Validators/RegExp',['require','./AbstractValidator'],function (require) {
+define('Oui/Form/Validators/RegExp',['require','Oui/Form/Validators/AbstractValidator'],function (require) {
   
 
-  var Validator = require('./AbstractValidator');
+  var Validator = require('Oui/Form/Validators/AbstractValidator');
 
   function RegExValidator(regex, message) {
     Validator.apply(this);
@@ -751,14 +751,14 @@ define('Oui/Form/Validators/RegExp',['require','./AbstractValidator'],function (
 
 
 /*global define */
-define('jsx!Oui/Form/TextField',['require','underscore','react','./Validator','./Validators/RegExp'],function (require) {
+define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Validator','Oui/Form/Validators/RegExp'],function (require) {
   
 
   var _ = require('underscore');
   var React = require('react');
 
-  var Validator = require('./Validator');
-  var RegExpValidator = require('./Validators/RegExp');
+  var Validator = require('Oui/Form/Validator');
+  var RegExpValidator = require('Oui/Form/Validators/RegExp');
 
   var counter = 0;
 
@@ -897,15 +897,119 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','./Validator','.
   return TextInput;
 });
 
+
+/*global define */
+define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone'],function (require) {
+  
+  var ImproperUseError = require('Oui/Error/ImproperUse');
+  var Backbone = require('backbone');
+  var React = require('react.backbone');
+
+  var counter = 0;
+
+  var Select = React.createBackboneClass({
+    propTypes: {
+      collection: React.PropTypes.instanceOf(Backbone.Collection).isRequired,
+      title: React.PropTypes.string,
+      placeholder: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.bool
+      ]),
+      label: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.bool
+      ]),
+      optionAttribute: React.PropTypes.string,
+      onChange: React.PropTypes.func
+    },
+    componentWillMount: function () {
+      this.props.inputId = 'oui_select_' + counter;
+      if (typeof this.props.collection === 'undefined') {
+        throw new ImproperUseError('Select requires a collection property.  Please provide a Backbone compatible collection.');
+      }
+      counter++;
+    },
+    getDefaultProps: function () {
+      return { optionAttribute: 'label', onChange: function () {} };
+    },
+    getInitialState: function () {
+      return { value: this.props.value };
+    },
+    getClassList: function () {
+      return React.addons.classSet({
+        'oui-form-control': true
+      });
+    },
+    onSelect: function (e) {
+      this.setState({ value: e.target.value });
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(this.getCollection().get(e.target.value));
+      }
+    },
+    renderOption: function (model) {
+      var id = model.id;
+      var data = model.toJSON();
+      return (
+        React.createElement("option", {key: id, value: id}, 
+          data[this.props.optionAttribute]
+        )
+      );
+    },
+    renderOptions: function () {
+      return this.getCollection().map(this.renderOption, this);
+    },
+    renderPlaceholder: function () {
+      var placeProp = false;
+      if (typeof this.props.placeholder !== 'undefined') {
+        placeProp = this.props.placeholder;
+      } else if (this.props.title) {
+        placeProp = this.props.title + '...';
+      }
+      return placeProp ?
+        React.createElement("option", null, placeProp) : '';
+    },
+    renderLabel: function () {
+      var label = '';
+      var inputId = this.props.inputId;
+      var labelProp = this.props.title || false;
+      if (typeof this.props.label !== 'undefined') {
+        labelProp = this.props.label;
+      }
+      if (labelProp){
+        label = React.createElement("label", {htmlFor: inputId}, labelProp);
+      }
+      return label;
+    },
+    render: function () {
+      var classList = this.getClassList();
+      var options = this.renderOptions();
+      var placeholderOption = this.renderPlaceholder();
+      var label = this.renderLabel();
+      return (
+        React.createElement("div", {className: classList}, 
+          label, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
+            placeholderOption, 
+            options
+          )
+        )
+      );
+    }
+  });
+  return Select;
+});
+
 /*globals define:false */
-define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon','jsx!./Loader/Loader','jsx!./Form/TextField'],function (require) {
+define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon','jsx!./Loader/Loader','jsx!./Form/TextField','jsx!./Form/Select','./Form/Validator'],function (require) {
   
   return {
     List: require('jsx!./List/List'),
     Icon: require('jsx!./Icon/Icon'),
     Loader: require('jsx!./Loader/Loader'),
     Form: {
-      TextField: require('jsx!./Form/TextField')
+      TextField: require('jsx!./Form/TextField'),
+      Select: require('jsx!./Form/Select'),
+      Validator: require('./Form/Validator')
     }
   };
 });

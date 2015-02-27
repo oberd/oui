@@ -6,7 +6,9 @@ define(function (require) {
     Icon: require('jsx!./Icon/Icon'),
     Loader: require('jsx!./Loader/Loader'),
     Form: {
-      TextField: require('jsx!./Form/TextField')
+      TextField: require('jsx!./Form/TextField'),
+      Select: require('jsx!./Form/Select'),
+      Validator: require('./Form/Validator')
     }
   };
 });

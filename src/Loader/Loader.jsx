@@ -2,7 +2,7 @@
 define(function (require) {
   'use strict';
   var React = require('react');
-  var Icon = require('jsx!../Icon/Icon');
+  var Icon = require('jsx!Oui/Icon/Icon');
   var Loader = React.createClass({
     propTypes: {
       on: React.PropTypes.bool

@@ -3,7 +3,7 @@
 define(function (require) {
   'use strict';
 
-  var Validator = require('./AbstractValidator');
+  var Validator = require('Oui/Form/Validators/AbstractValidator');
 
   function RegExValidator(regex, message) {
     Validator.apply(this);

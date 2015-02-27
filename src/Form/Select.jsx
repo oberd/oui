@@ -88,7 +88,7 @@ define(function (require) {
       return (
         <div className={classList}>
           {label}
-          <select onChange={this.onSelect} value={this.state.value} name={this.props.inputId}>
+          <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.props.inputId}>
             {placeholderOption}
             {options}
           </select>

@@ -35348,10 +35348,10 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
+define('jsx!Oui/Loader/Loader',['require','react','jsx!Oui/Icon/Icon'],function (require) {
   
   var React = require('react');
-  var Icon = require('jsx!../Icon/Icon');
+  var Icon = require('jsx!Oui/Icon/Icon');
   var Loader = React.createClass({displayName: 'Loader',
     propTypes: {
       on: React.PropTypes.bool
@@ -35398,16 +35398,16 @@ define('Oui/Error/ImproperUse',['require'],function (require) {
 
 /*global define */
 
-define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!./EmptyMessage','jsx!../Loader/Loader','../Error/ImproperUse'],function (require) {
+define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','jsx!Oui/List/EmptyMessage','jsx!Oui/Loader/Loader','Oui/Error/ImproperUse'],function (require) {
   
 
   var _ = require('underscore');
   var $ = require('jquery');
   var React = require('react.backbone');
 
-  var EmptyMessage = require('jsx!./EmptyMessage');
-  var DefaultLoader = require('jsx!../Loader/Loader');
-  var ImproperUseError = require('../Error/ImproperUse');
+  var EmptyMessage = require('jsx!Oui/List/EmptyMessage');
+  var DefaultLoader = require('jsx!Oui/Loader/Loader');
+  var ImproperUseError = require('Oui/Error/ImproperUse');
   var PropTypes = React.PropTypes;
 
   var Row = React.createBackboneClass({
@@ -49547,33 +49547,10 @@ define('text!docs/Loader/LoaderExample.jsx',[],function () { return '/*global de
 
 
 /*global define */
-define('jsx!docs/../../src/Icon/Icon',['require','react.backbone'],function (require) {
-
-  
-  var React = require('react.backbone');
-
-  var Icon = React.createClass({displayName: 'Icon',
-    propTypes: {
-      name: React.PropTypes.string
-    },
-    getDefaultProps: function () {
-      return { name: 'user' };
-    },
-    render: function () {
-      var className = 'icomoon icomoon-' + this.props.name;
-      delete this.props.name;
-      return React.createElement("span", React.__spread({},  this.props, {className: className}));
-    }
-  });
-  return Icon;
-});
-
-
-/*global define */
-define('jsx!docs/../../src/Loader/Loader',['require','react','jsx!../Icon/Icon'],function (require) {
+define('jsx!docs/../../src/Loader/Loader',['require','react','jsx!Oui/Icon/Icon'],function (require) {
   
   var React = require('react');
-  var Icon = require('jsx!../Icon/Icon');
+  var Icon = require('jsx!Oui/Icon/Icon');
   var Loader = React.createClass({displayName: 'Loader',
     propTypes: {
       on: React.PropTypes.bool
@@ -49733,10 +49710,10 @@ define('Oui/Form/Validator',['require','underscore','./Validators/AbstractValida
 
 /*global define */
 
-define('Oui/Form/Validators/RegExp',['require','./AbstractValidator'],function (require) {
+define('Oui/Form/Validators/RegExp',['require','Oui/Form/Validators/AbstractValidator'],function (require) {
   
 
-  var Validator = require('./AbstractValidator');
+  var Validator = require('Oui/Form/Validators/AbstractValidator');
 
   function RegExValidator(regex, message) {
     Validator.apply(this);
@@ -49755,14 +49732,14 @@ define('Oui/Form/Validators/RegExp',['require','./AbstractValidator'],function (
 
 
 /*global define */
-define('jsx!Oui/Form/TextField',['require','underscore','react','./Validator','./Validators/RegExp'],function (require) {
+define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Validator','Oui/Form/Validators/RegExp'],function (require) {
   
 
   var _ = require('underscore');
   var React = require('react');
 
-  var Validator = require('./Validator');
-  var RegExpValidator = require('./Validators/RegExp');
+  var Validator = require('Oui/Form/Validator');
+  var RegExpValidator = require('Oui/Form/Validators/RegExp');
 
   var counter = 0;
 
@@ -50089,7 +50066,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return (
         React.createElement("div", {className: classList}, 
           label, 
-          React.createElement("select", {onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
             placeholderOption, 
             options
           )
