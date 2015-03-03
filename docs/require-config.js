@@ -1,3 +1,4 @@
+/*global requirejs */
 requirejs.config({
   paths: {
     'docs': 'src',
@@ -16,7 +17,8 @@ requirejs.config({
     'mdown': '../bower_components/requirejs-plugins/src/mdown',
     'highlightjs': '../bower_components/highlightjs/highlight.pack',
     'chance': '../bower_components/chance/chance',
-    'markdownConverter': '../bower_components/requirejs-plugins/lib/Markdown.Converter'
+    'markdownConverter': '../bower_components/requirejs-plugins/lib/Markdown.Converter',
+    'oberd-media-query': '../bower_components/oberd-media-query/media-query'
   },
   jsx: { fileExtension: '.jsx' },
   shim: {

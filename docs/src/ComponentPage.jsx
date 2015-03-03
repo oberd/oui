@@ -6,11 +6,19 @@ define(function (require) {
   var $ = require('jquery');
   var hljs = require('highlightjs');
   var React = require('react.backbone');
+  var Router = require('react-router');
+  var examples = require('./manifest');
+  var byName = _.indexBy(examples, 'name');
+
+  var defaultPage = {
+    name: 'Oui!',
+    content: require('mdown!../../README.md')
+  };
+
   var ExampleRunner = React.createClass({
+    mixins: [Router.State],
     getInitialState: function () {
-      return {
-        sourceExpanded: false
-      };
+      return { sourceExpanded: false };
     },
     toggleSource: function () {
       this.setState({ sourceExpanded: !this.state.sourceExpanded });
@@ -26,28 +34,30 @@ define(function (require) {
     componentDidUpdate: function () {
       this.highlight();
     },
-    getPropertiesString: function () {
-      return _.map(this.props.manifest.properties, function (prop) {
+    getPropertiesString: function (example) {
+      return _.map(example.manifest.properties, function (prop) {
         return prop.required ? prop.name + '={' + prop.type + '}': '[' + prop.name + ']';
       }).join(' ');
     },
-    renderComponentPaster: function () {
-      return '<' + this.props.name + ' ' + this.getPropertiesString() + '/>';
+    renderComponentPaster: function (example) {
+      return '<' + example.name + ' ' + this.getPropertiesString(example) + '/>';
     },
     render: function () {
-      if (!this.props.name) {
-        return <div></div>;
+      var name = this.getParams().name;
+      var example = byName[name];
+      if (!example) {
+        return <div dangerouslySetInnerHTML={{__html: defaultPage.content}} />;
       }
       var sourceClasses = React.addons.classSet({
         'example-source': true,
         'expanded': this.state.sourceExpanded
       });
       var sourceMessage = this.state.sourceExpanded ? 'Hide Source':'View Source';
-      var Example = this.props.component;
+      var Example = example.component;
       return (
-        <div className="page-content component-page" key={this.props.name}>
-          <h3>{this.props.name} Component</h3>
-          <pre><code className="e4x">{this.renderComponentPaster()}</code></pre>
+        <div className="page-content component-page" key={example.name}>
+          <h3>{example.name} Component</h3>
+          <pre><code className="e4x">{this.renderComponentPaster(example)}</code></pre>
           <h4>Demo</h4>
           <div className="component-example">
             <a className="docs-button source-toggle" onClick={this.toggleSource}>{sourceMessage}</a>
@@ -57,7 +67,7 @@ define(function (require) {
           </div>
           <div className="component-docs">
             <div className={sourceClasses}>
-              <pre><code className="e4x">{this.props.source}</code></pre>
+              <pre><code className="e4x">{example.source}</code></pre>
             </div>
             <h4>Properties</h4>
             <table className="table table-striped">
@@ -65,7 +75,7 @@ define(function (require) {
                 <tr><th>Name</th><th>Type</th><th>Description</th></tr>
               </thead>
               <tbody>
-              {_.map(this.props.manifest.properties, function (p) {
+              {_.map(example.manifest.properties, function (p) {
                 var req = React.addons.classSet({
                   'required': p.required
                 });
@@ -81,7 +91,7 @@ define(function (require) {
               </tbody>
             </table>
             <div className="component-content">
-              <div dangerouslySetInnerHTML={{__html: this.props.content}} />
+              <div dangerouslySetInnerHTML={{__html: example.content}} />
             </div>
           </div>
         </div>

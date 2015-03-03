@@ -12,12 +12,16 @@ define(function (require) {
   });
   var Topbar = React.createClass({
     getDefaultProps: function () {
-        return { onMenuToggle: function () {} };
+      return { hamburger: false, onMenuToggle: function () {} };
+    },
+    onMenuToggle: function (e) {
+      this.props.onMenuToggle(e);
     },
     render: function () {
+      var hamburger = this.props.hamburger ? <HamburgerTime expanded={this.props.expanded} onClick={this.props.onMenuToggle} /> : <span/>;
       return (
         <div className="oui-topbar clearfix">
-          <HamburgerTime expanded={this.props.expanded} onClick={this.props.onMenuToggle} />
+          {hamburger}
           {this.props.children}
         </div>
       );

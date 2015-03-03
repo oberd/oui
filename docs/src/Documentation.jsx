@@ -1,69 +1,56 @@
-/*global define, window, document */
+/*global define */
 
 define(function (require) {
   'use strict';
-  var packageInfo = require('text!../../bower.json');
+
+  var _ = require('underscore');
+  var packageInfo = require('json!../../bower.json');
   var React = require('react.backbone');
-  var DocsMenu = require('jsx!./Menu');
-  var ComponentPage = require('jsx!./ComponentPage');
+  var Router = require('react-router');
+  var RouteHandler = Router.RouteHandler;
+  var Link = Router.Link;
+
+  var DrawerLayout = require('jsx!Oui/Layout/Drawer');
+  var Content = require('jsx!Oui/Layout/Content');
+  var Sidebar = require('jsx!Oui/Layout/Sidebar');
+  var Menu = require('jsx!Oui/Layout/Menu');
+  var MenuItem = require('jsx!Oui/Layout/MenuItem');
+  var Topbar = require('jsx!Oui/Layout/Topbar');
+
   var examples = require('./manifest');
 
-  var defaultPage = {
-    name: 'Oui!',
-    content: require('mdown!../../README.md')
-  };
-
-  packageInfo = JSON.parse(packageInfo);
-
   var Docs = React.createClass({
-    getDefaultProps: function () {
-      return {
-        examples: examples
-      };
-    },
-    getInitialState: function () {
-      return { example: { name: null } };
-    },
-    handleExample: function (example) {
-      this.setState({ example: example });
-    },
-    goHome: function () {
-      window.location.hash = '';
-      this.setState({ example: { name: null }});
-    },
+    mixins: [DrawerLayout.Expansion],
     render: function () {
-      var page;
-      if (this.state.example.name) {
-        page = <ComponentPage {...this.state.example} currentPage={this.state.example.component} />;
-      } else {
-        page = <div className="page-content" dangerouslySetInnerHTML={{__html: defaultPage.content}} />;
-      }
+      var expanded = this.state.layoutExpanded;
+      var menuItems = _.map(examples, function (example) {
+        return <MenuItem key={example.name} route="components" params={{ name: example.name }}>{example.name}</MenuItem>;
+      });
       return (
-        <section>
-          <h4 className="text-center page-header">
-            <div className="pointer" onClick={this.goHome}>
-              <img src="oui.svg" width="250" />
-              <div className="subtitle">Oberd User Interface Library <br/> v{packageInfo.version} <a className="header-link" href="/test">Tests</a></div>
+        <DrawerLayout expanded={expanded}>
+          <Sidebar>
+            <div className="logo">
+              <Link to="/"><img height="100%" src="oui.svg" /></Link>
             </div>
-          </h4>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-sm-3">
-                <div className="header-align--h3">
-                  <DocsMenu examples={this.props.examples} onSelect={this.handleExample} value={this.state.example.name} />
-                </div>
+            <Menu>{menuItems}</Menu>
+          </Sidebar>
+          <Content>
+            <Topbar expanded={expanded} onMenuToggle={this.toggleLayoutExpansion}>
+              <div className="pull-right">
+                v{packageInfo.version}
+                &nbsp;
+                <a className="header-link" href="/test">Tests</a>
+                &nbsp;
+                <a className="header-link" href="https://github.com/oberd/oui">Github</a>
               </div>
-              <div className="col-sm-9">
-                {page}
-              </div>
+            </Topbar>
+            <div className="docs-page">
+              <RouteHandler />
             </div>
-          </div>
-        </section>
+          </Content>
+        </DrawerLayout>
       );
     }
   });
-  React.render(<Docs />, document.getElementById('main'));
-  setTimeout(function () {
-    document.getElementById('main').className = 'in';
-  });
+  return Docs;
 });

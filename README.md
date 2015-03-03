@@ -9,7 +9,7 @@ UI components for building smart health applications
 ### Installation
 
 ```
-bower install --save https://github.com/oberd/oui.git
+bower install --save git@github.com:oberd/oui.git
 ```
 
 ### Usage

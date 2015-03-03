@@ -17,7 +17,9 @@
 a {
   cursor: pointer;
 }
-
+.docs-page {
+  padding: 2em;
+}
 .page-header {
   background: var(--color-header-bg);
   margin: 0;
@@ -90,6 +92,9 @@ a {
   text-decoration: underline;
   border: none;
 }
+.component-page {
+  padding: 0 1em;
+}
 .component-page .example-source {
   height: 0;
   overflow: hidden;
@@ -136,7 +141,6 @@ a {
 .icon-examples .icon-example .icomoon {
   font-size: 1.5em;
 }
-
 .table {
   color: #666666;
 }
@@ -145,4 +149,21 @@ a {
 }
 .table .required > td:first-child {
   font-weight: bold;
+}
+.oui-topbar {
+  background-color: var(--color-header-bg);
+}
+.oui-topbar .pull-right {
+  line-height: 4em;
+  padding: 0 2em;
+}
+.logo {
+  margin: 0.5em 0;
+  text-align: center;
+  display: block;
+  margin-bottom: 3em;
+}
+.logo img {
+  height: 3em;
+  display: inline-block;
 }

@@ -2291,13 +2291,13 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background: #f5f5f5;
+  background: #e7e7e7;
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
 }
 
 .hamburger-time {
-  padding: 1.15em;
+  padding: 0.9em;
   display: inline-block;
   cursor: pointer;
 }
@@ -2309,6 +2309,10 @@
   padding: 0.75em;
   margin-top: 0.25em;
   color: inherit;
+}
+
+.oui-menu-item.active {
+  background-color: #ffffff;
 }
 
 .oui-menu-item .icomoon {

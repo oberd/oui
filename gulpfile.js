@@ -16,7 +16,7 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var clean = require('gulp-rimraf');
 var rjs = require('requirejs');
-var flatten = require('gulp-flatten');
+// var flatten = require('gulp-flatten');
 
 function cleaner(files) {
   return function () {
@@ -45,7 +45,8 @@ var requireConfig = {
     'mdown': 'bower_components/requirejs-plugins/src/mdown',
     'highlightjs': 'bower_components/highlightjs/highlight.pack',
     'chance': 'bower_components/chance/chance',
-    'markdownConverter': 'bower_components/requirejs-plugins/lib/Markdown.Converter'
+    'markdownConverter': 'bower_components/requirejs-plugins/lib/Markdown.Converter',
+    'oberd-media-query': 'bower_components/oberd-media-query/media-query'
   },
   jsx: {
     fileExtension: '.jsx'
@@ -80,7 +81,7 @@ gulp.task('requirejs-lib', ['requirejs-lib-clean'], rjsOptimize({
 
 gulp.task('requirejs-docs-clean', cleaner(['docs/src/build.js', 'docs/src/build-info.txt']));
 gulp.task('requirejs-docs', ['requirejs-docs-clean'], rjsOptimize({
-  include: ['docs/main'],
+  include: ['jsx!docs/Main'],
   exclude: ['JSXTransformer'],
   out: 'docs/src/build.js',
   wrap: {},

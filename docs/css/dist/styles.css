@@ -23,6 +23,10 @@ a {
   cursor: pointer;
 }
 
+.docs-page {
+  padding: 2em;
+}
+
 .page-header {
   background: #F5DB41;
   margin: 0;
@@ -113,6 +117,10 @@ a {
   border: none;
 }
 
+.component-page {
+  padding: 0 1em;
+}
+
 .component-page .example-source {
   height: 0;
   overflow: hidden;
@@ -179,4 +187,25 @@ a {
 
 .table .required > td:first-child {
   font-weight: bold;
+}
+
+.oui-topbar {
+  background-color: #F5DB41;
+}
+
+.oui-topbar .pull-right {
+  line-height: 4em;
+  padding: 0 2em;
+}
+
+.logo {
+  margin: 0.5em 0;
+  text-align: center;
+  display: block;
+  margin-bottom: 3em;
+}
+
+.logo img {
+  height: 3em;
+  display: inline-block;
 }
