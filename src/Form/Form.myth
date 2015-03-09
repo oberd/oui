@@ -90,6 +90,7 @@
   line-height: 2.3em;
   display: block;
   font-weight: normal;
+  perspective: 1000;
 }
 .placeholder.u-translate-up {
   transform: translate3d(-0.9em, -80%, 0);

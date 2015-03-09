@@ -232,6 +232,8 @@
   line-height: 2.3em;
   display: block;
   font-weight: normal;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .placeholder.u-translate-up {
@@ -2280,6 +2282,27 @@
   font-weight: normal;
   font-style: normal;
 }
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
 .oui-drawer-container {
   position: relative;
 }
@@ -2328,27 +2351,6 @@
 
 .oui-drawer-container.expanded .oui-drawer-content {
   margin-left: 200px;
-}
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
 }
 .oui-loader {
   position: absolute;
