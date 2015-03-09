@@ -72,19 +72,18 @@ define(function (require) {
         this.props.onChange(newValue);
       }
     },
-    handlePlaceholderClick: function () {
+    handleLabelClick: function () {
       this.setState({ focused: true });
       this.refs.textInput.getDOMNode().focus();
     },
-    renderPlaceholder: function () {
+    renderLabel: function () {
       var above = this.state.value.length > 0;
       var classes = React.addons.classSet({
-        'placeholder': true,
         't-1': true,
-        'u-reset-translate': !above,
-        'u-translate-up': above
+        'u-reset-translate': above,
+        'u-translate-down': false // !above
       });
-      return <label htmlFor={this.props.inputId} className={classes} onClick={this.handlePlaceholderClick}>{this.props.placeholder}</label>;
+      return <label htmlFor={this.props.inputId} className={classes} onClick={this.handleLabelClick}>{this.props.label}</label>;
     },
     renderHelp: function (isErrored, errorText) {
       var errors = '';
@@ -101,7 +100,7 @@ define(function (require) {
       return <label htmlFor={this.props.inputId} role="presentation" className={classes}>{help}{errors}</label>;
     },
     render: function () {
-      var place = this.props.placeholder ? this.renderPlaceholder() : '';
+      var place = this.props.label ? this.renderLabel() : '';
       var validationErrors = this._validator.getValidationErrors(this.state.value);
       var isValid = validationErrors.length === 0;
       var isEmpty = this.state.value.length === 0;
@@ -127,15 +126,18 @@ define(function (require) {
         'onFocus': this.handleFocus,
         'onBlur': this.handleBlur,
         'value': this.state.value,
-        'maxLength': this.props.maxLength || 524288
+        'maxLength': this.props.maxLength || 524288,
+        'placeholder': this.props.placeholder
       };
       var icon = this.props.icon || '';
       return (
         <div className={classes}>
           {place}
-          {icon}
-          <div>
-            <input aria-describedby={this.props.help} id={this.props.inputId} ref="textInput" type="text" className="t-1" {...inputProps} />
+          <div className="oui-text-control">
+            {icon}
+            <div>
+              <input aria-describedby={this.props.help} id={this.props.inputId} ref="textInput" type="text" className="t-1" {...inputProps} />
+            </div>
           </div>
           {helpLine}
         </div>

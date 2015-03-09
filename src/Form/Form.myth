@@ -2,7 +2,7 @@
 
 .oui-form-control {
   position: relative;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 .oui-form-control.error .placeholder {
   color: var(--color-error);
@@ -13,6 +13,9 @@
 /**
  * TextField (<input> element)
  */
+.oui-text-control {
+  position: relative;
+}
 .oui-text input {
   display: block;
   background: #fff;
@@ -83,7 +86,6 @@
  */
 .placeholder {
   -webkit-font-smoothing: subpixel-antialiased;
-  position: absolute;
   z-index: var(--z-index-2);
   left: 1em;
   color: var(--color-gray-lighter);
@@ -91,12 +93,10 @@
   display: block;
   font-weight: normal;
   perspective: 1000;
+  position: relative;
 }
-.placeholder.u-translate-up {
-  transform: translate3d(-0.9em, -80%, 0);
-}
-.has-icon .placeholder.u-translate-up {
-  transform: translate3d(-2.5em, -80%, 0);
+.placeholder.u-translate-down {
+  transform: translate3d(0, 117%, 0);
 }
 .large .placeholder {
   font-size: 1.2em;
@@ -110,9 +110,4 @@
 }
 .not-empty .placeholder {
   color: inherit;
-}
-.not-empty .placeholder,
-.complete .placeholder,
-.error .placeholder {
-  font-size: 0.9em;
 }

@@ -131,7 +131,7 @@
 }
 .oui-form-control {
   position: relative;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
 .oui-form-control.error .placeholder {
@@ -145,6 +145,10 @@
 /**
  * TextField (<input> element)
  */
+
+.oui-text-control {
+  position: relative;
+}
 
 .oui-text input {
   display: block;
@@ -225,7 +229,6 @@
 
 .placeholder {
   -webkit-font-smoothing: subpixel-antialiased;
-  position: absolute;
   z-index: 20;
   left: 1em;
   color: rgb(171, 181, 186);
@@ -234,16 +237,12 @@
   font-weight: normal;
   -webkit-perspective: 1000;
   perspective: 1000;
+  position: relative;
 }
 
-.placeholder.u-translate-up {
-  -webkit-transform: translate3d(-0.9em, -80%, 0);
-  transform: translate3d(-0.9em, -80%, 0);
-}
-
-.has-icon .placeholder.u-translate-up {
-  -webkit-transform: translate3d(-2.5em, -80%, 0);
-  transform: translate3d(-2.5em, -80%, 0);
+.placeholder.u-translate-down {
+  -webkit-transform: translate3d(0, 117%, 0);
+  transform: translate3d(0, 117%, 0);
 }
 
 .large .placeholder {
@@ -261,12 +260,6 @@
 
 .not-empty .placeholder {
   color: inherit;
-}
-
-.not-empty .placeholder,
-.complete .placeholder,
-.error .placeholder {
-  font-size: 0.9em;
 }
 .icomoon {
   font-family: 'icomoon';
@@ -2282,27 +2275,6 @@
   font-weight: normal;
   font-style: normal;
 }
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
-}
 .oui-drawer-container {
   position: relative;
 }
@@ -2351,6 +2323,27 @@
 
 .oui-drawer-container.expanded .oui-drawer-content {
   margin-left: 200px;
+}
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
 }
 .oui-loader {
   position: absolute;

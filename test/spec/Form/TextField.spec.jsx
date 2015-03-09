@@ -26,13 +26,25 @@ define(function (require) {
     it('should not include placeholder if prop empty', function () {
 
       var ref = Helpers.renderIntoDocument(<Text />);
-      Helpers.expectDOMCount(0, '.placeholder', ref);
+      Helpers.expectDOMCount(0, 'input[placeholder]', ref);
     });
 
     it('should include placeholder if prop defined', function () {
 
       var ref = Helpers.renderIntoDocument(<Text placeholder="Test" />);
-      Helpers.expectDOMCount(1, '.placeholder', ref);
+      Helpers.expectDOMCount(1, 'input[placeholder]', ref);
+    });
+
+    it('should not include label if prop empty', function () {
+
+      var ref = Helpers.renderIntoDocument(<Text />);
+      Helpers.expectDOMCount(0, 'label', ref);
+    });
+
+    it('should include label if prop defined', function () {
+
+      var ref = Helpers.renderIntoDocument(<Text label="Test" />);
+      Helpers.expectDOMCount(1, 'label', ref);
     });
 
     it('should not include help line if prop empty, and no validators', function () {

@@ -25,8 +25,8 @@ define(function (require) {
       return (
         <div>
           <h4>Styles</h4>
-          <TextField placeholder="Plain" />
-          <TextField placeholder="With Help Line" help="Please enter a value" />
+          <TextField label="Plain" />
+          <TextField label="Example with Placeholder and Help" placeholder="Here is a placeholder" help="Please enter a value" />
           <TextField icon={search} placeholder="Search Me" />
           <TextField icon={user} placeholder="Large With Help Line" large help="Please enter a value" />
           <h4>Pattern Property</h4>
