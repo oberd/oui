@@ -824,19 +824,18 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
         this.props.onChange(newValue);
       }
     },
-    handlePlaceholderClick: function () {
+    handleLabelClick: function () {
       this.setState({ focused: true });
       this.refs.textInput.getDOMNode().focus();
     },
-    renderPlaceholder: function () {
+    renderLabel: function () {
       var above = this.state.value.length > 0;
       var classes = React.addons.classSet({
-        'placeholder': true,
         't-1': true,
-        'u-reset-translate': !above,
-        'u-translate-up': above
+        'u-reset-translate': above,
+        'u-translate-down': false // !above
       });
-      return React.createElement("label", {htmlFor: this.props.inputId, className: classes, onClick: this.handlePlaceholderClick}, this.props.placeholder);
+      return React.createElement("label", {htmlFor: this.props.inputId, className: classes, onClick: this.handleLabelClick}, this.props.label);
     },
     renderHelp: function (isErrored, errorText) {
       var errors = '';
@@ -853,7 +852,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
       return React.createElement("label", {htmlFor: this.props.inputId, role: "presentation", className: classes}, help, errors);
     },
     render: function () {
-      var place = this.props.placeholder ? this.renderPlaceholder() : '';
+      var place = this.props.label ? this.renderLabel() : '';
       var validationErrors = this._validator.getValidationErrors(this.state.value);
       var isValid = validationErrors.length === 0;
       var isEmpty = this.state.value.length === 0;
@@ -879,15 +878,18 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
         'onFocus': this.handleFocus,
         'onBlur': this.handleBlur,
         'value': this.state.value,
-        'maxLength': this.props.maxLength || 524288
+        'maxLength': this.props.maxLength || 524288,
+        'placeholder': this.props.placeholder
       };
       var icon = this.props.icon || '';
       return (
         React.createElement("div", {className: classes}, 
           place, 
-          icon, 
-          React.createElement("div", null, 
-            React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.props.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
+          React.createElement("div", {className: "oui-text-control"}, 
+            icon, 
+            React.createElement("div", null, 
+              React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.props.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
+            )
           ), 
           helpLine
         )

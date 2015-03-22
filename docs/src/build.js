@@ -1,5 +1,5 @@
 /**
- * @license RequireJS text 2.0.13 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
+ * @license RequireJS text 2.0.14 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/requirejs/text for details
  */
@@ -23,7 +23,7 @@ define('text',['module'], function (module) {
         masterConfig = (module.config && module.config()) || {};
 
     text = {
-        version: '2.0.13',
+        version: '2.0.14',
 
         strip: function (content) {
             //Strips <?xml ...?> declarations so that external SVG and XML
@@ -244,7 +244,8 @@ define('text',['module'], function (module) {
             typeof process !== "undefined" &&
             process.versions &&
             !!process.versions.node &&
-            !process.versions['node-webkit'])) {
+            !process.versions['node-webkit'] &&
+            !process.versions['atom-shell'])) {
         //Using special require.nodeRequire, something added by r.js.
         fs = require.nodeRequire('fs');
 
@@ -13755,6 +13756,10 @@ define('oberd-media-query',['require','underscore','jquery','backbone'],function
 
   MediaQuery.prototype.getMatched = function () {
     return _.unique(this.matched);
+  };
+
+  MediaQuery.prototype.is = function (breakpoint) {
+    return this.getMatched().indexOf(breakpoint) >= 0;
   };
 
   return new MediaQuery();
@@ -33652,7 +33657,7 @@ define('json',['text'], function(text){
 
 define("json!docs/../../bower.json", function(){ return {
   "name": "oui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [
@@ -33678,8 +33683,7 @@ define("json!docs/../../bower.json", function(){ return {
     "bootstrap-theme-oberd": "git@github.com:oberd/bootstrap-theme-oberd.git#~0.4.6",
     "es5-shim": "~4.0.5",
     "modernizr": "~2.8.3",
-    "react-router": "~0.12.4",
-    "oberd-media-query": "git@github.com:oberd/oberd-media-query.git#~0.0.3"
+    "oberd-media-query": "git@github.com:oberd/oberd-media-query.git#^1.0.0"
   },
   "devDependencies": {
     "almond": "~0.2.9",
@@ -37200,13 +37204,9 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
 
 
 /*global define */
-define('jsx!Oui/Layout/MenuItem',['require','react','react-router','jsx!Oui/Icon/Icon'],function (require) {
+define('jsx!Oui/Layout/MenuItem',['require','react','jsx!Oui/Icon/Icon'],function (require) {
   
   var React = require('react');
-
-  var Router = require('react-router');
-  var Link = Router.Link;
-
   var Icon = require('jsx!Oui/Icon/Icon');
   var MenuItem = React.createClass({displayName: 'MenuItem',
     getDefaultProps: function () {
@@ -37223,7 +37223,7 @@ define('jsx!Oui/Layout/MenuItem',['require','react','react-router','jsx!Oui/Icon
       }
       return (
         React.createElement("li", null, 
-          React.createElement(Link, {className: "oui-menu-item u-pointer", to: this.props.route, params: this.props.params}, 
+          React.createElement("a", {className: "oui-menu-item u-pointer", to: this.props.route, params: this.props.params}, 
             iconHtml, 
             React.createElement("span", {className: "u-inline-block u-breathe-h u-font-size-menu"}, inner)
           )
@@ -38873,7 +38873,7 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
   return List;
 });
 
-//  Chance.js 0.7.1
+//  Chance.js 0.7.3
 //  http://chancejs.com
 //  (c) 2013 Victor Quinn
 //  Chance may be freely distributed or modified under the MIT license.
@@ -38904,7 +38904,7 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
         }
 
         var seedling;
-        
+
         if (arguments.length) {
             // set a starting value of zero so we can add to it
             this.seed = 0;
@@ -38932,7 +38932,7 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
         return this;
     }
 
-    Chance.prototype.VERSION = "0.7.1";
+    Chance.prototype.VERSION = "0.7.3";
 
     // Random helper functions
     function initOptions(options, defaults) {
@@ -38957,9 +38957,8 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
 
     /**
      * Encode the input string with Base64.
-     * @param input
      */
-    var base64 = function(input) {
+    var base64 = function() {
         throw new Error('No Base64 encoder available.');
     };
 
@@ -39141,11 +39140,14 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
      *  Gives an array of n random terms
      *  @param fn the function that generates something random
      *  @param n number of terms to generate
-     *  @param options options for the function fn. 
      *  There can be more parameters after these. All additional parameters are provided to the given function
      */
-    Chance.prototype.n = function(fn, n, options) {
-        var i = n || 1, arr = [], params = slice.call(arguments, 2);
+    Chance.prototype.n = function(fn, n) {
+        if (typeof n === 'undefined') {
+            n = 1;
+        }
+        var i = n, arr = [], params = slice.call(arguments, 2);
+
         // Providing a negative count should result in a noop.
         i = Math.max( 0, i );
 
@@ -39198,6 +39200,15 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
     Chance.prototype.weighted = function(arr, weights) {
         if (arr.length !== weights.length) {
             throw new RangeError("Chance: length of array and weights must match");
+        }
+
+        // Handle weights that are less or equal to zero.
+        for (var weightIndex = weights.length - 1; weightIndex >= 0; --weightIndex) {
+            // If the weight is less or equal to zero, remove it and the value.
+            if (weights[weightIndex] <= 0) {
+                arr.splice(weightIndex,1);
+                weights.splice(weightIndex,1);
+            }
         }
 
         // If any of the weights are less than 1, we want to scale them up to whole
@@ -39500,27 +39511,27 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
 
     // -- Mobile --
     // Android GCM Registration ID
-    Chance.prototype.android_id = function (options) {
+    Chance.prototype.android_id = function () {
         return "APA91" + this.string({ pool: "0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_", length: 178 });
     };
 
     // Apple Push Token
-    Chance.prototype.apple_token = function (options) {
+    Chance.prototype.apple_token = function () {
         return this.string({ pool: "abcdef1234567890", length: 64 });
     };
 
     // Windows Phone 8 ANID2
-    Chance.prototype.wp8_anid2 = function (options) {
+    Chance.prototype.wp8_anid2 = function () {
         return base64( this.hash( { length : 32 } ) );
     };
 
     // Windows Phone 7 ANID
-    Chance.prototype.wp7_anid = function (options) {
+    Chance.prototype.wp7_anid = function () {
         return 'A=' + this.guid().replace(/-/g, '').toUpperCase() + '&E=' + this.hash({ length:3 }) + '&W=' + this.integer({ min:0, max:9 });
     };
 
     // BlackBerry Device PIN
-    Chance.prototype.bb_pin = function (options) {
+    Chance.prototype.bb_pin = function () {
         return this.hash({ length: 8 });
     };
 
@@ -40160,7 +40171,7 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
                    this.string({ pool: guid_pool, length: 12 });
         return guid;
     };
-    
+
     // Hash
     Chance.prototype.hash = function (options) {
         options = initOptions(options, {length : 40, casing: 'lower'});
@@ -40552,6 +40563,7 @@ define('jsx!Oui/List/List',['require','underscore','jquery','react.backbone','js
 
     function _copyObject(source, target) {
       var keys = o_keys(source);
+      var key;
 
       for (var i = 0, l = keys.length; i < l; i++) {
         key = keys[i];
@@ -52915,7 +52927,7 @@ define("json!docs/Loader/manifest.json", function(){ return {
 define('mdown!docs/Form/TextField/TextField.md',[],function () { return '<p>Accepting text input from the user is a vital and often overlooked part of building applications.  With this textfield, you can enable complex validations, while still retaining WIA accessibility.</p>';});
 
 
-define('text!docs/Form/TextField/TextField.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Icon = require(\'jsx!Oui/Icon/Icon\');\n  var TextField = require(\'jsx!Oui/Form/TextField\');\n  var Validator = require(\'Oui/Form/Validator\');\n  var RegExpValidator = require(\'Oui/Form/Validators/RegExp\');\n\n  var TextExample = React.createClass({\n    getInitialState: function () {\n      return { loading: true };\n    },\n    toggleLoading: function () {\n      this.setState({ loading: !this.state.loading });\n    },\n    turnOff: function () {\n      this.setState({ loading: false });\n    },\n    render: function () {\n      var search = <Icon name="search" />;\n      var user = <Icon name="user" />;\n      var regex = new Validator();\n      regex.addValidation(new RegExpValidator(/^[0-9]{5}$/, \'Please enter a valid 5 digit Zip Code\'));\n      return (\n        <div>\n          <h4>Styles</h4>\n          <TextField placeholder="Plain" />\n          <TextField placeholder="With Help Line" help="Please enter a value" />\n          <TextField icon={search} placeholder="Search Me" />\n          <TextField icon={user} placeholder="Large With Help Line" large help="Please enter a value" />\n          <h4>Pattern Property</h4>\n          <TextField placeholder="SSN" pattern="^\\d{3}-\\d{2}-\\d{4}$" title="Please enter your SSN (e.g. 123-45-5678)" />\n          <h4>Custom Validator Property</h4>\n          <TextField placeholder="Zip Code" validator={regex} maxLength="5" />\n        </div>\n      );\n    }\n  });\n  return TextExample;\n});\n';});
+define('text!docs/Form/TextField/TextField.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Icon = require(\'jsx!Oui/Icon/Icon\');\n  var TextField = require(\'jsx!Oui/Form/TextField\');\n  var Validator = require(\'Oui/Form/Validator\');\n  var RegExpValidator = require(\'Oui/Form/Validators/RegExp\');\n\n  var TextExample = React.createClass({\n    getInitialState: function () {\n      return { loading: true };\n    },\n    toggleLoading: function () {\n      this.setState({ loading: !this.state.loading });\n    },\n    turnOff: function () {\n      this.setState({ loading: false });\n    },\n    render: function () {\n      var search = <Icon name="search" />;\n      var user = <Icon name="user" />;\n      var regex = new Validator();\n      regex.addValidation(new RegExpValidator(/^[0-9]{5}$/, \'Please enter a valid 5 digit Zip Code\'));\n      return (\n        <div>\n          <h4>Styles</h4>\n          <TextField label="Plain" />\n          <TextField label="Example with Placeholder and Help" placeholder="Here is a placeholder" help="Please enter a value" />\n          <TextField icon={search} placeholder="Search Me" />\n          <TextField icon={user} placeholder="Large With Help Line" large help="Please enter a value" />\n          <h4>Pattern Property</h4>\n          <TextField placeholder="SSN" pattern="^\\d{3}-\\d{2}-\\d{4}$" title="Please enter your SSN (e.g. 123-45-5678)" />\n          <h4>Custom Validator Property</h4>\n          <TextField placeholder="Zip Code" validator={regex} maxLength="5" />\n        </div>\n      );\n    }\n  });\n  return TextExample;\n});\n';});
 
 /*global define */
 
@@ -53088,19 +53100,18 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
         this.props.onChange(newValue);
       }
     },
-    handlePlaceholderClick: function () {
+    handleLabelClick: function () {
       this.setState({ focused: true });
       this.refs.textInput.getDOMNode().focus();
     },
-    renderPlaceholder: function () {
+    renderLabel: function () {
       var above = this.state.value.length > 0;
       var classes = React.addons.classSet({
-        'placeholder': true,
         't-1': true,
-        'u-reset-translate': !above,
-        'u-translate-up': above
+        'u-reset-translate': above,
+        'u-translate-down': false // !above
       });
-      return React.createElement("label", {htmlFor: this.props.inputId, className: classes, onClick: this.handlePlaceholderClick}, this.props.placeholder);
+      return React.createElement("label", {htmlFor: this.props.inputId, className: classes, onClick: this.handleLabelClick}, this.props.label);
     },
     renderHelp: function (isErrored, errorText) {
       var errors = '';
@@ -53117,7 +53128,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
       return React.createElement("label", {htmlFor: this.props.inputId, role: "presentation", className: classes}, help, errors);
     },
     render: function () {
-      var place = this.props.placeholder ? this.renderPlaceholder() : '';
+      var place = this.props.label ? this.renderLabel() : '';
       var validationErrors = this._validator.getValidationErrors(this.state.value);
       var isValid = validationErrors.length === 0;
       var isEmpty = this.state.value.length === 0;
@@ -53143,15 +53154,18 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
         'onFocus': this.handleFocus,
         'onBlur': this.handleBlur,
         'value': this.state.value,
-        'maxLength': this.props.maxLength || 524288
+        'maxLength': this.props.maxLength || 524288,
+        'placeholder': this.props.placeholder
       };
       var icon = this.props.icon || '';
       return (
         React.createElement("div", {className: classes}, 
           place, 
-          icon, 
-          React.createElement("div", null, 
-            React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.props.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
+          React.createElement("div", {className: "oui-text-control"}, 
+            icon, 
+            React.createElement("div", null, 
+              React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.props.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
+            )
           ), 
           helpLine
         )
@@ -53189,8 +53203,8 @@ define('jsx!docs/Form/TextField/TextField',['require','react.backbone','jsx!Oui/
       return (
         React.createElement("div", null, 
           React.createElement("h4", null, "Styles"), 
-          React.createElement(TextField, {placeholder: "Plain"}), 
-          React.createElement(TextField, {placeholder: "With Help Line", help: "Please enter a value"}), 
+          React.createElement(TextField, {label: "Plain"}), 
+          React.createElement(TextField, {label: "Example with Placeholder and Help", placeholder: "Here is a placeholder", help: "Please enter a value"}), 
           React.createElement(TextField, {icon: search, placeholder: "Search Me"}), 
           React.createElement(TextField, {icon: user, placeholder: "Large With Help Line", large: true, help: "Please enter a value"}), 
           React.createElement("h4", null, "Pattern Property"), 
