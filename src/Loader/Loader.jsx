@@ -3,6 +3,7 @@ define(function (require) {
   'use strict';
   var React = require('react');
   var Icon = require('jsx!Oui/Icon/Icon');
+  var classnames = require('Oui/Utilities/classnames');
   var Loader = React.createClass({
     propTypes: {
       on: React.PropTypes.bool
@@ -11,7 +12,7 @@ define(function (require) {
       return { on: false };
     },
     render: function () {
-      var classList = React.addons.classSet({
+      var classList = classnames({
         'off': !this.props.on,
         'on': this.props.on,
         'oui-loader': true

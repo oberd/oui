@@ -4,6 +4,7 @@ define(function (require) {
   var ImproperUseError = require('Oui/Error/ImproperUse');
   var Backbone = require('backbone');
   var React = require('react.backbone');
+  var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
@@ -36,7 +37,7 @@ define(function (require) {
       return { value: this.props.value };
     },
     getClassList: function () {
-      return React.addons.classSet({
+      return classnames({
         'oui-form-control': true
       });
     },

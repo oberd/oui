@@ -7,6 +7,7 @@ define(function (require) {
 
   var Validator = require('Oui/Form/Validator');
   var RegExpValidator = require('Oui/Form/Validators/RegExp');
+  var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
@@ -78,7 +79,7 @@ define(function (require) {
     },
     renderLabel: function () {
       var above = this.state.value.length > 0;
-      var classes = React.addons.classSet({
+      var classes = classnames({
         't-1': true,
         'u-reset-translate': above,
         'u-translate-down': false // !above
@@ -88,7 +89,7 @@ define(function (require) {
     renderHelp: function (isErrored, errorText) {
       var errors = '';
       var help = this.props.help || '\u00a0';
-      var classes = React.addons.classSet({
+      var classes = classnames({
         'help': true,
         't-1': true,
         'u-reset-translate': this.state.focused,
@@ -108,7 +109,7 @@ define(function (require) {
       var isErrored = !isValid && this.state.hasFocused && !isEmpty;
       var errorText = isErrored ? validationErrors.join(', ') : '';
       var helpLine = hasHelpLine ? this.renderHelp(isErrored, errorText) : '';
-      var classes = React.addons.classSet({
+      var classes = classnames({
         'oui-form-control': true,
         'oui-text': true,
         'focused': this.state.focused,

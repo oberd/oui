@@ -3,9 +3,10 @@ define(function (require) {
   'use strict';
   var React = require('react');
   var mq = require('oberd-media-query');
+  var classnames = require('Oui/Utilities/classnames');
   var DrawerLayout = React.createClass({
     render: function () {
-      var classes = React.addons.classSet({
+      var classes = classnames({
         'oui-drawer-container': true,
         'expanded': this.props.expanded
       });
