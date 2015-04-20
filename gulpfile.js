@@ -178,9 +178,11 @@ gulp.task('serve', ['build'], function () {
   gulp.watch(['src/**/*.{js,jsx}', 'test/spec/**/*.{js,jsx}'], ['test']);
   gulp.watch(['src/**/*.myth'], ['myth-library']);
   gulp.watch(['docs/**/*.myth'], ['myth-docs']);
-  var server = require('superstatic')({ "cache_control": false, "host": '0.0.0.0' });
-  server.listen(function () {
-    var base = 'http://' + server.host + ':' + server.port;
+  var connect = require('connect');
+  var server = connect();
+  server.use(require('superstatic')({ "cache_control": false, "host": '0.0.0.0', "env": process.env }));
+  server.listen(3474, function () {
+    var base = 'http://localhost:3474';
     gutil.log('Documentation accessible: ' + base + '/docs');
     gutil.log('Tests accessible: ' + base + '/test');
   });
