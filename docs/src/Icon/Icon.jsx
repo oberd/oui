@@ -5,6 +5,7 @@ define(function (require) {
   var React = require('react.backbone');
   var Icon = require('jsx!Oui/Icon/Icon');
   var Icons = require('../ExampleData/Icons');
+  var classnames = require('Oui/Utilities/classnames');
 
   var IconInfo = React.createBackboneClass({
     getInitialState: function () {
@@ -18,7 +19,7 @@ define(function (require) {
     },
     render: function () {
       var name = this.getModel().get('name');
-      var classSet = React.addons.classSet({ 'icon-info': true, 'expanded': this.state.expanded });
+      var classSet = classnames({ 'icon-info': true, 'expanded': this.state.expanded });
       var iconStyle = { color: this.state.expanded ? '#7AA8D9' : '#999999'}
       return (
         <div className="icon-example" onMouseOver={this.handleOver} onMouseOut={this.handleOut}>

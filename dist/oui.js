@@ -476,12 +476,43 @@ define('jsx!Oui/Icon/Icon',['require','react.backbone'],function (require) {
   return Icon;
 });
 
+/*global define */
+define('Oui/Utilities/classnames',[],function () {
+  
+  function classNames() {
+    var args = arguments;
+    var classes = [];
+
+    for (var i = 0; i < args.length; i++) {
+      var arg = args[i];
+      if (!arg) {
+        continue;
+      }
+
+      if ('string' === typeof arg || 'number' === typeof arg) {
+        classes.push(arg);
+      } else if ('object' === typeof arg) {
+        for (var key in arg) {
+          if (!arg.hasOwnProperty(key) || !arg[key]) {
+            continue;
+          }
+          classes.push(key);
+        }
+      }
+    }
+    return classes.join(' ');
+  }
+
+  return classNames;
+});
+
 
 /*global define */
-define('jsx!Oui/Loader/Loader',['require','react','jsx!Oui/Icon/Icon'],function (require) {
+define('jsx!Oui/Loader/Loader',['require','react','jsx!Oui/Icon/Icon','Oui/Utilities/classnames'],function (require) {
   
   var React = require('react');
   var Icon = require('jsx!Oui/Icon/Icon');
+  var classnames = require('Oui/Utilities/classnames');
   var Loader = React.createClass({displayName: 'Loader',
     propTypes: {
       on: React.PropTypes.bool
@@ -490,7 +521,7 @@ define('jsx!Oui/Loader/Loader',['require','react','jsx!Oui/Icon/Icon'],function 
       return { on: false };
     },
     render: function () {
-      var classList = React.addons.classSet({
+      var classList = classnames({
         'off': !this.props.on,
         'on': this.props.on,
         'oui-loader': true
@@ -751,7 +782,7 @@ define('Oui/Form/Validators/RegExp',['require','Oui/Form/Validators/AbstractVali
 
 
 /*global define */
-define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Validator','Oui/Form/Validators/RegExp'],function (require) {
+define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Validator','Oui/Form/Validators/RegExp','Oui/Utilities/classnames'],function (require) {
   
 
   var _ = require('underscore');
@@ -759,6 +790,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
 
   var Validator = require('Oui/Form/Validator');
   var RegExpValidator = require('Oui/Form/Validators/RegExp');
+  var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
@@ -830,7 +862,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
     },
     renderLabel: function () {
       var above = this.state.value.length > 0;
-      var classes = React.addons.classSet({
+      var classes = classnames({
         't-1': true,
         'u-reset-translate': above,
         'u-translate-down': false // !above
@@ -840,7 +872,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
     renderHelp: function (isErrored, errorText) {
       var errors = '';
       var help = this.props.help || '\u00a0';
-      var classes = React.addons.classSet({
+      var classes = classnames({
         'help': true,
         't-1': true,
         'u-reset-translate': this.state.focused,
@@ -860,7 +892,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
       var isErrored = !isValid && this.state.hasFocused && !isEmpty;
       var errorText = isErrored ? validationErrors.join(', ') : '';
       var helpLine = hasHelpLine ? this.renderHelp(isErrored, errorText) : '';
-      var classes = React.addons.classSet({
+      var classes = classnames({
         'oui-form-control': true,
         'oui-text': true,
         'focused': this.state.focused,
@@ -901,11 +933,12 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
 
 
 /*global define */
-define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone'],function (require) {
+define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone','Oui/Utilities/classnames'],function (require) {
   
   var ImproperUseError = require('Oui/Error/ImproperUse');
   var Backbone = require('backbone');
   var React = require('react.backbone');
+  var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
@@ -938,7 +971,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return { value: this.props.value };
     },
     getClassList: function () {
-      return React.addons.classSet({
+      return classnames({
         'oui-form-control': true
       });
     },

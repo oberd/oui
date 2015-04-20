@@ -12,6 +12,7 @@
 json!docs/../../bower.json
 ./bower_components/react.backbone/react.backbone.js
 ./bower_components/react-router/build/global/ReactRouter.js
+./src/Utilities/classnames.js
 jsx!Oui/Layout/Drawer
 jsx!Oui/Layout/Content
 jsx!Oui/Layout/Sidebar

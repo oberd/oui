@@ -5,6 +5,7 @@
 ./bower_components/jsx-requirejs-plugin/js/jsx.js
 jsx!Oui/List/EmptyMessage
 jsx!Oui/Icon/Icon
+./src/Utilities/classnames.js
 jsx!Oui/Loader/Loader
 ./src/Error/ImproperUse.js
 jsx!Oui/List/List

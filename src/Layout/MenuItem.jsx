@@ -3,6 +3,7 @@ define(function (require) {
   'use strict';
   var React = require('react');
   var Icon = require('jsx!Oui/Icon/Icon');
+  var Link = require('react-router').Link;
   var MenuItem = React.createClass({
     getDefaultProps: function () {
         return { icon: false };
@@ -18,10 +19,10 @@ define(function (require) {
       }
       return (
         <li>
-          <a className="oui-menu-item u-pointer" to={this.props.route} params={this.props.params}>
+          <Link className="oui-menu-item u-pointer" to={this.props.route} params={this.props.params}>
             {iconHtml}
             <span className="u-inline-block u-breathe-h u-font-size-menu">{inner}</span>
-          </a>
+          </Link>
         </li>
       );
     }

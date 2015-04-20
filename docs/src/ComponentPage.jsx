@@ -9,6 +9,7 @@ define(function (require) {
   var Router = require('react-router');
   var examples = require('./manifest');
   var byName = _.indexBy(examples, 'name');
+  var classnames = require('Oui/Utilities/classnames');
 
   var defaultPage = {
     name: 'Oui!',
@@ -48,7 +49,7 @@ define(function (require) {
       if (!example) {
         return <div dangerouslySetInnerHTML={{__html: defaultPage.content}} />;
       }
-      var sourceClasses = React.addons.classSet({
+      var sourceClasses = classnames({
         'example-source': true,
         'expanded': this.state.sourceExpanded
       });
@@ -76,7 +77,7 @@ define(function (require) {
               </thead>
               <tbody>
               {_.map(example.manifest.properties, function (p) {
-                var req = React.addons.classSet({
+                var req = classnames({
                   'required': p.required
                 });
                 var type = p.required ? p.type : '[' + p.type + ']';

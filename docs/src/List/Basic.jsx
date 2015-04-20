@@ -4,13 +4,14 @@ define(function (require) {
   var React = require('react.backbone');
   var List = require('jsx!Oui/List/List');
   var Users = require('../ExampleData/Users');
+  var classnames = require('Oui/Utilities/classnames');
 
   var users = new Users();
   users.addRandom(2);
 
   var Row = React.createBackboneClass({
     render: function () {
-      var cls = React.addons.classSet({
+      var cls = classnames({
         'list-item': true,
         'selected' : this.props.selected
       });
