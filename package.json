@@ -8,7 +8,10 @@
     "test": "node node_modules/.bin/gulp test"
   },
   "jspm": {
-    "main": "dist/oui.js"
+    "main": "dist/oui.js",
+    "map": {
+      "Oui": "./src"
+    }
   },
   "author": "Oberd 2015",
   "license": "ISC",
