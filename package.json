@@ -7,6 +7,11 @@
     "dist": "node node_modules/.bin/gulp dist",
     "test": "node node_modules/.bin/gulp test"
   },
+  "jspm": {
+    "directories": {
+      "lib": "src"
+    }
+  },
   "author": "Oberd 2015",
   "license": "ISC",
   "dependencies": {},
