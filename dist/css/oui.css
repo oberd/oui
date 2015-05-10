@@ -261,6 +261,17 @@
 .not-empty .placeholder {
   color: inherit;
 }
+@font-face {
+  font-family: 'icomoon';
+  src: url('fonts/icomoon.eot?-8v9cjq');
+  src: url('fonts/icomoon.eot?#iefix-8v9cjq') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-8v9cjq') format('woff'),
+		url('fonts/icomoon.ttf?-8v9cjq') format('truetype'),
+		url('fonts/icomoon.svg?-8v9cjq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .icomoon {
   font-family: 'icomoon';
   speak: none;
@@ -275,6 +286,10 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icomoon-location:before {
+  content: "\e612";
 }
 
 .icomoon-accessibility:before {
@@ -2264,6 +2279,27 @@
 .icomoon-meanpath:before {
   content: "\f20c";
 }
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
 .oui-drawer-container {
   position: relative;
 }
@@ -2312,27 +2348,6 @@
 
 .oui-drawer-container.expanded .oui-drawer-content {
   margin-left: 200px;
-}
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
 }
 .oui-loader {
   position: absolute;

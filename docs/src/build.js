@@ -35638,7 +35638,7 @@ define('json',['text'], function(text){
 
 define("json!docs/../../bower.json", function(){ return {
   "name": "oui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [
@@ -43177,7 +43177,7 @@ define("json!docs/List/manifest.json", function(){ return {
 ;});
 
 
-define('mdown!docs/Icon/Icon.md',[],function () { return '<p>Use Icon elements when you need to display an affordance to the user, but are too limited on space to include text.</p>\n\n<p>If the Icon should be a button, make sure to include a title to enhance accessibility</p>\n\n<p>The icons themselves are built from a file in this repository, <code>assets/icomoon/selection.json</code>.  You can modify this selection of icons using the <a href="https://icomoon.io/">icomoon app</a></p>\n\n<h4>Using the font</h4>\n\n<p>Because each project is setup differently, you <strong>must</strong> configure the icomoon font-face in your own CSS for the icons to work properly. An example configuration is given below:</p>\n\n<p><code>\n@font-face {\n  font-family: \'icomoon\';\n  src: url(\'/fonts/icomoon.eot?ot8r61\');\n  src: url(\'/fonts/icomoon.eot?#iefixot8r61\') format(\'embedded-opentype\'),\n    url(\'/fonts/icomoon.woff?ot8r61\') format(\'woff\'),\n    url(\'/fonts/icomoon.ttf?ot8r61\') format(\'truetype\'),\n    url(\'/fonts/icomoon.svg?ot8r61#icomoon\') format(\'svg\');\n  font-weight: normal;\n  font-style: normal;\n}\n</code></p>\n\n<p>The fonts themselves can be found in the <code>dist/fonts</code> directory of this project.</p>';});
+define('mdown!docs/Icon/Icon.md',[],function () { return '<p>Use Icon elements when you need to display an affordance to the user, but are too limited on space to include text.</p>\n\n<p>If the Icon should be a button, make sure to include a title to enhance accessibility</p>\n\n<p>The icons themselves are built from a file in this repository, <code>assets/icomoon/selection.json</code>.  You can modify this selection of icons using the <a href="https://icomoon.io/">icomoon app</a></p>\n\n<h4>Using the font</h4>\n\n<p>Because each project is setup differently, you <strong>must</strong> configure the icomoon font-face in your own CSS for the icons to work properly. An example configuration is given below:</p>\n\n<pre>\n<code class="css">\n    @font-face {\n      font-family: \'icomoon\';\n      src: url(\'/fonts/icomoon.eot?ot8r61\');\n      src: url(\'/fonts/icomoon.eot?#iefixot8r61\') format(\'embedded-opentype\'),\n        url(\'/fonts/icomoon.woff?ot8r61\') format(\'woff\'),\n        url(\'/fonts/icomoon.ttf?ot8r61\') format(\'truetype\'),\n        url(\'/fonts/icomoon.svg?ot8r61#icomoon\') format(\'svg\');\n      font-weight: normal;\n      font-style: normal;\n    }\n</code>\n</pre>\n\n<p>The fonts themselves can be found in the <code>dist/fonts</code> directory of this project.</p>';});
 
 
 define('text!docs/Icon/Icon.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Icon = require(\'jsx!Oui/Icon/Icon\');\n  var Icons = require(\'../ExampleData/Icons\');\n  var classnames = require(\'Oui/Utilities/classnames\');\n\n  var IconInfo = React.createBackboneClass({\n    getInitialState: function () {\n      return { expanded: false };\n    },\n    handleOver: function () {\n      this.setState({ expanded: true });\n    },\n    handleOut: function () {\n      this.setState({ expanded: false });\n    },\n    render: function () {\n      var name = this.getModel().get(\'name\');\n      var classSet = classnames({ \'icon-info\': true, \'expanded\': this.state.expanded });\n      var iconStyle = { color: this.state.expanded ? \'#7AA8D9\' : \'#999999\'}\n      return (\n        <div className="icon-example" onMouseOver={this.handleOver} onMouseOut={this.handleOut}>\n          <Icon style={iconStyle} name={name} />\n          <div className={classSet}>{name}</div>\n        </div>\n      );\n    }\n  });\n\n  var IconList = React.createBackboneClass({\n    render: function () {\n      return (\n        <div className="icon-examples clearfix">\n          {this.getCollection().map(function (icon) {\n            return <IconInfo model={icon} key={icon.id} />;\n          })}\n        </div>\n      );\n    }\n  });\n  return React.createClass({\n    render: function () {\n      return <IconList collection={Icons} />;\n    }\n  });\n});\n';});
@@ -43186,6 +43186,32 @@ define('text!docs/Icon/Icon.jsx',[],function () { return '/*global define */\nde
 define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 	"IcoMoonType": "selection",
 	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M512 1024c0 0-325.818-372.364-325.818-698.182s325.818-325.818 325.818-325.818 325.818 0 325.818 325.818-325.818 698.182-325.818 698.182zM740.352 282.531c-10.705-56.879-42.403-105.751-86.342-139.869-2.979-2.374-5.679-5.027-8.797-7.261-6.889-4.887-14.522-8.751-22.016-12.847-6.284-3.491-12.195-7.308-18.851-10.24-6.516-2.839-13.545-4.515-20.387-6.749-7.959-2.607-15.546-5.725-23.971-7.447-15.5-3.212-31.465-5.027-47.895-5.027 0 0-0.047 0-0.093 0-0.093 0-0.14 0-0.233 0-16.198 0-31.977 1.722-47.244 4.841-30.487 6.144-57.763 18.246-81.687 34.397-0.372 0.233-0.745 0.372-1.071 0.605-9.914 6.749-18.804 14.522-27.462 22.668-2.607 2.42-5.492 4.468-7.959 6.982-5.818 6.004-10.705 12.66-15.872 19.177-4.422 5.632-9.216 10.985-13.172 17.036-2.653 4.236-4.655 8.797-7.121 13.172-4.934 8.797-9.961 17.548-13.777 26.996-1.443 3.537-2.141 7.308-3.398 10.938-3.537 10.24-7.121 20.48-9.216 31.372-2.932 14.615-4.515 29.556-4.515 44.544 0 232.727 232.727 558.545 232.727 558.545s232.727-325.818 232.727-558.545c0-14.476-1.489-28.998-4.375-43.287zM372.364 325.818c0-77.126 62.511-139.636 139.636-139.636s139.636 62.511 139.636 139.636-62.511 139.636-139.636 139.636-139.636-62.511-139.636-139.636z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"location",
+					"pin",
+					"map maker"
+				],
+				"grid": 22
+			},
+			"attrs": [],
+			"properties": {
+				"id": 7,
+				"order": 498,
+				"prevSize": 22,
+				"code": 58898,
+				"name": "location"
+			},
+			"setIdx": 0,
+			"setId": 2,
+			"iconIdx": 7
+		},
 		{
 			"icon": {
 				"paths": [
@@ -43205,7 +43231,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58880,
 				"name": "accessibility"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 0
 		},
 		{
@@ -43230,7 +43257,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58881,
 				"name": "face-unlock"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 1
 		},
 		{
@@ -43252,7 +43280,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58882,
 				"name": "perm-contact-cal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 2
 		},
 		{
@@ -43274,7 +43303,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58883,
 				"name": "reorder"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 3
 		},
 		{
@@ -43296,7 +43326,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58884,
 				"name": "contacts"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 4
 		},
 		{
@@ -43318,7 +43349,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58885,
 				"name": "quick-contacts-dialer"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 5
 		},
 		{
@@ -43340,7 +43372,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58886,
 				"name": "quick-contacts-mail"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 6
 		},
 		{
@@ -43362,7 +43395,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58887,
 				"name": "add"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 7
 		},
 		{
@@ -43384,7 +43418,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58888,
 				"name": "clear"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 8
 		},
 		{
@@ -43406,7 +43441,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58889,
 				"name": "keyboard-control"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 9
 		},
 		{
@@ -43428,7 +43464,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58890,
 				"name": "local-phone"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 10
 		},
 		{
@@ -43450,7 +43487,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58891,
 				"name": "check-box"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 11
 		},
 		{
@@ -43472,7 +43510,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58892,
 				"name": "check-box-outline-blank"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 12
 		},
 		{
@@ -43494,7 +43533,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58893,
 				"name": "radio-button-off"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 13
 		},
 		{
@@ -43516,7 +43556,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58894,
 				"name": "radio-button-on"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 14
 		},
 		{
@@ -43540,7 +43581,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58895,
 				"name": "settings"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 15
 		},
 		{
@@ -43566,7 +43608,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58896,
 				"name": "params"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 16
 		},
 		{
@@ -43590,7 +43633,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 58897,
 				"name": "data"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 17
 		},
 		{
@@ -43613,7 +43657,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61440,
 				"name": "glass"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 18
 		},
 		{
@@ -43636,7 +43681,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61441,
 				"name": "music"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 19
 		},
 		{
@@ -43660,7 +43706,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61442,
 				"name": "search"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 20
 		},
 		{
@@ -43683,7 +43730,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61443,
 				"name": "envelope-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 21
 		},
 		{
@@ -43706,7 +43754,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61444,
 				"name": "heart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 22
 		},
 		{
@@ -43730,7 +43779,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61445,
 				"name": "star"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 23
 		},
 		{
@@ -43754,7 +43804,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61446,
 				"name": "star-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 24
 		},
 		{
@@ -43778,7 +43829,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61447,
 				"name": "user"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 25
 		},
 		{
@@ -43802,7 +43854,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61448,
 				"name": "film"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 26
 		},
 		{
@@ -43826,7 +43879,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61449,
 				"name": "th-large"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 27
 		},
 		{
@@ -43849,7 +43903,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61450,
 				"name": "th"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 28
 		},
 		{
@@ -43872,7 +43927,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61451,
 				"name": "th-list"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 29
 		},
 		{
@@ -43895,7 +43951,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61452,
 				"name": "check"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 30
 		},
 		{
@@ -43921,7 +43978,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61453,
 				"name": "close"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 31
 		},
 		{
@@ -43945,7 +44003,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61454,
 				"name": "search-plus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 32
 		},
 		{
@@ -43969,7 +44028,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61456,
 				"name": "search-minus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 33
 		},
 		{
@@ -43992,7 +44052,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61457,
 				"name": "power-off"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 34
 		},
 		{
@@ -44015,7 +44076,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61458,
 				"name": "signal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 35
 		},
 		{
@@ -44039,7 +44101,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61459,
 				"name": "cog"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 36
 		},
 		{
@@ -44063,7 +44126,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61460,
 				"name": "trash-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 37
 		},
 		{
@@ -44087,7 +44151,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61461,
 				"name": "home"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 38
 		},
 		{
@@ -44110,7 +44175,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61462,
 				"name": "file-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 39
 		},
 		{
@@ -44133,7 +44199,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61463,
 				"name": "clock-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 40
 		},
 		{
@@ -44157,7 +44224,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61464,
 				"name": "road"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 41
 		},
 		{
@@ -44181,7 +44249,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61465,
 				"name": "download"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 42
 		},
 		{
@@ -44204,7 +44273,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61466,
 				"name": "arrow-circle-o-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 43
 		},
 		{
@@ -44227,7 +44297,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61467,
 				"name": "arrow-circle-o-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 44
 		},
 		{
@@ -44250,7 +44321,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61468,
 				"name": "inbox"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 45
 		},
 		{
@@ -44273,7 +44345,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61469,
 				"name": "play-circle-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 46
 		},
 		{
@@ -44297,7 +44370,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61470,
 				"name": "repeat"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 47
 		},
 		{
@@ -44320,7 +44394,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61473,
 				"name": "refresh"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 48
 		},
 		{
@@ -44343,7 +44418,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61474,
 				"name": "list-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 49
 		},
 		{
@@ -44367,7 +44443,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61475,
 				"name": "lock"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 50
 		},
 		{
@@ -44390,7 +44467,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61476,
 				"name": "flag"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 51
 		},
 		{
@@ -44414,7 +44492,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61477,
 				"name": "headphones"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 52
 		},
 		{
@@ -44438,7 +44517,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61478,
 				"name": "volume-off"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 53
 		},
 		{
@@ -44462,7 +44542,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61479,
 				"name": "volume-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 54
 		},
 		{
@@ -44486,7 +44567,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61480,
 				"name": "volume-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 55
 		},
 		{
@@ -44510,7 +44592,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61481,
 				"name": "qrcode"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 56
 		},
 		{
@@ -44533,7 +44616,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61482,
 				"name": "barcode"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 57
 		},
 		{
@@ -44556,7 +44640,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61483,
 				"name": "tag"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 58
 		},
 		{
@@ -44580,7 +44665,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61484,
 				"name": "tags"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 59
 		},
 		{
@@ -44604,7 +44690,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61485,
 				"name": "book"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 60
 		},
 		{
@@ -44628,7 +44715,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61486,
 				"name": "bookmark"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 61
 		},
 		{
@@ -44652,7 +44740,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61487,
 				"name": "print"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 62
 		},
 		{
@@ -44676,7 +44765,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61488,
 				"name": "camera"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 63
 		},
 		{
@@ -44700,7 +44790,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61489,
 				"name": "font"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 64
 		},
 		{
@@ -44724,7 +44815,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61490,
 				"name": "bold"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 65
 		},
 		{
@@ -44748,7 +44840,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61491,
 				"name": "italic"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 66
 		},
 		{
@@ -44771,7 +44864,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61492,
 				"name": "text-height"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 67
 		},
 		{
@@ -44794,7 +44888,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61493,
 				"name": "text-width"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 68
 		},
 		{
@@ -44817,7 +44912,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61494,
 				"name": "align-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 69
 		},
 		{
@@ -44840,7 +44936,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61495,
 				"name": "align-center"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 70
 		},
 		{
@@ -44863,7 +44960,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61496,
 				"name": "align-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 71
 		},
 		{
@@ -44886,7 +44984,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61497,
 				"name": "align-justify"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 72
 		},
 		{
@@ -44909,7 +45008,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61498,
 				"name": "list"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 73
 		},
 		{
@@ -44933,7 +45033,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61499,
 				"name": "dedent"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 74
 		},
 		{
@@ -44956,7 +45057,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61500,
 				"name": "indent"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 75
 		},
 		{
@@ -44979,7 +45081,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61501,
 				"name": "video-camera"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 76
 		},
 		{
@@ -45005,7 +45108,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61502,
 				"name": "image"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 77
 		},
 		{
@@ -45028,7 +45132,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61504,
 				"name": "pencil"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 78
 		},
 		{
@@ -45052,7 +45157,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61505,
 				"name": "map-marker"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 79
 		},
 		{
@@ -45075,7 +45181,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61506,
 				"name": "adjust"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 80
 		},
 		{
@@ -45099,7 +45206,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61507,
 				"name": "tint"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 81
 		},
 		{
@@ -45123,7 +45231,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61508,
 				"name": "edit"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 82
 		},
 		{
@@ -45147,7 +45256,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61509,
 				"name": "share-square-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 83
 		},
 		{
@@ -45171,7 +45281,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61510,
 				"name": "check-square-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 84
 		},
 		{
@@ -45194,7 +45305,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61511,
 				"name": "arrows"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 85
 		},
 		{
@@ -45218,7 +45330,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61512,
 				"name": "step-backward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 86
 		},
 		{
@@ -45241,7 +45354,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61513,
 				"name": "fast-backward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 87
 		},
 		{
@@ -45265,7 +45379,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61514,
 				"name": "backward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 88
 		},
 		{
@@ -45289,7 +45404,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61515,
 				"name": "play"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 89
 		},
 		{
@@ -45312,7 +45428,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61516,
 				"name": "pause"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 90
 		},
 		{
@@ -45335,7 +45452,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61517,
 				"name": "stop"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 91
 		},
 		{
@@ -45359,7 +45477,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61518,
 				"name": "forward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 92
 		},
 		{
@@ -45382,7 +45501,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61520,
 				"name": "fast-forward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 93
 		},
 		{
@@ -45406,7 +45526,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61521,
 				"name": "step-forward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 94
 		},
 		{
@@ -45430,7 +45551,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61522,
 				"name": "eject"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 95
 		},
 		{
@@ -45454,7 +45576,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61523,
 				"name": "chevron-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 96
 		},
 		{
@@ -45478,7 +45601,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61524,
 				"name": "chevron-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 97
 		},
 		{
@@ -45501,7 +45625,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61525,
 				"name": "plus-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 98
 		},
 		{
@@ -45524,7 +45649,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61526,
 				"name": "minus-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 99
 		},
 		{
@@ -45547,7 +45673,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61527,
 				"name": "times-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 100
 		},
 		{
@@ -45570,7 +45697,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61528,
 				"name": "check-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 101
 		},
 		{
@@ -45593,7 +45721,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61529,
 				"name": "question-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 102
 		},
 		{
@@ -45616,7 +45745,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61530,
 				"name": "info-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 103
 		},
 		{
@@ -45639,7 +45769,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61531,
 				"name": "crosshairs"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 104
 		},
 		{
@@ -45662,7 +45793,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61532,
 				"name": "times-circle-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 105
 		},
 		{
@@ -45685,7 +45817,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61533,
 				"name": "check-circle-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 106
 		},
 		{
@@ -45708,7 +45841,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61534,
 				"name": "ban"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 107
 		},
 		{
@@ -45731,7 +45865,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61536,
 				"name": "arrow-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 108
 		},
 		{
@@ -45754,7 +45889,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61537,
 				"name": "arrow-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 109
 		},
 		{
@@ -45778,7 +45914,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61538,
 				"name": "arrow-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 110
 		},
 		{
@@ -45802,7 +45939,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61539,
 				"name": "arrow-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 111
 		},
 		{
@@ -45826,7 +45964,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61540,
 				"name": "mail-forward"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 112
 		},
 		{
@@ -45849,7 +45988,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61541,
 				"name": "expand"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 113
 		},
 		{
@@ -45872,7 +46012,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61542,
 				"name": "compress"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 114
 		},
 		{
@@ -45896,7 +46037,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61543,
 				"name": "plus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 115
 		},
 		{
@@ -45920,7 +46062,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61544,
 				"name": "minus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 116
 		},
 		{
@@ -45944,7 +46087,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61545,
 				"name": "asterisk"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 117
 		},
 		{
@@ -45967,7 +46111,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61546,
 				"name": "exclamation-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 118
 		},
 		{
@@ -45990,7 +46135,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61547,
 				"name": "gift"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 119
 		},
 		{
@@ -46013,7 +46159,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61548,
 				"name": "leaf"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 120
 		},
 		{
@@ -46037,7 +46184,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61549,
 				"name": "fire"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 121
 		},
 		{
@@ -46060,7 +46208,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61550,
 				"name": "eye"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 122
 		},
 		{
@@ -46083,7 +46232,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61552,
 				"name": "eye-slash"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 123
 		},
 		{
@@ -46107,7 +46257,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61553,
 				"name": "exclamation-triangle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 124
 		},
 		{
@@ -46131,7 +46282,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61554,
 				"name": "plane"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 125
 		},
 		{
@@ -46155,7 +46307,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61555,
 				"name": "calendar"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 126
 		},
 		{
@@ -46178,7 +46331,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61556,
 				"name": "random"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 127
 		},
 		{
@@ -46201,7 +46355,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61557,
 				"name": "comment"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 128
 		},
 		{
@@ -46224,7 +46379,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61558,
 				"name": "magnet"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 129
 		},
 		{
@@ -46247,7 +46403,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61559,
 				"name": "chevron-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 130
 		},
 		{
@@ -46270,7 +46427,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61560,
 				"name": "chevron-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 131
 		},
 		{
@@ -46294,7 +46452,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61561,
 				"name": "retweet"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 132
 		},
 		{
@@ -46318,7 +46477,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61562,
 				"name": "shopping-cart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 133
 		},
 		{
@@ -46342,7 +46502,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61563,
 				"name": "folder"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 134
 		},
 		{
@@ -46366,7 +46527,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61564,
 				"name": "folder-open"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 135
 		},
 		{
@@ -46390,7 +46552,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61565,
 				"name": "arrows-v"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 136
 		},
 		{
@@ -46413,7 +46576,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61566,
 				"name": "arrows-h"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 137
 		},
 		{
@@ -46438,7 +46602,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61568,
 				"name": "bar-chart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 138
 		},
 		{
@@ -46461,7 +46626,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61569,
 				"name": "twitter-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 139
 		},
 		{
@@ -46484,7 +46650,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61570,
 				"name": "facebook-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 140
 		},
 		{
@@ -46507,7 +46674,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61571,
 				"name": "camera-retro"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 141
 		},
 		{
@@ -46530,7 +46698,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61572,
 				"name": "key"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 142
 		},
 		{
@@ -46555,7 +46724,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61573,
 				"name": "cogs"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 143
 		},
 		{
@@ -46578,7 +46748,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61574,
 				"name": "comments"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 144
 		},
 		{
@@ -46601,7 +46772,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61575,
 				"name": "thumbs-o-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 145
 		},
 		{
@@ -46624,7 +46796,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61576,
 				"name": "thumbs-o-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 146
 		},
 		{
@@ -46648,7 +46821,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61577,
 				"name": "star-half"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 147
 		},
 		{
@@ -46671,7 +46845,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61578,
 				"name": "heart-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 148
 		},
 		{
@@ -46695,7 +46870,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61579,
 				"name": "sign-out"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 149
 		},
 		{
@@ -46718,7 +46894,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61580,
 				"name": "linkedin-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 150
 		},
 		{
@@ -46742,7 +46919,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61581,
 				"name": "thumb-tack"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 151
 		},
 		{
@@ -46765,7 +46943,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61582,
 				"name": "external-link"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 152
 		},
 		{
@@ -46788,7 +46967,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61584,
 				"name": "sign-in"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 153
 		},
 		{
@@ -46812,7 +46992,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61585,
 				"name": "trophy"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 154
 		},
 		{
@@ -46835,7 +47016,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61586,
 				"name": "github-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 155
 		},
 		{
@@ -46859,7 +47041,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61587,
 				"name": "upload"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 156
 		},
 		{
@@ -46882,7 +47065,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61588,
 				"name": "lemon-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 157
 		},
 		{
@@ -46906,7 +47090,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61589,
 				"name": "phone"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 158
 		},
 		{
@@ -46930,7 +47115,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61590,
 				"name": "square-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 159
 		},
 		{
@@ -46954,7 +47140,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61591,
 				"name": "bookmark-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 160
 		},
 		{
@@ -46977,7 +47164,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61592,
 				"name": "phone-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 161
 		},
 		{
@@ -47001,7 +47189,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61593,
 				"name": "twitter"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 162
 		},
 		{
@@ -47025,7 +47214,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61594,
 				"name": "facebook"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 163
 		},
 		{
@@ -47048,7 +47238,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61595,
 				"name": "github"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 164
 		},
 		{
@@ -47072,7 +47263,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61596,
 				"name": "unlock"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 165
 		},
 		{
@@ -47096,7 +47288,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61597,
 				"name": "credit-card"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 166
 		},
 		{
@@ -47120,7 +47313,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61598,
 				"name": "rss"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 167
 		},
 		{
@@ -47143,7 +47337,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61600,
 				"name": "hdd-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 168
 		},
 		{
@@ -47166,7 +47361,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61601,
 				"name": "bullhorn"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 169
 		},
 		{
@@ -47189,7 +47385,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61602,
 				"name": "bell-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 170
 		},
 		{
@@ -47212,7 +47409,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61603,
 				"name": "certificate"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 171
 		},
 		{
@@ -47235,7 +47433,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61604,
 				"name": "hand-o-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 172
 		},
 		{
@@ -47258,7 +47457,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61605,
 				"name": "hand-o-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 173
 		},
 		{
@@ -47281,7 +47481,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61606,
 				"name": "hand-o-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 174
 		},
 		{
@@ -47304,7 +47505,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61607,
 				"name": "hand-o-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 175
 		},
 		{
@@ -47327,7 +47529,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61608,
 				"name": "arrow-circle-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 176
 		},
 		{
@@ -47350,7 +47553,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61609,
 				"name": "arrow-circle-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 177
 		},
 		{
@@ -47373,7 +47577,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61610,
 				"name": "arrow-circle-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 178
 		},
 		{
@@ -47396,7 +47601,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61611,
 				"name": "arrow-circle-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 179
 		},
 		{
@@ -47419,7 +47625,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61612,
 				"name": "globe"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 180
 		},
 		{
@@ -47443,7 +47650,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61613,
 				"name": "wrench"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 181
 		},
 		{
@@ -47466,7 +47674,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61614,
 				"name": "tasks"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 182
 		},
 		{
@@ -47490,7 +47699,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61616,
 				"name": "filter"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 183
 		},
 		{
@@ -47513,7 +47723,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61617,
 				"name": "briefcase"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 184
 		},
 		{
@@ -47536,7 +47747,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61618,
 				"name": "arrows-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 185
 		},
 		{
@@ -47561,7 +47773,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61632,
 				"name": "group"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 186
 		},
 		{
@@ -47586,7 +47799,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61633,
 				"name": "chain"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 187
 		},
 		{
@@ -47610,7 +47824,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61634,
 				"name": "cloud"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 188
 		},
 		{
@@ -47634,7 +47849,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61635,
 				"name": "flask"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 189
 		},
 		{
@@ -47658,7 +47874,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61636,
 				"name": "cut"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 190
 		},
 		{
@@ -47682,7 +47899,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61637,
 				"name": "copy"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 191
 		},
 		{
@@ -47706,7 +47924,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61638,
 				"name": "paperclip"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 192
 		},
 		{
@@ -47730,7 +47949,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61639,
 				"name": "floppy-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 193
 		},
 		{
@@ -47753,7 +47973,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61640,
 				"name": "square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 194
 		},
 		{
@@ -47778,7 +47999,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61641,
 				"name": "bars"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 195
 		},
 		{
@@ -47801,7 +48023,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61642,
 				"name": "list-ul"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 196
 		},
 		{
@@ -47824,7 +48047,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61643,
 				"name": "list-ol"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 197
 		},
 		{
@@ -47847,7 +48071,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61644,
 				"name": "strikethrough"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 198
 		},
 		{
@@ -47870,7 +48095,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61645,
 				"name": "underline"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 199
 		},
 		{
@@ -47894,7 +48120,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61646,
 				"name": "table"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 200
 		},
 		{
@@ -47918,7 +48145,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61648,
 				"name": "magic"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 201
 		},
 		{
@@ -47941,7 +48169,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61649,
 				"name": "truck"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 202
 		},
 		{
@@ -47964,7 +48193,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61650,
 				"name": "pinterest"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 203
 		},
 		{
@@ -47987,7 +48217,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61651,
 				"name": "pinterest-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 204
 		},
 		{
@@ -48010,7 +48241,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61652,
 				"name": "google-plus-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 205
 		},
 		{
@@ -48034,7 +48266,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61653,
 				"name": "google-plus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 206
 		},
 		{
@@ -48058,7 +48291,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61654,
 				"name": "money"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 207
 		},
 		{
@@ -48082,7 +48316,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61655,
 				"name": "caret-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 208
 		},
 		{
@@ -48106,7 +48341,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61656,
 				"name": "caret-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 209
 		},
 		{
@@ -48130,7 +48366,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61657,
 				"name": "caret-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 210
 		},
 		{
@@ -48154,7 +48391,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61658,
 				"name": "caret-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 211
 		},
 		{
@@ -48178,7 +48416,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61659,
 				"name": "columns"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 212
 		},
 		{
@@ -48203,7 +48442,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61660,
 				"name": "sort"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 213
 		},
 		{
@@ -48228,7 +48468,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61661,
 				"name": "sort-desc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 214
 		},
 		{
@@ -48253,7 +48494,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61662,
 				"name": "sort-asc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 215
 		},
 		{
@@ -48276,7 +48518,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61664,
 				"name": "envelope"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 216
 		},
 		{
@@ -48299,7 +48542,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61665,
 				"name": "linkedin"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 217
 		},
 		{
@@ -48323,7 +48567,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61666,
 				"name": "rotate-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 218
 		},
 		{
@@ -48347,7 +48592,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61667,
 				"name": "gavel"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 219
 		},
 		{
@@ -48371,7 +48617,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61668,
 				"name": "dashboard"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 220
 		},
 		{
@@ -48394,7 +48641,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61669,
 				"name": "comment-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 221
 		},
 		{
@@ -48417,7 +48665,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61670,
 				"name": "comments-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 222
 		},
 		{
@@ -48442,7 +48691,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61671,
 				"name": "bolt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 223
 		},
 		{
@@ -48465,7 +48715,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61672,
 				"name": "sitemap"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 224
 		},
 		{
@@ -48489,7 +48740,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61673,
 				"name": "umbrella"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 225
 		},
 		{
@@ -48513,7 +48765,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61674,
 				"name": "clipboard"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 226
 		},
 		{
@@ -48537,7 +48790,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61675,
 				"name": "lightbulb-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 227
 		},
 		{
@@ -48560,7 +48814,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61676,
 				"name": "exchange"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 228
 		},
 		{
@@ -48584,7 +48839,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61677,
 				"name": "cloud-download"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 229
 		},
 		{
@@ -48608,7 +48864,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61678,
 				"name": "cloud-upload"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 230
 		},
 		{
@@ -48632,7 +48889,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61680,
 				"name": "user-md"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 231
 		},
 		{
@@ -48656,7 +48914,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61681,
 				"name": "stethoscope"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 232
 		},
 		{
@@ -48679,7 +48938,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61682,
 				"name": "suitcase"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 233
 		},
 		{
@@ -48702,7 +48962,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61683,
 				"name": "bell"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 234
 		},
 		{
@@ -48726,7 +48987,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61684,
 				"name": "coffee"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 235
 		},
 		{
@@ -48750,7 +49012,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61685,
 				"name": "cutlery"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 236
 		},
 		{
@@ -48773,7 +49036,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61686,
 				"name": "file-text-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 237
 		},
 		{
@@ -48797,7 +49061,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61687,
 				"name": "building-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 238
 		},
 		{
@@ -48821,7 +49086,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61688,
 				"name": "hospital-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 239
 		},
 		{
@@ -48845,7 +49111,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61689,
 				"name": "ambulance"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 240
 		},
 		{
@@ -48868,7 +49135,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61690,
 				"name": "medkit"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 241
 		},
 		{
@@ -48892,7 +49160,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61691,
 				"name": "fighter-jet"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 242
 		},
 		{
@@ -48916,7 +49185,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61692,
 				"name": "beer"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 243
 		},
 		{
@@ -48939,7 +49209,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61693,
 				"name": "h-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 244
 		},
 		{
@@ -48962,7 +49233,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61694,
 				"name": "plus-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 245
 		},
 		{
@@ -48986,7 +49258,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61696,
 				"name": "angle-double-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 246
 		},
 		{
@@ -49010,7 +49283,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61697,
 				"name": "angle-double-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 247
 		},
 		{
@@ -49034,7 +49308,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61698,
 				"name": "angle-double-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 248
 		},
 		{
@@ -49058,7 +49333,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61699,
 				"name": "angle-double-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 249
 		},
 		{
@@ -49082,7 +49358,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61700,
 				"name": "angle-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 250
 		},
 		{
@@ -49106,7 +49383,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61701,
 				"name": "angle-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 251
 		},
 		{
@@ -49130,7 +49408,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61702,
 				"name": "angle-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 252
 		},
 		{
@@ -49154,7 +49433,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61703,
 				"name": "angle-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 253
 		},
 		{
@@ -49178,7 +49458,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61704,
 				"name": "desktop"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 254
 		},
 		{
@@ -49202,7 +49483,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61705,
 				"name": "laptop"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 255
 		},
 		{
@@ -49226,7 +49508,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61706,
 				"name": "tablet"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 256
 		},
 		{
@@ -49251,7 +49534,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61707,
 				"name": "mobile"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 257
 		},
 		{
@@ -49274,7 +49558,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61708,
 				"name": "circle-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 258
 		},
 		{
@@ -49298,7 +49583,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61709,
 				"name": "quote-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 259
 		},
 		{
@@ -49322,7 +49608,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61710,
 				"name": "quote-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 260
 		},
 		{
@@ -49346,7 +49633,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61712,
 				"name": "spinner"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 261
 		},
 		{
@@ -49369,7 +49657,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61713,
 				"name": "circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 262
 		},
 		{
@@ -49393,7 +49682,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61714,
 				"name": "mail-reply"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 263
 		},
 		{
@@ -49417,7 +49707,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61715,
 				"name": "github-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 264
 		},
 		{
@@ -49441,7 +49732,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61716,
 				"name": "folder-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 265
 		},
 		{
@@ -49465,7 +49757,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61717,
 				"name": "folder-open-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 266
 		},
 		{
@@ -49488,7 +49781,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61720,
 				"name": "smile-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 267
 		},
 		{
@@ -49511,7 +49805,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61721,
 				"name": "frown-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 268
 		},
 		{
@@ -49534,7 +49829,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61722,
 				"name": "meh-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 269
 		},
 		{
@@ -49558,7 +49854,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61723,
 				"name": "gamepad"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 270
 		},
 		{
@@ -49582,7 +49879,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61724,
 				"name": "keyboard-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 271
 		},
 		{
@@ -49605,7 +49903,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61725,
 				"name": "flag-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 272
 		},
 		{
@@ -49628,7 +49927,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61726,
 				"name": "flag-checkered"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 273
 		},
 		{
@@ -49652,7 +49952,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61728,
 				"name": "terminal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 274
 		},
 		{
@@ -49676,7 +49977,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61729,
 				"name": "code"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 275
 		},
 		{
@@ -49700,7 +50002,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61730,
 				"name": "mail-reply-all"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 276
 		},
 		{
@@ -49726,7 +50029,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61731,
 				"name": "star-half-empty"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 277
 		},
 		{
@@ -49750,7 +50054,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61732,
 				"name": "location-arrow"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 278
 		},
 		{
@@ -49774,7 +50079,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61733,
 				"name": "crop"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 279
 		},
 		{
@@ -49798,7 +50104,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61734,
 				"name": "code-fork"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 280
 		},
 		{
@@ -49823,7 +50130,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61735,
 				"name": "chain-broken"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 281
 		},
 		{
@@ -49847,7 +50155,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61736,
 				"name": "question"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 282
 		},
 		{
@@ -49871,7 +50180,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61737,
 				"name": "info"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 283
 		},
 		{
@@ -49895,7 +50205,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61738,
 				"name": "exclamation"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 284
 		},
 		{
@@ -49918,7 +50229,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61739,
 				"name": "superscript"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 285
 		},
 		{
@@ -49941,7 +50253,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61740,
 				"name": "subscript"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 286
 		},
 		{
@@ -49965,7 +50278,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61741,
 				"name": "eraser"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 287
 		},
 		{
@@ -49989,7 +50303,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61742,
 				"name": "puzzle-piece"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 288
 		},
 		{
@@ -50013,7 +50328,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61744,
 				"name": "microphone"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 289
 		},
 		{
@@ -50037,7 +50353,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61745,
 				"name": "microphone-slash"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 290
 		},
 		{
@@ -50061,7 +50378,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61746,
 				"name": "shield"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 291
 		},
 		{
@@ -50085,7 +50403,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61747,
 				"name": "calendar-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 292
 		},
 		{
@@ -50109,7 +50428,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61748,
 				"name": "fire-extinguisher"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 293
 		},
 		{
@@ -50133,7 +50453,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61749,
 				"name": "rocket"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 294
 		},
 		{
@@ -50156,7 +50477,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61750,
 				"name": "maxcdn"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 295
 		},
 		{
@@ -50179,7 +50501,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61751,
 				"name": "chevron-circle-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 296
 		},
 		{
@@ -50202,7 +50525,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61752,
 				"name": "chevron-circle-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 297
 		},
 		{
@@ -50225,7 +50549,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61753,
 				"name": "chevron-circle-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 298
 		},
 		{
@@ -50248,7 +50573,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61754,
 				"name": "chevron-circle-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 299
 		},
 		{
@@ -50272,7 +50598,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61755,
 				"name": "html5"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 300
 		},
 		{
@@ -50295,7 +50622,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61756,
 				"name": "css3"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 301
 		},
 		{
@@ -50318,7 +50646,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61757,
 				"name": "anchor"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 302
 		},
 		{
@@ -50342,7 +50671,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61758,
 				"name": "unlock-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 303
 		},
 		{
@@ -50365,7 +50695,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61760,
 				"name": "bullseye"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 304
 		},
 		{
@@ -50389,7 +50720,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61761,
 				"name": "ellipsis-h"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 305
 		},
 		{
@@ -50413,7 +50745,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61762,
 				"name": "ellipsis-v"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 306
 		},
 		{
@@ -50436,7 +50769,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61763,
 				"name": "rss-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 307
 		},
 		{
@@ -50459,7 +50793,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61764,
 				"name": "play-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 308
 		},
 		{
@@ -50482,7 +50817,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61765,
 				"name": "ticket"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 309
 		},
 		{
@@ -50505,7 +50841,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61766,
 				"name": "minus-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 310
 		},
 		{
@@ -50529,7 +50866,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61767,
 				"name": "minus-square-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 311
 		},
 		{
@@ -50553,7 +50891,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61768,
 				"name": "level-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 312
 		},
 		{
@@ -50577,7 +50916,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61769,
 				"name": "level-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 313
 		},
 		{
@@ -50600,7 +50940,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61770,
 				"name": "check-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 314
 		},
 		{
@@ -50623,7 +50964,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61771,
 				"name": "pencil-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 315
 		},
 		{
@@ -50646,7 +50988,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61772,
 				"name": "external-link-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 316
 		},
 		{
@@ -50669,7 +51012,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61773,
 				"name": "share-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 317
 		},
 		{
@@ -50692,7 +51036,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61774,
 				"name": "compass"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 318
 		},
 		{
@@ -50716,7 +51061,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61776,
 				"name": "caret-square-o-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 319
 		},
 		{
@@ -50740,7 +51086,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61777,
 				"name": "caret-square-o-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 320
 		},
 		{
@@ -50764,7 +51111,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61778,
 				"name": "caret-square-o-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 321
 		},
 		{
@@ -50789,7 +51137,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61779,
 				"name": "eur"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 322
 		},
 		{
@@ -50813,7 +51162,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61780,
 				"name": "gbp"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 323
 		},
 		{
@@ -50838,7 +51188,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61781,
 				"name": "dollar"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 324
 		},
 		{
@@ -50863,7 +51214,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61782,
 				"name": "inr"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 325
 		},
 		{
@@ -50890,7 +51242,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61783,
 				"name": "cny"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 326
 		},
 		{
@@ -50916,7 +51269,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61784,
 				"name": "rouble"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 327
 		},
 		{
@@ -50940,7 +51294,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61785,
 				"name": "krw"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 328
 		},
 		{
@@ -50965,7 +51320,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61786,
 				"name": "bitcoin"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 329
 		},
 		{
@@ -50988,7 +51344,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61787,
 				"name": "file"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 330
 		},
 		{
@@ -51011,7 +51368,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61788,
 				"name": "file-text"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 331
 		},
 		{
@@ -51035,7 +51393,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61789,
 				"name": "sort-alpha-asc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 332
 		},
 		{
@@ -51059,7 +51418,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61790,
 				"name": "sort-alpha-desc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 333
 		},
 		{
@@ -51082,7 +51442,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61792,
 				"name": "sort-amount-asc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 334
 		},
 		{
@@ -51105,7 +51466,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61793,
 				"name": "sort-amount-desc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 335
 		},
 		{
@@ -51128,7 +51490,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61794,
 				"name": "sort-numeric-asc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 336
 		},
 		{
@@ -51151,7 +51514,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61795,
 				"name": "sort-numeric-desc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 337
 		},
 		{
@@ -51175,7 +51539,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61796,
 				"name": "thumbs-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 338
 		},
 		{
@@ -51199,7 +51564,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61797,
 				"name": "thumbs-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 339
 		},
 		{
@@ -51222,7 +51588,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61798,
 				"name": "youtube-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 340
 		},
 		{
@@ -51245,7 +51612,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61799,
 				"name": "youtube"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 341
 		},
 		{
@@ -51269,7 +51637,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61800,
 				"name": "xing"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 342
 		},
 		{
@@ -51292,7 +51661,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61801,
 				"name": "xing-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 343
 		},
 		{
@@ -51315,7 +51685,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61802,
 				"name": "youtube-play"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 344
 		},
 		{
@@ -51338,7 +51709,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61803,
 				"name": "dropbox"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 345
 		},
 		{
@@ -51362,7 +51734,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61804,
 				"name": "stack-overflow"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 346
 		},
 		{
@@ -51385,7 +51758,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61805,
 				"name": "instagram"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 347
 		},
 		{
@@ -51408,7 +51782,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61806,
 				"name": "flickr"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 348
 		},
 		{
@@ -51431,7 +51806,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61808,
 				"name": "adn"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 349
 		},
 		{
@@ -51455,7 +51831,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61809,
 				"name": "bitbucket"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 350
 		},
 		{
@@ -51478,7 +51855,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61810,
 				"name": "bitbucket-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 351
 		},
 		{
@@ -51502,7 +51880,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61811,
 				"name": "tumblr"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 352
 		},
 		{
@@ -51525,7 +51904,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61812,
 				"name": "tumblr-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 353
 		},
 		{
@@ -51549,7 +51929,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61813,
 				"name": "long-arrow-down"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 354
 		},
 		{
@@ -51573,7 +51954,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61814,
 				"name": "long-arrow-up"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 355
 		},
 		{
@@ -51596,7 +51978,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61815,
 				"name": "long-arrow-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 356
 		},
 		{
@@ -51619,7 +52002,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61816,
 				"name": "long-arrow-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 357
 		},
 		{
@@ -51643,7 +52027,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61817,
 				"name": "apple"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 358
 		},
 		{
@@ -51667,7 +52052,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61818,
 				"name": "windows"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 359
 		},
 		{
@@ -51691,7 +52077,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61819,
 				"name": "android"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 360
 		},
 		{
@@ -51714,7 +52101,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61820,
 				"name": "linux"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 361
 		},
 		{
@@ -51737,7 +52125,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61821,
 				"name": "dribbble"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 362
 		},
 		{
@@ -51760,7 +52149,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61822,
 				"name": "skype"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 363
 		},
 		{
@@ -51784,7 +52174,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61824,
 				"name": "foursquare"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 364
 		},
 		{
@@ -51807,7 +52198,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61825,
 				"name": "trello"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 365
 		},
 		{
@@ -51831,7 +52223,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61826,
 				"name": "female"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 366
 		},
 		{
@@ -51855,7 +52248,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61827,
 				"name": "male"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 367
 		},
 		{
@@ -51878,7 +52272,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61828,
 				"name": "gittip"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 368
 		},
 		{
@@ -51901,7 +52296,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61829,
 				"name": "sun-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 369
 		},
 		{
@@ -51924,7 +52320,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61830,
 				"name": "moon-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 370
 		},
 		{
@@ -51947,7 +52344,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61831,
 				"name": "archive"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 371
 		},
 		{
@@ -51971,7 +52369,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61832,
 				"name": "bug"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 372
 		},
 		{
@@ -51995,7 +52394,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61833,
 				"name": "vk"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 373
 		},
 		{
@@ -52018,7 +52418,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61834,
 				"name": "weibo"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 374
 		},
 		{
@@ -52041,7 +52442,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61835,
 				"name": "renren"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 375
 		},
 		{
@@ -52065,7 +52467,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61836,
 				"name": "pagelines"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 376
 		},
 		{
@@ -52089,7 +52492,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61837,
 				"name": "stack-exchange"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 377
 		},
 		{
@@ -52112,7 +52516,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61838,
 				"name": "arrow-circle-o-right"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 378
 		},
 		{
@@ -52135,7 +52540,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61840,
 				"name": "arrow-circle-o-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 379
 		},
 		{
@@ -52159,7 +52565,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61841,
 				"name": "caret-square-o-left"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 380
 		},
 		{
@@ -52182,7 +52589,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61842,
 				"name": "dot-circle-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 381
 		},
 		{
@@ -52206,7 +52614,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61843,
 				"name": "wheelchair"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 382
 		},
 		{
@@ -52229,7 +52638,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61844,
 				"name": "vimeo-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 383
 		},
 		{
@@ -52254,7 +52664,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61845,
 				"name": "try"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 384
 		},
 		{
@@ -52278,7 +52689,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61846,
 				"name": "plus-square-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 385
 		},
 		{
@@ -52302,7 +52714,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61847,
 				"name": "space-shuttle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 386
 		},
 		{
@@ -52326,7 +52739,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61848,
 				"name": "slack"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 387
 		},
 		{
@@ -52349,7 +52763,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61849,
 				"name": "envelope-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 388
 		},
 		{
@@ -52372,7 +52787,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61850,
 				"name": "wordpress"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 389
 		},
 		{
@@ -52395,7 +52811,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61851,
 				"name": "openid"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 390
 		},
 		{
@@ -52421,7 +52838,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61852,
 				"name": "bank"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 391
 		},
 		{
@@ -52446,7 +52864,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61853,
 				"name": "graduation-cap"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 392
 		},
 		{
@@ -52469,7 +52888,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61854,
 				"name": "yahoo"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 393
 		},
 		{
@@ -52493,7 +52913,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61856,
 				"name": "google"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 394
 		},
 		{
@@ -52517,7 +52938,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61857,
 				"name": "reddit"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 395
 		},
 		{
@@ -52540,7 +52962,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61858,
 				"name": "reddit-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 396
 		},
 		{
@@ -52563,7 +52986,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61859,
 				"name": "stumbleupon-circle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 397
 		},
 		{
@@ -52587,7 +53011,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61860,
 				"name": "stumbleupon"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 398
 		},
 		{
@@ -52610,7 +53035,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61861,
 				"name": "delicious"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 399
 		},
 		{
@@ -52634,7 +53060,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61862,
 				"name": "digg"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 400
 		},
 		{
@@ -52657,7 +53084,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61863,
 				"name": "pied-piper"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 401
 		},
 		{
@@ -52681,7 +53109,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61864,
 				"name": "pied-piper-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 402
 		},
 		{
@@ -52704,7 +53133,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61865,
 				"name": "drupal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 403
 		},
 		{
@@ -52727,7 +53157,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61866,
 				"name": "joomla"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 404
 		},
 		{
@@ -52750,7 +53181,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61867,
 				"name": "language"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 405
 		},
 		{
@@ -52773,7 +53205,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61868,
 				"name": "fax"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 406
 		},
 		{
@@ -52796,7 +53229,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61869,
 				"name": "building"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 407
 		},
 		{
@@ -52820,7 +53254,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61870,
 				"name": "child"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 408
 		},
 		{
@@ -52844,7 +53279,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61872,
 				"name": "paw"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 409
 		},
 		{
@@ -52868,7 +53304,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61873,
 				"name": "spoon"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 410
 		},
 		{
@@ -52891,7 +53328,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61874,
 				"name": "cube"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 411
 		},
 		{
@@ -52915,7 +53353,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61875,
 				"name": "cubes"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 412
 		},
 		{
@@ -52939,7 +53378,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61876,
 				"name": "behance"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 413
 		},
 		{
@@ -52962,7 +53402,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61877,
 				"name": "behance-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 414
 		},
 		{
@@ -52985,7 +53426,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61878,
 				"name": "steam"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 415
 		},
 		{
@@ -53008,7 +53450,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61879,
 				"name": "steam-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 416
 		},
 		{
@@ -53031,7 +53474,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61880,
 				"name": "recycle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 417
 		},
 		{
@@ -53056,7 +53500,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61881,
 				"name": "automobile"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 418
 		},
 		{
@@ -53081,7 +53526,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61882,
 				"name": "cab"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 419
 		},
 		{
@@ -53104,7 +53550,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61883,
 				"name": "tree"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 420
 		},
 		{
@@ -53127,7 +53574,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61884,
 				"name": "spotify"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 421
 		},
 		{
@@ -53150,7 +53598,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61885,
 				"name": "deviantart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 422
 		},
 		{
@@ -53174,7 +53623,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61886,
 				"name": "soundcloud"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 423
 		},
 		{
@@ -53197,7 +53647,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61888,
 				"name": "database"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 424
 		},
 		{
@@ -53220,7 +53671,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61889,
 				"name": "file-pdf-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 425
 		},
 		{
@@ -53243,7 +53695,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61890,
 				"name": "file-word-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 426
 		},
 		{
@@ -53266,7 +53719,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61891,
 				"name": "file-excel-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 427
 		},
 		{
@@ -53289,7 +53743,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61892,
 				"name": "file-powerpoint-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 428
 		},
 		{
@@ -53314,7 +53769,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61893,
 				"name": "file-image-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 429
 		},
 		{
@@ -53338,7 +53794,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61894,
 				"name": "file-archive-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 430
 		},
 		{
@@ -53362,7 +53819,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61895,
 				"name": "file-audio-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 431
 		},
 		{
@@ -53386,7 +53844,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61896,
 				"name": "file-movie-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 432
 		},
 		{
@@ -53409,7 +53868,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61897,
 				"name": "file-code-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 433
 		},
 		{
@@ -53432,7 +53892,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61898,
 				"name": "vine"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 434
 		},
 		{
@@ -53455,7 +53916,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61899,
 				"name": "codepen"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 435
 		},
 		{
@@ -53479,7 +53941,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61900,
 				"name": "jsfiddle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 436
 		},
 		{
@@ -53506,7 +53969,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61901,
 				"name": "life-bouy"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 437
 		},
 		{
@@ -53529,7 +53993,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61902,
 				"name": "circle-o-notch"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 438
 		},
 		{
@@ -53553,7 +54018,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61904,
 				"name": "ra"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 439
 		},
 		{
@@ -53577,7 +54043,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61905,
 				"name": "empire"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 440
 		},
 		{
@@ -53600,7 +54067,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61906,
 				"name": "git-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 441
 		},
 		{
@@ -53623,7 +54091,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61907,
 				"name": "git"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 442
 		},
 		{
@@ -53646,7 +54115,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61908,
 				"name": "hacker-news"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 443
 		},
 		{
@@ -53670,7 +54140,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61909,
 				"name": "tencent-weibo"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 444
 		},
 		{
@@ -53693,7 +54164,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61910,
 				"name": "qq"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 445
 		},
 		{
@@ -53718,7 +54190,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61911,
 				"name": "wechat"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 446
 		},
 		{
@@ -53742,7 +54215,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61912,
 				"name": "paper-plane"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 447
 		},
 		{
@@ -53766,7 +54240,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61913,
 				"name": "paper-plane-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 448
 		},
 		{
@@ -53789,7 +54264,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61914,
 				"name": "history"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 449
 		},
 		{
@@ -53812,7 +54288,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61915,
 				"name": "circle-thin"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 450
 		},
 		{
@@ -53835,7 +54312,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61916,
 				"name": "header"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 451
 		},
 		{
@@ -53859,7 +54337,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61917,
 				"name": "paragraph"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 452
 		},
 		{
@@ -53882,7 +54361,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61918,
 				"name": "sliders"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 453
 		},
 		{
@@ -53905,7 +54385,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61920,
 				"name": "share-alt"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 454
 		},
 		{
@@ -53928,7 +54409,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61921,
 				"name": "share-alt-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 455
 		},
 		{
@@ -53951,7 +54433,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61922,
 				"name": "bomb"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 456
 		},
 		{
@@ -53975,7 +54458,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61923,
 				"name": "futbol-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 457
 		},
 		{
@@ -53998,7 +54482,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61924,
 				"name": "tty"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 458
 		},
 		{
@@ -54021,7 +54506,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61925,
 				"name": "binoculars"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 459
 		},
 		{
@@ -54044,7 +54530,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61926,
 				"name": "plug"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 460
 		},
 		{
@@ -54067,7 +54554,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61927,
 				"name": "slideshare"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 461
 		},
 		{
@@ -54090,7 +54578,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61928,
 				"name": "twitch"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 462
 		},
 		{
@@ -54113,7 +54602,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61929,
 				"name": "yelp"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 463
 		},
 		{
@@ -54137,7 +54627,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61930,
 				"name": "newspaper-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 464
 		},
 		{
@@ -54161,7 +54652,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61931,
 				"name": "wifi"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 465
 		},
 		{
@@ -54184,7 +54676,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61932,
 				"name": "calculator"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 466
 		},
 		{
@@ -54207,7 +54700,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61933,
 				"name": "paypal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 467
 		},
 		{
@@ -54230,7 +54724,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61934,
 				"name": "google-wallet"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 468
 		},
 		{
@@ -54254,7 +54749,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61936,
 				"name": "cc-visa"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 469
 		},
 		{
@@ -54278,7 +54774,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61937,
 				"name": "cc-mastercard"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 470
 		},
 		{
@@ -54302,7 +54799,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61938,
 				"name": "cc-discover"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 471
 		},
 		{
@@ -54326,7 +54824,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61939,
 				"name": "cc-amex"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 472
 		},
 		{
@@ -54350,7 +54849,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61940,
 				"name": "cc-paypal"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 473
 		},
 		{
@@ -54374,7 +54874,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61941,
 				"name": "cc-stripe"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 474
 		},
 		{
@@ -54398,7 +54899,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61942,
 				"name": "bell-slash"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 475
 		},
 		{
@@ -54422,7 +54924,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61943,
 				"name": "bell-slash-o"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 476
 		},
 		{
@@ -54446,7 +54949,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61944,
 				"name": "trash"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 477
 		},
 		{
@@ -54469,7 +54973,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61945,
 				"name": "copyright"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 478
 		},
 		{
@@ -54492,7 +54997,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61946,
 				"name": "at"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 479
 		},
 		{
@@ -54515,7 +55021,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61947,
 				"name": "eyedropper"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 480
 		},
 		{
@@ -54538,7 +55045,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61948,
 				"name": "paint-brush"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 481
 		},
 		{
@@ -54561,7 +55069,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61949,
 				"name": "birthday-cake"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 482
 		},
 		{
@@ -54585,7 +55094,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61950,
 				"name": "area-chart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 483
 		},
 		{
@@ -54608,7 +55118,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61952,
 				"name": "pie-chart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 484
 		},
 		{
@@ -54632,7 +55143,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61953,
 				"name": "line-chart"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 485
 		},
 		{
@@ -54655,7 +55167,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61954,
 				"name": "lastfm"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 486
 		},
 		{
@@ -54678,7 +55191,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61955,
 				"name": "lastfm-square"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 487
 		},
 		{
@@ -54702,7 +55216,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61956,
 				"name": "toggle-off"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 488
 		},
 		{
@@ -54726,7 +55241,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61957,
 				"name": "toggle-on"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 489
 		},
 		{
@@ -54750,7 +55266,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61958,
 				"name": "bicycle"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 490
 		},
 		{
@@ -54773,7 +55290,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61959,
 				"name": "bus"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 491
 		},
 		{
@@ -54797,7 +55315,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61960,
 				"name": "ioxhost"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 492
 		},
 		{
@@ -54821,7 +55340,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61961,
 				"name": "angellist"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 493
 		},
 		{
@@ -54845,7 +55365,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61962,
 				"name": "cc"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 494
 		},
 		{
@@ -54870,7 +55391,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61963,
 				"name": "ils"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 495
 		},
 		{
@@ -54893,7 +55415,8 @@ define("json!docs/../../assets/icomoon/selection.json", function(){ return {
 				"code": 61964,
 				"name": "meanpath"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
+			"setId": 1,
 			"iconIdx": 496
 		}
 	],
