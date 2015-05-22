@@ -55765,7 +55765,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
       this.receivePattern(nextProps.pattern);
     },
     componentWillMount: function () {
-      this.props.inputId = 'oui_textfield_' + counter;
+      this.inputId = 'oui_textfield_' + counter;
       if (!this._validator) {
         this._validator = this.props.validator || new Validator();
       }
@@ -55823,7 +55823,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
         'u-reset-translate': above,
         'u-translate-down': false // !above
       });
-      return React.createElement("label", {htmlFor: this.props.inputId, className: classes, onClick: this.handleLabelClick}, this.props.label);
+      return React.createElement("label", {htmlFor: this.inputId, className: classes, onClick: this.handleLabelClick}, this.props.label);
     },
     renderHelp: function (isErrored, errorText) {
       var errors = '';
@@ -55837,7 +55837,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
       if (isErrored) {
         errors = React.createElement("span", {className: "errors"}, errorText);
       }
-      return React.createElement("label", {htmlFor: this.props.inputId, role: "presentation", className: classes}, help, errors);
+      return React.createElement("label", {htmlFor: this.inputId, role: "presentation", className: classes}, help, errors);
     },
     render: function () {
       var place = this.props.label ? this.renderLabel() : '';
@@ -55876,7 +55876,7 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
           React.createElement("div", {className: "oui-text-control"}, 
             icon, 
             React.createElement("div", null, 
-              React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.props.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
+              React.createElement("input", React.__spread({'aria-describedby': this.props.help, id: this.inputId, ref: "textInput", type: "text", className: "t-1"},  inputProps))
             )
           ), 
           helpLine
