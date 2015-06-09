@@ -4,13 +4,14 @@ define(function (require) {
   var ImproperUseError = require('Oui/Error/ImproperUse');
   var Backbone = require('backbone');
   var React = require('react.backbone');
+  var PropTypes = require('Oui/PropTypes');
   var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
   var Select = React.createBackboneClass({
     propTypes: {
-      collection: React.PropTypes.instanceOf(Backbone.Collection).isRequired,
+      collection: PropTypes.collection.isRequired,
       title: React.PropTypes.string,
       placeholder: React.PropTypes.oneOfType([
         React.PropTypes.string,
