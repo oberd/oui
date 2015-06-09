@@ -13,6 +13,9 @@
       "Oui": "./src"
     }
   },
+  "publishConfig": {
+    "registry": "https://npm.oberd.com"
+  },
   "author": "Oberd 2015",
   "license": "ISC",
   "dependencies": {},
