@@ -35638,7 +35638,7 @@ define('json',['text'], function(text){
 
 define("json!docs/../../bower.json", function(){ return {
   "name": "oui",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [
@@ -55984,20 +55984,376 @@ define('mdown!docs/Form/Select/Select.md',[],function () { return '<h3>Select</h
 
 define('text!docs/Form/Select/Select.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Users = require(\'../../ExampleData/Users\');\n  var Select = require(\'jsx!Oui/Form/Select\');\n\n  var users = new Users();\n  users.addRandom(5);\n  var SelectExample = React.createClass({\n    render: function () {\n      return (\n        <div>\n          <Select title="Select a user" collection={users} optionAttribute="username" />\n          <Select value={users.at(3).id} collection={users} optionAttribute="username" />\n        </div>\n      );\n    }\n  });\n  return SelectExample;\n});\n';});
 
+(function (root, factory) {
+  if (typeof exports === 'object') {
+    module.exports = factory(require('underscore'), require('backbone'));
+  }
+  else if (typeof define === 'function' && define.amd) {
+    define('backbone-filtered-collection',['underscore', 'backbone'], factory);
+  }
+  else {
+    var globalAlias = 'FilteredCollection';
+    var namespace = globalAlias.split('.');
+    var parent = root;
+    for ( var i = 0; i < namespace.length-1; i++ ) {
+      if ( parent[namespace[i]] === undefined ) parent[namespace[i]] = {};
+      parent = parent[namespace[i]];
+    }
+    parent[namespace[namespace.length-1]] = factory(root['_'], root['Backbone']);
+  }
+}(this, function(_, Backbone) {
+  function _requireDep(name) {
+    return {'underscore': _, 'backbone': Backbone}[name];
+  }
+
+  var _bundleExports = (function (define) {
+    function _require(index) {
+        var module = _require.cache[index];
+        if (!module) {
+            var exports = {};
+            module = _require.cache[index] = {
+                id: index,
+                exports: exports
+            };
+            _require.modules[index].call(exports, module, exports);
+        }
+        return module.exports;
+    }
+    _require.cache = [];
+    _require.modules = [
+        function (module, exports) {
+            var _ = _requireDep('underscore');
+            var Backbone = _requireDep('backbone');
+            var proxyCollection = _require(1);
+            var createFilter = _require(2);
+            function invalidateCache() {
+                this._filterResultCache = {};
+            }
+            function invalidateCacheForFilter(filterName) {
+                for (var cid in this._filterResultCache) {
+                    if (this._filterResultCache.hasOwnProperty(cid)) {
+                        delete this._filterResultCache[cid][filterName];
+                    }
+                }
+            }
+            function addFilter(filterName, filterObj) {
+                if (this._filters[filterName]) {
+                    invalidateCacheForFilter.call(this, filterName);
+                }
+                this._filters[filterName] = filterObj;
+                this.trigger('filtered:add', filterName);
+            }
+            function removeFilter(filterName) {
+                delete this._filters[filterName];
+                invalidateCacheForFilter.call(this, filterName);
+                this.trigger('filtered:remove', filterName);
+            }
+            function execFilterOnModel(model) {
+                if (!this._filterResultCache[model.cid]) {
+                    this._filterResultCache[model.cid] = {};
+                }
+                var cache = this._filterResultCache[model.cid];
+                for (var filterName in this._filters) {
+                    if (this._filters.hasOwnProperty(filterName)) {
+                        if (!cache.hasOwnProperty(filterName)) {
+                            cache[filterName] = this._filters[filterName].fn(model);
+                        }
+                        if (!cache[filterName]) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            function execFilter() {
+                var filtered = [];
+                if (this._superset) {
+                    filtered = this._superset.filter(_.bind(execFilterOnModel, this));
+                }
+                this._collection.reset(filtered);
+                this.length = this._collection.length;
+            }
+            function onAddChange(model) {
+                this._filterResultCache[model.cid] = {};
+                if (execFilterOnModel.call(this, model)) {
+                    if (!this._collection.get(model.cid)) {
+                        var index = this.superset().indexOf(model);
+                        var filteredIndex = null;
+                        for (var i = index - 1; i >= 0; i -= 1) {
+                            if (this.contains(this.superset().at(i))) {
+                                filteredIndex = this.indexOf(this.superset().at(i)) + 1;
+                                break;
+                            }
+                        }
+                        filteredIndex = filteredIndex || 0;
+                        this._collection.add(model, { at: filteredIndex });
+                    }
+                } else {
+                    if (this._collection.get(model.cid)) {
+                        this._collection.remove(model);
+                    }
+                }
+                this.length = this._collection.length;
+            }
+            function onModelAttributeChange(model) {
+                this._filterResultCache[model.cid] = {};
+                if (!execFilterOnModel.call(this, model)) {
+                    if (this._collection.get(model.cid)) {
+                        this._collection.remove(model);
+                    }
+                }
+            }
+            function onAll(eventName, model, value) {
+                if (eventName.slice(0, 7) === 'change:') {
+                    onModelAttributeChange.call(this, arguments[1]);
+                }
+            }
+            function onModelRemove(model) {
+                if (this.contains(model)) {
+                    this._collection.remove(model);
+                }
+                this.length = this._collection.length;
+            }
+            function Filtered(superset) {
+                this._superset = superset;
+                this._collection = new Backbone.Collection(superset.toArray());
+                proxyCollection(this._collection, this);
+                this.resetFilters();
+                this.listenTo(this._superset, 'reset sort', execFilter);
+                this.listenTo(this._superset, 'add change', onAddChange);
+                this.listenTo(this._superset, 'remove', onModelRemove);
+                this.listenTo(this._superset, 'all', onAll);
+            }
+            var methods = {
+                    defaultFilterName: '__default',
+                    filterBy: function (filterName, filter) {
+                        if (!filter) {
+                            filter = filterName;
+                            filterName = this.defaultFilterName;
+                        }
+                        addFilter.call(this, filterName, createFilter(filter));
+                        execFilter.call(this);
+                        return this;
+                    },
+                    removeFilter: function (filterName) {
+                        if (!filterName) {
+                            filterName = this.defaultFilterName;
+                        }
+                        removeFilter.call(this, filterName);
+                        execFilter.call(this);
+                        return this;
+                    },
+                    resetFilters: function () {
+                        this._filters = {};
+                        invalidateCache.call(this);
+                        this.trigger('filtered:reset');
+                        execFilter.call(this);
+                        return this;
+                    },
+                    superset: function () {
+                        return this._superset;
+                    },
+                    refilter: function (arg) {
+                        if (typeof arg === 'object' && arg.cid) {
+                            onAddChange.call(this, arg);
+                        } else {
+                            invalidateCache.call(this);
+                            execFilter.call(this);
+                        }
+                        return this;
+                    },
+                    getFilters: function () {
+                        return _.keys(this._filters);
+                    },
+                    hasFilter: function (name) {
+                        return _.contains(this.getFilters(), name);
+                    },
+                    destroy: function () {
+                        this.stopListening();
+                        this._collection.reset([]);
+                        this._superset = this._collection;
+                        this.length = 0;
+                        this.trigger('filtered:destroy');
+                    }
+                };
+            _.extend(Filtered.prototype, methods, Backbone.Events);
+            module.exports = Filtered;
+        },
+        function (module, exports) {
+            var _ = _requireDep('underscore');
+            var Backbone = _requireDep('backbone');
+            var blacklistedMethods = [
+                    '_onModelEvent',
+                    '_prepareModel',
+                    '_removeReference',
+                    '_reset',
+                    'add',
+                    'initialize',
+                    'sync',
+                    'remove',
+                    'reset',
+                    'set',
+                    'push',
+                    'pop',
+                    'unshift',
+                    'shift',
+                    'sort',
+                    'parse',
+                    'fetch',
+                    'create',
+                    'model',
+                    'off',
+                    'on',
+                    'listenTo',
+                    'listenToOnce',
+                    'bind',
+                    'trigger',
+                    'once',
+                    'stopListening'
+                ];
+            var eventWhiteList = [
+                    'add',
+                    'remove',
+                    'reset',
+                    'sort',
+                    'destroy',
+                    'sync',
+                    'request',
+                    'error'
+                ];
+            function proxyCollection(from, target) {
+                function updateLength() {
+                    target.length = from.length;
+                }
+                function pipeEvents(eventName) {
+                    var args = _.toArray(arguments);
+                    var isChangeEvent = eventName === 'change' || eventName.slice(0, 7) === 'change:';
+                    if (eventName === 'reset') {
+                        target.models = from.models;
+                    }
+                    if (_.contains(eventWhiteList, eventName)) {
+                        if (_.contains([
+                                'add',
+                                'remove',
+                                'destroy'
+                            ], eventName)) {
+                            args[2] = target;
+                        } else if (_.contains([
+                                'reset',
+                                'sort'
+                            ], eventName)) {
+                            args[1] = target;
+                        }
+                        target.trigger.apply(this, args);
+                    } else if (isChangeEvent) {
+                        if (target.contains(args[1])) {
+                            target.trigger.apply(this, args);
+                        }
+                    }
+                }
+                var methods = {};
+                _.each(_.functions(Backbone.Collection.prototype), function (method) {
+                    if (!_.contains(blacklistedMethods, method)) {
+                        methods[method] = function () {
+                            return from[method].apply(from, arguments);
+                        };
+                    }
+                });
+                _.extend(target, Backbone.Events, methods);
+                target.listenTo(from, 'all', updateLength);
+                target.listenTo(from, 'all', pipeEvents);
+                target.models = from.models;
+                updateLength();
+                return target;
+            }
+            module.exports = proxyCollection;
+        },
+        function (module, exports) {
+            var _ = _requireDep('underscore');
+            function convertKeyValueToFunction(key, value) {
+                return function (model) {
+                    return model.get(key) === value;
+                };
+            }
+            function convertKeyFunctionToFunction(key, fn) {
+                return function (model) {
+                    return fn(model.get(key));
+                };
+            }
+            function createFilterObject(filterFunction, keys) {
+                if (!_.isArray(keys)) {
+                    keys = null;
+                }
+                return {
+                    fn: filterFunction,
+                    keys: keys
+                };
+            }
+            function createFilterFromObject(filterObj) {
+                var keys = _.keys(filterObj);
+                var filterFunctions = _.map(keys, function (key) {
+                        var val = filterObj[key];
+                        if (_.isFunction(val)) {
+                            return convertKeyFunctionToFunction(key, val);
+                        }
+                        return convertKeyValueToFunction(key, val);
+                    });
+                var filterFunction = function (model) {
+                    for (var i = 0; i < filterFunctions.length; i++) {
+                        if (!filterFunctions[i](model)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+                return createFilterObject(filterFunction, keys);
+            }
+            function createFilter(filter, keys) {
+                if (_.isFunction(filter)) {
+                    return createFilterObject(filter, keys);
+                }
+                if (_.isObject(filter)) {
+                    return createFilterFromObject(filter);
+                }
+            }
+            module.exports = createFilter;
+        }
+    ];
+    return  _require(0);
+}());
+
+  return _bundleExports;
+}));
+/*global define */
+define('Oui/PropTypes',['require','react.backbone','backbone','backbone-filtered-collection'],function(require) {
+    
+    var React = require('react.backbone');
+    var Backbone = require('backbone');
+    var FilteredCollection = require('backbone-filtered-collection');
+    return {
+        collection: React.PropTypes.oneOfType([
+            React.PropTypes.instanceOf(Backbone.Collection),
+            React.PropTypes.instanceOf(FilteredCollection)
+        ]),
+        model: React.PropTypes.instanceOf(Backbone.Model)
+    };
+});
+
 
 /*global define */
-define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone','Oui/Utilities/classnames'],function (require) {
+define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone','Oui/PropTypes','Oui/Utilities/classnames'],function (require) {
   
   var ImproperUseError = require('Oui/Error/ImproperUse');
   var Backbone = require('backbone');
   var React = require('react.backbone');
+  var PropTypes = require('Oui/PropTypes');
   var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
   var Select = React.createBackboneClass({
     propTypes: {
-      collection: React.PropTypes.instanceOf(Backbone.Collection).isRequired,
+      collection: PropTypes.collection.isRequired,
       title: React.PropTypes.string,
       placeholder: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -56008,7 +56364,8 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
         React.PropTypes.bool
       ]),
       optionAttribute: React.PropTypes.string,
-      onChange: React.PropTypes.func
+      onChange: React.PropTypes.func,
+      disabled: React.PropTypes.bool
     },
     componentWillMount: function () {
       this.inputId = 'oui_select_' + counter;
@@ -56018,7 +56375,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       counter++;
     },
     getDefaultProps: function () {
-      return { optionAttribute: 'label', onChange: function () {} };
+      return { optionAttribute: 'label', onChange: function () {}, disabled: false };
     },
     getInitialState: function () {
       return { value: this.props.value };
@@ -56076,7 +56433,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return (
         React.createElement("div", {className: classList}, 
           label, 
-          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId}, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId, disabled: this.props.disabled}, 
             placeholderOption, 
             options
           )

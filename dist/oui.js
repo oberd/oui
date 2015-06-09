@@ -931,20 +931,36 @@ define('jsx!Oui/Form/TextField',['require','underscore','react','Oui/Form/Valida
   return TextInput;
 });
 
+/*global define */
+define('Oui/PropTypes',['require','react.backbone','backbone','backbone-filtered-collection'],function(require) {
+    
+    var React = require('react.backbone');
+    var Backbone = require('backbone');
+    var FilteredCollection = require('backbone-filtered-collection');
+    return {
+        collection: React.PropTypes.oneOfType([
+            React.PropTypes.instanceOf(Backbone.Collection),
+            React.PropTypes.instanceOf(FilteredCollection)
+        ]),
+        model: React.PropTypes.instanceOf(Backbone.Model)
+    };
+});
+
 
 /*global define */
-define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone','Oui/Utilities/classnames'],function (require) {
+define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','react.backbone','Oui/PropTypes','Oui/Utilities/classnames'],function (require) {
   
   var ImproperUseError = require('Oui/Error/ImproperUse');
   var Backbone = require('backbone');
   var React = require('react.backbone');
+  var PropTypes = require('Oui/PropTypes');
   var classnames = require('Oui/Utilities/classnames');
 
   var counter = 0;
 
   var Select = React.createBackboneClass({
     propTypes: {
-      collection: React.PropTypes.instanceOf(Backbone.Collection).isRequired,
+      collection: PropTypes.collection.isRequired,
       title: React.PropTypes.string,
       placeholder: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -955,7 +971,8 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
         React.PropTypes.bool
       ]),
       optionAttribute: React.PropTypes.string,
-      onChange: React.PropTypes.func
+      onChange: React.PropTypes.func,
+      disabled: React.PropTypes.bool
     },
     componentWillMount: function () {
       this.inputId = 'oui_select_' + counter;
@@ -965,7 +982,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       counter++;
     },
     getDefaultProps: function () {
-      return { optionAttribute: 'label', onChange: function () {} };
+      return { optionAttribute: 'label', onChange: function () {}, disabled: false };
     },
     getInitialState: function () {
       return { value: this.props.value };
@@ -1023,7 +1040,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return (
         React.createElement("div", {className: classList}, 
           label, 
-          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId}, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId, disabled: this.props.disabled}, 
             placeholderOption, 
             options
           )

@@ -55,6 +55,8 @@ jsx!docs/Form/TextField/TextField
 json!docs/Form/TextField/manifest.json
 mdown!docs/Form/Select/Select.md
 text!docs/Form/Select/Select.jsx
+./bower_components/backbone-filtered-collection/backbone-filtered-collection.js
+./src/PropTypes.js
 jsx!Oui/Form/Select
 jsx!docs/Form/Select/Select
 json!docs/Form/Select/manifest.json

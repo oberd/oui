@@ -2279,6 +2279,27 @@
 .icomoon-meanpath:before {
   content: "\f20c";
 }
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
 .oui-drawer-container {
   position: relative;
 }
@@ -2327,27 +2348,6 @@
 
 .oui-drawer-container.expanded .oui-drawer-content {
   margin-left: 200px;
-}
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
 }
 .oui-loader {
   position: absolute;

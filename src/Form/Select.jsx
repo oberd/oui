@@ -22,7 +22,8 @@ define(function (require) {
         React.PropTypes.bool
       ]),
       optionAttribute: React.PropTypes.string,
-      onChange: React.PropTypes.func
+      onChange: React.PropTypes.func,
+      disabled: React.PropTypes.bool
     },
     componentWillMount: function () {
       this.inputId = 'oui_select_' + counter;
@@ -32,7 +33,7 @@ define(function (require) {
       counter++;
     },
     getDefaultProps: function () {
-      return { optionAttribute: 'label', onChange: function () {} };
+      return { optionAttribute: 'label', onChange: function () {}, disabled: false };
     },
     getInitialState: function () {
       return { value: this.props.value };
@@ -90,7 +91,7 @@ define(function (require) {
       return (
         <div className={classList}>
           {label}
-          <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.inputId}>
+          <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.inputId} disabled={this.props.disabled}>
             {placeholderOption}
             {options}
           </select>
