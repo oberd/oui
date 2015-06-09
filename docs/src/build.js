@@ -35638,7 +35638,7 @@ define('json',['text'], function(text){
 
 define("json!docs/../../bower.json", function(){ return {
   "name": "oui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [
@@ -55979,7 +55979,7 @@ define("json!docs/Form/TextField/manifest.json", function(){ return {
 ;});
 
 
-define('mdown!docs/Form/Select/Select.md',[],function () { return '<h3>Select</h3>';});
+define('mdown!docs/Form/Select/Select.md',[],function () { return '<h3>Select</h3>\n\n<p>Drive a select element\'s options directly from a collection.</p>';});
 
 
 define('text!docs/Form/Select/Select.jsx',[],function () { return '/*global define */\ndefine(function (require) {\n  \'use strict\';\n  var React = require(\'react.backbone\');\n  var Users = require(\'../../ExampleData/Users\');\n  var Select = require(\'jsx!Oui/Form/Select\');\n\n  var users = new Users();\n  users.addRandom(5);\n  var SelectExample = React.createClass({\n    render: function () {\n      return (\n        <div>\n          <Select title="Select a user" collection={users} optionAttribute="username" />\n          <Select value={users.at(3).id} collection={users} optionAttribute="username" />\n        </div>\n      );\n    }\n  });\n  return SelectExample;\n});\n';});
@@ -56011,7 +56011,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       onChange: React.PropTypes.func
     },
     componentWillMount: function () {
-      this.props.inputId = 'oui_select_' + counter;
+      this.inputId = 'oui_select_' + counter;
       if (typeof this.props.collection === 'undefined') {
         throw new ImproperUseError('Select requires a collection property.  Please provide a Backbone compatible collection.');
       }
@@ -56058,7 +56058,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
     },
     renderLabel: function () {
       var label = '';
-      var inputId = this.props.inputId;
+      var inputId = this.inputId;
       var labelProp = this.props.title || false;
       if (typeof this.props.label !== 'undefined') {
         labelProp = this.props.label;
@@ -56076,7 +56076,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return (
         React.createElement("div", {className: classList}, 
           label, 
-          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId}, 
             placeholderOption, 
             options
           )
@@ -56143,6 +56143,11 @@ define("json!docs/Form/Select/manifest.json", function(){ return {
       "type": "function",
       "required": false,
       "description": "function will be called on value change with selected model"
+    },{
+      "name": "optionAttribute",
+      "type": "string",
+      "required": false,
+      "description": "model property to use for the content of each option"
     }
   ]
 }

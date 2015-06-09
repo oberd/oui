@@ -958,7 +958,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       onChange: React.PropTypes.func
     },
     componentWillMount: function () {
-      this.props.inputId = 'oui_select_' + counter;
+      this.inputId = 'oui_select_' + counter;
       if (typeof this.props.collection === 'undefined') {
         throw new ImproperUseError('Select requires a collection property.  Please provide a Backbone compatible collection.');
       }
@@ -1005,7 +1005,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
     },
     renderLabel: function () {
       var label = '';
-      var inputId = this.props.inputId;
+      var inputId = this.inputId;
       var labelProp = this.props.title || false;
       if (typeof this.props.label !== 'undefined') {
         labelProp = this.props.label;
@@ -1023,7 +1023,7 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','backbone','reac
       return (
         React.createElement("div", {className: classList}, 
           label, 
-          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.props.inputId}, 
+          React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId}, 
             placeholderOption, 
             options
           )

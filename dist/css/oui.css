@@ -261,55 +261,6 @@
 .not-empty .placeholder {
   color: inherit;
 }
-.oui-drawer-container {
-  position: relative;
-}
-
-.oui-sidebar {
-  z-index: 30;
-  width: 200px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: #e7e7e7;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  transform: translate3d(-100%, 0, 0);
-}
-
-.hamburger-time {
-  padding: 0.9em;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* Menu */
-
-.oui-menu-item {
-  display: block;
-  padding: 0.75em;
-  margin-top: 0.25em;
-  color: inherit;
-}
-
-.oui-menu-item.active {
-  background-color: #ffffff;
-}
-
-.oui-menu-item .icomoon {
-  vertical-align: middle;
-}
-
-/* Expanded Styles */
-
-.oui-drawer-container.expanded .oui-sidebar {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.oui-drawer-container.expanded .oui-drawer-content {
-  margin-left: 200px;
-}
 @font-face {
   font-family: 'icomoon';
   src: url('fonts/icomoon.eot?-8v9cjq');
@@ -2328,6 +2279,76 @@
 .icomoon-meanpath:before {
   content: "\f20c";
 }
+.oui-drawer-container {
+  position: relative;
+}
+
+.oui-sidebar {
+  z-index: 30;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #e7e7e7;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.hamburger-time {
+  padding: 0.9em;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Menu */
+
+.oui-menu-item {
+  display: block;
+  padding: 0.75em;
+  margin-top: 0.25em;
+  color: inherit;
+}
+
+.oui-menu-item.active {
+  background-color: #ffffff;
+}
+
+.oui-menu-item .icomoon {
+  vertical-align: middle;
+}
+
+/* Expanded Styles */
+
+.oui-drawer-container.expanded .oui-sidebar {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.oui-drawer-container.expanded .oui-drawer-content {
+  margin-left: 200px;
+}
+.oui-list-container {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.oui-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.oui-list-content {
+  margin: 0.5em;
+  position: relative;
+  min-height: 200px;
+  z-index: 1;
+}
+
+.oui-list-group {
+  padding-left: 0;
+}
 .oui-loader {
   position: absolute;
   width: 100%;
@@ -2383,25 +2404,4 @@
 .on .oui-button-icon {
   -webkit-transform: translate3d(0, 50%, 0) scale(1);
   transform: translate3d(0, 50%, 0) scale(1);
-}
-.oui-list-container {
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-.oui-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.oui-list-content {
-  margin: 0.5em;
-  position: relative;
-  min-height: 200px;
-  z-index: 1;
-}
-
-.oui-list-group {
-  padding-left: 0;
 }

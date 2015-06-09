@@ -24,7 +24,7 @@ define(function (require) {
       onChange: React.PropTypes.func
     },
     componentWillMount: function () {
-      this.props.inputId = 'oui_select_' + counter;
+      this.inputId = 'oui_select_' + counter;
       if (typeof this.props.collection === 'undefined') {
         throw new ImproperUseError('Select requires a collection property.  Please provide a Backbone compatible collection.');
       }
@@ -71,7 +71,7 @@ define(function (require) {
     },
     renderLabel: function () {
       var label = '';
-      var inputId = this.props.inputId;
+      var inputId = this.inputId;
       var labelProp = this.props.title || false;
       if (typeof this.props.label !== 'undefined') {
         labelProp = this.props.label;
@@ -89,7 +89,7 @@ define(function (require) {
       return (
         <div className={classList}>
           {label}
-          <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.props.inputId}>
+          <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.inputId}>
             {placeholderOption}
             {options}
           </select>

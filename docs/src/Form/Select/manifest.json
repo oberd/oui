@@ -30,6 +30,11 @@
       "type": "function",
       "required": false,
       "description": "function will be called on value change with selected model"
+    },{
+      "name": "optionAttribute",
+      "type": "string",
+      "required": false,
+      "description": "model property to use for the content of each option"
     }
   ]
 }

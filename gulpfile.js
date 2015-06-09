@@ -180,9 +180,10 @@ gulp.task('serve', ['build'], function () {
   gulp.watch(['docs/**/*.myth'], ['myth-docs']);
   var connect = require('connect');
   var server = connect();
+  var port = process.env.PORT || 3474;
   server.use(require('superstatic')({ "cache_control": false, "host": '0.0.0.0', "env": process.env }));
-  server.listen(3474, function () {
-    var base = 'http://localhost:3474';
+  server.listen(port, function () {
+    var base = 'http://localhost:' + port;
     gutil.log('Documentation accessible: ' + base + '/docs');
     gutil.log('Tests accessible: ' + base + '/test');
   });
