@@ -17,7 +17,8 @@ define(function (require) {
       validator: React.PropTypes.instanceOf(Validator),
       pattern: React.PropTypes.string,
       onChange: React.PropTypes.func,
-      title: React.PropTypes.node
+      title: React.PropTypes.node,
+      disabled: React.PropTypes.bool
     },
     componentWillReceiveProps: function (nextProps) {
       if (nextProps.validator) {
@@ -36,7 +37,8 @@ define(function (require) {
     getDefaultProps: function () {
       return {
         onChange: function () { },
-        value: ''
+        value: '',
+        disabled: false
       };
     },
     getInitialState: function () {
@@ -128,7 +130,8 @@ define(function (require) {
         'onBlur': this.handleBlur,
         'value': this.state.value,
         'maxLength': this.props.maxLength || 524288,
-        'placeholder': this.props.placeholder
+        'placeholder': this.props.placeholder,
+        'disabled': this.props.disabled
       };
       var icon = this.props.icon || '';
       return (
