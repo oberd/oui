@@ -32,6 +32,11 @@ define(function (require) {
       }
       counter++;
     },
+    componentWillReceiveProps: function(props) {
+      if (props.value !== this.props.value) {
+        this.setState({ value: props.value });
+      }
+    },
     getDefaultProps: function () {
       return { optionAttribute: 'label', onChange: function () {}, disabled: false };
     },
@@ -44,7 +49,7 @@ define(function (require) {
       });
     },
     onSelect: function (e) {
-      this.setState({ value: e.target.value });
+      // this.setState({ value: e.target.value });
       if (typeof this.props.onChange === 'function') {
         this.props.onChange(this.getCollection().get(e.target.value));
       }
