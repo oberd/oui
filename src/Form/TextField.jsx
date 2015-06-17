@@ -17,6 +17,7 @@ define(function (require) {
       validator: React.PropTypes.instanceOf(Validator),
       pattern: React.PropTypes.string,
       onChange: React.PropTypes.func,
+      onEnter: React.PropTypes.func,
       title: React.PropTypes.node,
       disabled: React.PropTypes.bool
     },
@@ -73,6 +74,11 @@ define(function (require) {
       });
       if (!validationErrors.length && typeof this.props.onChange === 'function') {
         this.props.onChange(newValue);
+      }
+    },
+    handleKeyDown: function(e) {
+      if (e.keyCode === 13 && typeof this.props.onEnter === 'function') {
+        this.props.onEnter(this.state.value);
       }
     },
     handleLabelClick: function () {

@@ -36,6 +36,11 @@
       "required": false,
       "description": "called onChange(value) when input value changes"
     },{
+      "name": "onEnter",
+      "type": "function",
+      "required": false,
+      "description": "called onEnter(value) when enter key is pressed"
+    },{
       "name": "icon",
       "type": "ReactElement",
       "required": false,
