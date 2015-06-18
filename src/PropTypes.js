@@ -1,6 +1,5 @@
 /*global define */
 define(function(require) {
-    'use strict';
     var React = require('react.backbone');
     var Backbone = require('backbone');
     var FilteredCollection = require('backbone-filtered-collection');

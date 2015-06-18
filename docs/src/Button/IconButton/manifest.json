@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "description": "name of the Oui/Icon/Icon to prepend to the content"
+    },{
+      "name": "breakpoint",
+      "type": "string",
+      "required": false,
+      "description": "defines min-width breakpoint at which both content and icon are displayed (if icon provided)"
+    }
+  ]
+}

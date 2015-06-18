@@ -137,7 +137,7 @@ gulp.task('myth-docs', ['myth-docs-clean'], function () {
     .pipe(gulp.dest('docs/css/dist'));
 });
 gulp.task('myth-library-clean', cleaner(['dist/css/oui.css']));
-gulp.task('myth-library', ['myth-library-clean'], function () {
+gulp.task('myth-library', ['myth-library-clean'], function() {
   return gulp.src('src/**/*.myth')
     .pipe(myth())
     .pipe(concat('oui.css'))
@@ -165,6 +165,13 @@ gulp.task('ie7-css', ['ie7-css-clean'], function () {
 });
 gulp.task('ie7', ['ie7-js', 'ie7-css']);
 
+var lint = require('gulp-eslint');
+
+gulp.task('lint', function() {
+    return gulp.src(['src/**/*.{js,jsx}'])
+        .pipe(lint())
+        .pipe(lint.format());
+});
 
 // Headless testing for pre-commit hook
 //

@@ -1,14 +1,18 @@
 /*globals define:false */
-define(function (require) {
-  'use strict';
-  return {
-    List: require('jsx!./List/List'),
-    Icon: require('jsx!./Icon/Icon'),
-    Loader: require('jsx!./Loader/Loader'),
-    Form: {
-      TextField: require('jsx!./Form/TextField'),
-      Select: require('jsx!./Form/Select'),
-      Validator: require('./Form/Validator')
-    }
-  };
+define(function(require) {
+    return {
+        List: require('jsx!./List/List'),
+        Icon: require('jsx!./Icon/Icon'),
+        Loader: require('jsx!./Loader/Loader'),
+        Button: {
+            IconButton: require('jsx!./Button/IconButton'),
+            IconLink: require('jsx!./Button/IconLink')
+        },
+        Form: {
+            TextField: require('jsx!./Form/TextField'),
+            Select: require('jsx!./Form/Select'),
+            MultiSelect: require('jsx!./Form/MultiSelect'),
+            Validator: require('./Form/Validator')
+        }
+    };
 });

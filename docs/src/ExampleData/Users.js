@@ -30,6 +30,9 @@ define(function (require) {
         self.addRandom(2);
         self.trigger('sync');
       }, time);
+    },
+    fetch: function() {
+        this.fakeFetch();
     }
   });
   return Users;

@@ -1,0 +1,40 @@
+{
+  "properties": [
+    {
+      "name": "collection",
+      "type": "Backbone.Collection",
+      "required": true,
+      "description": "collection defining select options"
+    },{
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "description": "set initial value for the input"
+    },{
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "description": "defines first (null) option to display if no option selected"
+    },{
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "text of prepended label element"
+    },{
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "description": "shorthand attribute to fill in label and placeholder"
+    },{
+      "name": "onChange",
+      "type": "function",
+      "required": false,
+      "description": "function will be called on value change with selected model"
+    },{
+      "name": "optionAttribute",
+      "type": "string",
+      "required": false,
+      "description": "model property to use for the content of each option"
+    }
+  ]
+}

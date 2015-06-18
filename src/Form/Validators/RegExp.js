@@ -1,21 +1,18 @@
 /*global define */
+define(function(require) {
+    var Validator = require('Oui/Form/Validators/AbstractValidator');
 
-define(function (require) {
-  'use strict';
+    function RegExValidator(regex, message) {
+        Validator.apply(this);
+        this.regex = regex;
+        this.message = message || 'Invalid value';
+    }
 
-  var Validator = require('Oui/Form/Validators/AbstractValidator');
+    RegExValidator.prototype = Object.create(Validator.prototype);
 
-  function RegExValidator(regex, message) {
-    Validator.apply(this);
-    this.regex = regex;
-    this.message = message || 'Invalid value';
-  }
+    RegExValidator.prototype.validate = function(value) {
+        return value.match(this.regex);
+    };
 
-  RegExValidator.prototype = Object.create(Validator.prototype);
-
-  RegExValidator.prototype.validate = function (value) {
-    return value.match(this.regex);
-  };
-
-  return RegExValidator;
+    return RegExValidator;
 });

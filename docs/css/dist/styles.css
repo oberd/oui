@@ -220,3 +220,7 @@ a {
   height: 3em;
   display: inline-block;
 }
+
+pre code {
+  font-size: 0.8em;
+}

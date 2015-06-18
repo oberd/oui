@@ -19,6 +19,7 @@ jsx!Oui/Layout/Sidebar
 jsx!Oui/Layout/Menu
 jsx!Oui/Icon/Icon
 jsx!Oui/Layout/MenuItem
+jsx!Oui/Layout/HamburgerTime
 jsx!Oui/Layout/Topbar
 ./bower_components/requirejs-plugins/lib/Markdown.Converter.js
 ./bower_components/requirejs-plugins/src/mdown.js
@@ -46,9 +47,9 @@ jsx!docs/Loader/LoaderExample
 json!docs/Loader/manifest.json
 mdown!docs/Form/TextField/TextField.md
 text!docs/Form/TextField/TextField.jsx
+./src/Form/Validator.js
 ./src/Error/InterfaceError.js
 ./src/Form/Validators/AbstractValidator.js
-./src/Form/Validator.js
 ./src/Form/Validators/RegExp.js
 jsx!Oui/Form/TextField
 jsx!docs/Form/TextField/TextField
@@ -60,6 +61,17 @@ text!docs/Form/Select/Select.jsx
 jsx!Oui/Form/Select
 jsx!docs/Form/Select/Select
 json!docs/Form/Select/manifest.json
+mdown!docs/Button/IconButton/IconButton.md
+text!docs/Button/IconButton/IconButton.jsx
+./src/Mixins/Responsive.js
+jsx!Oui/Button/IconButton
+jsx!docs/Button/IconButton/IconButton
+json!docs/Button/IconButton/manifest.json
+mdown!docs/Button/IconLink/IconLink.md
+text!docs/Button/IconLink/IconLink.jsx
+jsx!Oui/Button/IconLink
+jsx!docs/Button/IconLink/IconLink
+json!docs/Button/IconLink/manifest.json
 ./docs/src/manifest.js
 jsx!docs/Documentation
 ./bower_components/highlightjs/highlight.pack.js

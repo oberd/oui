@@ -32,6 +32,24 @@ define(function (require) {
       source: require('text!docs/Form/Select/Select.jsx'),
       component: require('jsx!docs/Form/Select/Select'),
       manifest: require('json!docs/Form/Select/manifest.json')
+    },{
+      name: 'MultiSelect',
+      content: require('mdown!docs/Form/MultiSelect/MultiSelect.md'),
+      source: require('text!docs/Form/MultiSelect/MultiSelect.jsx'),
+      component: require('jsx!docs/Form/MultiSelect/MultiSelect'),
+      manifest: require('json!docs/Form/MultiSelect/manifest.json')
+    },{
+      name: 'Button',
+      content: require('mdown!docs/Button/IconButton/IconButton.md'),
+      source: require('text!docs/Button/IconButton/IconButton.jsx'),
+      component: require('jsx!docs/Button/IconButton/IconButton'),
+      manifest: require('json!docs/Button/IconButton/manifest.json')
+    },{
+      name: 'Link',
+      content: require('mdown!docs/Button/IconLink/IconLink.md'),
+      source: require('text!docs/Button/IconLink/IconLink.jsx'),
+      component: require('jsx!docs/Button/IconLink/IconLink'),
+      manifest: require('json!docs/Button/IconLink/manifest.json')
     }
   ];
 });

@@ -1,4 +1,5 @@
 @import '../Globals.myth';
+@import '../../bower_components/react-select/dist/default.css';
 
 .oui-form-control {
   position: relative;
