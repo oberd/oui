@@ -61,6 +61,12 @@ text!docs/Form/Select/Select.jsx
 jsx!Oui/Form/Select
 jsx!docs/Form/Select/Select
 json!docs/Form/Select/manifest.json
+mdown!docs/Form/MultiSelect/MultiSelect.md
+text!docs/Form/MultiSelect/MultiSelect.jsx
+jsx!Oui/Shims/ReactSelect
+jsx!Oui/Form/MultiSelect
+jsx!docs/Form/MultiSelect/MultiSelect
+json!docs/Form/MultiSelect/manifest.json
 mdown!docs/Button/IconButton/IconButton.md
 text!docs/Button/IconButton/IconButton.jsx
 ./src/Mixins/Responsive.js

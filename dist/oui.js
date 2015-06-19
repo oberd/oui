@@ -1210,47 +1210,16 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','react.backbone'
     return Select;
 });
 
-function classNames() {
-	var args = arguments;
-	var classes = [];
-
-	for (var i = 0; i < args.length; i++) {
-		var arg = args[i];
-		if (!arg) {
-			continue;
-		}
-
-		if ('string' === typeof arg || 'number' === typeof arg) {
-			classes.push(arg);
-		} else if ('object' === typeof arg) {
-			for (var key in arg) {
-				if (!arg.hasOwnProperty(key) || !arg[key]) {
-					continue;
-				}
-				classes.push(key);
-			}
-		}
-	}
-	return classes.join(' ');
-}
-
-// safely export classNames in case the script is included directly on a page
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = classNames;
-}
-;
-define("classnames", function(){});
-
 
 /*global define*/
-define('jsx!Oui/Form/MultiSelect',['require','react','classnames'],function(require) {
+define('jsx!Oui/Shims/ReactSelect',['require','react','Oui/Utilities/classnames'],function(require) {
     /* disable some rules until we refactor more completely; fixing them now would
        cause conflicts with some open PRs unnecessarily. */
     /* eslint react/jsx-sort-prop-types: 0, react/sort-comp: 0, react/prop-types: 0 */
     var _extends = Object.assign || function(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
     var React = require('react');
-    var classes = require('classnames');
+    var classes = require('Oui/Utilities/classnames');
 
     var sizerStyle = { position: 'absolute', visibility: 'hidden', height: 0, width: 0, overflow: 'scroll', whiteSpace: 'nowrap' };
 
@@ -2175,6 +2144,97 @@ define('jsx!Oui/Form/MultiSelect',['require','react','classnames'],function(requ
         }
     });
     return Select;
+});
+
+
+/*global define */
+define('jsx!Oui/Form/MultiSelect',['require','underscore','react.backbone','Oui/PropTypes','jsx!Oui/Shims/ReactSelect','Oui/Utilities/classnames'],function(require) {
+    var _ = require('underscore');
+    var React = require('react.backbone');
+    var PropTypes = require('Oui/PropTypes');
+    var Select = require('jsx!Oui/Shims/ReactSelect');
+    var classnames = require('Oui/Utilities/classnames');
+    var bb = React.BackboneMixin;
+    var MultiSelect = React.createClass({displayName: 'MultiSelect',
+        mixins: [bb('collection')],
+        propTypes: {
+            collection: PropTypes.collection.isRequired,
+            title: React.PropTypes.string.isRequired,
+            placeholder: React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.bool
+            ]),
+            label: React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.bool
+            ]),
+            optionAttribute: React.PropTypes.string,
+            onChange: React.PropTypes.func,
+            disabled: React.PropTypes.bool,
+            value: React.PropTypes.array
+        },
+        getDefaultProps: function() {
+            return { optionAttribute: 'label', onChange: function() {}, disabled: false };
+        },
+        componentWillMount: function() {
+            this.props.collection.fetch();
+        },
+        getOptions: function() {
+            var props = this.props;
+            return props.collection.map(function(model) {
+                var modelData = model.toJSON();
+                var label = modelData[props.optionAttribute] || model.id;
+                return { value: model.id.toString(), label: label };
+            });
+        },
+        renderLabel: function() {
+            var label = '';
+            var labelProp = this.props.title || false;
+            if (typeof this.props.label !== 'undefined') {
+                labelProp = this.props.label;
+            }
+            if (labelProp) {
+                label = React.createElement("label", null, labelProp);
+            }
+            return label;
+        },
+        getClassList: function() {
+            return classnames({
+                'oui-form-control': true
+            });
+        },
+        render: function() {
+            var props = {
+                multi: true,
+                options: this.getOptions(),
+                onChange: this.handleChange,
+                value: _.compact(this.props.value)
+            };
+            if (typeof this.props.placeholder !== 'undefined') {
+                props.placeholder = this.props.placeholder;
+            } else if (this.props.title) {
+                props.placeholder = this.props.title + '...';
+            }
+            var label = this.renderLabel();
+            var classList = this.getClassList();
+            var out = React.createElement("span", null);
+            if (props.options.length) {
+                out = (
+                    React.createElement("div", {className: classList}, 
+                        label, 
+                        React.createElement(Select, React.__spread({},  props))
+                    )
+                );
+            }
+            return out;
+        },
+        handleChange: function(value) {
+            if (typeof this.props.onChange === 'function') {
+                this.props.onChange(value.split(','));
+            }
+        }
+    });
+    return MultiSelect;
 });
 
 /*globals define:false */
