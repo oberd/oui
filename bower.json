@@ -1,6 +1,6 @@
 {
   "name": "oui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [

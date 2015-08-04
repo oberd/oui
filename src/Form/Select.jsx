@@ -14,14 +14,17 @@ define(function(require) {
             placeholder: React.PropTypes.oneOfType([
                 React.PropTypes.string,
                 React.PropTypes.bool
-                ]),
+            ]),
             label: React.PropTypes.oneOfType([
                 React.PropTypes.string,
                 React.PropTypes.bool
-                ]),
+            ]),
             optionAttribute: React.PropTypes.string,
             onChange: React.PropTypes.func,
-            disabled: React.PropTypes.bool
+            disabled: React.PropTypes.bool,
+            help: React.PropTypes.string,
+            error: React.PropTypes.bool,
+            className: React.PropTypes.string
         },
         componentWillMount: function() {
             this.inputId = 'oui_select_' + counter;
@@ -43,7 +46,8 @@ define(function(require) {
         },
         getClassList: function() {
             return classnames({
-                'oui-form-control': true
+                'oui-form-control': true,
+                'error': this.props.error
             });
         },
         onSelect: function(e) {
@@ -84,18 +88,32 @@ define(function(require) {
             }
             return label;
         },
+        renderHelp: function() {
+            var hasHelp = this.props.help && !!this.props.help.length;
+            var help = this.props.help || '\u00a0';
+            var classes = classnames({
+                'help': true,
+                't-1': true,
+                'u-reset-translate': hasHelp,
+                'u-translate-up': !hasHelp
+            });
+            return <label htmlFor={this.inputId} role="presentation" className={classes}>{help}</label>;
+        },
         render: function() {
             var classList = this.getClassList();
             var options = this.renderOptions();
             var placeholderOption = this.renderPlaceholder();
             var label = this.renderLabel();
+            var help = this.renderHelp();
+            var className = this.props.className ? 'form-control ' + this.props.className : 'form-control';
             return (
                 <div className={classList}>
                     {label}
-                    <select className="form-control" onChange={this.onSelect} value={this.state.value} name={this.inputId} disabled={this.props.disabled}>
+                    <select className={className} onChange={this.onSelect} value={this.state.value} name={this.inputId} disabled={this.props.disabled}>
                         {placeholderOption}
                         {options}
                     </select>
+                    {help}
                 </div>
             );
         }

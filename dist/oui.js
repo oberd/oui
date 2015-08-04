@@ -1121,14 +1121,17 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','react.backbone'
             placeholder: React.PropTypes.oneOfType([
                 React.PropTypes.string,
                 React.PropTypes.bool
-                ]),
+            ]),
             label: React.PropTypes.oneOfType([
                 React.PropTypes.string,
                 React.PropTypes.bool
-                ]),
+            ]),
             optionAttribute: React.PropTypes.string,
             onChange: React.PropTypes.func,
-            disabled: React.PropTypes.bool
+            disabled: React.PropTypes.bool,
+            help: React.PropTypes.string,
+            error: React.PropTypes.bool,
+            className: React.PropTypes.string
         },
         componentWillMount: function() {
             this.inputId = 'oui_select_' + counter;
@@ -1150,7 +1153,8 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','react.backbone'
         },
         getClassList: function() {
             return classnames({
-                'oui-form-control': true
+                'oui-form-control': true,
+                'error': this.props.error
             });
         },
         onSelect: function(e) {
@@ -1191,18 +1195,32 @@ define('jsx!Oui/Form/Select',['require','Oui/Error/ImproperUse','react.backbone'
             }
             return label;
         },
+        renderHelp: function() {
+            var hasHelp = this.props.help && !!this.props.help.length;
+            var help = this.props.help || '\u00a0';
+            var classes = classnames({
+                'help': true,
+                't-1': true,
+                'u-reset-translate': hasHelp,
+                'u-translate-up': !hasHelp
+            });
+            return React.createElement("label", {htmlFor: this.inputId, role: "presentation", className: classes}, help);
+        },
         render: function() {
             var classList = this.getClassList();
             var options = this.renderOptions();
             var placeholderOption = this.renderPlaceholder();
             var label = this.renderLabel();
+            var help = this.renderHelp();
+            var className = this.props.className ? 'form-control ' + this.props.className : 'form-control';
             return (
                 React.createElement("div", {className: classList}, 
                     label, 
-                    React.createElement("select", {className: "form-control", onChange: this.onSelect, value: this.state.value, name: this.inputId, disabled: this.props.disabled}, 
+                    React.createElement("select", {className: className, onChange: this.onSelect, value: this.state.value, name: this.inputId, disabled: this.props.disabled}, 
                         placeholderOption, 
                         options
-                    )
+                    ), 
+                    help
                 )
             );
         }
@@ -2271,6 +2289,9 @@ define('Oui/Oui',['require','jsx!./List/List','jsx!./Icon/Icon','jsx!./Loader/Lo
         return React;
     });
     define('react.backbone', function () {
+        return React;
+    });
+    define('backbone-filtered-collection', function () {
         return React;
     });
 

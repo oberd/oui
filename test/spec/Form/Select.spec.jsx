@@ -81,7 +81,7 @@ define(function (require) {
         var ref = getRef({
           label: 'User'
         });
-        Helpers.expectDOMCount(1, 'label', ref);
+        Helpers.expectDOMCount(2, 'label', ref);
         var $option = $(ref.getDOMNode()).find('label').first();
         expect($option.text()).to.eql('User');
       });
@@ -89,7 +89,7 @@ define(function (require) {
         var ref = getRef({
           title: 'User'
         });
-        Helpers.expectDOMCount(1, 'label', ref);
+        Helpers.expectDOMCount(2, 'label', ref);
         var $option = $(ref.getDOMNode()).find('label').first();
         expect($option.text()).to.eql('User');
       });
@@ -98,7 +98,7 @@ define(function (require) {
           title: 'User',
           label: false
         });
-        Helpers.expectDOMCount(0, 'label', ref);
+        Helpers.expectDOMCount(1, 'label', ref);
       });
       it('should use optionAttribute for option text', function () {
         var collection = getCollection([{ id: 1, name: 'Test' }]);

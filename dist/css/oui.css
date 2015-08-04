@@ -405,7 +405,8 @@
   margin-top: 1em;
 }
 
-.oui-form-control.error .placeholder {
+.oui-form-control.error .placeholder,
+.oui-form-control.error label {
   color: #7E5E8C;
 }
 
@@ -482,16 +483,12 @@
  * Help Line
  */
 
-.oui-text .help {
+.oui-form-control .help {
   margin-left: 0.1em;
   z-index: 0;
   font-size: 0.9em;
   line-height: 2em;
   -webkit-font-smoothing: subpixel-antialiased;
-}
-
-.oui-text .help .errors {
-  color: #7E5E8C;
 }
 
 /**
@@ -531,6 +528,16 @@
 
 .not-empty .placeholder {
   color: inherit;
+}
+
+/**
+ * Select
+ */
+
+select.form-control {
+  margin-bottom: 0;
+  z-index: 10;
+  position: relative;
 }
 @font-face {
   font-family: 'icomoon';
