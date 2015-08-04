@@ -16,7 +16,7 @@
         return React;
     });
     define('backbone-filtered-collection', function () {
-        return React;
+        return FilteredCollection;
     });
 
     //Use almond's special top-level, synchronous require to trigger factory
