@@ -24,11 +24,17 @@ define(function(require) {
             disabled: React.PropTypes.bool,
             value: React.PropTypes.array
         },
+        getInitialState: function() {
+            return { loading: true };
+        },
         getDefaultProps: function() {
             return { optionAttribute: 'label', onChange: function() {}, disabled: false };
         },
         componentWillMount: function() {
-            this.props.collection.fetch();
+            var self = this;
+            this.props.collection.fetch().then(function() {
+                self.setState({ loading: false });
+            });
         },
         getOptions: function() {
             var props = this.props;
@@ -68,14 +74,20 @@ define(function(require) {
             }
             var label = this.renderLabel();
             var classList = this.getClassList();
-            var out = <span/>;
-            if (props.options.length) {
-                out = (
-                    <div className={classList}>
-                        {label}
-                        <Select {...props} />
-                    </div>
-                );
+            var out;
+            if (!this.state.loading) {
+                if (props.options.length) {
+                    out = (
+                        <div className={classList}>
+                            {label}
+                            <Select {...props} />
+                        </div>
+                    );
+                } else {
+                    out = <span>No results found.</span>;
+                }
+            } else {
+                out = <span>Loading...</span>;
             }
             return out;
         },

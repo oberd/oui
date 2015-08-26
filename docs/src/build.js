@@ -35639,7 +35639,7 @@ define('json',['text'], function(text){
 
 define("json!docs/../../bower.json", function(){ return {
   "name": "oui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Oberd Generic Frontend Components",
   "main": "dist/oui.js",
   "moduleType": [
@@ -57536,11 +57536,17 @@ define('jsx!Oui/Form/MultiSelect',['require','underscore','react.backbone','Oui/
             disabled: React.PropTypes.bool,
             value: React.PropTypes.array
         },
+        getInitialState: function() {
+            return { loading: true };
+        },
         getDefaultProps: function() {
             return { optionAttribute: 'label', onChange: function() {}, disabled: false };
         },
         componentWillMount: function() {
-            this.props.collection.fetch();
+            var self = this;
+            this.props.collection.fetch().then(function() {
+                self.setState({ loading: false });
+            });
         },
         getOptions: function() {
             var props = this.props;
@@ -57580,14 +57586,20 @@ define('jsx!Oui/Form/MultiSelect',['require','underscore','react.backbone','Oui/
             }
             var label = this.renderLabel();
             var classList = this.getClassList();
-            var out = React.createElement("span", null);
-            if (props.options.length) {
-                out = (
-                    React.createElement("div", {className: classList}, 
-                        label, 
-                        React.createElement(Select, React.__spread({},  props))
-                    )
-                );
+            var out;
+            if (!this.state.loading) {
+                if (props.options.length) {
+                    out = (
+                        React.createElement("div", {className: classList}, 
+                            label, 
+                            React.createElement(Select, React.__spread({},  props))
+                        )
+                    );
+                } else {
+                    out = React.createElement("span", null, "No results found.");
+                }
+            } else {
+                out = React.createElement("span", null, "Loading...");
             }
             return out;
         },
