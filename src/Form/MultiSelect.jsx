@@ -65,7 +65,7 @@ define(function(require) {
                 multi: true,
                 options: this.getOptions(),
                 onChange: this.handleChange,
-                value: _.compact(this.props.value)
+                value: _.map(_.compact(this.props.value), function(val) { return val.toString(); })
             };
             if (typeof this.props.placeholder !== 'undefined') {
                 props.placeholder = this.props.placeholder;
