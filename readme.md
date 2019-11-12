@@ -1,4 +1,4 @@
-<img alt="Oberd Oui!" src="src/components/svg/svg/oui-logo-light-bg.svg?raw=true" width="100px" />
+<img alt="Oberd Oui!" src="src/components/svg/svg/oui-logo-light-bg.svg" width="100px" />
 
 ### Usage
 
