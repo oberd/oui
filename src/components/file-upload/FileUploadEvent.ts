@@ -11,11 +11,11 @@ export class FileUploadEvent {
         }
         this.files = this.eventToFilesArray(event)
     }
-    public uploadWith(fetch: (formData: FormData) => Promise<void>) {
+    public async uploadWith<T= any | void>(fetch: (formData: FormData) => Promise<T>): Promise<T> {
         this.uploadStarted()
-        fetch(this.toFormData())
-            .then(() => this.uploadCompleted())
-            .catch((e: any) => this.uploadErrored(e.toString()))
+        return fetch(this.toFormData())
+            .then((val) => { this.uploadCompleted(); return val })
+            .catch((e: any) => { this.uploadErrored(e.toString()); throw e })
     }
     public uploadStarted: () => void = () => { /** no-op */}
     public uploadCompleted: () => void = () => { /** no-op */ }

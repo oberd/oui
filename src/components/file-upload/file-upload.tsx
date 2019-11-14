@@ -8,13 +8,18 @@ import { FileUploadAction, FileUploadActionType, FileUploadState } from "./FileU
  * (this will place a button on the page, but drag and drop is enabled globally on the page)
  * <oui-file-upload id="my-files"></oui-file-upload>
  * <script>
-    const el = document.getElementById("files")
-    el.addEventListener("dropped", async (formData) => {
-        el.isUploading = true
-        await fetch("/my-upload", { body: formData })
-        el.isUploading = false
-    })
-  </script>
+ * document
+ *  .getElementById("my-files")
+ *  .addEventListener("dropped", (fileUploadEvent) => {
+ *      const response = fileUploadEvent.detail.uploadWith(async (formData) => {
+ *          const response = await fetch("/my-url", { body: formData })
+ *          if (!response.ok) {
+ *              throw new Error("problem during upload")
+ *          }
+ *          return response.json()
+ *      })
+ *  })
+ * </script>
  */
 
 @Component({
