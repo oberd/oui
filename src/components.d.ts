@@ -8,12 +8,25 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  FileUploadEvent,
+} from './components/file-upload/FileUploadEvent';
+import {
   SvgPack,
 } from './components/svg/svgs';
 
 export namespace Components {
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiDocumentsIcon {
+    'isAnimating': boolean;
+    'isFannedOut': boolean;
+    'isHighlighted': boolean;
+  }
+  interface OuiFileUpload {
+    'accept': string;
+    'isUploading': boolean;
+  }
+  interface OuiFileUploadModal {}
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -35,6 +48,24 @@ declare global {
     new (): HTMLOuiCardHeadingElement;
   };
 
+  interface HTMLOuiDocumentsIconElement extends Components.OuiDocumentsIcon, HTMLStencilElement {}
+  var HTMLOuiDocumentsIconElement: {
+    prototype: HTMLOuiDocumentsIconElement;
+    new (): HTMLOuiDocumentsIconElement;
+  };
+
+  interface HTMLOuiFileUploadElement extends Components.OuiFileUpload, HTMLStencilElement {}
+  var HTMLOuiFileUploadElement: {
+    prototype: HTMLOuiFileUploadElement;
+    new (): HTMLOuiFileUploadElement;
+  };
+
+  interface HTMLOuiFileUploadModalElement extends Components.OuiFileUploadModal, HTMLStencilElement {}
+  var HTMLOuiFileUploadModalElement: {
+    prototype: HTMLOuiFileUploadModalElement;
+    new (): HTMLOuiFileUploadModalElement;
+  };
+
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
   var HTMLOuiSvgElement: {
     prototype: HTMLOuiSvgElement;
@@ -43,6 +74,9 @@ declare global {
   interface HTMLElementTagNameMap {
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
+    'oui-documents-icon': HTMLOuiDocumentsIconElement;
+    'oui-file-upload': HTMLOuiFileUploadElement;
+    'oui-file-upload-modal': HTMLOuiFileUploadModalElement;
     'oui-svg': HTMLOuiSvgElement;
   }
 }
@@ -50,6 +84,19 @@ declare global {
 declare namespace LocalJSX {
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiDocumentsIcon {
+    'isAnimating'?: boolean;
+    'isFannedOut'?: boolean;
+    'isHighlighted'?: boolean;
+  }
+  interface OuiFileUpload {
+    'accept'?: string;
+    'isUploading'?: boolean;
+    'onDropped'?: (event: CustomEvent<FileUploadEvent>) => void;
+  }
+  interface OuiFileUploadModal {
+    'onClose'?: (event: CustomEvent<any>) => void;
+  }
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
@@ -58,6 +105,9 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
+    'oui-documents-icon': OuiDocumentsIcon;
+    'oui-file-upload': OuiFileUpload;
+    'oui-file-upload-modal': OuiFileUploadModal;
     'oui-svg': OuiSvg;
   }
 }
@@ -70,6 +120,9 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
+      'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
+      'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
+      'oui-file-upload-modal': LocalJSX.OuiFileUploadModal & JSXBase.HTMLAttributes<HTMLOuiFileUploadModalElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
     }
   }
