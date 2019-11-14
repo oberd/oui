@@ -4,19 +4,16 @@
 <!-- File Upload Dialog Dropper -->
 <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
 <script>
-  const el = document.getElementById("files")
-  let counter = 0
-  el.addEventListener("dropped", (event) => {
-    event.detail.uploadWith((formData) => {
-      return new Promise((resolve, reject) => {
-        counter++
-        if (counter % 2 === 0) {
-          setTimeout(() => resolve(), 3000)
-          return
-        }
-        setTimeout(() => reject("problem with upload"), 3000)
-      })
-    })
+  document.getElementById("my-files")
+    .addEventListener("dropped", (fileUploadEvent) => {
+        const response = fileUploadEvent.detail.uploadWith(async (formData) => {
+            const response = await fetch("/my-url", { body: formData })
+            if (!response.ok) {
+                throw new Error("problem during upload")
+            }
+            return response.json()
+        })
+        console.log("Uploaded Files (response: %s)", JSON.stringify(response))
   })
 </script>
 ```
