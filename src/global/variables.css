@@ -1,4 +1,7 @@
 :root {
     --oui-global-spacing: 0.5rem;
     --oui-card-heading-height: 2.4rem;
+    --oui-global-primary-color: #20c981;
+    --oui-global-primary-color-light: #24d98c;
+    --oui-global-primary-color-dark: #1db272;
 }

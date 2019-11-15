@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.oui-button {
+  transition: background-color 0.25s ease;
+  background-color: var(--oui-global-primary-color);
+  border: none;
+  padding: 0.5rem .75rem;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.oui-button:hover {
+  background-color: var(--oui-global-primary-color-light);
+}
+
+.oui-button:active {
+  background-color: var(--oui-global-primary-color-dark);
+}

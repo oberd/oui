@@ -12,6 +12,7 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface OuiButton {}
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiSvg {
@@ -22,6 +23,12 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLOuiButtonElement extends Components.OuiButton, HTMLStencilElement {}
+  var HTMLOuiButtonElement: {
+    prototype: HTMLOuiButtonElement;
+    new (): HTMLOuiButtonElement;
+  };
 
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
@@ -41,6 +48,7 @@ declare global {
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'oui-button': HTMLOuiButtonElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-svg': HTMLOuiSvgElement;
@@ -48,6 +56,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface OuiButton {}
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiSvg {
@@ -56,6 +65,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'oui-button': OuiButton;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
     'oui-svg': OuiSvg;
@@ -68,6 +78,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'oui-button': LocalJSX.OuiButton & JSXBase.HTMLAttributes<HTMLOuiButtonElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
