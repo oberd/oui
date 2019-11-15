@@ -8,8 +8,8 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  FileUploadEvent,
-} from './components/file-upload/FileUploadEvent';
+  FileDropEvent,
+} from './components/file-upload/FileDropEvent';
 import {
   SvgPack,
 } from './components/svg/svgs';
@@ -23,8 +23,10 @@ export namespace Components {
     'isHighlighted': boolean;
   }
   interface OuiFileUpload {
+    /**
+    * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
+    */
     'accept': string;
-    'isUploading': boolean;
   }
   interface OuiFileUploadModal {}
   interface OuiSvg {
@@ -90,11 +92,19 @@ declare namespace LocalJSX {
     'isHighlighted'?: boolean;
   }
   interface OuiFileUpload {
+    /**
+    * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
+    */
     'accept'?: string;
-    'isUploading'?: boolean;
-    'onDropped'?: (event: CustomEvent<FileUploadEvent>) => void;
+    /**
+    * Files dropped onto page, and validated. You can use this event to perform an upload in javscript
+    */
+    'onDropped'?: (event: CustomEvent<FileDropEvent>) => void;
   }
   interface OuiFileUploadModal {
+    /**
+    * Emitted when modal is closed via button or esc
+    */
     'onClose'?: (event: CustomEvent<any>) => void;
   }
   interface OuiSvg {
