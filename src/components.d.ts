@@ -12,8 +12,11 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface NotiTray {}
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiFabButtons {}
+  interface OuiNavBar {}
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -22,6 +25,12 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLNotiTrayElement extends Components.NotiTray, HTMLStencilElement {}
+  var HTMLNotiTrayElement: {
+    prototype: HTMLNotiTrayElement;
+    new (): HTMLNotiTrayElement;
+  };
 
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
@@ -35,29 +44,50 @@ declare global {
     new (): HTMLOuiCardHeadingElement;
   };
 
+  interface HTMLOuiFabButtonsElement extends Components.OuiFabButtons, HTMLStencilElement {}
+  var HTMLOuiFabButtonsElement: {
+    prototype: HTMLOuiFabButtonsElement;
+    new (): HTMLOuiFabButtonsElement;
+  };
+
+  interface HTMLOuiNavBarElement extends Components.OuiNavBar, HTMLStencilElement {}
+  var HTMLOuiNavBarElement: {
+    prototype: HTMLOuiNavBarElement;
+    new (): HTMLOuiNavBarElement;
+  };
+
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
   var HTMLOuiSvgElement: {
     prototype: HTMLOuiSvgElement;
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'noti-tray': HTMLNotiTrayElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
+    'oui-fab-buttons': HTMLOuiFabButtonsElement;
+    'oui-nav-bar': HTMLOuiNavBarElement;
     'oui-svg': HTMLOuiSvgElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface NotiTray {}
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiFabButtons {}
+  interface OuiNavBar {}
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
   }
 
   interface IntrinsicElements {
+    'noti-tray': NotiTray;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
+    'oui-fab-buttons': OuiFabButtons;
+    'oui-nav-bar': OuiNavBar;
     'oui-svg': OuiSvg;
   }
 }
@@ -68,8 +98,11 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'noti-tray': LocalJSX.NotiTray & JSXBase.HTMLAttributes<HTMLNotiTrayElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
+      'oui-fab-buttons': LocalJSX.OuiFabButtons & JSXBase.HTMLAttributes<HTMLOuiFabButtonsElement>;
+      'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
     }
   }

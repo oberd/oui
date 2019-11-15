@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Oberd Oui!</title>
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/build/oui.css">
-  <style>html,body { font-family: 'Montserrat', sans-serif; }</style>
+  <style>
+    html,
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
   <script type="module" src="/build/oui.esm.js"></script>
   <script nomodule src="/build/oui.js"></script>
 
 </head>
+
 <body>
+
   <oui-card style="min-height: 400px;">
     <oui-card-heading>
-      <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
+      <oui-svg name="logo-light-bg" scale="0.5"></oui-svg>
     </oui-card-heading>
+    <oui-nav-bar>
+      <ul class="right">
+        <oui-fab-buttons><i class="material-icons md-light">alarm</i></oui-fab-buttons>
+        <oui-fab-buttons><i class="material-icons md-light">alarm_on</i></oui-fab-buttons>
+        <oui-fab-buttons><i class="material-icons md-light">alarm_off</i></oui-fab-buttons>
+      </ul>
+    </oui-nav-bar>
   </oui-card>
 </body>
+
 </html>
