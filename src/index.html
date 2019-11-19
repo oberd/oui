@@ -18,6 +18,27 @@
       <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
     </oui-card-heading>
     <oui-button>Click Me</oui-button>
+    <div>
+      <!-- File Upload Dialog Dropper -->
+      <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
+      <script>
+        const el = document.getElementById("files")
+        el.addEventListener("dropped", async (event) => {
+          const postResponse = await event.detail.uploadWith(async (formData) => {
+            const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
+            const response = await fetch(url, {
+              method: "POST",
+              body: formData,
+            })
+            if (!response.ok) {
+              throw new Error("problem uploading files.")
+            }
+            return response.status + " " + response.statusText
+          })
+          console.log("Uploaded files: " + postResponse)
+        })
+      </script>
+    </div>
   </oui-card>
 </body>
 </html>

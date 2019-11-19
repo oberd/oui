@@ -5,3 +5,9 @@
     --oui-global-primary-color-light: #24d98c;
     --oui-global-primary-color-dark: #1db272;
 }
+a {
+    cursor: pointer;
+}
+a:disabled {
+    cursor: not-allowed;
+}
