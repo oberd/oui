@@ -15,7 +15,12 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
-  interface OuiButton {}
+  interface OuiButton {
+    /**
+    * Set disabled status of the button. Default `false`
+    */
+    'disabled': boolean;
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
@@ -92,7 +97,12 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface OuiButton {}
+  interface OuiButton {
+    /**
+    * Set disabled status of the button. Default `false`
+    */
+    'disabled'?: boolean;
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
