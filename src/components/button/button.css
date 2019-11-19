@@ -1,27 +1,58 @@
 oui-button {
   display: inline-block;
   user-select: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0.25rem;
-  background-color: var(--oui-global-primary-color);
   padding: 0.5rem .75rem;
-  color: #FFF;
+  color: #333;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.15s linear;
 }
 
-oui-button:hover:not(oui-button.oui-button__disabled) {
+oui-button.oui-button__default {
+  background-color: var(--oui-global-default-color);
+}
+
+oui-button.oui-button__default:hover:not(.oui-button__disabled) {
+  background-color: var(--oui-global-default-color-light);
+  border-color: var(--oui-global-default-color-dark);
+}
+
+oui-button.oui-button__default:active:not(.oui-button__disabled) {
+  background-color: var(--oui-global-default-color-dark);
+}
+
+oui-button.oui-button__primary {
+  background-color: var(--oui-global-primary-color);
+  font-weight: bold;
+  color: #FFF;
+}
+
+oui-button.oui-button__primary:hover:not(.oui-button__disabled) {
   background-color: var(--oui-global-primary-color-light);
+  border-color: var(--oui-global-primary-color-dark);
 }
 
-oui-button:active:not(oui-button.oui-button__disabled) {
+oui-button.oui-button__primary:active:not(.oui-button__disabled) {
   background-color: var(--oui-global-primary-color-dark);
 }
 
+oui-button.oui-button__danger {
+  background-color: var(--oui-global-danger-color);
+  color: #FFF;
+}
+
+oui-button.oui-button__danger:hover:not(.oui-button__disabled) {
+  background-color: var(--oui-global-danger-color-light);
+  border-color: var(--oui-global-danger-color-dark);
+}
+
+oui-button.oui-button__danger:active:not(.oui-button__disabled) {
+  background-color: var(--oui-global-danger-color-dark);
+}
+
 oui-button.oui-button__disabled {
-  opacity: 0.8;
-  color: #555;
-  background-color: var(--oui-global-primary-disabled-color);
+  opacity: 0.5;
   cursor: not-allowed;
 }

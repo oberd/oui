@@ -1,10 +1,18 @@
 :root {
     --oui-global-spacing: 0.5rem;
     --oui-card-heading-height: 2.4rem;
-    --oui-global-primary-color: #20c981;
+
+    --oui-global-default-color-light: #e8e8e8;
+    --oui-global-default-color: #d9d9d9;
+    --oui-global-default-color-dark: #bfbfbf;
+
     --oui-global-primary-color-light: #24d98c;
+    --oui-global-primary-color: #20c981;
     --oui-global-primary-color-dark: #1db272;
-    --oui-global-primary-disabled-color: #9EBDB1;
+
+    --oui-global-danger-color-light: #ff4d4f;
+    --oui-global-danger-color: #f5222d;
+    --oui-global-danger-color-dark: #cf1322;
 }
 a {
     cursor: pointer;
