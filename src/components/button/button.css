@@ -1,8 +1,9 @@
-:host {
-  display: block;
+oui-button {
+  display: inline-block;
+  user-select: none;
 }
 
-.oui-button {
+oui-button {
   transition: background-color 0.25s ease;
   background-color: var(--oui-global-primary-color);
   border: none;
@@ -13,10 +14,10 @@
   font-size: 1rem;
 }
 
-.oui-button:hover {
+oui-button:hover {
   background-color: var(--oui-global-primary-color-light);
 }
 
-.oui-button:active {
+oui-button:active {
   background-color: var(--oui-global-primary-color-dark);
 }

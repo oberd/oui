@@ -1,20 +1,15 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h, Host } from "@stencil/core"
 
 @Component({
-  tag: 'oui-button',
-  styleUrl: 'button.css',
-  shadow: true
+  tag: "oui-button",
+  styleUrl: "button.css",
 })
 export class Button {
-
-  render() {
+  public render() {
     return (
       <Host>
-        <button class="oui-button">
-          <slot />
-        </button>
+        <slot />
       </Host>
-    );
+    )
   }
-
 }
