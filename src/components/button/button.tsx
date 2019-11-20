@@ -20,6 +20,9 @@ export class Button {
    */
   @Prop() public danger: boolean = false
 
+  /**
+   * Set aria-pressed state
+   */
   @State() private pressed: boolean = false
 
   public render() {
