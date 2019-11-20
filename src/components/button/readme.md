@@ -1,10 +1,10 @@
 # oui-button
 
-![default](./default.png)
+<div style="text-align: center">
 
-![default](./primary.png)
+![default](./screenshot.png)
 
-![default](./danger.png)
+</div>
 
 <!-- Auto Generated Below -->
 
