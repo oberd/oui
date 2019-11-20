@@ -17,15 +17,15 @@ import {
 export namespace Components {
   interface OuiButton {
     /**
-    * Set danger status of the button. Default `false`
+    * Set danger status of the button.
     */
     'danger': boolean;
     /**
-    * Set disabled status of the button. Default `false`
+    * Set disabled status of the button.
     */
     'disabled': boolean;
     /**
-    * Set primary status of the button. Default `false`
+    * Set primary status of the button.
     */
     'primary': boolean;
   }
@@ -107,15 +107,15 @@ declare global {
 declare namespace LocalJSX {
   interface OuiButton {
     /**
-    * Set danger status of the button. Default `false`
+    * Set danger status of the button.
     */
     'danger'?: boolean;
     /**
-    * Set disabled status of the button. Default `false`
+    * Set disabled status of the button.
     */
     'disabled'?: boolean;
     /**
-    * Set primary status of the button. Default `false`
+    * Set primary status of the button.
     */
     'primary'?: boolean;
   }

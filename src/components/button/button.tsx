@@ -6,17 +6,17 @@ import { Component, h, Host, Prop, State } from "@stencil/core"
 })
 export class Button {
   /**
-   * Set disabled status of the button. Default `false`
+   * Set disabled status of the button.
    */
   @Prop() public disabled: boolean = false
 
   /**
-   * Set primary status of the button. Default `false`
+   * Set primary status of the button.
    */
   @Prop() public primary: boolean = false
 
   /**
-   * Set danger status of the button. Default `false`
+   * Set danger status of the button.
    */
   @Prop() public danger: boolean = false
 
