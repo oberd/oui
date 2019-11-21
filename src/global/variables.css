@@ -2,3 +2,9 @@
     --oui-global-spacing: 0.5rem;
     --oui-card-heading-height: 2.4rem;
 }
+a {
+    cursor: pointer;
+}
+a:disabled {
+    cursor: not-allowed;
+}
