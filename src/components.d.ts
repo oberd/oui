@@ -18,13 +18,12 @@ export namespace Components {
   interface NotiTray {}
   interface OuiCard {}
   interface OuiCardHeading {}
-  interface OuiFabButtons {}
-  interface OuiNavBar {}
   interface OuiDocumentsIcon {
     'isAnimating': boolean;
     'isFannedOut': boolean;
     'isHighlighted': boolean;
   }
+  interface OuiFabButtons {}
   interface OuiFileUpload {
     /**
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
@@ -32,6 +31,7 @@ export namespace Components {
     'accept': string;
   }
   interface OuiFileUploadModal {}
+  interface OuiNavBar {}
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -59,20 +59,16 @@ declare global {
     new (): HTMLOuiCardHeadingElement;
   };
 
-  interface HTMLOuiFabButtonsElement extends Components.OuiFabButtons, HTMLStencilElement {}
-  var HTMLOuiFabButtonsElement: {
-    prototype: HTMLOuiFabButtonsElement;
-    new (): HTMLOuiFabButtonsElement;
-  };
-
-  interface HTMLOuiNavBarElement extends Components.OuiNavBar, HTMLStencilElement {}
-  var HTMLOuiNavBarElement: {
-    prototype: HTMLOuiNavBarElement;
-    new (): HTMLOuiNavBarElement;
   interface HTMLOuiDocumentsIconElement extends Components.OuiDocumentsIcon, HTMLStencilElement {}
   var HTMLOuiDocumentsIconElement: {
     prototype: HTMLOuiDocumentsIconElement;
     new (): HTMLOuiDocumentsIconElement;
+  };
+
+  interface HTMLOuiFabButtonsElement extends Components.OuiFabButtons, HTMLStencilElement {}
+  var HTMLOuiFabButtonsElement: {
+    prototype: HTMLOuiFabButtonsElement;
+    new (): HTMLOuiFabButtonsElement;
   };
 
   interface HTMLOuiFileUploadElement extends Components.OuiFileUpload, HTMLStencilElement {}
@@ -87,6 +83,12 @@ declare global {
     new (): HTMLOuiFileUploadModalElement;
   };
 
+  interface HTMLOuiNavBarElement extends Components.OuiNavBar, HTMLStencilElement {}
+  var HTMLOuiNavBarElement: {
+    prototype: HTMLOuiNavBarElement;
+    new (): HTMLOuiNavBarElement;
+  };
+
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
   var HTMLOuiSvgElement: {
     prototype: HTMLOuiSvgElement;
@@ -96,11 +98,11 @@ declare global {
     'noti-tray': HTMLNotiTrayElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
-    'oui-fab-buttons': HTMLOuiFabButtonsElement;
-    'oui-nav-bar': HTMLOuiNavBarElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
+    'oui-fab-buttons': HTMLOuiFabButtonsElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-file-upload-modal': HTMLOuiFileUploadModalElement;
+    'oui-nav-bar': HTMLOuiNavBarElement;
     'oui-svg': HTMLOuiSvgElement;
   }
 }
@@ -109,13 +111,12 @@ declare namespace LocalJSX {
   interface NotiTray {}
   interface OuiCard {}
   interface OuiCardHeading {}
-  interface OuiFabButtons {}
-  interface OuiNavBar {}
   interface OuiDocumentsIcon {
     'isAnimating'?: boolean;
     'isFannedOut'?: boolean;
     'isHighlighted'?: boolean;
   }
+  interface OuiFabButtons {}
   interface OuiFileUpload {
     /**
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
@@ -132,6 +133,7 @@ declare namespace LocalJSX {
     */
     'onClose'?: (event: CustomEvent<any>) => void;
   }
+  interface OuiNavBar {}
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
@@ -141,11 +143,11 @@ declare namespace LocalJSX {
     'noti-tray': NotiTray;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
-    'oui-fab-buttons': OuiFabButtons;
-    'oui-nav-bar': OuiNavBar;
     'oui-documents-icon': OuiDocumentsIcon;
+    'oui-fab-buttons': OuiFabButtons;
     'oui-file-upload': OuiFileUpload;
     'oui-file-upload-modal': OuiFileUploadModal;
+    'oui-nav-bar': OuiNavBar;
     'oui-svg': OuiSvg;
   }
 }
@@ -159,11 +161,11 @@ declare module "@stencil/core" {
       'noti-tray': LocalJSX.NotiTray & JSXBase.HTMLAttributes<HTMLNotiTrayElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
-      'oui-fab-buttons': LocalJSX.OuiFabButtons & JSXBase.HTMLAttributes<HTMLOuiFabButtonsElement>;
-      'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
+      'oui-fab-buttons': LocalJSX.OuiFabButtons & JSXBase.HTMLAttributes<HTMLOuiFabButtonsElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-file-upload-modal': LocalJSX.OuiFileUploadModal & JSXBase.HTMLAttributes<HTMLOuiFileUploadModalElement>;
+      'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
     }
   }
