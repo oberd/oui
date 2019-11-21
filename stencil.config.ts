@@ -3,7 +3,7 @@ import { inlineSvg } from "stencil-inline-svg"
 
 export const config: Config = {
   namespace: "oui",
-  globalStyle: "src/global/variables.css",
+  globalStyle: "src/global/oui.css",
   outputTargets: [
     {
       type: "dist",
