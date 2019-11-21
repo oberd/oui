@@ -33,10 +33,20 @@ export const svgs: SvgMap = {
     loader: toString(() => import("./svg/icon-filter.svg")),
     ...iconSize
   },
-  "noti-bell": {
-      loader: toString(() => import("./svg/Font_Awesome_5_regular_bell.svg")),
-      width: 150,
-      height: 150
+  "noti-bell-unread": {
+    loader: toString(() => import("./svg/noti-bell-unread.svg")),
+    width: 150,
+    height: 150
+  },
+  "noti-bell-read": {
+    loader: toString(() => import("./svg/noti-bell-read.svg")),
+    width: 150,
+    height: 150
+  },
+  "noti-bell-unused": {
+    loader: toString(() => import("./svg/noti-bell-unused.svg")),
+    width: 150,
+    height: 150
   }
 };
 export type SvgPack = keyof typeof svgs;

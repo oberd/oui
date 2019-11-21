@@ -1,28 +1,36 @@
 oui-fab-buttons {
-  display: flex;
-  justify-content: right;
+  display: block;
   margin: 1rem;
   position: relative;
   padding: var(--oui-global-spacing);
 }
 
-button {
-  border-radius: 100px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-}
-
-oui-fab-buttons > oui-svg.noti-unread {
-  fill: red;
+.button-unread {
+  float: right;
+  border: solid white;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  margin: 12px;
   background-color: white;
 }
 
-oui-fab-buttons > oui-svg.noti-read {
-  fill: rgb(40,51,68);
+.button-read {
+  float: right;
+  border: solid white;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  margin: 12px;
   background-color: white;
 }
 
-oui-fab-buttons > oui-svg.noti-unused {
-  fill: rgb(40,51,68);
-  background-color: rgb(40,51,68);
+.button-unused {
+  float: right;
+  border: solid rgb(69, 76, 85);
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  margin: 12px;
+  background-color: rgb(40, 51, 68);
 }
-
