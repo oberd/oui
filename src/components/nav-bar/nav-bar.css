@@ -2,7 +2,7 @@ body {
   margin: 1em;
 }
 
-.oui-nav-bar {
+oui-nav-bar {
   display: flex;
   list-style-type: none;
   align-items: flex-end;

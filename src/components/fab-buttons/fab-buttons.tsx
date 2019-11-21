@@ -8,9 +8,9 @@ import { Component, Host, h } from "@stencil/core";
 export class FabButtons {
   render() {
     return (
-      <Host class="oui-fab-buttons">
+      <button role="button">
         <slot />
-      </Host>
+      </button>
     );
   }
 }

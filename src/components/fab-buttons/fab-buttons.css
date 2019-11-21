@@ -1,4 +1,4 @@
-.oui-fab-buttons {
+oui-fab-buttons {
   display: flex;
   justify-content: right;
   margin: 1rem;
@@ -6,74 +6,23 @@
   padding: var(--oui-global-spacing);
 }
 
-.md-18 {
-  font-size: 18px;
-  float: right;
+button {
+  border-radius: 100px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
 }
 
-.md-24 {
-  font-size: 24px;
-  float: right;
+oui-fab-buttons > oui-svg.noti-unread {
+  fill: red;
+  background-color: white;
 }
 
-.md-36 {
-  font-size: 36px;
-  float: right;
+oui-fab-buttons > oui-svg.noti-read {
+  fill: rgb(40,51,68);
+  background-color: white;
 }
 
-.md-48 {
-  font-size: 48px;
-  float: right;
+oui-fab-buttons > oui-svg.noti-unused {
+  fill: rgb(40,51,68);
+  background-color: rgb(40,51,68);
 }
 
-.md-24 a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.md-18 a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.md-36 a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.md-48 a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.md-dark {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.md-dark, .md-inactive {
-  color: rgba(0, 0, 0, 0.26);
-}
-
-.md-light {
-  color: rgba(255, 255, 255, 1);
-}
-
-.md-light.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.active {
-  background-color: #4CAF50;
-}
