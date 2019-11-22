@@ -60,8 +60,9 @@ export class FileUploadHandler {
   }
 
   private doesAcceptMimeType(mimeType: string) {
-    return (!this.acceptedTypes.includes(FileUploadHandler.acceptAll))
-      ? this.acceptedTypes.includes(mimeType)
-      : true
+    return (
+      this.acceptedTypes.includes(FileUploadHandler.acceptAll) ||
+      this.acceptedTypes.includes(mimeType)
+    )
   }
 }
