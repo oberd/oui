@@ -100,11 +100,17 @@ export class FileUpload {
     this.inputRef.click()
   }
 
-  private handleButtonClick = () => this.dispatchActionType("initialize-modal")
+  private handleButtonClick = () => {
+    this.dispatchActionType("initialize-modal")
+  }
 
-  private handleClose = () => this.dispatchActionType("modal-closed")
+  private handleClose = () => {
+    this.dispatchActionType("modal-closed")
+  }
 
-  private handleDragExit = () => this.dispatchActionType("drag-cancelled")
+  private handleDragExit = () => {
+    this.dispatchActionType("drag-cancelled")
+  }
 
   private handleDragOver = (e: DragEvent) => {
     e.preventDefault()
