@@ -1,0 +1,86 @@
+:root {
+  --oui-global-spacing: 0.5rem;
+  --oui-card-heading-height: 2.4rem;
+  --oui-global-gray-light: #e8e8e8;
+  --oui-global-gray: #d9d9d9;
+  --oui-global-gray-dark: #bfbfbf;
+  --oui-global-green-light: #24d98c;
+  --oui-global-green: #20c981;
+  --oui-global-green-dark: #1db272;
+  --oui-global-red-light: #ff4d4f;
+  --oui-global-red: #f5222d;
+  --oui-global-red-dark: #cf1322;
+}
+
+body {
+  font-size: calc(14px + 0.25vw);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:disabled {
+  cursor: not-allowed;
+}
+
+.oui-btn {
+  display: inline-block;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 0.5rem .75rem;
+  color: #333;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.15s linear;
+}
+
+.oui-btn {
+  background-color: var(--oui-global-gray);
+}
+
+.oui-btn:hover:not([disabled]) {
+  background-color: var(--oui-global-gray-light);
+  border-color: var(--oui-global-gray-dark);
+}
+
+.oui-btn:active:not([disabled]) {
+  background-color: var(--oui-global-gray-dark);
+}
+
+.oui-btn.oui-btn__primary {
+  background-color: var(--oui-global-green);
+  font-weight: bold;
+  color: #FFF;
+}
+
+.oui-btn.oui-btn__primary:hover:not([disabled]) {
+  background-color: var(--oui-global-green-light);
+  border-color: var(--oui-global-green-dark);
+}
+
+.oui-btn.oui-btn__primary:active:not([disabled]) {
+  background-color: var(--oui-global-green-dark);
+}
+
+.oui-btn.oui-btn__danger {
+  background-color: var(--oui-global-red);
+  color: #FFF;
+}
+
+.oui-btn.oui-btn__danger:hover:not([disabled]) {
+  background-color: var(--oui-global-red-light);
+  border-color: var(--oui-global-red-dark);
+}
+
+.oui-btn.oui-btn__danger:active:not([disabled]) {
+  background-color: var(--oui-global-red-dark);
+}
+
+.oui-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
