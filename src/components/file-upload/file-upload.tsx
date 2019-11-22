@@ -145,10 +145,12 @@ export class FileUpload {
 
     handler.onComplete(() => {
       this.dispatchActionType("upload-finished")
+      this.inputRef.value = ""
     })
 
     handler.onError((reason) => {
       this.dispatch({ type: "upload-finished", error: reason })
+      this.inputRef.value = ""
     })
 
     return handler

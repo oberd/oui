@@ -13,7 +13,7 @@ export class FileUploadHandler {
     this.acceptedTypes = acceptedTypes
 
     if (!this.selectionHasValidFiles(files)) {
-      throw Error("Invalid files")
+      throw new Error("Invalid files")
     }
 
     this.files = files
