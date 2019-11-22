@@ -35,7 +35,7 @@ Upload files by drag and drop
 
 | Property     | Attribute     | Description                                                                                                  | Type     | Default                   |
 | ------------ | ------------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------------------------- |
-| `accept`     | `accept`      | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileDropEvent.acceptAll` |
+| `accept`     | `accept`      | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileSelectEvent.acceptAll` |
 | `btnLabel`   | `btn-label`   | Specify a label for the button.                                                                              | `string` | `"Upload"`                |
 | `modalTitle` | `modal-title` | Specify a title for the modal.                                                                               | `string` | `"Upload Files"`          |
 
@@ -44,7 +44,7 @@ Upload files by drag and drop
 
 | Event     | Description                                                                                      | Type                         |
 | --------- | ------------------------------------------------------------------------------------------------ | ---------------------------- |
-| `dropped` | Files dropped onto page, and validated. You can use this event to perform an upload in javscript | `CustomEvent<FileDropEvent>` |
+| `dropped` | Files dropped onto page, and validated. You can use this event to perform an upload in javscript | `CustomEvent<FileSelectEvent>` |
 
 
 ## Dependencies

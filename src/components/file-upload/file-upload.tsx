@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
-import { DropOrPickEvent, FileDropEvent } from "./FileDropEvent"
+import { DropOrPickEvent, FileSelectEvent } from "./FileSelectEvent"
 import { FileUploadAction, FileUploadActionType, FileUploadState } from "./FileUploadState"
 
 @Component({
@@ -12,7 +12,7 @@ export class FileUpload {
    * Separate by spaces for multiple:
    * `text/html text/xml`
    */
-  @Prop() public accept: string = FileDropEvent.acceptAll
+  @Prop() public accept: string = FileSelectEvent.acceptAll
 
   /**
    * Specify a label for the button.
@@ -28,7 +28,7 @@ export class FileUpload {
    * Files dropped onto page, and validated. You can use this
    * event to perform an upload in javscript
    */
-  @Event() public dropped: EventEmitter<FileDropEvent>
+  @Event() public dropped: EventEmitter<FileSelectEvent>
 
   @State() public version: number = 0
 
@@ -131,7 +131,11 @@ export class FileUpload {
   }
 
   private makeDropEvent(evt: DropOrPickEvent) {
-    const event = new FileDropEvent(evt, this.accept.split(/[\s]+/))
+    if (evt instanceof DragEvent) {
+      this.inputRef.files = (evt as DragEvent).dataTransfer.files
+    }
+
+    const event = new FileSelectEvent(this.inputRef, this.accept.split(/[\s]+/))
     event.onStarted(() => this.dispatchActionType("upload-started"))
     event.onComplete(() => this.dispatchActionType("upload-finished"))
     event.onError((reason) => this.dispatch({ type: "upload-finished", error: reason }))

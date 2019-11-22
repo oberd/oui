@@ -2,7 +2,7 @@ import { noop } from "../../lib/fn/noop"
 
 export type DropOrPickEvent = DragEvent|MouseEvent
 
-export class FileDropEvent {
+export class FileSelectEvent {
   public static acceptAll = "*/*"
   public readonly hasValidFiles: boolean
   public readonly files: File[] = []
@@ -10,17 +10,13 @@ export class FileDropEvent {
   public uploadCompleted = noop
   public uploadErrored: (reason?: string) => void = noop
 
-  constructor(event: DropOrPickEvent, private acceptedTypes: string[]) {
+  constructor(input: HTMLInputElement, private acceptedTypes: string[]) {
     this.acceptedTypes = acceptedTypes
-    this.hasValidFiles = this.dropHasValidFiles(event)
+    this.hasValidFiles = this.dropHasValidFiles(input)
 
-    if (!this.hasValidFiles) {
-      return
-    }
+    if (!this.hasValidFiles) { return }
 
-    this.files = (event instanceof DragEvent)
-      ? Array.from(event.dataTransfer.files)
-      : Array.from((event.target as HTMLInputElement).files)
+    this.files = Array.from(input.files)
   }
 
   public async uploadWith<T = any | void>(fetch: (formData: FormData) => Promise<T>): Promise<T> {
@@ -48,12 +44,9 @@ export class FileDropEvent {
     return formData
   }
 
-  private dropHasValidFiles(evt: DropOrPickEvent) {
-    const validFileCount = (evt instanceof DragEvent)
-      ? Array.from(evt.dataTransfer.files).filter(this.isValidFile).length
-      : Array.from((evt.target as HTMLInputElement).files).filter(this.isValidFile).length
-
-    return validFileCount > 0
+  private dropHasValidFiles(input: HTMLInputElement) {
+    const validFileCount = Array.from(input.files).filter(this.isValidFile).length
+    return (validFileCount > 0)
   }
 
   private isValidFile = (file: File) => {
@@ -61,7 +54,7 @@ export class FileDropEvent {
   }
 
   private doesAcceptMimeType(mimeType: string) {
-    if (this.acceptedTypes.includes(FileDropEvent.acceptAll)) {
+    if (this.acceptedTypes.includes(FileSelectEvent.acceptAll)) {
       return true
     }
     return this.acceptedTypes.includes(mimeType)

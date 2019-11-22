@@ -8,8 +8,8 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  FileDropEvent,
-} from './components/file-upload/FileDropEvent';
+  FileSelectEvent,
+} from './components/file-upload/FileSelectEvent';
 import {
   SvgPack,
 } from './components/svg/svgs';
@@ -115,7 +115,7 @@ declare namespace LocalJSX {
     /**
     * Files dropped onto page, and validated. You can use this event to perform an upload in javscript
     */
-    'onDropped'?: (event: CustomEvent<FileDropEvent>) => void;
+    'onDropped'?: (event: CustomEvent<FileSelectEvent>) => void;
   }
   interface OuiModal {
     /**
