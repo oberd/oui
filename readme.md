@@ -81,18 +81,12 @@ Good components to have in your app:
 
 ## Components
 
-> Note: Do not add your component here manually.
-> To generate this component list run &nbsp; '`$ npm run build`'
+> **Note:** Do not add your component here manually.
+> To generate this component list run &nbsp; `$ npm run build`
 
-* [card](./src/components/card/readme.md)
-
-* [card-heading](./src/components/card-heading/readme.md)
-
-* [documents-icon](./src/components/documents-icon/readme.md)
-
-* [file-upload](./src/components/file-upload/readme.md)
-
-* [file-upload-modal](./src/components/file-upload-modal/readme.md)
-
-* [svg](./src/components/svg/readme.md)
-
+* [card](src/components/card/readme.md)
+* [card-heading](src/components/card-heading/readme.md)
+* [documents-icon](src/components/documents-icon/readme.md)
+* [file-upload](src/components/file-upload/readme.md)
+* [file-upload-modal](src/components/file-upload-modal/readme.md)
+* [svg](src/components/svg/readme.md)
