@@ -1,11 +1,10 @@
 import { Component, Host, h, Prop } from "@stencil/core";
 
 @Component({
-  tag: "oui-fab-buttons",
-  styleUrl: "fab-buttons.css",
-  shadow: true
+  tag: "oui-noti-buttons-light",
+  styleUrl: "noti-buttons-light.css",
 })
-export class FabButtons {
+export class NotiButtonsLight {
   render() {
     return (
       <Host>

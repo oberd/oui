@@ -1,10 +1,10 @@
 import { Component, Host, h } from '@stencil/core';
 
 @Component({
-  tag: 'noti-tray',
-  styleUrl: 'noti-tray.css',
+  tag: 'oui-noti-tray-light',
+  styleUrl: 'noti-tray-light.css',
 })
-export class NotiTray {
+export class NotiTrayLight {
 
   render() {
     return (
