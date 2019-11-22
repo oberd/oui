@@ -1,0 +1,60 @@
+/* oui button classes ****************************************/
+.oui-btn {
+  display: inline-block;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 0.5rem .75rem;
+  color: #333;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.15s linear;
+}
+
+.oui-btn {
+  background-color: var(--oui-global-gray);
+}
+
+.oui-btn:hover:not([disabled]) {
+  background-color: var(--oui-global-gray-light);
+  border-color: var(--oui-global-gray-dark);
+}
+
+.oui-btn:active:not([disabled]) {
+  background-color: var(--oui-global-gray-dark);
+}
+
+.oui-btn.oui-btn__primary {
+  background-color: var(--oui-global-green);
+  font-weight: bold;
+  color: #FFF;
+}
+
+.oui-btn.oui-btn__primary:hover:not([disabled]) {
+  background-color: var(--oui-global-green-light);
+  border-color: var(--oui-global-green-dark);
+}
+
+.oui-btn.oui-btn__primary:active:not([disabled]) {
+  background-color: var(--oui-global-green-dark);
+}
+
+.oui-btn.oui-btn__danger {
+  background-color: var(--oui-global-red);
+  color: #FFF;
+}
+
+.oui-btn.oui-btn__danger:hover:not([disabled]) {
+  background-color: var(--oui-global-red-light);
+  border-color: var(--oui-global-red-dark);
+}
+
+.oui-btn.oui-btn__danger:active:not([disabled]) {
+  background-color: var(--oui-global-red-dark);
+}
+
+.oui-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* end of oui button classes ******************************************/
