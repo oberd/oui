@@ -1,6 +1,6 @@
-# oui-file-upload-modal
+# oui-modal
 
-![file-upload](https://user-images.githubusercontent.com/61154/68951476-c4acf180-0783-11ea-9241-e32d27b4a140.gif)
+![oui-modal](./screenshot.png)
 
 <!-- Auto Generated Below -->
 
@@ -21,8 +21,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  oui-file-upload --> oui-file-upload-modal
-  style oui-file-upload-modal fill:#f9f,stroke:#333,stroke-width:4px
+  oui-file-upload --> oui-modal
+  style oui-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

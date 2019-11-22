@@ -33,9 +33,11 @@ Upload files by drag and drop
 
 ## Properties
 
-| Property | Attribute | Description                                                                                                  | Type     | Default                   |
-| -------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------------------------- |
-| `accept` | `accept`  | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileDropEvent.acceptAll` |
+| Property     | Attribute     | Description                                                                                                  | Type     | Default                   |
+| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------------------------- |
+| `accept`     | `accept`      | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileDropEvent.acceptAll` |
+| `btnLabel`   | `btn-label`   | Specify a label for the button.                                                                              | `string` | `"Upload"`                |
+| `modalTitle` | `modal-title` | Specify a title for the modal.                                                                               | `string` | `"Upload Files"`          |
 
 
 ## Events
@@ -49,13 +51,13 @@ Upload files by drag and drop
 
 ### Depends on
 
-- [oui-file-upload-modal](../file-upload-modal)
+- [oui-modal](../modal)
 - [oui-documents-icon](../documents-icon)
 
 ### Graph
 ```mermaid
 graph TD;
-  oui-file-upload --> oui-file-upload-modal
+  oui-file-upload --> oui-modal
   oui-file-upload --> oui-documents-icon
   style oui-file-upload fill:#f9f,stroke:#333,stroke-width:4px
 ```
