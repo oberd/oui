@@ -2,28 +2,34 @@ import { noop } from "../../lib/fn/noop"
 
 export type DropOrPickEvent = DragEvent|MouseEvent
 
-export class FileSelectEvent {
+export class FileUploadHandler {
   public static acceptAll = "*/*"
-  public readonly hasValidFiles: boolean
   public readonly files: File[] = []
   public uploadStarted = noop
   public uploadCompleted = noop
   public uploadErrored: (reason?: string) => void = noop
 
-  constructor(input: HTMLInputElement, private acceptedTypes: string[]) {
+  constructor(files: File[], private acceptedTypes: string[]) {
     this.acceptedTypes = acceptedTypes
-    this.hasValidFiles = this.dropHasValidFiles(input)
 
-    if (!this.hasValidFiles) { return }
+    if (!this.selectionHasValidFiles(files)) {
+      throw Error("Invalid files")
+    }
 
-    this.files = Array.from(input.files)
+    this.files = files
   }
 
   public async uploadWith<T = any | void>(fetch: (formData: FormData) => Promise<T>): Promise<T> {
     this.uploadStarted()
     return fetch(this.toFormData())
-      .then((val) => { this.uploadCompleted(); return val })
-      .catch((e: any) => { this.uploadErrored(e.toString()); throw e })
+      .then((val) => {
+        this.uploadCompleted()
+        return val
+      })
+      .catch((e: any) => {
+        this.uploadErrored(e.toString())
+        throw e
+      })
   }
 
   public onStarted(callback: () => void) {
@@ -44,8 +50,8 @@ export class FileSelectEvent {
     return formData
   }
 
-  private dropHasValidFiles(input: HTMLInputElement) {
-    const validFileCount = Array.from(input.files).filter(this.isValidFile).length
+  private selectionHasValidFiles(files: File[]) {
+    const validFileCount = files.filter(this.isValidFile).length
     return (validFileCount > 0)
   }
 
@@ -54,9 +60,8 @@ export class FileSelectEvent {
   }
 
   private doesAcceptMimeType(mimeType: string) {
-    if (this.acceptedTypes.includes(FileSelectEvent.acceptAll)) {
-      return true
-    }
-    return this.acceptedTypes.includes(mimeType)
+    return (!this.acceptedTypes.includes(FileUploadHandler.acceptAll))
+      ? this.acceptedTypes.includes(mimeType)
+      : true
   }
 }

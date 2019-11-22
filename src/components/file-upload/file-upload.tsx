@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
-import { DropOrPickEvent, FileSelectEvent } from "./FileSelectEvent"
+import { DropOrPickEvent, FileUploadHandler } from "./FileUploadHandler"
 import { FileUploadAction, FileUploadActionType, FileUploadState } from "./FileUploadState"
 
 @Component({
@@ -12,7 +12,7 @@ export class FileUpload {
    * Separate by spaces for multiple:
    * `text/html text/xml`
    */
-  @Prop() public accept: string = FileSelectEvent.acceptAll
+  @Prop() public accept: string = FileUploadHandler.acceptAll
 
   /**
    * Specify a label for the button.
@@ -28,7 +28,7 @@ export class FileUpload {
    * Files dropped onto page, and validated. You can use this
    * event to perform an upload in javscript
    */
-  @Event() public dropped: EventEmitter<FileSelectEvent>
+  @Event() public dropped: EventEmitter<FileUploadHandler>
 
   @State() public version: number = 0
 
@@ -117,29 +117,41 @@ export class FileUpload {
 
   private handleDrop = (evt: DropOrPickEvent) => {
     evt.preventDefault()
-    const event = this.makeDropEvent(evt)
 
-    if (!event.hasValidFiles) {
-      return this.dispatch({
+    try {
+      const event = this.makeUploadHandler(evt)
+      this.dispatch({ type: "files-dropped", files: event.files })
+      this.dropped.emit(event)
+    } catch (err) {
+      this.dispatch({
         type: "dropped-bad-files",
         message: "only files of type " + this.accept + " are supported",
       })
     }
-
-    this.dispatch({ type: "files-dropped", files: event.files })
-    this.dropped.emit(event)
   }
 
-  private makeDropEvent(evt: DropOrPickEvent) {
-    if (evt instanceof DragEvent) {
-      this.inputRef.files = (evt as DragEvent).dataTransfer.files
-    }
+  private makeUploadHandler(evt: DropOrPickEvent) {
+    const files = Array.from(
+      (evt instanceof DragEvent)
+        ? evt.dataTransfer.files
+        : this.inputRef.files,
+    )
 
-    const event = new FileSelectEvent(this.inputRef, this.accept.split(/[\s]+/))
-    event.onStarted(() => this.dispatchActionType("upload-started"))
-    event.onComplete(() => this.dispatchActionType("upload-finished"))
-    event.onError((reason) => this.dispatch({ type: "upload-finished", error: reason }))
-    return event
+    const handler = new FileUploadHandler(files, this.accept.split(/[\s]+/))
+
+    handler.onStarted(() => {
+      this.dispatchActionType("upload-started")
+    })
+
+    handler.onComplete(() => {
+      this.dispatchActionType("upload-finished")
+    })
+
+    handler.onError((reason) => {
+      this.dispatch({ type: "upload-finished", error: reason })
+    })
+
+    return handler
   }
 
   private dispatchActionType(type: FileUploadActionType) {
