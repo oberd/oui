@@ -26,9 +26,9 @@ export class FileUploadHandler {
         this.uploadCompleted()
         return val
       })
-      .catch((e: any) => {
-        this.uploadErrored(e.toString())
-        throw e
+      .catch((err: any) => {
+        this.uploadErrored(err.toString())
+        throw err
       })
   }
 
