@@ -46,7 +46,7 @@ export class FileUploadHandler {
 
   public toFormData(key: string = "files") {
     const formData = new FormData()
-    this.files.forEach((file) => formData.append(key, file))
+    this.files.forEach((file) => { formData.append(key, file) })
     return formData
   }
 

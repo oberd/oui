@@ -88,7 +88,7 @@ export class FileUpload {
             accept={this.accept}
             multiple
             ref={(el: HTMLInputElement) => { this.inputRef = el }}
-            onChange={this.handleFilePicker}
+            onChange={this.handleFileSelection}
           />
         </div>
       </oui-modal>
@@ -98,10 +98,6 @@ export class FileUpload {
   private handleDropAreaClick = (evt: MouseEvent) => {
     evt.stopPropagation()
     this.inputRef.click()
-  }
-
-  private handleFilePicker = (evt: MouseEvent) => {
-    this.handleDrop(evt)
   }
 
   private handleButtonClick = () => this.dispatchActionType("initialize-modal")
@@ -115,9 +111,12 @@ export class FileUpload {
     this.dispatchActionType("drag-start")
   }
 
-  private handleDrop = (evt: DropOrPickEvent) => {
+  private handleDrop = (evt: DragEvent) => {
     evt.preventDefault()
+    this.handleFileSelection(evt)
+  }
 
+  private handleFileSelection = (evt: DropOrPickEvent) => {
     try {
       const event = this.makeUploadHandler(evt)
       this.dispatch({ type: "files-dropped", files: event.files })
