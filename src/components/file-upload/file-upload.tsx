@@ -56,6 +56,8 @@ export class FileUpload {
   public render() {
     return (
       <Host>
+        {this.state.isUploading() && <div class="oui-file-upload__superlay" />}
+
         <button class="oui-btn oui-btn__primary" onClick={this.handleButtonClick}>
           {this.btnLabel}
         </button>
@@ -105,7 +107,9 @@ export class FileUpload {
   }
 
   private handleClose = () => {
-    this.dispatchActionType("modal-closed")
+    if (!this.state.isUploading()) {
+      this.dispatchActionType("modal-closed")
+    }
   }
 
   private handleDragExit = () => {
@@ -114,12 +118,16 @@ export class FileUpload {
 
   private handleDragOver = (e: DragEvent) => {
     e.preventDefault()
-    this.dispatchActionType("drag-start")
+    if (!this.state.isUploading()) {
+      this.dispatchActionType("drag-start")
+    }
   }
 
   private handleDrop = (evt: DragEvent) => {
     evt.preventDefault()
-    this.handleFileSelection(evt)
+    if (!this.state.isUploading()) {
+      this.handleFileSelection(evt)
+    }
   }
 
   private handleFileSelection = (evt: DropOrPickEvent) => {
