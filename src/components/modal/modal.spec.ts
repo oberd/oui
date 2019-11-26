@@ -12,7 +12,10 @@ describe("Test oui-modal component", () => {
       `,
     })
 
-    const content = page.doc.querySelector("oui-modal").querySelector("p").textContent
+    const content = page.doc
+                      .querySelector("oui-modal")
+                      .querySelector("p")
+                      .textContent
 
     expect(content).toBe("Success")
   })
@@ -35,5 +38,26 @@ describe("Test oui-modal component", () => {
                           .textContent
 
     expect(titleContent).toBe("Modal Title")
+  })
+
+  it("should title on click fire close event", async () => {
+    const page = await newSpecPage({
+      components: [Modal],
+      html: `
+        <oui-modal>
+          <span slot="title">Modal Title</span>
+          <p>Success</p>
+        </oui-modal>
+      `,
+    })
+
+    const modal = page.doc.querySelector("oui-modal")
+    let closed = false
+
+    modal.addEventListener("close", () => { closed = true })
+    modal.querySelector("header").querySelector("a").click()
+
+    page.waitForChanges()
+    expect(closed).toBe(true)
   })
 })
