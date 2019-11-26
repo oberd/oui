@@ -41,6 +41,7 @@ describe("Test oui-modal component", () => {
   })
 
   it("should title on click fire close event", async () => {
+    const eventSpy = jest.fn()
     const page = await newSpecPage({
       components: [Modal],
       html: `
@@ -52,16 +53,13 @@ describe("Test oui-modal component", () => {
     })
 
     const modal = page.doc.querySelector("oui-modal")
-    let closed = false
-
-    modal.addEventListener("close", () => { closed = true })
+    modal.addEventListener("close", eventSpy)
     modal.querySelector("header").querySelector("a").click()
-
-    page.waitForChanges()
-    expect(closed).toBe(true)
+    expect(eventSpy).toHaveBeenCalled()
   })
 
   it("should esc key fire close event", async () => {
+    const eventSpy = jest.fn()
     const escEvent = new KeyboardEvent("keydown", { keyCode: 27 } as KeyboardEventInit)
     const page = await newSpecPage({
       components: [Modal],
@@ -74,12 +72,8 @@ describe("Test oui-modal component", () => {
     })
 
     const modal = page.doc.querySelector("oui-modal")
-    let closed = false
-
-    modal.addEventListener("close", () => { closed = true })
+    modal.addEventListener("close", eventSpy)
     page.doc.dispatchEvent(escEvent)
-
-    page.waitForChanges()
-    expect(closed).toBe(true)
+    expect(eventSpy).toHaveBeenCalled()
   })
 })
