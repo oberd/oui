@@ -60,4 +60,26 @@ describe("Test oui-modal component", () => {
     page.waitForChanges()
     expect(closed).toBe(true)
   })
+
+  it("should esc key fire close event", async () => {
+    const escEvent = new KeyboardEvent("keydown", { keyCode: 27 } as KeyboardEventInit)
+    const page = await newSpecPage({
+      components: [Modal],
+      html: `
+        <oui-modal>
+          <span slot="title">Modal Title</span>
+          <p>Success</p>
+        </oui-modal>
+      `,
+    })
+
+    const modal = page.doc.querySelector("oui-modal")
+    let closed = false
+
+    modal.addEventListener("close", () => { closed = true })
+    page.doc.dispatchEvent(escEvent)
+
+    page.waitForChanges()
+    expect(closed).toBe(true)
+  })
 })
