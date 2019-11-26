@@ -17,10 +17,10 @@ export class Modal {
     return (
       <Host>
         <section class="oui-modal__content">
-          <heading>
+          <header>
             <span class="oui-modal__title"><slot name="title" /></span>
             <a onClick={this.handleClose}>Close (esc)</a>
-          </heading>
+          </header>
 
           <div><slot /></div>
         </section>
