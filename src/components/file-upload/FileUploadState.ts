@@ -123,7 +123,7 @@ export class FileUploadState {
       return "Files Uploaded"
     }
 
-    return "Drop Files Here to Upload"
+    return "Click Here or Drop Files to Upload"
   }
 
   public onChange(callback: (state: IFileUploadState) => void) {

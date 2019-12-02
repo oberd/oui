@@ -6,6 +6,8 @@
 
 ![oui-modal](./animation02.gif)
 
+## Usage
+
 ```html
 <oui-modal>
   <span slot="title">Oui Modal</span>
