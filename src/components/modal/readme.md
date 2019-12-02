@@ -1,6 +1,27 @@
+<style>img{width: 300px; display: block; margin: 1em auto}</style>
 # oui-modal
 
 ![oui-modal](./screenshot.png)
+
+<div style="display:flex;justify-content:center">
+
+![oui-modal](./animation01.gif)
+
+![oui-modal](./animation02.gif)
+
+</div>
+
+```html
+<oui-modal>
+  <span slot="title">Oui Modal</span>
+  <h1>Lorem Ipsum</h1>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam similique, quibusdam aliquid
+    officia eveniet, recusandae iste ab cupiditate pariatur accusamus alias ratione provident
+    sequi vitae facilis, qui sint fugiat earum?
+  </p>
+</oui-modal>
+```
 
 <!-- Auto Generated Below -->
 
