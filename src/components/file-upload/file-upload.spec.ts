@@ -55,7 +55,7 @@ describe("Test oui-file-upload component", () => {
 
     await page.waitForChanges()
 
-    const modal = page.doc.querySelector("#oui-file-upload__drop-area")
+    const modal = page.doc.querySelector(".oui-file-upload__drop-area")
 
     expect(modal).not.toBeNull()
   })
@@ -75,7 +75,7 @@ describe("Test oui-file-upload component", () => {
 
     await page.waitForChanges()
 
-    const modal = page.doc.querySelector("#oui-file-upload__drop-area")
+    const modal = page.doc.querySelector(".oui-file-upload__drop-area")
     expect(modal).not.toBeNull()
   })
 })

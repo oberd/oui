@@ -4,7 +4,7 @@ oui-file-upload > oui-modal .oui-modal__content {
 }
 
 oui-file-upload > oui-modal .oui-modal__content > div,
-  oui-file-upload #oui-file-upload__drop-area {
+  oui-file-upload .oui-file-upload__drop-area {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ oui-file-upload > oui-modal .oui-modal__content > div,
   padding: 0;
 }
 
-oui-file-upload #oui-file-upload__drop-area {
+oui-file-upload .oui-file-upload__drop-area {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
@@ -21,7 +21,7 @@ oui-file-upload #oui-file-upload__drop-area {
   transition: all 0.15s linear;
 }
 
-oui-file-upload #oui-file-upload__drop-area:hover {
+oui-file-upload .oui-file-upload__drop-area:hover {
   opacity: 1;
 }
 

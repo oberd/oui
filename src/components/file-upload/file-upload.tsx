@@ -74,7 +74,7 @@ export class FileUpload {
       <oui-modal onClose={this.handleClose}>
         <span slot="title">{this.modalTitle}</span>
 
-        <div id="oui-file-upload__drop-area" onClick={this.handleDropAreaClick}>
+        <div class="oui-file-upload__drop-area" onClick={this.handleDropAreaClick}>
           <oui-documents-icon
             isFannedOut={this.state.isIconFannedOut()}
             isHighlighted={this.state.isIconHighlighted()}
