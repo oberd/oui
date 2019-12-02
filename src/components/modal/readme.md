@@ -1,15 +1,10 @@
-<style>img{width: 300px; display: block; margin: 1em auto}</style>
 # oui-modal
 
 ![oui-modal](./screenshot.png)
 
-<div style="display:flex;justify-content:center">
-
 ![oui-modal](./animation01.gif)
 
 ![oui-modal](./animation02.gif)
-
-</div>
 
 ```html
 <oui-modal>
