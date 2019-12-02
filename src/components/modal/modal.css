@@ -35,7 +35,7 @@ oui-modal > .oui-modal__content > div {
   overflow-y: auto;
 }
 
-oui-modal .oui-modal__content > heading {
+oui-modal .oui-modal__content > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
