@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
@@ -8,61 +7,37 @@
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/build/oui.css">
-  <style>
-    html,
-    body {
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .oui-modal__content {
-      line-height: 1.8em;
-      text-align: justify;
-    }
-  </style>
+  <style>html,body { font-family: 'Montserrat', sans-serif; }</style>
   <script type="module" src="/build/oui.esm.js"></script>
   <script nomodule src="/build/oui.js"></script>
 
 </head>
-
 <body>
   <oui-card style="min-height: 400px;">
     <oui-card-heading>
       <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
     </oui-card-heading>
-
     <div>
-      <oui-file-upload
-        accept="text/xml"
-        btn-label="Click Here To Upload A File"
-        modal-title="Oui File Upload"
-      ></oui-file-upload>
+      <!-- File Upload Dialog Dropper -->
+      <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
+      <script>
+        const el = document.getElementById("files")
+        el.addEventListener("dropped", async (event) => {
+          const postResponse = await event.detail.uploadWith(async (formData) => {
+            const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
+            const response = await fetch(url, {
+              method: "POST",
+              body: formData,
+            })
+            if (!response.ok) {
+              throw new Error("problem uploading files.")
+            }
+            return response.status + " " + response.statusText
+          })
+          console.log("Uploaded files: " + postResponse)
+        })
+      </script>
     </div>
   </oui-card>
-
-  <script>
-    function sleep (sec) {
-      return new Promise((resolve, reject) => {
-        setTimeout(resolve, (sec * 1000))
-      })
-    }
-
-    document
-      .querySelector("oui-file-upload")
-      .addEventListener("dropped", async (evt) => {
-        const postResponse = await evt.detail.uploadWith(async (formData) => {
-          await sleep(3)
-          // const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
-          const url = "https://httpbin.org/status/200"
-          const response = await fetch(url, { method: "POST", body: formData })
-
-          if (!response.ok) { throw new Error("problem uploading files.") }
-
-          return response.status + " " + response.statusText
-        })
-
-        console.log("Uploaded files: " + postResponse)
-      })
-  </script>
 </body>
-
 </html>
