@@ -43,18 +43,18 @@ Upload files by drag and drop
 
 ## Properties
 
-| Property     | Attribute     | Description                                                                                                  | Type     | Default                   |
-| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------------------------- |
-| `accept`     | `accept`      | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileSelectEvent.acceptAll` |
-| `btnLabel`   | `btn-label`   | Specify a label for the button.                                                                              | `string` | `"Upload"`                |
-| `modalTitle` | `modal-title` | Specify a title for the modal.                                                                               | `string` | `"Upload Files"`          |
+| Property     | Attribute     | Description                                                                                                  | Type     | Default                       |
+| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------- |
+| `accept`     | `accept`      | Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml` | `string` | `FileUploadHandler.acceptAll` |
+| `btnLabel`   | `btn-label`   | Specify a label for the button.                                                                              | `string` | `"Upload"`                    |
+| `modalTitle` | `modal-title` | Specify a title for the modal.                                                                               | `string` | `"Upload Files"`              |
 
 
 ## Events
 
-| Event     | Description                                                                                      | Type                         |
-| --------- | ------------------------------------------------------------------------------------------------ | ---------------------------- |
-| `dropped` | Files dropped onto page, and validated. You can use this event to perform an upload in javscript | `CustomEvent<FileSelectEvent>` |
+| Event     | Description                                                                                      | Type                             |
+| --------- | ------------------------------------------------------------------------------------------------ | -------------------------------- |
+| `dropped` | Files dropped onto page, and validated. You can use this event to perform an upload in javscript | `CustomEvent<FileUploadHandler>` |
 
 
 ## Dependencies
