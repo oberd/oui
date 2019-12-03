@@ -1,17 +1,15 @@
-import { Component, Host, h, Prop } from "@stencil/core";
+import { Component, h, Host } from "@stencil/core";
 
 @Component({
   tag: "oui-nav-bar",
-  styleUrl: "nav-bar.css"
+  styleUrl: "nav-bar.css",
 })
 export class NavBar {
-  @Prop() Dark: boolean;
-
-  render() {
+  public render() {
     return (
       <Host>
         <slot></slot>
       </Host>
-    );
+    )
   }
 }

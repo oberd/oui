@@ -21,9 +21,6 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
-  "dependencies": {
-    "@oberd/oui": "file:../oui"
-  },
   "devDependencies": {
     "@stencil/core": "^1.3.3",
     "stencil-inline-svg": "^1.0.1",

@@ -1,41 +1,35 @@
-import { Component, h, Host, Prop, State } from "@stencil/core";
+import { Component, h} from "@stencil/core"
 
 @Component({ tag: "oui-tm-switch", styleUrl: "tm-switch.css" })
 export class ThemeSwitch {
-  @Prop() theme: string;
 
-  switchToLight() {
-    document.querySelector("oui-nav-bar").classList.remove("dark");
-    document.querySelector("oui-noti-tray").classList.remove("dark");
-    document.querySelector("oui-noti-buttons").classList.remove("dark");
-  }
-
-  switchToDark() {
-    document.querySelector("oui-nav-bar").classList.add("dark");
-    document.querySelector("oui-noti-tray").classList.add("dark");
-    document.querySelector("oui-noti-buttons").classList.add("dark");
-  }
-
-  render() {
+  public render() {
     return (
       <div>
         <button
-          id="tmLight"
-          onClick={() => {
-            this.switchToLight();
-          }}
+          class="oui-tm-switch__Light"
+          onClick={
+            this.switchToLight
+          }
         >
           Light
         </button>
         <button
-          id="tmDark"
-          onClick={() => {
-            this.switchToDark();
-          }}
+          class="oui-tm-switch__Dark"
+          onClick={
+            this.switchToDark
+          }
         >
           Dark
         </button>
       </div>
-    );
+    )
+  }
+  private switchToLight() {
+    document.querySelector("body").classList.remove("dark")
+  }
+
+  private switchToDark() {
+    document.querySelector("body").classList.add("dark")
   }
 }

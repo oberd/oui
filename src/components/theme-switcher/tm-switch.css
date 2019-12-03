@@ -2,7 +2,7 @@ oui-tm-switch {
     position: absolute;
 }
 
-#tmLight {
+.oui-tm-switch__Light {
     margin: 1rem 0.625rem 1rem 1rem;
     border: solid rgb(237, 237, 237);
     border-radius: 1.25rem;
@@ -15,18 +15,18 @@ oui-tm-switch {
     transition-timing-function: ease-in-out;
 }
 
-#tmLight:hover {
+.oui-tm-switch__Light:hover {
     transform: scale(1.05);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     background-color: rgb(237, 237, 237);
     border: solid rgb(237, 237, 237);
 }
 
-#tmLight:active {
+.oui-tm-switch__Light:active {
     transform: scale(1);
 }
 
-#tmDark {
+.oui-tm-switch__Dark {
     color: white;
     margin: 1rem 0.625rem 1rem 0rem;
     border: solid rgb(40, 51, 68);
@@ -40,11 +40,11 @@ oui-tm-switch {
     transition-timing-function: ease-in-out;
 }
 
-#tmDark:hover {
+.oui-tm-switch__Dark:hover {
     transform: scale(1.05);
     box-shadow: 2px 2px 10px rgb(101, 202, 130, 0.8);
 }
 
-#tmDark:active {
+.oui-tm-switch__Dark:active {
     transform: scale(1);
 }

@@ -1,31 +1,30 @@
-import { Component, Host, h, Prop } from "@stencil/core";
+import { Component, h, Host } from "@stencil/core"
 
 @Component({
   tag: "oui-noti-buttons",
-  styleUrl: "noti-buttons.css"
+  styleUrl: "noti-buttons.css",
 })
 export class NotiButtons {
-  render() {
+  public render() {
     const openTray = () => {
-      const notiTray = document.querySelector("oui-noti-tray");
-      console.log(notiTray);
-      notiTray.open();
-    };
+      const notiTray = document.querySelector("oui-noti-tray")
+      notiTray.open()
+    }
 
     return (
       <Host>
-        <button id="buttonUnused">
+        <button class="oui-noti-buttons__unused">
           <oui-svg name="noti-bell-unused" scale={0.25}></oui-svg>
         </button>
 
-        <button id="buttonRead">
+        <button class="oui-noti-buttons__read">
           <oui-svg name="noti-bell-read" scale={0.25}></oui-svg>
         </button>
 
-        <button id="buttonUnread" onClick={() => openTray()}>
+        <button class="oui-noti-buttons__unread" onClick={() => openTray()}>
           <oui-svg name="noti-bell-unread" scale={0.25}></oui-svg>
         </button>
       </Host>
-    );
+    )
   }
 }

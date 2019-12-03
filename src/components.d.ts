@@ -29,21 +29,16 @@ export namespace Components {
     'accept': string;
   }
   interface OuiFileUploadModal {}
-  interface OuiNavBar {
-    'Dark': boolean;
-  }
+  interface OuiNavBar {}
   interface OuiNotiButtons {}
   interface OuiNotiTray {
     'open': () => Promise<void>;
-    'opened': boolean;
   }
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
   }
-  interface OuiTmSwitch {
-    'theme': string;
-  }
+  interface OuiTmSwitch {}
 }
 
 declare global {
@@ -146,20 +141,14 @@ declare namespace LocalJSX {
     */
     'onClose'?: (event: CustomEvent<any>) => void;
   }
-  interface OuiNavBar {
-    'Dark'?: boolean;
-  }
+  interface OuiNavBar {}
   interface OuiNotiButtons {}
-  interface OuiNotiTray {
-    'opened'?: boolean;
-  }
+  interface OuiNotiTray {}
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
   }
-  interface OuiTmSwitch {
-    'theme'?: string;
-  }
+  interface OuiTmSwitch {}
 
   interface IntrinsicElements {
     'oui-card': OuiCard;

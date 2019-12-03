@@ -3,7 +3,7 @@ body {
   transition: all 1s ease-in-out;
 }
 
-oui-nav-bar.dark {
+body.dark oui-nav-bar {
   display: block;
   list-style-type: none;
   padding: 3px 5px;

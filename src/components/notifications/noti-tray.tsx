@@ -1,68 +1,64 @@
-import { Component, h, Prop, State, Method } from "@stencil/core";
+import { Component, h, Method, State } from "@stencil/core"
 
 @Component({
   tag: "oui-noti-tray",
-  styleUrl: "noti-tray.css"
+  styleUrl: "noti-tray.css",
 })
 export class NotiTray {
-  @State() showNoti = false;
+  @State() private showNoti = false
 
-  @Prop({ reflectToAttr: true, mutable: true }) opened: boolean;
-  // status: string;
+  // @Prop({ reflectToAttr: true, mutable: true }) opened: boolean;
 
-  demoImport() {
-    const newStatus = document.createElement("li");
-    const notiList = document.querySelector("#statusList");
-    const isDark = document.querySelector("oui-noti-tray.dark");
-    newStatus.textContent = "EXPORT COMPLETED";
-    notiList.appendChild(newStatus);
-    if (isDark === null) {
-      newStatus.style.cssText =
-        "padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(247, 247, 247); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);";
-    } else {
-      newStatus.style.cssText =
-        "color: white; padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(40, 51, 68); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);";
-    }
+  public componentDidLoad() {
+    setInterval(this.demoImport.bind(this), 5000)
   }
 
-  componentDidLoad() {
-    setInterval(this.demoImport.bind(this), 5000);
-  }
-
-  componentDidUnload() {
-    clearInterval(this.demoImport.bind(this));
-  }
-
-  onCloseNoti() {
-    this.opened = false;
-  }
-
-  onClearNoti() {
-    document.querySelector("#statusList").innerHTML = "";
+  public componentDidUnload() {
+    clearInterval(this.demoImport.bind(this))
   }
 
   @Method()
-  open() {
-    if (this.opened) {
-      this.opened = false;
+  public async open() {
+    if (this.showNoti) {
+      this.showNoti = false
+      document.querySelector("oui-noti-tray").style.display = "block"
     } else {
-      this.opened = true;
+      this.showNoti = true
+      document.querySelector("oui-noti-tray").style.display = "none"
     }
   }
 
-  render() {
-    return [
-      // <div class="overlay" onClick={this.onCloseNoti.bind(this)} />,
+  public render() {
+    return (
       <aside>
         <header>
-          <button id="clear" onClick={this.onClearNoti.bind(this)}>
+          <button class="oui-noti-tray__clear" onClick={this.onClearNoti.bind(this)}>
             Clear All
           </button>
         </header>
-        <section id="statuses">
-          <ul id="statusList"></ul>
+        <section class="oui-noti-tray__statuses">
+          <ul class="oui-noti-tray__statusList"></ul>
         </section>
       </aside>
-    ];
+    )
+  }
+
+  private demoImport() {
+    const newStatus = document.createElement("li")
+    const notiList = document.querySelector(".oui-noti-tray__statusList")
+    const isDark = document.querySelector("body.dark")
+    newStatus.textContent = "EXPORT COMPLETED"
+    notiList.appendChild(newStatus)
+    if (isDark === null) {
+      newStatus.style.cssText =
+        "padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(247, 247, 247); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);"
+    } else {
+      newStatus.style.cssText =
+        "color: white; padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(40, 51, 68); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);"
+    }
+  }
+
+  private onClearNoti() {
+    document.querySelector(".oui-noti-tray__statusList").innerHTML = ""
   }
 }

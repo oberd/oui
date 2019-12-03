@@ -1,4 +1,6 @@
-oui-noti-buttons>button#buttonUnread, oui-noti-buttons>#buttonRead, oui-noti-buttons>#buttonUnused {
+oui-noti-buttons > button.oui-noti-buttons__unread,
+oui-noti-buttons > button.oui-noti-buttons__read,
+oui-noti-buttons > button.oui-noti-buttons__unused {
   transition: all 0.05s;
   cursor: pointer;
   outline: none;
@@ -6,25 +8,28 @@ oui-noti-buttons>button#buttonUnread, oui-noti-buttons>#buttonRead, oui-noti-but
   transition-timing-function: ease-in-out;
 }
 
-oui-noti-buttons>button#buttonUnread:hover, oui-noti-buttons>button#buttonRead:hover {
+oui-noti-buttons > button.oui-noti-buttons__unread:hover,
+oui-noti-buttons > button.oui-noti-buttons__read:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   border: solid rgb(237, 237, 237);
 }
 
-oui-noti-buttons>button#buttonUnused:hover {
+oui-noti-buttons > button.oui-noti-buttons__unused:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   /* border: solid rgb(237, 237, 237); */
 }
 
-oui-noti-buttons>button#buttonUnread:active, oui-noti-buttons>button#buttonRead:active, oui-noti-buttons>button#buttonUnused:active {
+oui-noti-buttons > button.oui-noti-buttons__unread:active,
+oui-noti-buttons > button.oui-noti-buttons__read:active,
+oui-noti-buttons > button.oui-noti-buttons__unused:active {
   transform: scale(1);
 }
 
-oui-noti-buttons>button#buttonUnread {
+oui-noti-buttons > button.oui-noti-buttons__unread {
   float: right;
   border: solid white;
   border-radius: 50%;
@@ -33,7 +38,7 @@ oui-noti-buttons>button#buttonUnread {
   background-color: white;
 }
 
-oui-noti-buttons>button#buttonRead {
+oui-noti-buttons > button.oui-noti-buttons__read {
   float: right;
   border: solid white;
   border-radius: 50%;
@@ -42,7 +47,7 @@ oui-noti-buttons>button#buttonRead {
   background-color: white;
 }
 
-oui-noti-buttons>button#buttonUnused {
+oui-noti-buttons > button.oui-noti-buttons__unused {
   float: right;
   border: solid rgb(134, 134, 134);
   border-radius: 50%;
@@ -51,16 +56,20 @@ oui-noti-buttons>button#buttonUnused {
   background-color: white;
 }
 
-oui-noti-buttons.dark>button#buttonUnread:hover, oui-noti-buttons.dark>button#buttonRead:hover, oui-noti-buttons.dark>button#buttonUnused:hover {
+body.dark oui-noti-buttons > button.oui-noti-buttons__unread:hover,
+body.dark oui-noti-buttons > button.oui-noti-buttons__read:hover,
+body.dark oui-noti-buttons > button.oui-noti-buttons__unused:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 10px rgb(101, 202, 130, 0.8);
 }
 
-oui-noti-buttons.dark>button#buttonUnread:active, oui-noti-buttons.dark>button#buttonRead:active, oui-noti-buttons.dark>button#buttonUnused:active {
+body.dark oui-noti-buttons > button.oui-noti-buttons__unread:active,
+body.dark oui-noti-buttons > button.oui-noti-buttons__read:active,
+body.dark oui-noti-buttons > button.oui-noti-buttons__unused:active {
   transform: scale(1);
 }
 
-oui-noti-buttons.dark>button#buttonUnread {
+body.dark oui-noti-buttons > button.oui-noti-buttons__unread {
   float: right;
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
@@ -70,7 +79,7 @@ oui-noti-buttons.dark>button#buttonUnread {
   background-color: rgb(237, 237, 237);
 }
 
-oui-noti-buttons.dark>button#buttonRead {
+body.dark oui-noti-buttons > button.oui-noti-buttons__read {
   float: right;
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
@@ -80,7 +89,7 @@ oui-noti-buttons.dark>button#buttonRead {
   background-color: rgb(237, 237, 237);
 }
 
-oui-noti-buttons.dark>button#buttonUnused {
+body.dark oui-noti-buttons > button.oui-noti-buttons__unused {
   float: right;
   border: solid rgb(69, 76, 85);
   border-radius: 50%;
