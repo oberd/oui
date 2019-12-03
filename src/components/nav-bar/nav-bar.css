@@ -18,6 +18,7 @@ body.dark oui-nav-bar {
   width: inherit;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
+  transition: all 1s ease-in-out;
 }
 
 oui-nav-bar {
@@ -35,4 +36,5 @@ oui-nav-bar {
   width: inherit;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
+  transition: all 1s ease-in-out;
 }

@@ -7,8 +7,6 @@ import { Component, h, Method, State } from "@stencil/core"
 export class NotiTray {
   @State() private showNoti = false
 
-  // @Prop({ reflectToAttr: true, mutable: true }) opened: boolean;
-
   public componentDidLoad() {
     setInterval(this.demoImport.bind(this), 5000)
   }
@@ -18,13 +16,16 @@ export class NotiTray {
   }
 
   @Method()
-  public async open() {
-    if (this.showNoti) {
-      this.showNoti = false
-      document.querySelector("oui-noti-tray").style.display = "block"
-    } else {
-      this.showNoti = true
-      document.querySelector("oui-noti-tray").style.display = "none"
+  public open() {
+    switch (this.showNoti) {
+      case false:
+        this.showNoti = true
+        document.querySelector("oui-noti-tray").style.display = "block"
+        break
+      default:
+        this.showNoti = false
+        document.querySelector("oui-noti-tray").style.display = "none"
+        break
     }
   }
 
@@ -32,7 +33,10 @@ export class NotiTray {
     return (
       <aside>
         <header>
-          <button class="oui-noti-tray__clear" onClick={this.onClearNoti.bind(this)}>
+          <button
+            class="oui-noti-tray__clear"
+            onClick={this.onClearNoti.bind(this)}
+          >
             Clear All
           </button>
         </header>

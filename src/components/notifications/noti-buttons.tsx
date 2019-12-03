@@ -21,7 +21,7 @@ export class NotiButtons {
           <oui-svg name="noti-bell-read" scale={0.25}></oui-svg>
         </button>
 
-        <button class="oui-noti-buttons__unread" onClick={() => openTray()}>
+        <button class="oui-noti-buttons__unread" onClick={openTray}>
           <oui-svg name="noti-bell-unread" scale={0.25}></oui-svg>
         </button>
       </Host>
