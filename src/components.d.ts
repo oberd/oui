@@ -29,15 +29,20 @@ export namespace Components {
     'accept': string;
   }
   interface OuiFileUploadModal {}
-  interface OuiNavBarDark {}
-  interface OuiNavBarLight {}
-  interface OuiNotiButtonsDark {}
-  interface OuiNotiButtonsLight {}
-  interface OuiNotiTrayDark {}
-  interface OuiNotiTrayLight {}
+  interface OuiNavBar {
+    'Dark': boolean;
+  }
+  interface OuiNotiButtons {}
+  interface OuiNotiTray {
+    'open': () => Promise<void>;
+    'opened': boolean;
+  }
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
+  }
+  interface OuiTmSwitch {
+    'theme': string;
   }
 }
 
@@ -74,40 +79,22 @@ declare global {
     new (): HTMLOuiFileUploadModalElement;
   };
 
-  interface HTMLOuiNavBarDarkElement extends Components.OuiNavBarDark, HTMLStencilElement {}
-  var HTMLOuiNavBarDarkElement: {
-    prototype: HTMLOuiNavBarDarkElement;
-    new (): HTMLOuiNavBarDarkElement;
+  interface HTMLOuiNavBarElement extends Components.OuiNavBar, HTMLStencilElement {}
+  var HTMLOuiNavBarElement: {
+    prototype: HTMLOuiNavBarElement;
+    new (): HTMLOuiNavBarElement;
   };
 
-  interface HTMLOuiNavBarLightElement extends Components.OuiNavBarLight, HTMLStencilElement {}
-  var HTMLOuiNavBarLightElement: {
-    prototype: HTMLOuiNavBarLightElement;
-    new (): HTMLOuiNavBarLightElement;
+  interface HTMLOuiNotiButtonsElement extends Components.OuiNotiButtons, HTMLStencilElement {}
+  var HTMLOuiNotiButtonsElement: {
+    prototype: HTMLOuiNotiButtonsElement;
+    new (): HTMLOuiNotiButtonsElement;
   };
 
-  interface HTMLOuiNotiButtonsDarkElement extends Components.OuiNotiButtonsDark, HTMLStencilElement {}
-  var HTMLOuiNotiButtonsDarkElement: {
-    prototype: HTMLOuiNotiButtonsDarkElement;
-    new (): HTMLOuiNotiButtonsDarkElement;
-  };
-
-  interface HTMLOuiNotiButtonsLightElement extends Components.OuiNotiButtonsLight, HTMLStencilElement {}
-  var HTMLOuiNotiButtonsLightElement: {
-    prototype: HTMLOuiNotiButtonsLightElement;
-    new (): HTMLOuiNotiButtonsLightElement;
-  };
-
-  interface HTMLOuiNotiTrayDarkElement extends Components.OuiNotiTrayDark, HTMLStencilElement {}
-  var HTMLOuiNotiTrayDarkElement: {
-    prototype: HTMLOuiNotiTrayDarkElement;
-    new (): HTMLOuiNotiTrayDarkElement;
-  };
-
-  interface HTMLOuiNotiTrayLightElement extends Components.OuiNotiTrayLight, HTMLStencilElement {}
-  var HTMLOuiNotiTrayLightElement: {
-    prototype: HTMLOuiNotiTrayLightElement;
-    new (): HTMLOuiNotiTrayLightElement;
+  interface HTMLOuiNotiTrayElement extends Components.OuiNotiTray, HTMLStencilElement {}
+  var HTMLOuiNotiTrayElement: {
+    prototype: HTMLOuiNotiTrayElement;
+    new (): HTMLOuiNotiTrayElement;
   };
 
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
@@ -115,19 +102,23 @@ declare global {
     prototype: HTMLOuiSvgElement;
     new (): HTMLOuiSvgElement;
   };
+
+  interface HTMLOuiTmSwitchElement extends Components.OuiTmSwitch, HTMLStencilElement {}
+  var HTMLOuiTmSwitchElement: {
+    prototype: HTMLOuiTmSwitchElement;
+    new (): HTMLOuiTmSwitchElement;
+  };
   interface HTMLElementTagNameMap {
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-file-upload-modal': HTMLOuiFileUploadModalElement;
-    'oui-nav-bar-dark': HTMLOuiNavBarDarkElement;
-    'oui-nav-bar-light': HTMLOuiNavBarLightElement;
-    'oui-noti-buttons-dark': HTMLOuiNotiButtonsDarkElement;
-    'oui-noti-buttons-light': HTMLOuiNotiButtonsLightElement;
-    'oui-noti-tray-dark': HTMLOuiNotiTrayDarkElement;
-    'oui-noti-tray-light': HTMLOuiNotiTrayLightElement;
+    'oui-nav-bar': HTMLOuiNavBarElement;
+    'oui-noti-buttons': HTMLOuiNotiButtonsElement;
+    'oui-noti-tray': HTMLOuiNotiTrayElement;
     'oui-svg': HTMLOuiSvgElement;
+    'oui-tm-switch': HTMLOuiTmSwitchElement;
   }
 }
 
@@ -155,15 +146,19 @@ declare namespace LocalJSX {
     */
     'onClose'?: (event: CustomEvent<any>) => void;
   }
-  interface OuiNavBarDark {}
-  interface OuiNavBarLight {}
-  interface OuiNotiButtonsDark {}
-  interface OuiNotiButtonsLight {}
-  interface OuiNotiTrayDark {}
-  interface OuiNotiTrayLight {}
+  interface OuiNavBar {
+    'Dark'?: boolean;
+  }
+  interface OuiNotiButtons {}
+  interface OuiNotiTray {
+    'opened'?: boolean;
+  }
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
+  }
+  interface OuiTmSwitch {
+    'theme'?: string;
   }
 
   interface IntrinsicElements {
@@ -172,13 +167,11 @@ declare namespace LocalJSX {
     'oui-documents-icon': OuiDocumentsIcon;
     'oui-file-upload': OuiFileUpload;
     'oui-file-upload-modal': OuiFileUploadModal;
-    'oui-nav-bar-dark': OuiNavBarDark;
-    'oui-nav-bar-light': OuiNavBarLight;
-    'oui-noti-buttons-dark': OuiNotiButtonsDark;
-    'oui-noti-buttons-light': OuiNotiButtonsLight;
-    'oui-noti-tray-dark': OuiNotiTrayDark;
-    'oui-noti-tray-light': OuiNotiTrayLight;
+    'oui-nav-bar': OuiNavBar;
+    'oui-noti-buttons': OuiNotiButtons;
+    'oui-noti-tray': OuiNotiTray;
     'oui-svg': OuiSvg;
+    'oui-tm-switch': OuiTmSwitch;
   }
 }
 
@@ -193,13 +186,11 @@ declare module "@stencil/core" {
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-file-upload-modal': LocalJSX.OuiFileUploadModal & JSXBase.HTMLAttributes<HTMLOuiFileUploadModalElement>;
-      'oui-nav-bar-dark': LocalJSX.OuiNavBarDark & JSXBase.HTMLAttributes<HTMLOuiNavBarDarkElement>;
-      'oui-nav-bar-light': LocalJSX.OuiNavBarLight & JSXBase.HTMLAttributes<HTMLOuiNavBarLightElement>;
-      'oui-noti-buttons-dark': LocalJSX.OuiNotiButtonsDark & JSXBase.HTMLAttributes<HTMLOuiNotiButtonsDarkElement>;
-      'oui-noti-buttons-light': LocalJSX.OuiNotiButtonsLight & JSXBase.HTMLAttributes<HTMLOuiNotiButtonsLightElement>;
-      'oui-noti-tray-dark': LocalJSX.OuiNotiTrayDark & JSXBase.HTMLAttributes<HTMLOuiNotiTrayDarkElement>;
-      'oui-noti-tray-light': LocalJSX.OuiNotiTrayLight & JSXBase.HTMLAttributes<HTMLOuiNotiTrayLightElement>;
+      'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
+      'oui-noti-buttons': LocalJSX.OuiNotiButtons & JSXBase.HTMLAttributes<HTMLOuiNotiButtonsElement>;
+      'oui-noti-tray': LocalJSX.OuiNotiTray & JSXBase.HTMLAttributes<HTMLOuiNotiTrayElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
+      'oui-tm-switch': LocalJSX.OuiTmSwitch & JSXBase.HTMLAttributes<HTMLOuiTmSwitchElement>;
     }
   }
 }

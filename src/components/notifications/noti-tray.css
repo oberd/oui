@@ -1,0 +1,91 @@
+oui-noti-tray aside {
+  margin-right: 13%;
+  float: right;
+  position: element(buttonRead);
+  transform: translateY(-45.5px);
+  top: -100vh;
+  background-color: white;
+  border-top: none;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);
+  width: 20vw;
+  transition: all 1s ease-in-out;
+  z-index: 100;
+}
+
+oui-noti-tray.dark aside {
+  margin-right: 13%;
+  float: right;
+  position: element(buttonRead);
+  transform: translateY(-45.5px);
+  top: -100vh;
+  background-color: rgb(25, 37, 54);
+  border-top: none;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);
+  width: 20vw;
+  transition: all 1s ease-in-out;
+  z-index: 100;
+}
+
+oui-noti-tray #clear {
+  float: right;
+  margin: 1rem;
+  border: solid rgb(237, 237, 237);
+  border-radius: 1.25rem;
+  padding: 0 0.625rem;
+  background-color: rgb(237, 237, 237);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.05s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+
+oui-noti-tray #clear:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(237, 237, 237);
+  border: solid rgb(237, 237, 237);
+}
+
+oui-noti-tray #clear:active {
+  transform: scale(1);
+}
+
+oui-noti-tray.dark #clear {
+  color: white;
+  float: right;
+  margin: 1rem;
+  border: solid rgb(40, 51, 68);
+  border-radius: 1.25rem;
+  padding: 0 0.625rem;
+  background-color: rgb(40, 51, 68);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.05s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+
+oui-noti-tray.dark #clear:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px rgb(101, 202, 130, 0.8);
+}
+
+oui-noti-tray.dark #clear:active {
+  transform: scale(1);
+}
+
+#statuses ul {
+  list-style: none;
+  margin-top: 3.5rem;
+  padding: 0;
+}
+
+oui-noti-tray {
+  display: none;
+  transition: all 1s ease-in-out;
+}
+
+oui-noti-tray[opened] {
+  display: block;
+}
