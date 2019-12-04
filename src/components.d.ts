@@ -15,6 +15,17 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface NavButton {
+    'buttonName': string;
+  }
+  interface NavDrawer {
+    'navTitle': string;
+    'open': () => Promise<void>;
+    'opened': boolean;
+  }
+  interface NavLinks {
+    'links': string[];
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
@@ -37,6 +48,24 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLNavButtonElement extends Components.NavButton, HTMLStencilElement {}
+  var HTMLNavButtonElement: {
+    prototype: HTMLNavButtonElement;
+    new (): HTMLNavButtonElement;
+  };
+
+  interface HTMLNavDrawerElement extends Components.NavDrawer, HTMLStencilElement {}
+  var HTMLNavDrawerElement: {
+    prototype: HTMLNavDrawerElement;
+    new (): HTMLNavDrawerElement;
+  };
+
+  interface HTMLNavLinksElement extends Components.NavLinks, HTMLStencilElement {}
+  var HTMLNavLinksElement: {
+    prototype: HTMLNavLinksElement;
+    new (): HTMLNavLinksElement;
+  };
 
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
@@ -74,6 +103,9 @@ declare global {
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'nav-button': HTMLNavButtonElement;
+    'nav-drawer': HTMLNavDrawerElement;
+    'nav-links': HTMLNavLinksElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
@@ -84,6 +116,16 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface NavButton {
+    'buttonName'?: string;
+  }
+  interface NavDrawer {
+    'navTitle'?: string;
+    'opened'?: boolean;
+  }
+  interface NavLinks {
+    'links'?: string[];
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
@@ -113,6 +155,9 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'nav-button': NavButton;
+    'nav-drawer': NavDrawer;
+    'nav-links': NavLinks;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
     'oui-documents-icon': OuiDocumentsIcon;
@@ -128,6 +173,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'nav-button': LocalJSX.NavButton & JSXBase.HTMLAttributes<HTMLNavButtonElement>;
+      'nav-drawer': LocalJSX.NavDrawer & JSXBase.HTMLAttributes<HTMLNavDrawerElement>;
+      'nav-links': LocalJSX.NavLinks & JSXBase.HTMLAttributes<HTMLNavLinksElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;

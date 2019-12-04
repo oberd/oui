@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Oberd Oui!</title>
 
+  <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      .side-nav ul {
+        list-style: none;
+      }
+
+      .side-nav li {
+        margin: 1rem 0;
+      }
+
+      .side-nav a {
+        text-decoration: none;
+        color: black;
+      }
+
+      .side-drawer-btn {
+      display: block;
+      height: 100%;
+      border: none;
+      background-color: #38CD84;
+      padding: 14px 28px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+    </style>
+
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/build/oui.css">
   <style>html,body { font-family: 'Montserrat', sans-serif; }</style>
@@ -13,6 +43,37 @@
 
 </head>
 <body>
+
+
+    <button id="side-drawer-btn" class="side-drawer-btn" >></button>
+    <nav-drawer title="Main Menu">
+      <nav class="side-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/">Home1</a></li>
+          <li><a href="/">Home2</a></li>
+        </ul>
+      </nav>
+    </nav-drawer>
+
+    <script>
+      const sideDrawerButton = document.querySelector('#side-drawer-btn');
+      const sideDrawer = document.querySelector('nav-drawer');
+      sideDrawerButton.addEventListener('click', () => {
+        if (!sideDrawer.opened) {
+          console.log('Opening side drawer...');
+          // sideDrawer.open = true;
+          sideDrawer.open();
+        }
+      });
+      setTimeout(() => {
+        // sideDrawer.title = 'It changed!';
+        // sideDrawer.setAttribute('title', 'It changed via Attribute');
+      }, 3000);
+    </script>
+
+
+
   <oui-card style="min-height: 400px;">
     <oui-card-heading>
       <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
