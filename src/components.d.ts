@@ -18,9 +18,9 @@ export namespace Components {
   interface NavButton {}
   interface NavButtonName {}
   interface NavDrawer {
-    'navTitle': string;
     'open': () => Promise<void>;
     'opened': boolean;
+    'title': string;
   }
   interface NavLinks {
     'links': string[];
@@ -125,8 +125,8 @@ declare namespace LocalJSX {
   interface NavButton {}
   interface NavButtonName {}
   interface NavDrawer {
-    'navTitle'?: string;
     'opened'?: boolean;
+    'title'?: string;
   }
   interface NavLinks {
     'links'?: string[];

@@ -6,7 +6,7 @@ import { Component, h, Host, Method, Prop, State } from "@stencil/core"
 })
 export class NavDrawer {
 
-  @Prop() public navTitle: string
+  @Prop() public title: string
   @Prop() public opened: boolean
 
   @State() public showContactInfo = false
@@ -22,8 +22,10 @@ export class NavDrawer {
         <div class="backdrop" onClick={this.onCloseDrawer} />
         <aside>
           <header>
-            <h1>{this.navTitle}</h1>
-            <button onClick={this.onCloseDrawer}>X</button>
+            <h1>{this.title}</h1>
+            <button onClick={this.onCloseDrawer}>
+              <oui-svg name="icon-close" scale={1} />
+            </button>
           </header>
           <slot  />
         </aside>
