@@ -1,44 +1,22 @@
-import { Component, h, Host, Prop, State, Method } from '@stencil/core';
+import { Component, h, Host, Method, Prop, State } from "@stencil/core"
 
 @Component({
-  tag: 'nav-drawer',
-  styleUrl: './nav-drawer.css',
+  tag: "nav-drawer",
+  styleUrl: "./nav-drawer.css",
 })
 export class NavDrawer {
-  @State() showContactInfo = false;
 
-  @Prop({ reflect: true }) navTitle: string;
-  @Prop({ reflect: true, mutable: true }) opened: boolean;
+  @Prop() public navTitle: string
+  @Prop() public opened: boolean
 
-  onCloseDrawer = () => {
-    this.opened = false;
-  }
-
-  onContentChange(content: string) {
-    this.showContactInfo = content === 'contact';
-  }
+  @State() public showContactInfo = false
 
   @Method()
-  open() {
-    this.opened = true;
+  public open() {
+    this.opened = true
   }
 
-  render() {
-    
-    // let mainContent = <slot />;
-    // if (this.showContactInfo) {
-    //   mainContent = (
-    //     <div id="studies">
-    //       <ul>
-    //         <li>Studies Homes</li>
-    //         <li>Studies Homes</li>
-    //         <li>Studies Homes</li>
-    //         <li>Studies Homes</li>
-    //       </ul>
-    //     </div>
-    //   );
-    
-
+  public render() {
     return (
       <Host>
         <div class="backdrop" onClick={this.onCloseDrawer} />
@@ -50,6 +28,14 @@ export class NavDrawer {
           <slot  />
         </aside>
       </Host>
-    );
+    )
+  }
+
+  private onCloseDrawer = () => {
+    this.opened = false
+  }
+
+  private onContentChange(content: string) {
+    this.showContactInfo = content === "contact"
   }
 }
