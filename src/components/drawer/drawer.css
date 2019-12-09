@@ -1,4 +1,4 @@
-nav-drawer aside {
+oui-drawer aside {
   position: fixed;
   top: 0;
   max-width: 100%;
@@ -9,23 +9,23 @@ nav-drawer aside {
   z-index: 100;
 }
 
-nav-drawer.default aside {
+oui-drawer.default aside {
   left: -100%;
 }
 
-nav-drawer[opened].default aside {
+oui-drawer[opened].default aside {
   left: 0;
 }
 
-nav-drawer.reverse aside {
+oui-drawer.reverse aside {
   right: -100%;
 }
 
-nav-drawer[opened].reverse aside {
+oui-drawer[opened].reverse aside {
   right: 0;
 }
 
-nav-drawer header {
+oui-drawer header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,27 +34,27 @@ nav-drawer header {
   border-bottom: 1px ridge rgba(0, 0, 0, 0.15);
 }
 
-nav-drawer header.reverse {
+oui-drawer header.reverse {
   flex-direction: row-reverse;
 }
 
-nav-drawer header h1 {
+oui-drawer header h1 {
   font-size: 1.2rem;
   margin: 0;
   color: #333;
 }
 
-nav-drawer svg {
+oui-drawer svg {
   opacity: 0.3;
   cursor: pointer;
   transition: opacity 0.15s linear;
 }
 
-nav-drawer svg:hover {
+oui-drawer svg:hover {
   opacity: 1;
 }
 
-nav-drawer .backdrop {
+oui-drawer .backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -67,7 +67,7 @@ nav-drawer .backdrop {
   transition: opacity 0.3s ease-out;
 }
 
-nav-drawer[opened] .backdrop {
+oui-drawer[opened] .backdrop {
   opacity: 1;
   pointer-events: all;
 }

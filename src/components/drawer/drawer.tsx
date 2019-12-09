@@ -1,10 +1,10 @@
-import { Component, h, Host, Method, Prop, State } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-  tag: "nav-drawer",
-  styleUrl: "./nav-drawer.css",
+  tag: "oui-drawer",
+  styleUrl: "./drawer.css",
 })
-export class NavDrawer {
+export class Drawer {
   /**
    * Set drawer drawerTitle
    */
@@ -24,8 +24,6 @@ export class NavDrawer {
    * Set drawer size
    */
   @Prop() public size: string = "auto"
-
-  @State() public showContactInfo = false
 
   public render() {
     const cls = (this.position === "right") ? "reverse" : "default"
