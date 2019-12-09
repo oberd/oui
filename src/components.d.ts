@@ -8,8 +8,8 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  FileDropEvent,
-} from './components/file-upload/FileDropEvent';
+  FileUploadHandler,
+} from './components/file-upload/FileUploadHandler';
 import {
   SvgPack,
 } from './components/svg/svgs';
@@ -27,6 +27,14 @@ export namespace Components {
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
     */
     'accept': string;
+    /**
+    * Specify a label for the button.
+    */
+    'btnLabel': string;
+    /**
+    * Specify a title for the modal.
+    */
+    'modalTitle': string;
   }
   interface OuiSvg {
     'name': SvgPack;
@@ -89,9 +97,17 @@ declare namespace LocalJSX {
     */
     'accept'?: string;
     /**
+    * Specify a label for the button.
+    */
+    'btnLabel'?: string;
+    /**
+    * Specify a title for the modal.
+    */
+    'modalTitle'?: string;
+    /**
     * Files dropped onto page, and validated. You can use this event to perform an upload in javscript
     */
-    'onDropped'?: (event: CustomEvent<FileDropEvent>) => void;
+    'onDropped'?: (event: CustomEvent<FileUploadHandler>) => void;
   }
   interface OuiSvg {
     'name'?: SvgPack;
