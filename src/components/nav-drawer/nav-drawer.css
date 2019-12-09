@@ -1,7 +1,6 @@
 nav-drawer aside {
   position: fixed;
   top: 0;
-  left: -100%;
   width: 20rem;
   max-width: 80%;
   height: 100vh;
@@ -11,8 +10,20 @@ nav-drawer aside {
   z-index: 100;
 }
 
-nav-drawer[opened] aside {
+nav-drawer.default aside {
+  left: -100%;
+}
+
+nav-drawer[opened].default aside {
   left: 0;
+}
+
+nav-drawer.reverse aside {
+  right: -100%;
+}
+
+nav-drawer[opened].reverse aside {
+  right: 0;
 }
 
 nav-drawer header {

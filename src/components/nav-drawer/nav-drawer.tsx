@@ -18,7 +18,7 @@ export class NavDrawer {
   }
 
   public render() {
-    const cls = (this.position === "right") ? "reverse" : ""
+    const cls = (this.position === "right") ? "reverse" : "default"
 
     return (
       <Host opened={this.opened} class={cls}>
