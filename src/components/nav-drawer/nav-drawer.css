@@ -16,26 +16,33 @@ nav-drawer[opened] aside {
 }
 
 nav-drawer header {
-  padding: 1rem;
-  background: white;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0.3em;
+  background: #FFF;
+  border-bottom: 1px ridge rgba(0, 0, 0, 0.15);
+}
+
+nav-drawer header.reverse {
+  flex-direction: row-reverse;
 }
 
 nav-drawer header h1 {
-  font-size: 1.5rem;
-  color: white;
+  font-size: 1.2rem;
   margin: 0;
+  color: #333;
 }
 
-nav-drawer header button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1rem;
-  color: black;
-  background: transparent;
-  font-size: 1.5rem;
-  border: none;
+nav-drawer svg {
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.15s linear;
+}
+
+
+nav-drawer svg:hover {
+  opacity: 1;
 }
 
 nav-drawer header button:focus {
