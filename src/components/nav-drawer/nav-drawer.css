@@ -1,4 +1,4 @@
-aside {
+nav-drawer aside {
   position: fixed;
   top: 0;
   left: -100%;
@@ -11,23 +11,23 @@ aside {
   z-index: 100;
 }
 
-:host([opened]) aside {
+nav-drawer[opened] aside {
   left: 0;
 }
 
-header {
+nav-drawer header {
   padding: 1rem;
   background: black;
   position: relative;
 }
 
-header h1 {
+nav-drawer header h1 {
   font-size: 1.5rem;
   color: white;
   margin: 0;
 }
 
-header button {
+nav-drawer header button {
   position: absolute;
   top: 0;
   right: 0;
@@ -38,11 +38,11 @@ header button {
   border: none;
 }
 
-header button:focus {
+nav-drawer header button:focus {
   outline: none;
 }
 
-#tabs {
+nav-drawer #tabs {
   /* display: flex;
   justify-content: center;
   width: 100%;
@@ -51,7 +51,7 @@ header button:focus {
   justify-content: center;
 }
 
-#tabs button {
+nav-drawer #tabs button {
   /* width: 30%;
   background: white;
   color: black;
@@ -66,22 +66,18 @@ header button:focus {
   font-family: Comic Sans MS, cursive, sans-serif;
 }
 
-#tabs button.active,
-#tabs button:hover,
-#tabs button:active {
+nav-drawer #tabs button.active,
+nav-drawer #tabs button:hover,
+nav-drawer #tabs button:active {
   background: black;
   color: white;
 }
 
-#tabs button:focus {
+nav-drawer #tabs button:focus {
   outline: none;
 }
 
-#contact-information {
-  padding: 0 1rem;
-}
-
-.backdrop {
+nav-drawer .backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -94,7 +90,7 @@ header button:focus {
   transition: opacity 0.3s ease-out;
 }
 
-:host([opened]) .backdrop {
+nav-drawer[opened] .backdrop {
   opacity: 1;
   pointer-events: all;
 }

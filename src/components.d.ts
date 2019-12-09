@@ -15,9 +15,8 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
-  interface NavButton {
-    'buttonName': string;
-  }
+  interface NavButton {}
+  interface NavButtonName {}
   interface NavDrawer {
     'navTitle': string;
     'open': () => Promise<void>;
@@ -53,6 +52,12 @@ declare global {
   var HTMLNavButtonElement: {
     prototype: HTMLNavButtonElement;
     new (): HTMLNavButtonElement;
+  };
+
+  interface HTMLNavButtonNameElement extends Components.NavButtonName, HTMLStencilElement {}
+  var HTMLNavButtonNameElement: {
+    prototype: HTMLNavButtonNameElement;
+    new (): HTMLNavButtonNameElement;
   };
 
   interface HTMLNavDrawerElement extends Components.NavDrawer, HTMLStencilElement {}
@@ -104,6 +109,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'nav-button': HTMLNavButtonElement;
+    'nav-button-name': HTMLNavButtonNameElement;
     'nav-drawer': HTMLNavDrawerElement;
     'nav-links': HTMLNavLinksElement;
     'oui-card': HTMLOuiCardElement;
@@ -116,9 +122,8 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface NavButton {
-    'buttonName'?: string;
-  }
+  interface NavButton {}
+  interface NavButtonName {}
   interface NavDrawer {
     'navTitle'?: string;
     'opened'?: boolean;
@@ -156,6 +161,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'nav-button': NavButton;
+    'nav-button-name': NavButtonName;
     'nav-drawer': NavDrawer;
     'nav-links': NavLinks;
     'oui-card': OuiCard;
@@ -174,6 +180,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'nav-button': LocalJSX.NavButton & JSXBase.HTMLAttributes<HTMLNavButtonElement>;
+      'nav-button-name': LocalJSX.NavButtonName & JSXBase.HTMLAttributes<HTMLNavButtonNameElement>;
       'nav-drawer': LocalJSX.NavDrawer & JSXBase.HTMLAttributes<HTMLNavDrawerElement>;
       'nav-links': LocalJSX.NavLinks & JSXBase.HTMLAttributes<HTMLNavLinksElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
