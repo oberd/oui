@@ -8,8 +8,8 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  FileDropEvent,
-} from './components/file-upload/FileDropEvent';
+  FileUploadHandler,
+} from './components/file-upload/FileUploadHandler';
 import {
   SvgPack,
 } from './components/svg/svgs';
@@ -27,8 +27,16 @@ export namespace Components {
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
     */
     'accept': string;
+    /**
+    * Specify a label for the button.
+    */
+    'btnLabel': string;
+    /**
+    * Specify a title for the modal.
+    */
+    'modalTitle': string;
   }
-  interface OuiFileUploadModal {}
+  interface OuiModal {}
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -62,10 +70,10 @@ declare global {
     new (): HTMLOuiFileUploadElement;
   };
 
-  interface HTMLOuiFileUploadModalElement extends Components.OuiFileUploadModal, HTMLStencilElement {}
-  var HTMLOuiFileUploadModalElement: {
-    prototype: HTMLOuiFileUploadModalElement;
-    new (): HTMLOuiFileUploadModalElement;
+  interface HTMLOuiModalElement extends Components.OuiModal, HTMLStencilElement {}
+  var HTMLOuiModalElement: {
+    prototype: HTMLOuiModalElement;
+    new (): HTMLOuiModalElement;
   };
 
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
@@ -78,7 +86,7 @@ declare global {
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
-    'oui-file-upload-modal': HTMLOuiFileUploadModalElement;
+    'oui-modal': HTMLOuiModalElement;
     'oui-svg': HTMLOuiSvgElement;
   }
 }
@@ -97,11 +105,19 @@ declare namespace LocalJSX {
     */
     'accept'?: string;
     /**
+    * Specify a label for the button.
+    */
+    'btnLabel'?: string;
+    /**
+    * Specify a title for the modal.
+    */
+    'modalTitle'?: string;
+    /**
     * Files dropped onto page, and validated. You can use this event to perform an upload in javscript
     */
-    'onDropped'?: (event: CustomEvent<FileDropEvent>) => void;
+    'onDropped'?: (event: CustomEvent<FileUploadHandler>) => void;
   }
-  interface OuiFileUploadModal {
+  interface OuiModal {
     /**
     * Emitted when modal is closed via button or esc
     */
@@ -117,7 +133,7 @@ declare namespace LocalJSX {
     'oui-card-heading': OuiCardHeading;
     'oui-documents-icon': OuiDocumentsIcon;
     'oui-file-upload': OuiFileUpload;
-    'oui-file-upload-modal': OuiFileUploadModal;
+    'oui-modal': OuiModal;
     'oui-svg': OuiSvg;
   }
 }
@@ -132,7 +148,7 @@ declare module "@stencil/core" {
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
-      'oui-file-upload-modal': LocalJSX.OuiFileUploadModal & JSXBase.HTMLAttributes<HTMLOuiFileUploadModalElement>;
+      'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
     }
   }
