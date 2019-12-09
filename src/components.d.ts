@@ -15,6 +15,24 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface NavDrawer {
+    /**
+    * Set drawer drawerTitle
+    */
+    'drawerTitle': string;
+    /**
+    * Open and close drawer
+    */
+    'opened': boolean;
+    /**
+    * Set drawer position to right or left
+    */
+    'position': string;
+    /**
+    * Set drawer size
+    */
+    'size': string;
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
@@ -36,6 +54,7 @@ export namespace Components {
     */
     'modalTitle': string;
   }
+  interface OuiModal {}
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -44,6 +63,12 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLNavDrawerElement extends Components.NavDrawer, HTMLStencilElement {}
+  var HTMLNavDrawerElement: {
+    prototype: HTMLNavDrawerElement;
+    new (): HTMLNavDrawerElement;
+  };
 
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
@@ -69,21 +94,47 @@ declare global {
     new (): HTMLOuiFileUploadElement;
   };
 
+  interface HTMLOuiModalElement extends Components.OuiModal, HTMLStencilElement {}
+  var HTMLOuiModalElement: {
+    prototype: HTMLOuiModalElement;
+    new (): HTMLOuiModalElement;
+  };
+
   interface HTMLOuiSvgElement extends Components.OuiSvg, HTMLStencilElement {}
   var HTMLOuiSvgElement: {
     prototype: HTMLOuiSvgElement;
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'nav-drawer': HTMLNavDrawerElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
+    'oui-modal': HTMLOuiModalElement;
     'oui-svg': HTMLOuiSvgElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface NavDrawer {
+    /**
+    * Set drawer drawerTitle
+    */
+    'drawerTitle'?: string;
+    /**
+    * Open and close drawer
+    */
+    'opened'?: boolean;
+    /**
+    * Set drawer position to right or left
+    */
+    'position'?: string;
+    /**
+    * Set drawer size
+    */
+    'size'?: string;
+  }
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiDocumentsIcon {
@@ -109,16 +160,24 @@ declare namespace LocalJSX {
     */
     'onDropped'?: (event: CustomEvent<FileUploadHandler>) => void;
   }
+  interface OuiModal {
+    /**
+    * Emitted when modal is closed via button or esc
+    */
+    'onClose'?: (event: CustomEvent<any>) => void;
+  }
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;
   }
 
   interface IntrinsicElements {
+    'nav-drawer': NavDrawer;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
     'oui-documents-icon': OuiDocumentsIcon;
     'oui-file-upload': OuiFileUpload;
+    'oui-modal': OuiModal;
     'oui-svg': OuiSvg;
   }
 }
@@ -129,10 +188,12 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'nav-drawer': LocalJSX.NavDrawer & JSXBase.HTMLAttributes<HTMLNavDrawerElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
+      'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
     }
   }
