@@ -12,13 +12,13 @@ export class NavDrawer {
   @State() public showContactInfo = false
 
   @Method()
-  public open() {
+  public async open() {
     this.opened = true
   }
 
   public render() {
     return (
-      <Host>
+      <Host opened={this.opened}>
         <div class="backdrop" onClick={this.onCloseDrawer} />
         <aside>
           <header>
@@ -33,9 +33,5 @@ export class NavDrawer {
 
   private onCloseDrawer = () => {
     this.opened = false
-  }
-
-  private onContentChange(content: string) {
-    this.showContactInfo = content === "contact"
   }
 }
