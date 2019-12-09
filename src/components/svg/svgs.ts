@@ -19,5 +19,6 @@ export const svgs: SvgMap = {
     "logo-light-bg": { loader: toString(() => import("./svg/oui-logo-light-bg.svg")), width: 266, height: 145 },
     "icon-close": { loader: toString(() => import("./svg/icon-close.svg")), ...iconSize },
     "icon-filter": { loader: toString(() => import("./svg/icon-filter.svg")), ...iconSize },
+    "icon-varrow": { loader: toString(() => import("./svg/icon-varrow.svg")), ...iconSize },
 }
 export type SvgPack = keyof typeof svgs
