@@ -40,37 +40,8 @@ nav-drawer svg {
   transition: opacity 0.15s linear;
 }
 
-
 nav-drawer svg:hover {
   opacity: 1;
-}
-
-nav-drawer header button:focus {
-  outline: none;
-}
-
-nav-drawer #tabs {
-  width: 19rem;
-  justify-content: center;
-}
-
-nav-drawer #tabs button {
-  width: 100%;
-  display: block;
-  height: 60px;
-  font-size: 15px; 
-  font-family: Comic Sans MS, cursive, sans-serif;
-}
-
-nav-drawer #tabs button.active,
-nav-drawer #tabs button:hover,
-nav-drawer #tabs button:active {
-  background: black;
-  color: white;
-}
-
-nav-drawer #tabs button:focus {
-  outline: none;
 }
 
 nav-drawer .backdrop {
