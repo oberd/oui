@@ -9,6 +9,7 @@ export class NavDrawer {
   @Prop() public title: string
   @Prop() public position: string = "left"
   @Prop() public opened: boolean
+  @Prop() public size: string = "auto"
 
   @State() public showContactInfo = false
 
@@ -19,11 +20,10 @@ export class NavDrawer {
 
   public render() {
     const cls = (this.position === "right") ? "reverse" : "default"
-
     return (
       <Host opened={this.opened} class={cls}>
         <div class="backdrop" onClick={this.onCloseDrawer} />
-        <aside>
+        <aside style={{width: this.size}}>
           <header class={cls}>
             <h1>{this.title}</h1>
             <oui-svg name="icon-close" scale={1} onClick={this.onCloseDrawer} />

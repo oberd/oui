@@ -21,6 +21,7 @@ export namespace Components {
     'open': () => Promise<void>;
     'opened': boolean;
     'position': string;
+    'size': string;
     'title': string;
   }
   interface NavLinks {
@@ -128,6 +129,7 @@ declare namespace LocalJSX {
   interface NavDrawer {
     'opened'?: boolean;
     'position'?: string;
+    'size'?: string;
     'title'?: string;
   }
   interface NavLinks {
