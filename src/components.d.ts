@@ -50,6 +50,16 @@ export namespace Components {
     */
     'size': string;
   }
+  interface OuiDrawerItem {
+    /**
+    * Set drawer item action if string will be treated as a url or as a callback if it is a function
+    */
+    'action': string | DrawerItemAction;
+    /**
+    * Set drawer item label
+    */
+    'label': string;
+  }
   interface OuiFileUpload {
     /**
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
@@ -104,6 +114,12 @@ declare global {
     new (): HTMLOuiDrawerElement;
   };
 
+  interface HTMLOuiDrawerItemElement extends Components.OuiDrawerItem, HTMLStencilElement {}
+  var HTMLOuiDrawerItemElement: {
+    prototype: HTMLOuiDrawerItemElement;
+    new (): HTMLOuiDrawerItemElement;
+  };
+
   interface HTMLOuiFileUploadElement extends Components.OuiFileUpload, HTMLStencilElement {}
   var HTMLOuiFileUploadElement: {
     prototype: HTMLOuiFileUploadElement;
@@ -127,6 +143,7 @@ declare global {
     'oui-collapsable': HTMLOuiCollapsableElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
     'oui-drawer': HTMLOuiDrawerElement;
+    'oui-drawer-item': HTMLOuiDrawerItemElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-modal': HTMLOuiModalElement;
     'oui-svg': HTMLOuiSvgElement;
@@ -169,6 +186,16 @@ declare namespace LocalJSX {
     */
     'size'?: string;
   }
+  interface OuiDrawerItem {
+    /**
+    * Set drawer item action if string will be treated as a url or as a callback if it is a function
+    */
+    'action'?: string | DrawerItemAction;
+    /**
+    * Set drawer item label
+    */
+    'label'?: string;
+  }
   interface OuiFileUpload {
     /**
     * Specify mime types to accept (unrestricted by default) Separate by spaces for multiple: `text/html text/xml`
@@ -204,6 +231,7 @@ declare namespace LocalJSX {
     'oui-collapsable': OuiCollapsable;
     'oui-documents-icon': OuiDocumentsIcon;
     'oui-drawer': OuiDrawer;
+    'oui-drawer-item': OuiDrawerItem;
     'oui-file-upload': OuiFileUpload;
     'oui-modal': OuiModal;
     'oui-svg': OuiSvg;
@@ -221,6 +249,7 @@ declare module "@stencil/core" {
       'oui-collapsable': LocalJSX.OuiCollapsable & JSXBase.HTMLAttributes<HTMLOuiCollapsableElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
       'oui-drawer': LocalJSX.OuiDrawer & JSXBase.HTMLAttributes<HTMLOuiDrawerElement>;
+      'oui-drawer-item': LocalJSX.OuiDrawerItem & JSXBase.HTMLAttributes<HTMLOuiDrawerItemElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
