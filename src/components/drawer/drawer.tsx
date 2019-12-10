@@ -18,7 +18,7 @@ export class Drawer {
   /**
    * Open and close drawer
    */
-  @Prop() public open: boolean
+  @Prop() public opened: boolean
 
   /**
    * Set drawer size
@@ -28,24 +28,24 @@ export class Drawer {
   /**
    * Triggered when the drawer close
    */
-  @Event() public closed: EventEmitter
+  @Event() public close: EventEmitter
 
    /**
     * Triggered when the drawer open
     */
-  @Event() public opened: EventEmitter
+  @Event() public open: EventEmitter
 
-  @Watch("open")
+  @Watch("opened")
   public openhandler(newValue: boolean) {
     if (newValue === true) {
-      this.opened.emit()
+      this.open.emit()
     }
   }
 
   public render() {
     const cls = (this.position === "right") ? "reverse" : "default"
     return (
-      <Host opened={this.open} class={cls}>
+      <Host opened={this.opened} class={cls}>
         <div class="backdrop" onClick={this.onCloseDrawer} />
         <aside style={{ width: this.size }}>
           <header class={cls}>
@@ -60,7 +60,7 @@ export class Drawer {
 
   private onCloseDrawer = () => {
     /** TODO: it is possible to implement preventDefault() ???? */
-    this.closed.emit()
-    this.open = false
+    this.close.emit()
+    this.opened = false
   }
 }

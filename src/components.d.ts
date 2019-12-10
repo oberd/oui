@@ -40,7 +40,7 @@ export namespace Components {
     /**
     * Open and close drawer
     */
-    'open': boolean;
+    'opened': boolean;
     /**
     * Set drawer position to right or left
     */
@@ -176,15 +176,15 @@ declare namespace LocalJSX {
     /**
     * Triggered when the drawer close
     */
-    'onClosed'?: (event: CustomEvent<any>) => void;
+    'onClose'?: (event: CustomEvent<any>) => void;
     /**
     * Triggered when the drawer open
     */
-    'onOpened'?: (event: CustomEvent<any>) => void;
+    'onOpen'?: (event: CustomEvent<any>) => void;
     /**
     * Open and close drawer
     */
-    'open'?: boolean;
+    'opened'?: boolean;
     /**
     * Set drawer position to right or left
     */
