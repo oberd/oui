@@ -91,5 +91,14 @@ oui-drawer oui-collapsable .oui-collapsable__content {
 oui-drawer oui-collapsable .oui-collapsable__content {
   background-color: rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba( 0, 0, 0, 0.1);
+  padding: 0 !important;
 }
 
+oui-drawer oui-collapsable oui-drawer-item {
+  padding: 0.5em 0.3em;
+  box-sizing: border-box;
+}
+
+oui-drawer oui-collapsable oui-drawer-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
