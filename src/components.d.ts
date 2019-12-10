@@ -15,13 +15,14 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface OuiAccordion {}
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiCollapsable {
     /**
     * Set drawer position to right or left
     */
-    'collapsed': boolean;
+    'expanded': boolean;
     /**
     * Set drawer drawerTitle
     */
@@ -84,6 +85,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLOuiAccordionElement extends Components.OuiAccordion, HTMLStencilElement {}
+  var HTMLOuiAccordionElement: {
+    prototype: HTMLOuiAccordionElement;
+    new (): HTMLOuiAccordionElement;
+  };
+
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
     prototype: HTMLOuiCardElement;
@@ -138,6 +145,7 @@ declare global {
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'oui-accordion': HTMLOuiAccordionElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
     'oui-collapsable': HTMLOuiCollapsableElement;
@@ -151,13 +159,14 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface OuiAccordion {}
   interface OuiCard {}
   interface OuiCardHeading {}
   interface OuiCollapsable {
     /**
     * Set drawer position to right or left
     */
-    'collapsed'?: boolean;
+    'expanded'?: boolean;
     /**
     * Set drawer drawerTitle
     */
@@ -242,6 +251,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'oui-accordion': OuiAccordion;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
     'oui-collapsable': OuiCollapsable;
@@ -260,6 +270,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'oui-accordion': LocalJSX.OuiAccordion & JSXBase.HTMLAttributes<HTMLOuiAccordionElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
       'oui-collapsable': LocalJSX.OuiCollapsable & JSXBase.HTMLAttributes<HTMLOuiCollapsableElement>;

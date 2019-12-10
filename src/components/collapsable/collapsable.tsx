@@ -13,7 +13,7 @@ export class Collapsable {
   /**
    * Set drawer position to right or left
    */
-  @Prop() public collapsed: boolean = false
+  @Prop() public expanded: boolean = false
 
   /**
    * Triggered when item collaspes
@@ -27,9 +27,9 @@ export class Collapsable {
 
   public render() {
     return (
-      <Host collapsed={this.collapsed}>
+      <Host expanded={this.expanded}>
         <div class="oui-collapsable__title" onClick={this.toggle}>
-          <oui-svg name="icon-varrow" scale={0.45}  />
+          <oui-svg name="icon-varrow" scale={0.45} />
           <span>{this.label}</span>
         </div>
         <section class="oui-collapsable__content">
@@ -40,9 +40,9 @@ export class Collapsable {
   }
 
   private toggle = () => {
-    this.collapsed = !this.collapsed
+    this.expanded = !this.expanded
 
-    if (!this.collapsed) {
+    if (!this.expanded) {
       this.collapse.emit()
       return
     }
