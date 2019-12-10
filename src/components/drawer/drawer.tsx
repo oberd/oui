@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "oui-drawer",
@@ -25,6 +25,9 @@ export class Drawer {
    */
   @Prop() public size: string = "auto"
 
+  @Event() public closed: EventEmitter
+
+
   public render() {
     const cls = (this.position === "right") ? "reverse" : "default"
     return (
@@ -42,6 +45,8 @@ export class Drawer {
   }
 
   private onCloseDrawer = () => {
+    /** TODO: it is possible to implement preventDefault() ???? */
+    this.closed.emit()
     this.opened = false
   }
 }

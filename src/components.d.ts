@@ -173,6 +173,7 @@ declare namespace LocalJSX {
     * Set drawer drawerTitle
     */
     'drawerTitle'?: string;
+    'onClosed'?: (event: CustomEvent<any>) => void;
     /**
     * Open and close drawer
     */
