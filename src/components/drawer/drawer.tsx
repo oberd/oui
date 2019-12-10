@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
 
 @Component({
   tag: "oui-drawer",
@@ -18,20 +18,34 @@ export class Drawer {
   /**
    * Open and close drawer
    */
-  @Prop() public opened: boolean
+  @Prop() public open: boolean
 
   /**
    * Set drawer size
    */
   @Prop() public size: string = "auto"
 
+  /**
+   * Triggered when the drawer close
+   */
   @Event() public closed: EventEmitter
 
+   /**
+    * Triggered when the drawer open
+    */
+  @Event() public opened: EventEmitter
+
+  @Watch("open")
+  public openhandler(newValue: boolean) {
+    if (newValue === true) {
+      this.opened.emit()
+    }
+  }
 
   public render() {
     const cls = (this.position === "right") ? "reverse" : "default"
     return (
-      <Host opened={this.opened} class={cls}>
+      <Host opened={this.open} class={cls}>
         <div class="backdrop" onClick={this.onCloseDrawer} />
         <aside style={{ width: this.size }}>
           <header class={cls}>
@@ -47,6 +61,6 @@ export class Drawer {
   private onCloseDrawer = () => {
     /** TODO: it is possible to implement preventDefault() ???? */
     this.closed.emit()
-    this.opened = false
+    this.open = false
   }
 }
