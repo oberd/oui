@@ -52,13 +52,13 @@ export namespace Components {
   }
   interface OuiDrawerItem {
     /**
-    * Set drawer item action if string will be treated as a url or as a callback if it is a function
-    */
-    'action': string | DrawerItemAction;
-    /**
     * Set drawer item label
     */
     'label': string;
+    /**
+    * Set drawer item link if string will be treated as a url or as a callback if it is a function
+    */
+    'link': string;
   }
   interface OuiFileUpload {
     /**
@@ -163,11 +163,11 @@ declare namespace LocalJSX {
     */
     'label'?: string;
     /**
-    * Triggered when the drawer open
+    * Triggered when item collaspes
     */
     'onCollapse'?: (event: CustomEvent<any>) => void;
     /**
-    * Triggered when the drawer open
+    * Triggered when the item expands
     */
     'onExpand'?: (event: CustomEvent<any>) => void;
   }
@@ -204,13 +204,13 @@ declare namespace LocalJSX {
   }
   interface OuiDrawerItem {
     /**
-    * Set drawer item action if string will be treated as a url or as a callback if it is a function
-    */
-    'action'?: string | DrawerItemAction;
-    /**
     * Set drawer item label
     */
     'label'?: string;
+    /**
+    * Set drawer item link if string will be treated as a url or as a callback if it is a function
+    */
+    'link'?: string;
   }
   interface OuiFileUpload {
     /**

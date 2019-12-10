@@ -16,12 +16,12 @@ export class Collapsable {
   @Prop() public collapsed: boolean = false
 
   /**
-   * Triggered when the drawer open
+   * Triggered when item collaspes
    */
   @Event() public collapse: EventEmitter
 
   /**
-   * Triggered when the drawer open
+   * Triggered when the item expands
    */
   @Event() public expand: EventEmitter
 
