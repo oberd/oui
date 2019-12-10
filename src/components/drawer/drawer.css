@@ -44,7 +44,7 @@ oui-drawer header h1 {
   color: #333;
 }
 
-oui-drawer svg {
+oui-drawer oui-svg {
   opacity: 0.3;
   cursor: pointer;
   transition: opacity 0.15s linear;
