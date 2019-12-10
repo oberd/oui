@@ -78,6 +78,10 @@ oui-drawer oui-collapsable .oui-collapsable__title {
   padding-left: 0.3em;
 }
 
+oui-drawer.reverse oui-collapsable .oui-collapsable__title {
+  flex-direction: initial;
+}
+
 oui-drawer oui-collapsable .oui-collapsable__title:hover {
   background-color: rgba(50, 50, 80, 0.05);
 }
@@ -97,6 +101,10 @@ oui-drawer oui-collapsable .oui-collapsable__content {
 oui-drawer oui-collapsable oui-drawer-item {
   padding: 0.5em 0.3em;
   box-sizing: border-box;
+}
+
+oui-drawer.reverse oui-collapsable oui-drawer-item {
+  text-align: right;
 }
 
 oui-drawer oui-collapsable oui-drawer-item:hover {
