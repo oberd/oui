@@ -32,7 +32,13 @@ export namespace Components {
   interface OuiNavBar {}
   interface OuiNotiButtons {}
   interface OuiNotiTray {
+    'info': string;
+    'link': string;
+    'linkType': string;
     'open': () => Promise<void>;
+    'opened': boolean;
+    'status': string;
+    'valence': string;
   }
   interface OuiSvg {
     'name': SvgPack;
@@ -143,7 +149,15 @@ declare namespace LocalJSX {
   }
   interface OuiNavBar {}
   interface OuiNotiButtons {}
-  interface OuiNotiTray {}
+  interface OuiNotiTray {
+    'info'?: string;
+    'link'?: string;
+    'linkType'?: string;
+    'onAddStatusDone'?: (event: CustomEvent<any>) => void;
+    'opened'?: boolean;
+    'status'?: string;
+    'valence'?: string;
+  }
   interface OuiSvg {
     'name'?: SvgPack;
     'scale'?: number;

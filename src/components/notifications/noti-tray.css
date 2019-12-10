@@ -1,29 +1,37 @@
 oui-noti-tray aside {
-  margin-right: 13%;
+  display: block;
+  justify-content: space-between;
+  /* margin-right: calc(250.5px * (2/3)); */
   float: right;
-  position: element(oui-noti-buttons);
-  transform: translateY(-45.5px);
-  top: -100vh;
+  /* position: element(oui-noti-buttons); */
   background-color: white;
-  border-top: none;
+  margin-top: -8px;
+  border-top: -15px;
+  border-radius: 0 0 15px 15px;
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);
   width: 20vw;
-  transition: all 1s ease-in-out;
-  z-index: 100;
+  transition: all 0.5s ease-in-out;
+  z-index: -1;
+  height: 0;
+  overflow: auto;
 }
 
 body.dark oui-noti-tray aside {
-  margin-right: 13%;
+  display: block;
+  justify-content: space-between;
+  /* margin-right: calc(250.5px * (2/3)); */
   float: right;
   position: element(oui-noti-buttons);
-  transform: translateY(-45.5px);
-  top: -100vh;
   background-color: rgb(25, 37, 54);
+  margin-top: -8px;
   border-top: none;
+  border-radius: 0 0 15px 15px;
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);
   width: 20vw;
-  transition: all 1s ease-in-out;
-  z-index: 100;
+  transition: all 0.5s ease-in-out;
+  z-index: -1;
+  height: 0;
+  overflow: auto;
 }
 
 oui-noti-tray .oui-noti-tray__clear {
@@ -76,11 +84,123 @@ body.dark oui-noti-tray .oui-noti-tray__clear:active {
 }
 
 oui-noti-tray .oui-noti-tray__statuses ul {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   margin-top: 3.5rem;
-  padding: 0;
+  padding-left: 0;
+  padding-bottom: 0.625rem;
 }
 
-oui-noti-tray {
+oui-noti-tray .oui-noti-tray__statuses ul li{
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-self: end; 
+  padding: 0.125rem 0; 
+  text-align: center; 
+  width: 100%; 
+  margin: 0.25rem 0rem; 
+  background-color: rgb(247, 247, 247);
+}
+
+body.dark oui-noti-tray .oui-noti-tray__statuses ul li{
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-self: end; 
+  color: white; 
+  padding: 0.125rem 0; 
+  text-align: center; 
+  width: 100%; 
+  margin: 0.25rem 0; 
+  background-color: rgb(40, 51, 68);
+  transition: all 0.05s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+3) {
+  opacity: 0.6;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+4) {
   display: none;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li a {
+  display: flex-end;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__status-text-div {
+  display: block;
+  width: 10vw;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__status-text-div p {
+  white-space: nowrap;
+  overflow: hidden;  
+  text-overflow: ellipsis;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__success-light {
+  display: flex-start;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.125rem;
+  width: calc(24px * 0.5);
+  height: calc(24px * 0.5);
+  background-color: #ABFF00;
+  border-radius: 50%;
+}
+
+oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__error-light {
+  display: flex-start;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.125rem;
+  width: calc(24px * 0.5);
+  height: calc(24px * 0.5);
+  background-color: rgb(250,177,48);
+  border-radius: 50%;
+}
+
+oui-noti-tray aside::-webkit-scrollbar {
+  width: 0.625em;
+}
+
+oui-noti-tray aside::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+oui-noti-tray aside::-webkit-scrollbar-thumb {
+  background-color: rgb(237, 237, 237);
+  border-radius: 50%;
+  outline: 1px solid rgb(237, 237, 237);
+}
+
+body.dark oui-noti-tray aside::-webkit-scrollbar {
+  width: 0.625em;
+}
+
+body.dark oui-noti-tray aside::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgb(101, 202, 130, 0.8);
+  background-color: rgb(40, 51, 68);
+}
+
+body.dark oui-noti-tray aside::-webkit-scrollbar-thumb {
+  background-color: rgb(40,51,68);
+  border-radius: 50px;
+  outline: 1px solid slategrey;
+}
+
+oui-noti-tray span.oui-noti-tray__read-more {
+  align-self: flex-end;
+  cursor: pointer;
+  display: none;
+}
+
+oui-noti-tray .oui-noti-tray__read-more p {
+  text-align: center;
 }

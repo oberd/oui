@@ -1,30 +1,52 @@
-import { Component, h, Method, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
 
 @Component({
   tag: "oui-noti-tray",
   styleUrl: "noti-tray.css",
 })
 export class NotiTray {
-  @State() private showNoti = false
+  @Event({
+    eventName: "addStatusDone",
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  public addStatusDone: EventEmitter
+
+  @Prop({ reflectToAttr: true, mutable: true }) public opened = false
+  @Prop({ reflectToAttr: true, mutable: true }) public status: string =
+    "placeholder"
+  @Prop({ reflectToAttr: true, mutable: true }) public link: string =
+    "https://placeholder.com"
+  @Prop({ reflectToAttr: true, mutable: true }) public info: string =
+    "placeholder"
+  @Prop({ reflectToAttr: true, mutable: true }) public linkType: string =
+    "href"
+  @Prop({ reflectToAttr: true, mutable: true }) public valence: string =
+    "success"
+
+  @State() private counter = 0
 
   public componentDidLoad() {
-    setInterval(this.demoImport.bind(this), 5000)
+    setInterval(this.demoImport.bind(this), 60000)
   }
 
-  public componentDidUnload() {
-    clearInterval(this.demoImport.bind(this))
-  }
+  // public componentDidUnload() {
+  //   this.onClearNoti.bind(this)
+  // }
 
   @Method()
-  public open() {
-    switch (this.showNoti) {
+  public async open() {
+    switch (this.opened) {
       case false:
-        this.showNoti = true
-        document.querySelector("oui-noti-tray").style.display = "block"
+        this.opened = true
+        document.querySelector("aside").style.height = "17.6875em"
+        document.querySelector("aside").style.transform = "translateY(0px)"
         break
       default:
-        this.showNoti = false
-        document.querySelector("oui-noti-tray").style.display = "none"
+        this.opened = false
+        document.querySelector("aside").style.height = "0"
+        document.querySelector("aside").style.transform = "translateY(-0px)"
         break
     }
   }
@@ -41,28 +63,50 @@ export class NotiTray {
           </button>
         </header>
         <section class="oui-noti-tray__statuses">
-          <ul class="oui-noti-tray__statusList"></ul>
+          <ul class="oui-noti-tray__status-list"></ul>
         </section>
       </aside>
     )
   }
 
-  private demoImport() {
+  private demoImport(addDone) {
     const newStatus = document.createElement("li")
-    const notiList = document.querySelector(".oui-noti-tray__statusList")
-    const isDark = document.querySelector("body.dark")
-    newStatus.textContent = "EXPORT COMPLETED"
-    notiList.appendChild(newStatus)
-    if (isDark === null) {
-      newStatus.style.cssText =
-        "padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(247, 247, 247); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);"
-    } else {
-      newStatus.style.cssText =
-        "color: white; padding: 0.125rem 0; text-align: center; width: 100%; margin: 1rem 0; background-color: rgb(40, 51, 68); box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.26);"
+    const notiList = document.querySelector(".oui-noti-tray__status-list")
+
+    switch (true) {
+      case this.valence === "success":
+        newStatus.innerHTML =
+          `
+          <div class="oui-noti-tray__success-light"></div>
+          <div class="oui-noti-tray__status-text-div"><p>` +
+          this.status +
+          `
+          </p></div><a href="` +
+          this.link +
+          `"><oui-svg name="status-link" scale={0.25}></oui-svg></a>
+        `
+
+      default:
+        newStatus.innerHTML =
+          `
+          <div class="oui-noti-tray__error-light"></div>
+          <div class="oui-noti-tray__status-text-div"><p>` +
+          this.info +
+          `
+          </p></div><a href="` +
+          this.link +
+          `"><oui-svg name="status-info" scale={0.25}></oui-svg></a>
+        `
+        break
     }
+
+    notiList.appendChild(newStatus)
+    this.addStatusDone.emit(addDone)
+    this.counter += 1
   }
 
   private onClearNoti() {
-    document.querySelector(".oui-noti-tray__statusList").innerHTML = ""
+    document.querySelector(".oui-noti-tray__status-list").innerHTML = ""
+    this.counter = 0
   }
 }
