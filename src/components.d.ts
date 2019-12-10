@@ -162,6 +162,14 @@ declare namespace LocalJSX {
     * Set drawer drawerTitle
     */
     'label'?: string;
+    /**
+    * Triggered when the drawer open
+    */
+    'onCollapse'?: (event: CustomEvent<any>) => void;
+    /**
+    * Triggered when the drawer open
+    */
+    'onExpand'?: (event: CustomEvent<any>) => void;
   }
   interface OuiDocumentsIcon {
     'isAnimating'?: boolean;

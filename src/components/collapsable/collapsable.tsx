@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "oui-collapsable",
@@ -15,6 +15,15 @@ export class Collapsable {
    */
   @Prop() public collapsed: boolean = false
 
+  /**
+   * Triggered when the drawer open
+   */
+  @Event() public collapse: EventEmitter
+
+  /**
+   * Triggered when the drawer open
+   */
+  @Event() public expand: EventEmitter
 
   public render() {
     return (
@@ -32,5 +41,12 @@ export class Collapsable {
 
   private toggle = () => {
     this.collapsed = !this.collapsed
+
+    if (!this.collapsed) {
+      this.collapse.emit()
+      return
+    }
+
+    this.expand.emit()
   }
 }

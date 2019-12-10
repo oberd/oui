@@ -37,7 +37,7 @@ export class Drawer {
 
   @Watch("opened")
   public openhandler(newValue: boolean) {
-    if (newValue === true) {
+    if (newValue) {
       this.open.emit()
     }
   }
