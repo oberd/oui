@@ -17,12 +17,14 @@
 
 ### Used by
 
- - [nav-drawer](../nav-drawer)
+ - [oui-collapsable](../collapsable)
+ - [oui-drawer](../drawer)
 
 ### Graph
 ```mermaid
 graph TD;
-  nav-drawer --> oui-svg
+  oui-collapsable --> oui-svg
+  oui-drawer --> oui-svg
   style oui-svg fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

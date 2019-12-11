@@ -15,17 +15,12 @@
 | `size`        | `size`         | Set drawer size                      | `string`  | `"auto"`    |
 
 
-## Methods
+## Events
 
-### `open() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
+| Event   | Description                     | Type               |
+| ------- | ------------------------------- | ------------------ |
+| `close` | Triggered when the drawer close | `CustomEvent<any>` |
+| `open`  | Triggered when the drawer open  | `CustomEvent<any>` |
 
 
 ## Dependencies
@@ -37,8 +32,8 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
-  nav-drawer --> oui-svg
-  style nav-drawer fill:#f9f,stroke:#333,stroke-width:4px
+  oui-drawer --> oui-svg
+  style oui-drawer fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

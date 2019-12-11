@@ -15,7 +15,7 @@ export class Accordion {
   }
 
   @Listen("expand")
-  private expandHandler(evt: CustomEvent) {
+  public expandHandler(evt: CustomEvent) {
     const target = evt.target as HTMLOuiCollapsableElement
 
     this.self.querySelectorAll("oui-collapsable").forEach((el: HTMLOuiCollapsableElement) => {
