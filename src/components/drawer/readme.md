@@ -43,7 +43,7 @@ When used with `oui-collapsable` and `oui-drawer-item` the children will inherit
     <oui-drawer drawer-title="Oui Drawer" size="50%" position="right">
       <oui-collapsable label="Collapsable Group">
         <oui-drawer-item label="Ubuntu" link="https://ubuntu.com"></oui-drawer-item>
-        <oui-drawer-item label="Fedora" link="https://fedora.org"></oui-drawer-item>
+        <oui-drawer-item label="Fedora" link="https://getfedora.org"></oui-drawer-item>
       </oui-collapsable>
     </oui-drawer>
 ```
