@@ -2,7 +2,7 @@
 
 Collapsable web component. Click on the label to expand content, click again to collapse content.
 
-![file-upload](collapse-animation.gif)
+![collapsable](collapse-animation.gif)
 
 ## Usage
 ```html

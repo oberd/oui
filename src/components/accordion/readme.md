@@ -2,7 +2,7 @@
 
 Accordion web component. Use on muliple collapsable components. When one collapsable label is expanded, accordion collapses any other label that is expanded. Needs to have more than two collapsable components with different named labels to be useful.
 
-![file-upload](accordion-animation.gif)
+![accordion](accordion-animation.gif)
 
 ## Usage
 ```html
