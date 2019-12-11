@@ -14,6 +14,9 @@ export class Accordion {
     )
   }
 
+  /**
+   * Listen to `expand` event from child collapsable components
+   */
   @Listen("expand")
   public expandHandler(evt: CustomEvent) {
     const target = evt.target as HTMLOuiCollapsableElement
