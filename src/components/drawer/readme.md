@@ -1,6 +1,52 @@
-# nav-drawer
+# oui-drawer
+
+A plain drawer that will render HTML or oui-drawer elements. Closable by clicking on the close button, the backdrop or by setting the prop closed to `true`. Also emit 'close' and 'open' events. By defult the size set to auto and will expand to fit the content width.
+
+![oui-drawer](animation.gif)
+
+```html
+<button id="open-drawer">Open Drawer</button>
+
+<oui-drawer drawer-title="Oui Drawer" size="50%">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio saepe,
+    itaque distinctio minus quis autem. Nostrum velit ut dolorem pariatur
+    hic quasi adipisci quisquam ab neque ipsum eligendi, recusandae dicta.
+  </p>
+</oui-drawer>
+
+<script>
+  document
+    .querySelector("#open-drawer")
+    .addEventListener('click', () => {
+      document.querySelector('oui-drawer').opened = true
+    })
+</script>
+```
+
+--------
+
+> Postion prop set to right
+
+![oui-drawer posiont right](screenshot01.png)
 
 
+-----
+
+## Used with `oui-collapsable` and `oui-drawer-item`
+
+When used with `oui-collapsable` and `oui-drawer-item` the children will inherit some styling. e.g. will swap alingment on when position is set to right.
+
+![oui-drawer with collapsable and drawer item](screenshot02.png)
+
+```html
+    <oui-drawer drawer-title="Oui Drawer" size="50%" position="right">
+      <oui-collapsable label="Collapsable Group">
+        <oui-drawer-item label="Ubuntu" link="https://ubuntu.com"></oui-drawer-item>
+        <oui-drawer-item label="Fedora" link="https://fedora.org"></oui-drawer-item>
+      </oui-collapsable>
+    </oui-drawer>
+```
 
 <!-- Auto Generated Below -->
 
