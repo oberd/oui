@@ -15,12 +15,55 @@ import {
 } from './components/svg/svgs';
 
 export namespace Components {
+  interface OuiAccordion {}
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiCollapsable {
+    /**
+    * Set drawer position to right or left
+    */
+    'expanded': boolean;
+    /**
+    * Set drawer drawerTitle
+    */
+    'label': string;
+  }
   interface OuiDocumentsIcon {
     'isAnimating': boolean;
     'isFannedOut': boolean;
     'isHighlighted': boolean;
+  }
+  interface OuiDrawer {
+    /**
+    * Set drawer drawerTitle
+    */
+    'drawerTitle': string;
+    /**
+    * Open and close drawer
+    */
+    'opened': boolean;
+    /**
+    * Set drawer position to right or left
+    */
+    'position': string;
+    /**
+    * Set drawer size
+    */
+    'size': string;
+  }
+  interface OuiDrawerItem {
+    /**
+    * Open link in a new tab. Only for links
+    */
+    'external': boolean;
+    /**
+    * Set drawer item label
+    */
+    'label': string;
+    /**
+    * Set drawer item link if string will be treated as a url or as a callback if it is a function
+    */
+    'link': string;
   }
   interface OuiFileUpload {
     /**
@@ -46,6 +89,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLOuiAccordionElement extends Components.OuiAccordion, HTMLStencilElement {}
+  var HTMLOuiAccordionElement: {
+    prototype: HTMLOuiAccordionElement;
+    new (): HTMLOuiAccordionElement;
+  };
+
   interface HTMLOuiCardElement extends Components.OuiCard, HTMLStencilElement {}
   var HTMLOuiCardElement: {
     prototype: HTMLOuiCardElement;
@@ -58,10 +107,28 @@ declare global {
     new (): HTMLOuiCardHeadingElement;
   };
 
+  interface HTMLOuiCollapsableElement extends Components.OuiCollapsable, HTMLStencilElement {}
+  var HTMLOuiCollapsableElement: {
+    prototype: HTMLOuiCollapsableElement;
+    new (): HTMLOuiCollapsableElement;
+  };
+
   interface HTMLOuiDocumentsIconElement extends Components.OuiDocumentsIcon, HTMLStencilElement {}
   var HTMLOuiDocumentsIconElement: {
     prototype: HTMLOuiDocumentsIconElement;
     new (): HTMLOuiDocumentsIconElement;
+  };
+
+  interface HTMLOuiDrawerElement extends Components.OuiDrawer, HTMLStencilElement {}
+  var HTMLOuiDrawerElement: {
+    prototype: HTMLOuiDrawerElement;
+    new (): HTMLOuiDrawerElement;
+  };
+
+  interface HTMLOuiDrawerItemElement extends Components.OuiDrawerItem, HTMLStencilElement {}
+  var HTMLOuiDrawerItemElement: {
+    prototype: HTMLOuiDrawerItemElement;
+    new (): HTMLOuiDrawerItemElement;
   };
 
   interface HTMLOuiFileUploadElement extends Components.OuiFileUpload, HTMLStencilElement {}
@@ -82,9 +149,13 @@ declare global {
     new (): HTMLOuiSvgElement;
   };
   interface HTMLElementTagNameMap {
+    'oui-accordion': HTMLOuiAccordionElement;
     'oui-card': HTMLOuiCardElement;
     'oui-card-heading': HTMLOuiCardHeadingElement;
+    'oui-collapsable': HTMLOuiCollapsableElement;
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
+    'oui-drawer': HTMLOuiDrawerElement;
+    'oui-drawer-item': HTMLOuiDrawerItemElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-modal': HTMLOuiModalElement;
     'oui-svg': HTMLOuiSvgElement;
@@ -92,12 +163,71 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface OuiAccordion {}
   interface OuiCard {}
   interface OuiCardHeading {}
+  interface OuiCollapsable {
+    /**
+    * Set drawer position to right or left
+    */
+    'expanded'?: boolean;
+    /**
+    * Set drawer drawerTitle
+    */
+    'label'?: string;
+    /**
+    * Triggered when item collaspes
+    */
+    'onCollapse'?: (event: CustomEvent<any>) => void;
+    /**
+    * Triggered when the item expands
+    */
+    'onExpand'?: (event: CustomEvent<any>) => void;
+  }
   interface OuiDocumentsIcon {
     'isAnimating'?: boolean;
     'isFannedOut'?: boolean;
     'isHighlighted'?: boolean;
+  }
+  interface OuiDrawer {
+    /**
+    * Set drawer drawerTitle
+    */
+    'drawerTitle'?: string;
+    /**
+    * Triggered when the drawer close
+    */
+    'onClose'?: (event: CustomEvent<any>) => void;
+    /**
+    * Triggered when the drawer open
+    */
+    'onOpen'?: (event: CustomEvent<any>) => void;
+    /**
+    * Open and close drawer
+    */
+    'opened'?: boolean;
+    /**
+    * Set drawer position to right or left
+    */
+    'position'?: string;
+    /**
+    * Set drawer size
+    */
+    'size'?: string;
+  }
+  interface OuiDrawerItem {
+    /**
+    * Open link in a new tab. Only for links
+    */
+    'external'?: boolean;
+    /**
+    * Set drawer item label
+    */
+    'label'?: string;
+    /**
+    * Set drawer item link if string will be treated as a url or as a callback if it is a function
+    */
+    'link'?: string;
   }
   interface OuiFileUpload {
     /**
@@ -129,9 +259,13 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'oui-accordion': OuiAccordion;
     'oui-card': OuiCard;
     'oui-card-heading': OuiCardHeading;
+    'oui-collapsable': OuiCollapsable;
     'oui-documents-icon': OuiDocumentsIcon;
+    'oui-drawer': OuiDrawer;
+    'oui-drawer-item': OuiDrawerItem;
     'oui-file-upload': OuiFileUpload;
     'oui-modal': OuiModal;
     'oui-svg': OuiSvg;
@@ -144,9 +278,13 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'oui-accordion': LocalJSX.OuiAccordion & JSXBase.HTMLAttributes<HTMLOuiAccordionElement>;
       'oui-card': LocalJSX.OuiCard & JSXBase.HTMLAttributes<HTMLOuiCardElement>;
       'oui-card-heading': LocalJSX.OuiCardHeading & JSXBase.HTMLAttributes<HTMLOuiCardHeadingElement>;
+      'oui-collapsable': LocalJSX.OuiCollapsable & JSXBase.HTMLAttributes<HTMLOuiCollapsableElement>;
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
+      'oui-drawer': LocalJSX.OuiDrawer & JSXBase.HTMLAttributes<HTMLOuiDrawerElement>;
+      'oui-drawer-item': LocalJSX.OuiDrawerItem & JSXBase.HTMLAttributes<HTMLOuiDrawerItemElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;

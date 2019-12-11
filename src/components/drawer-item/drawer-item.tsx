@@ -15,13 +15,19 @@ export class DrawerItem {
    */
   @Prop() public link: string
 
+  /**
+   * Open link in a new tab. Only for links
+   */
+  @Prop() public external: boolean
 
   public render() {
+    const extraProps = this.external ? { target: "_blank", rel: "noopener noreferrer" } : {}
+
     return (
       <Host>
         {
           this.link
-            ? <a class="oui-drawer-item__label" href={this.link}>{this.label}</a>
+            ? <a class="oui-drawer-item__label" href={this.link} {...extraProps}>{this.label}</a>
             : <span class="oui-drawer-item__label">{this.label}</span>
         }
       </Host>
