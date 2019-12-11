@@ -1,6 +1,6 @@
 # oui-drawer
 
-A plain drawer that will render HTML or oui-drawer elements. Closable by clicking on the close button, the backdrop or by setting the prop opened to `false`. It also emits 'close' and 'open' events that can be used to react to the user iteraction. By defult the size is set to auto and will expand to fit the content width, but it can be overwrited by passing the desired widht to the size prop with the unit (e.g. size="20em").
+A plain drawer that will render HTML or oui-drawer elements. Closable by clicking on the close button, the backdrop or by setting the prop opened to `false`. It also emits 'close' and 'open' events that can be used to react to the user iteraction. By defult the size is set to auto and will expand to fit the content width, but it can be overwrited by passing the desired widht to the size prop with the unit (e.g. `size="20em"`).
 
 ![oui-drawer](animation.gif)
 

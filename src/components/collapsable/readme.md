@@ -1,16 +1,16 @@
 # oui-collapsable
 
-Collapsable web component. Click on the label to expand content, click again to collapse content.
+Collapsable web component. Click on the label to expand content, click again to collapse content. Can be manually overwrite by setting the `expanded` prop to `true` or `false`. It emits `collapse` and `expand` events that can be use to react to user interaction.
 
 ![collapsable](collapse-animation.gif)
 
 ## Usage
-```html
-<!-- collapsable web component -->
-  <oui-collapsable 
-  label="title of collapsable element"
-  ></oui-collapsable>
 
+```html
+<oui-collapsable label="Hello Collapsable">
+  <oui-drawer-item label="www.google.com" link="https://google.com"><oui-drawer-item>
+  <oui-drawer-item lable="callback link"><oui-drawer-item>
+</oui-collapsable>
 ```
 
 <!-- Auto Generated Below -->
