@@ -4,6 +4,8 @@ A plain drawer that will render HTML or oui-drawer elements. Closable by clickin
 
 ![oui-drawer](animation.gif)
 
+## Usage
+
 ```html
 <button id="open-drawer">Open Drawer</button>
 
@@ -38,6 +40,8 @@ A plain drawer that will render HTML or oui-drawer elements. Closable by clickin
 When used with `oui-collapsable` and `oui-drawer-item` the children will inherit some styling. e.g. will swap alingment on when position is set to right.
 
 ![oui-drawer with collapsable and drawer item](screenshot02.png)
+
+## Usage
 
 ```html
     <oui-drawer drawer-title="Oui Drawer" size="50%" position="right">

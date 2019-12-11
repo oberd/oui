@@ -8,6 +8,8 @@ A container for links or clickable elements to be used by the `oui-drawer` compo
 
 ![oui-drawer-item position right](screenshot02.png)
 
+## Usage
+
 ```html
 <oui-drawer drawer-title="Oui Drawer" size="50%">
   <oui-collapsable label="Collapsable Group">
