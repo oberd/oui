@@ -1,6 +1,17 @@
 # oui-collapsable
 
+Collapsable web component. Click on the label to expand content, click again to collapse content.
 
+![file-upload](collapse-animation.gif)
+
+## Usage
+```html
+<!-- collapsable web component -->
+  <oui-collapsable 
+  label="title of collapsable element"
+  ></oui-collapsable>
+
+```
 
 <!-- Auto Generated Below -->
 
