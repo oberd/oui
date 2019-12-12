@@ -49,7 +49,7 @@ export class Drawer {
         <div class="backdrop" onClick={this.onCloseDrawer} />
         <aside style={{ width: this.size }}>
           <header class={cls}>
-            <h1>{this.drawerTitle}</h1>
+            <h1 class="oui-drawer__title">{this.drawerTitle}</h1>
             <oui-svg name="icon-close" scale={1} onClick={this.onCloseDrawer} />
           </header>
           <slot />
