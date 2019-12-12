@@ -14,7 +14,7 @@ describe("Test oui-modal component", () => {
     expect(el).not.toBeNull()
   })
 
-  it("should esc key fire close event", async () => {
+  it("should collapse expanded child collapsables", async () => {
     const page = await newSpecPage({
       components: [Accordion, Collapsable],
       html: `
@@ -33,11 +33,11 @@ describe("Test oui-modal component", () => {
       `,
     })
 
-    const cllp1: HTMLOuiCollapsableElement = page.doc
+    const cllp1 = page.doc
       .querySelector("oui-accordion")
       .querySelector("oui-collapsable.one") as HTMLOuiCollapsableElement
 
-    const cllp2: HTMLOuiCollapsableElement = page.doc
+    const cllp2 = page.doc
       .querySelector("oui-accordion")
       .querySelector("oui-collapsable.two") as HTMLOuiCollapsableElement
 
