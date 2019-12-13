@@ -37,6 +37,13 @@ export namespace Components {
     'modalTitle': string;
   }
   interface OuiModal {}
+  interface OuiNavBar {}
+  interface OuiNotiButtons {}
+  interface OuiNotiTray {
+    'open': () => Promise<void>;
+    'opened': boolean;
+    'status': object[];
+  }
   interface OuiSvg {
     'name': SvgPack;
     'scale': number;
@@ -112,6 +119,9 @@ declare global {
     'oui-documents-icon': HTMLOuiDocumentsIconElement;
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-modal': HTMLOuiModalElement;
+    'oui-nav-bar': HTMLOuiNavBarElement;
+    'oui-noti-buttons': HTMLOuiNotiButtonsElement;
+    'oui-noti-tray': HTMLOuiNotiTrayElement;
     'oui-svg': HTMLOuiSvgElement;
     'oui-tm-switch': HTMLOuiTmSwitchElement;
   }
@@ -152,13 +162,10 @@ declare namespace LocalJSX {
   interface OuiNavBar {}
   interface OuiNotiButtons {}
   interface OuiNotiTray {
-    'info'?: string;
-    'link'?: string;
-    'linkType'?: string;
     'onAddStatusDone'?: (event: CustomEvent<any>) => void;
+    'onClearStatusDone'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
-    'status'?: string;
-    'valence'?: string;
+    'status'?: object[];
   }
   interface OuiSvg {
     'name'?: SvgPack;
@@ -172,6 +179,9 @@ declare namespace LocalJSX {
     'oui-documents-icon': OuiDocumentsIcon;
     'oui-file-upload': OuiFileUpload;
     'oui-modal': OuiModal;
+    'oui-nav-bar': OuiNavBar;
+    'oui-noti-buttons': OuiNotiButtons;
+    'oui-noti-tray': OuiNotiTray;
     'oui-svg': OuiSvg;
     'oui-tm-switch': OuiTmSwitch;
   }
@@ -188,6 +198,9 @@ declare module "@stencil/core" {
       'oui-documents-icon': LocalJSX.OuiDocumentsIcon & JSXBase.HTMLAttributes<HTMLOuiDocumentsIconElement>;
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
+      'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
+      'oui-noti-buttons': LocalJSX.OuiNotiButtons & JSXBase.HTMLAttributes<HTMLOuiNotiButtonsElement>;
+      'oui-noti-tray': LocalJSX.OuiNotiTray & JSXBase.HTMLAttributes<HTMLOuiNotiTrayElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
       'oui-tm-switch': LocalJSX.OuiTmSwitch & JSXBase.HTMLAttributes<HTMLOuiTmSwitchElement>;
     }

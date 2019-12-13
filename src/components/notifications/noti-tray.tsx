@@ -1,4 +1,14 @@
-import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
+import {
+  Component,
+  Event,
+  EventEmitter,
+  h,
+  Method,
+  Prop,
+  State,
+} from "@stencil/core"
+
+import { StatusType } from "./status-type"
 
 @Component({
   tag: "oui-noti-tray",
@@ -13,27 +23,23 @@ export class NotiTray {
   })
   public addStatusDone: EventEmitter
 
+  @Event({
+    eventName: "clearStatusDone",
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  })
+  public clearStatusDone: EventEmitter
+
   @Prop({ reflectToAttr: true, mutable: true }) public opened = false
-  @Prop({ reflectToAttr: true, mutable: true }) public status: string =
-    "placeholder"
-  @Prop({ reflectToAttr: true, mutable: true }) public link: string =
-    "https://placeholder.com"
-  @Prop({ reflectToAttr: true, mutable: true }) public info: string =
-    "placeholder"
-  @Prop({ reflectToAttr: true, mutable: true }) public linkType: string =
-    "href"
-  @Prop({ reflectToAttr: true, mutable: true }) public valence: string =
-    "success"
+  @Prop({ reflectToAttr: true, mutable: true }) public status: object[]
 
-  @State() private counter = 0
+  @State() public counter: number = 0
+  @State() public oldStatus: object[]
 
-  public componentDidLoad() {
+  public componentWillLoad() {
     setInterval(this.demoImport.bind(this), 60000)
   }
-
-  // public componentDidUnload() {
-  //   this.onClearNoti.bind(this)
-  // }
 
   @Method()
   public async open() {
@@ -54,59 +60,48 @@ export class NotiTray {
   public render() {
     return (
       <aside>
-        <header>
+        <section class="oui-noti-tray__statuses">
           <button
             class="oui-noti-tray__clear"
             onClick={this.onClearNoti.bind(this)}
           >
             Clear All
           </button>
-        </header>
-        <section class="oui-noti-tray__statuses">
           <ul class="oui-noti-tray__status-list"></ul>
         </section>
       </aside>
     )
   }
 
-  private demoImport(addDone) {
-    const newStatus = document.createElement("li")
-    const notiList = document.querySelector(".oui-noti-tray__status-list")
-
-    switch (true) {
-      case this.valence === "success":
-        newStatus.innerHTML =
-          `
-          <div class="oui-noti-tray__success-light"></div>
-          <div class="oui-noti-tray__status-text-div"><p>` +
-          this.status +
-          `
-          </p></div><a href="` +
-          this.link +
-          `"><oui-svg name="status-link" scale={0.25}></oui-svg></a>
-        `
-
-      default:
-        newStatus.innerHTML =
-          `
-          <div class="oui-noti-tray__error-light"></div>
-          <div class="oui-noti-tray__status-text-div"><p>` +
-          this.info +
-          `
-          </p></div><a href="` +
-          this.link +
-          `"><oui-svg name="status-info" scale={0.25}></oui-svg></a>
-        `
-        break
-    }
-
-    notiList.appendChild(newStatus)
-    this.addStatusDone.emit(addDone)
-    this.counter += 1
+  public demoImport(addStatusDone) {
+    if (this.oldStatus !== this.status) {
+    this.status.map((noti: StatusType) => {
+      const newStatus = document.createElement("li")
+      const notiList = document.querySelector(".oui-noti-tray__status-list")
+      const statusClass = noti.valence === "success" ? "oui-noti-tray__success-light" : "oui-noti-tray__error-light"
+      const iconName = noti.linkType === "href" ? "status-link" : "status-info"
+      newStatus.innerHTML = `
+        <div class='${statusClass}'></div>
+        <div class="oui-noti-tray__status-text-div">
+          <p>
+            ${noti.notification}
+          </p>
+        </div>
+        <a href="${noti.link}">
+          <oui-svg name="${iconName}" scale={0.25}></oui-svg>
+        </a>
+      `
+      notiList.appendChild(newStatus)
+      this.counter++
+      this.addStatusDone.emit(addStatusDone)
+      this.oldStatus = JSON.parse(JSON.stringify(noti))
+    })
+  }
   }
 
-  private onClearNoti() {
+  private onClearNoti(clearStatusDone) {
     document.querySelector(".oui-noti-tray__status-list").innerHTML = ""
     this.counter = 0
+    this.clearStatusDone.emit(clearStatusDone)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, State, } from "@stencil/core"
+import { Component, h, Host, Listen, State } from "@stencil/core"
 
 @Component({
   tag: "oui-noti-buttons",
@@ -24,7 +24,7 @@ export class NotiButtons {
     return (
       <Host>
         <button class="oui-noti-buttons__unread" onClick={openTray}>
-          <span class="oui-noti-buttons__status-counter"></span>
+          <span class="oui-noti-buttons__status-counter">{this.statusCounter}</span>
           <oui-svg name="noti-bell-unread" scale={0.25}></oui-svg>
         </button>
 
@@ -39,10 +39,25 @@ export class NotiButtons {
     )
   }
 
-  @Listen("addStatusDone")
-  private addStatusDoneHandler(event: CustomEvent) {
-    this.statusCounter += 1
-    console.log("Received Custom Event: ", event.detail)
-    console.log(`Amount of Status generated: ` + this.statusCounter)
+  @Listen("addStatusDone", {target: "body"})
+  public addStatusDoneHandler(event: CustomEvent) {
+    this.statusCounter++
+    Notification.requestPermission().then(() => {
+      const statusAdded = new Notification(`Event ${event.type} has been completed!`, {
+        body: "New Status has been received!",
+      })
+      return statusAdded
+    })
+  }
+
+  @Listen("clearStatusDone", {target: "body"})
+  public clearStatusDoneHandler(event: CustomEvent) {
+    this.statusCounter = 0
+    Notification.requestPermission().then(() => {
+      const statusCleared = new Notification(`Event ${event.type} has been completed!`, {
+        body: "New Status has been received!",
+      })
+      return statusCleared
+    })
   }
 }
