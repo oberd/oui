@@ -62,6 +62,10 @@ export namespace Components {
     * A single noti message
     */
     'message': NotiMessageProps;
+    /**
+    * A single noti message
+    */
+    'read': boolean;
   }
   interface OuiNotiTray {
     'messages': NotiMessageProps[];
@@ -212,12 +216,18 @@ declare namespace LocalJSX {
     * Messages array
     */
     'messages'?: NotiMessageProps[];
+    'onDismissall'?: (event: CustomEvent<any>) => void;
   }
   interface OuiNotiItem {
     /**
     * A single noti message
     */
     'message'?: NotiMessageProps;
+    'onDismiss'?: (event: CustomEvent<any>) => void;
+    /**
+    * A single noti message
+    */
+    'read'?: boolean;
   }
   interface OuiNotiTray {
     'messages'?: NotiMessageProps[];

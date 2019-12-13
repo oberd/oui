@@ -4,7 +4,6 @@ import {
   Host,
   Listen,
   Prop,
-  Watch,
 } from "@stencil/core"
 
 import { NotiMessageProps } from "./status-type"
@@ -16,11 +15,6 @@ import { NotiMessageProps } from "./status-type"
 export class NotiTray {
   @Prop({ reflect: true, mutable: true }) public opened = false
   @Prop({ reflect: true, mutable: true }) public messages: NotiMessageProps[]
-
-  @Watch("opened")
-  public openedChange(newValue: boolean, oldValue: boolean) {
-    console.log(newValue, oldValue)
-  }
 
   @Listen("click")
   public todoCompletedHandler(evt: UIEvent) {

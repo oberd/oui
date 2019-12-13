@@ -3,5 +3,6 @@ export interface NotiMessageProps {
   link?: string
   type: "link" | "info"
   detail: string
-  valence: "success" | "fail"
+  valence: "success" | "fail",
+  read?: boolean
 }

@@ -42,6 +42,18 @@ oui-noti-drawer .oui-noti-drawer__clear:active {
   transform: scale(1);
 }
 
+oui-noti-drawer oui-noti-item {
+  opacity: 0.75;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+oui-noti-drawer oui-noti-item:hover {
+  opacity: 1;
+  border-color: rgba(0, 0, 0, 0.1);
+  ;
+}
+
 oui-noti-drawer .oui-noti-drawer__statuses ul {
   display: flex;
   flex-direction: column;
@@ -50,7 +62,7 @@ oui-noti-drawer .oui-noti-drawer__statuses ul {
   padding-bottom: 0.625em;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item a {
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item {
   display: flex;
   padding: 0.125em;
   margin: 0.25em 0em;
@@ -60,15 +72,36 @@ oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item a {
   color: black;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item oui-svg {
-  margin: 0.625em auto auto 0.625em;
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item.oui-noti-item__read {
+  opacity: 0.3;
+}
+
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item a {
+  align-self: center;
+  padding: 0 0.5em;
+}
+
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item .oui-svg {
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 0.35em;
+  opacity: 0.75;
+}
+
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item .oui-svg:hover {
+  opacity: 1;
 }
 
 oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__content {
   flex: 1 auto;
   display: flex;
   flex-direction: column;
-  width: 9.625em;
+  align-self: baseline;
+}
+
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item span {
+  justify-content: space-between;
+  margin: 0.1em 0;
 }
 
 oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__detail {
@@ -85,20 +118,23 @@ oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__title {
   font-weight: 500;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light {
-  margin: auto 0.625em auto 0.625em;
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light, oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__fail-light {
+  margin: 0 0.8em;
   width: calc(1.5em * 0.5);
   height: calc(1.5em * 0.5);
-  background-color: #ABFF00;
   border-radius: 50%;
+  align-self: center;
+  border: 1px solid transparent;
+}
+
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light {
+  background-color: #ABFF00;
+  border-color: #89CC00;
 }
 
 oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__fail-light {
-  margin: auto 0.625em auto 0.625em;
-  width: calc(1.5em * 0.5);
-  height: calc(1.5em * 0.5);
-  background-color: rgb(250, 177, 48);
-  border-radius: 50%;
+  background-color: rgb(255, 177, 48);
+  border-color: rgb(250, 170, 45);
 }
 
 oui-noti-drawer::-webkit-scrollbar {
@@ -132,7 +168,7 @@ body.dark oui-noti-drawer .oui-noti-drawer__clear:hover {
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
-body.dark oui-noti-drawer .oui-noti-drawer__statuses ul li a{
+body.dark oui-noti-drawer .oui-noti-drawer__statuses ul li a {
   color: white;
   background-color: rgb(40, 51, 68);
 }

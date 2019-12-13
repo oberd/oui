@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 import { NotiMessageProps } from "../status-type"
 
 @Component({
@@ -10,18 +10,30 @@ export class NotiItem {
    */
   @Prop() public message: NotiMessageProps
 
+  /**
+   * A single noti message
+   */
+  @Prop() public read: boolean = false
+
+  @Event() public dismiss: EventEmitter
+  public dismissHandler = (evt: UIEvent) => {
+    evt.stopPropagation()
+    this.dismiss.emit((evt.currentTarget as HTMLLIElement).dataset.mst)
+  }
+
   public render() {
     const { detail, link = "", title, type, valence } = this.message
+    const cls = this.read ? "oui-noti-item__read" : ""
 
     return (
-      <Host>
+      <Host class={cls} onCLick={this.dismissHandler} data-mst={title}>
+        <div class={`oui-noti-drawer__${valence}-light`} />
+        <div class="oui-noti-drawer__content">
+          <span class="oui-noti-drawer__title">{title}</span>
+          <span class="oui-noti-drawer__detail">{detail}</span>
+        </div>
         <a href={link}>
-          <div class={`oui-noti-drawer__${valence}-light`} />
-          <div class="oui-noti-drawer__content">
-            <span class="oui-noti-drawer__title">{title}</span>
-            <span class="oui-noti-drawer__detail">{detail}</span>
-          </div>
-          <oui-svg name={`status-${type}`} scale={0.25} />
+          <oui-svg name={`status-${type}`} scale={0.15} />
         </a>
       </Host >
     )

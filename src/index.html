@@ -27,8 +27,8 @@
   </oui-nav-bar>
 
   <script>
-    const notiTray = document.querySelector("oui-noti-tray")
-    notiTray.messages = [
+
+    let messages = [
       {
         title: "Good Morning!",
         link: "https://www.google.com",
@@ -44,6 +44,28 @@
       }
     ]
 
+    document.addEventListener('dismiss', (evt) => {
+      messages = messages.map((msg) => {
+        if (msg.title === evt.detail) { msg.read = true }
+        return msg
+      })
+
+      notiTray.messages = messages
+    })
+
+    document.addEventListener('dismissall', (evt) => {
+      console.log('dismiss all');
+      messages = messages.map((msg) => {
+        msg.read = true
+        return msg
+      })
+
+      notiTray.messages = messages
+    })
+
+    const notiTray = document.querySelector("oui-noti-tray")
+    notiTray.messages = messages
+
     document.querySelector("#open").addEventListener("click", () => {
       notiTray.opened = true
     })
@@ -51,18 +73,6 @@
     document.querySelector("#close").addEventListener("click", () => {
       notiTray.opened = false
     })
-
-    // setTimeout(() => {
-    //   notiTray.messages = [
-    //     {
-    //       title: "Good Morning!",
-    //       link: "https://www.google.com",
-    //       type: "link",
-    //       detail: "these are the details",
-    //       valence: "success"
-    //     }
-    //   ]
-    // }, 5000)
   </script>
 </body>
 

@@ -1,9 +1,4 @@
-import {
-  Component,
-  h,
-  Host,
-  Prop,
-} from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 import { NotiMessageProps } from "../status-type"
 
@@ -17,18 +12,31 @@ export class NotiDrawer {
    */
   @Prop() public messages: NotiMessageProps[] = []
 
+  @Event() public dismissall: EventEmitter
+  public dismissAllHandler = (evt: UIEvent) => {
+    evt.stopPropagation()
+    this.dismissall.emit()
+  }
+
   public render() {
+    const disabled = !!this.messages.length && !!this.messages.every((msg) => msg.read)
+
     return (
       <Host>
         <section class="oui-noti-drawer__statuses">
-          <button class="oui-noti-drawer__clear">
+          <button
+            disabled={disabled}
+            class="oui-noti-drawer__clear"
+            onClick={disabled ? () => {/*noop*/ } : this.dismissAllHandler}
+          >
             Clear All
           </button>
 
           <ul class="oui-noti-drawer__status-list">
             <li class=".oui-noti-drawer__status-list">
               {
-                this.messages.map((msg: NotiMessageProps) => <oui-noti-item message={msg} />)
+                this.messages.map((msg: NotiMessageProps) =>
+                  (<oui-noti-item message={msg} read={msg.read} />))
               }
             </li>
           </ul>
@@ -37,9 +45,3 @@ export class NotiDrawer {
     )
   }
 }
-
-  //     this.status.map((noti: StatusType) => {
-  //       const iconName = noti.linkType === "href" ? "status-link" : "status-info"
-  //       const statusClass =  (noti.valence === "success")
-  //          ? "oui-noti-drawer__success-light"
-  //          : "oui-noti-drawer__error-light"
