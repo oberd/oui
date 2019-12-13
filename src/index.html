@@ -24,24 +24,28 @@
     <oui-card-heading>
       <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
     </oui-card-heading>
-
-    <button id="open-drawer">Open Drawer</button>
-
-    <oui-drawer drawer-title="Oui Drawer" size="50%" position="right">
-      <oui-collapsable label="Collapsable Group">
-        <oui-drawer-item label="Ubuntu" link="https://ubuntu.com"></oui-drawer-item>
-        <oui-drawer-item label="Fedora" link="https://getfedora.org"></oui-drawer-item>
-      </oui-collapsable>
-    </oui-drawer>
+    <div>
+      <!-- File Upload Dialog Dropper -->
+      <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
+      <script>
+        const el = document.getElementById("files")
+        el.addEventListener("dropped", async (event) => {
+          const postResponse = await event.detail.uploadWith(async (formData) => {
+            const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
+            const response = await fetch(url, {
+              method: "POST",
+              body: formData,
+            })
+            if (!response.ok) {
+              throw new Error("problem uploading files.")
+            }
+            return response.status + " " + response.statusText
+          })
+          console.log("Uploaded files: " + postResponse)
+        })
+      </script>
+    </div>
   </oui-card>
-
-  <script>
-    document
-      .querySelector("#open-drawer")
-      .addEventListener('click', () => {
-        document.querySelector('oui-drawer').opened = true
-      })
-  </script>
 </body>
 
 </html>
