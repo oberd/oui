@@ -26,11 +26,6 @@ export class NotiTray {
     console.log(newValue, oldValue)
   }
 
-  @Watch("messages")
-  public stausChange(newValue: boolean, oldValue: boolean) {
-    console.log(newValue, oldValue)
-  }
-
   @Listen("click")
   public todoCompletedHandler(evt: UIEvent) {
     evt.preventDefault()
@@ -42,7 +37,10 @@ export class NotiTray {
   public render() {
     return (
       <Host>
-        {(this.opened && this.messages.length) && <oui-noti-drawer />}
+        {
+          (this.opened && this.messages.length) &&
+          <oui-noti-drawer messages={this.messages} />
+        }
         <oui-noti-button />
       </Host>
     )
