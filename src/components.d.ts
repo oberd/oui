@@ -38,10 +38,21 @@ export namespace Components {
   }
   interface OuiModal {}
   interface OuiNavBar {}
-  interface OuiNotiButtons {}
+  interface OuiNotiButton {
+    /**
+    * Number of unread notifications
+    */
+    'count': number;
+    /**
+    * Set the noti-try status icon
+    */
+    'icon': string;
+  }
+  interface OuiNotiDrawer {}
+  interface OuiNotiItem {}
   interface OuiNotiTray {
+    'messages': object[];
     'opened': boolean;
-    'status': object[];
   }
   interface OuiSvg {
     'name': SvgPack;
@@ -89,10 +100,22 @@ declare global {
     new (): HTMLOuiNavBarElement;
   };
 
-  interface HTMLOuiNotiButtonsElement extends Components.OuiNotiButtons, HTMLStencilElement {}
-  var HTMLOuiNotiButtonsElement: {
-    prototype: HTMLOuiNotiButtonsElement;
-    new (): HTMLOuiNotiButtonsElement;
+  interface HTMLOuiNotiButtonElement extends Components.OuiNotiButton, HTMLStencilElement {}
+  var HTMLOuiNotiButtonElement: {
+    prototype: HTMLOuiNotiButtonElement;
+    new (): HTMLOuiNotiButtonElement;
+  };
+
+  interface HTMLOuiNotiDrawerElement extends Components.OuiNotiDrawer, HTMLStencilElement {}
+  var HTMLOuiNotiDrawerElement: {
+    prototype: HTMLOuiNotiDrawerElement;
+    new (): HTMLOuiNotiDrawerElement;
+  };
+
+  interface HTMLOuiNotiItemElement extends Components.OuiNotiItem, HTMLStencilElement {}
+  var HTMLOuiNotiItemElement: {
+    prototype: HTMLOuiNotiItemElement;
+    new (): HTMLOuiNotiItemElement;
   };
 
   interface HTMLOuiNotiTrayElement extends Components.OuiNotiTray, HTMLStencilElement {}
@@ -119,7 +142,9 @@ declare global {
     'oui-file-upload': HTMLOuiFileUploadElement;
     'oui-modal': HTMLOuiModalElement;
     'oui-nav-bar': HTMLOuiNavBarElement;
-    'oui-noti-buttons': HTMLOuiNotiButtonsElement;
+    'oui-noti-button': HTMLOuiNotiButtonElement;
+    'oui-noti-drawer': HTMLOuiNotiDrawerElement;
+    'oui-noti-item': HTMLOuiNotiItemElement;
     'oui-noti-tray': HTMLOuiNotiTrayElement;
     'oui-svg': HTMLOuiSvgElement;
     'oui-tm-switch': HTMLOuiTmSwitchElement;
@@ -159,10 +184,21 @@ declare namespace LocalJSX {
     'onClose'?: (event: CustomEvent<any>) => void;
   }
   interface OuiNavBar {}
-  interface OuiNotiButtons {}
+  interface OuiNotiButton {
+    /**
+    * Number of unread notifications
+    */
+    'count'?: number;
+    /**
+    * Set the noti-try status icon
+    */
+    'icon'?: string;
+  }
+  interface OuiNotiDrawer {}
+  interface OuiNotiItem {}
   interface OuiNotiTray {
+    'messages'?: object[];
     'opened'?: boolean;
-    'status'?: object[];
   }
   interface OuiSvg {
     'name'?: SvgPack;
@@ -177,7 +213,9 @@ declare namespace LocalJSX {
     'oui-file-upload': OuiFileUpload;
     'oui-modal': OuiModal;
     'oui-nav-bar': OuiNavBar;
-    'oui-noti-buttons': OuiNotiButtons;
+    'oui-noti-button': OuiNotiButton;
+    'oui-noti-drawer': OuiNotiDrawer;
+    'oui-noti-item': OuiNotiItem;
     'oui-noti-tray': OuiNotiTray;
     'oui-svg': OuiSvg;
     'oui-tm-switch': OuiTmSwitch;
@@ -196,7 +234,9 @@ declare module "@stencil/core" {
       'oui-file-upload': LocalJSX.OuiFileUpload & JSXBase.HTMLAttributes<HTMLOuiFileUploadElement>;
       'oui-modal': LocalJSX.OuiModal & JSXBase.HTMLAttributes<HTMLOuiModalElement>;
       'oui-nav-bar': LocalJSX.OuiNavBar & JSXBase.HTMLAttributes<HTMLOuiNavBarElement>;
-      'oui-noti-buttons': LocalJSX.OuiNotiButtons & JSXBase.HTMLAttributes<HTMLOuiNotiButtonsElement>;
+      'oui-noti-button': LocalJSX.OuiNotiButton & JSXBase.HTMLAttributes<HTMLOuiNotiButtonElement>;
+      'oui-noti-drawer': LocalJSX.OuiNotiDrawer & JSXBase.HTMLAttributes<HTMLOuiNotiDrawerElement>;
+      'oui-noti-item': LocalJSX.OuiNotiItem & JSXBase.HTMLAttributes<HTMLOuiNotiItemElement>;
       'oui-noti-tray': LocalJSX.OuiNotiTray & JSXBase.HTMLAttributes<HTMLOuiNotiTrayElement>;
       'oui-svg': LocalJSX.OuiSvg & JSXBase.HTMLAttributes<HTMLOuiSvgElement>;
       'oui-tm-switch': LocalJSX.OuiTmSwitch & JSXBase.HTMLAttributes<HTMLOuiTmSwitchElement>;

@@ -1,12 +1,10 @@
-oui-noti-buttons {
+oui-noti-button {
   order: 4;
   align-self: flex-end;
   justify-self: space-between;
 }
 
-oui-noti-buttons > .oui-noti-buttons__unread,
-oui-noti-buttons > .oui-noti-buttons__read,
-oui-noti-buttons > .oui-noti-buttons__unused {
+oui-noti-button>.oui-noti-button__unread, oui-noti-button>.oui-noti-button__read, oui-noti-button>.oui-noti-button__unused {
   transition: all 0.05s;
   cursor: pointer;
   outline: none;
@@ -14,28 +12,25 @@ oui-noti-buttons > .oui-noti-buttons__unused {
   transition-timing-function: ease-in-out;
 }
 
-oui-noti-buttons > .oui-noti-buttons__unread:hover,
-oui-noti-buttons > .oui-noti-buttons__read:hover {
+oui-noti-button>.oui-noti-button__unread:hover, oui-noti-button>.oui-noti-button__read:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   border: solid rgb(237, 237, 237);
 }
 
-oui-noti-buttons > .oui-noti-buttons__unused:hover {
+oui-noti-button>.oui-noti-button__unused:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   /* border: solid rgb(237, 237, 237); */
 }
 
-oui-noti-buttons > .oui-noti-buttons__unread:active,
-oui-noti-buttons > .oui-noti-buttons__read:active,
-oui-noti-buttons > .oui-noti-buttons__unused:active {
+oui-noti-button>.oui-noti-button__unread:active, oui-noti-button>.oui-noti-button__read:active, oui-noti-button>.oui-noti-button__unused:active {
   transform: scale(1);
 }
 
-oui-noti-buttons > .oui-noti-buttons__unread {
+oui-noti-button>.oui-noti-button__unread {
   border: solid white;
   border-radius: 50%;
   padding: 0.5em;
@@ -45,7 +40,7 @@ oui-noti-buttons > .oui-noti-buttons__unread {
   flex-direction: row-reverse;
 }
 
-oui-noti-buttons > .oui-noti-buttons__read {
+oui-noti-button>.oui-noti-button__read {
   border: solid white;
   border-radius: 50%;
   padding: 0.5em;
@@ -53,7 +48,7 @@ oui-noti-buttons > .oui-noti-buttons__read {
   background-color: white;
 }
 
-oui-noti-buttons > .oui-noti-buttons__unused {
+oui-noti-button>.oui-noti-button__unused {
   border: solid rgb(134, 134, 134);
   border-radius: 50%;
   padding: 0.5em;
@@ -62,20 +57,16 @@ oui-noti-buttons > .oui-noti-buttons__unused {
   color: rgb(134, 134, 134);
 }
 
-body.dark oui-noti-buttons > .oui-noti-buttons__unread:hover,
-body.dark oui-noti-buttons > .oui-noti-buttons__read:hover,
-body.dark oui-noti-buttons > .oui-noti-buttons__unused:hover {
+body.dark oui-noti-button>.oui-noti-button__unread:hover, body.dark oui-noti-button>.oui-noti-button__read:hover, body.dark oui-noti-button>.oui-noti-button__unused:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
-body.dark oui-noti-buttons > .oui-noti-buttons__unread:active,
-body.dark oui-noti-buttons > .oui-noti-buttons__read:active,
-body.dark oui-noti-buttons > .oui-noti-buttons__unused:active {
+body.dark oui-noti-button>.oui-noti-button__unread:active, body.dark oui-noti-button>.oui-noti-button__read:active, body.dark oui-noti-button>.oui-noti-button__unused:active {
   transform: scale(1);
 }
 
-body.dark oui-noti-buttons > .oui-noti-buttons__unread {
+body.dark oui-noti-button>.oui-noti-button__unread {
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -84,7 +75,7 @@ body.dark oui-noti-buttons > .oui-noti-buttons__unread {
   background-color: rgb(237, 237, 237);
 }
 
-body.dark oui-noti-buttons > .oui-noti-buttons__read {
+body.dark oui-noti-button>.oui-noti-button__read {
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -93,7 +84,7 @@ body.dark oui-noti-buttons > .oui-noti-buttons__read {
   background-color: rgb(237, 237, 237);
 }
 
-body.dark oui-noti-buttons > .oui-noti-buttons__unused {
+body.dark oui-noti-button>.oui-noti-button__unused {
   border: solid rgb(69, 76, 85);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -102,7 +93,7 @@ body.dark oui-noti-buttons > .oui-noti-buttons__unused {
   background-color: rgb(40, 51, 68);
 }
 
-oui-noti-buttons .oui-noti-buttons__status-counter {
+oui-noti-button .oui-noti-button__status-counter {
   display: inline-block;
   color: white;
   background-color: red;
@@ -117,7 +108,7 @@ oui-noti-buttons .oui-noti-buttons__status-counter {
   z-index: 999;
 }
 
-body.dark oui-noti-buttons .oui-noti-buttons__status-counter {
+body.dark oui-noti-button .oui-noti-button__status-counter {
   display: inline-block;
   color: white;
   background-color: rgb(40, 51, 68);
