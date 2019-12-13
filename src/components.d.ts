@@ -47,9 +47,9 @@ export namespace Components {
     */
     'count': number;
     /**
-    * Set the noti-try status icon
+    * Number of unread notifications
     */
-    'icon': string;
+    'unread': number;
   }
   interface OuiNotiDrawer {
     /**
@@ -207,9 +207,9 @@ declare namespace LocalJSX {
     */
     'count'?: number;
     /**
-    * Set the noti-try status icon
+    * Number of unread notifications
     */
-    'icon'?: string;
+    'unread'?: number;
   }
   interface OuiNotiDrawer {
     /**

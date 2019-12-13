@@ -25,13 +25,21 @@ export class NotiTray {
   }
 
   public render() {
+    const count = this.messages.length
+    const unread = count
+      ? this.messages.reduce((acc, itm) => {
+        return itm.read ? acc : ++acc
+      }, 0)
+      : count
+
     return (
       <Host>
         {
-          (this.opened && this.messages.length) &&
+          (!!this.opened && !!this.messages.length) &&
           <oui-noti-drawer messages={this.messages} />
         }
-        <oui-noti-button />
+
+        <oui-noti-button count={count} unread={unread} />
       </Host>
     )
   }

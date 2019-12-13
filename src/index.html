@@ -27,7 +27,6 @@
   </oui-nav-bar>
 
   <script>
-
     let messages = [
       {
         title: "Good Morning!",
@@ -54,7 +53,6 @@
     })
 
     document.addEventListener('dismissall', (evt) => {
-      console.log('dismiss all');
       messages = messages.map((msg) => {
         msg.read = true
         return msg

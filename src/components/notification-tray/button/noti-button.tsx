@@ -6,30 +6,27 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class NotiButton {
   /**
-   * Set the noti-try status icon
-   */
-  @Prop() public icon: string = "read"
-
-  /**
    * Number of unread notifications
    */
   @Prop() public count: number = 0
 
+  /**
+   * Number of unread notifications
+   */
+  @Prop() public unread: number = 0
+
   public render() {
+    const btnCls = !this.count ? "unused" : (this.unread ? "unread" : "read")
+
     return (
       <Host>
-        {/* <button class="oui-noti-button__unread" onClick={openTray}>
-          <span class="oui-noti-button__status-counter">{this.statusCounter}</span>
-          <oui-svg name="noti-bell-unread" scale={0.25}></oui-svg>
-        </button> */}
-
-        <button class="oui-noti-button__read">
-          <oui-svg name={`noti-bell-${this.icon}`} scale={0.25} />
+        <button class={`oui-noti-button__${btnCls}`}>
+          {
+            (btnCls === "unread") &&
+            <span class="oui-noti-button__status-counter">{this.unread}</span>
+          }
+          <oui-svg name={`noti-bell-${btnCls}`} scale={0.25} />
         </button>
-
-        {/* <button class="oui-noti-button__unused">
-          <oui-svg name="noti-bell-unused" scale={0.25}></oui-svg>
-        </button> */}
       </Host>
     )
   }
