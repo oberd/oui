@@ -2,17 +2,21 @@ import {
   Component,
   h,
   Host,
-  Listen,
   Prop,
-  State,
-  Watch,
 } from "@stencil/core"
+
+import { NotiMessageProps } from "../status-type"
 
 @Component({
   tag: "oui-noti-drawer",
   styleUrl: "noti-drawer.css",
 })
 export class NotiDrawer {
+  /**
+   * Messages array
+   */
+  @Prop() public messages: NotiMessageProps[] = []
+
   public render() {
     return (
       <Host>
@@ -23,15 +27,9 @@ export class NotiDrawer {
 
           <ul class="oui-noti-drawer__status-list">
             <li class=".oui-noti-drawer__status-list">
-              <div class="oui-noti-drawer__success-light"></div>
-              <div class="oui-noti-drawer__status-text-div">
-                <p>
-                  Hello
-                </p>
-              </div>
-              <a href="${noti.link}">
-                <oui-svg name="status-link" scale={0.25}></oui-svg>
-              </a>
+              {
+                this.messages.map((msg: NotiMessageProps) => <oui-noti-item message={msg} />)
+              }
             </li>
           </ul>
         </section>

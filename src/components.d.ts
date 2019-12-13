@@ -11,6 +11,9 @@ import {
   FileUploadHandler,
 } from './components/file-upload/FileUploadHandler';
 import {
+  NotiMessageProps,
+} from './components/notifications/status-type';
+import {
   SvgPack,
 } from './components/svg/svgs';
 
@@ -48,10 +51,20 @@ export namespace Components {
     */
     'icon': string;
   }
-  interface OuiNotiDrawer {}
-  interface OuiNotiItem {}
+  interface OuiNotiDrawer {
+    /**
+    * Messages array
+    */
+    'messages': NotiMessageProps[];
+  }
+  interface OuiNotiItem {
+    /**
+    * A single noti message
+    */
+    'message': NotiMessageProps;
+  }
   interface OuiNotiTray {
-    'messages': object[];
+    'messages': NotiMessageProps[];
     'opened': boolean;
   }
   interface OuiSvg {
@@ -194,10 +207,20 @@ declare namespace LocalJSX {
     */
     'icon'?: string;
   }
-  interface OuiNotiDrawer {}
-  interface OuiNotiItem {}
+  interface OuiNotiDrawer {
+    /**
+    * Messages array
+    */
+    'messages'?: NotiMessageProps[];
+  }
+  interface OuiNotiItem {
+    /**
+    * A single noti message
+    */
+    'message'?: NotiMessageProps;
+  }
   interface OuiNotiTray {
-    'messages'?: object[];
+    'messages'?: NotiMessageProps[];
     'opened'?: boolean;
   }
   interface OuiSvg {

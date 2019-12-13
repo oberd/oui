@@ -16,11 +16,11 @@
   </style>
   <script type="module" src="/build/oui.esm.js"></script>
   <script nomodule src="/build/oui.js"></script>
-
 </head>
 
 <body>
-  <button>Notify me</button>
+  <button id="open">Notify Open</button>
+  <button id="close">Notify Close</button>
 
   <oui-nav-bar>
     <oui-noti-tray></oui-noti-tray>
@@ -28,26 +28,41 @@
 
   <script>
     const notiTray = document.querySelector("oui-noti-tray")
-    notiTray.status = [
+    notiTray.messages = [
       {
-        notification: "Good Morning!",
+        title: "Good Morning!",
         link: "https://www.google.com",
-        linkType: "href",
-        info: "these are the details",
+        type: "link",
+        detail: "these are the details",
         valence: "success"
       },
       {
-        notification: "Good Afternoon!",
-        link: "https://www.google.com",
-        linkType: "info",
-        info: "these are the details",
+        title: "Good Afternoon!",
+        type: "info",
+        detail: "these are the details",
         valence: "fail"
       }
     ]
 
-    document.querySelector("button").addEventListener("click", () => {
+    document.querySelector("#open").addEventListener("click", () => {
       notiTray.opened = true
     })
+
+    document.querySelector("#close").addEventListener("click", () => {
+      notiTray.opened = false
+    })
+
+    // setTimeout(() => {
+    //   notiTray.messages = [
+    //     {
+    //       title: "Good Morning!",
+    //       link: "https://www.google.com",
+    //       type: "link",
+    //       detail: "these are the details",
+    //       valence: "success"
+    //     }
+    //   ]
+    // }, 5000)
   </script>
 </body>
 

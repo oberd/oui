@@ -1,7 +1,7 @@
 export interface NotiMessageProps {
-  notification: string
-  link: string
-  linkType: "href" | "info"
-  info: string
+  title: string
+  link?: string
+  type: "link" | "info"
+  detail: string
   valence: "success" | "fail"
 }

@@ -4,11 +4,10 @@ import {
   Host,
   Listen,
   Prop,
-  State,
   Watch,
 } from "@stencil/core"
 
-// import { StatusType } from "./status-type"
+import { NotiMessageProps } from "./status-type"
 
 @Component({
   tag: "oui-noti-tray",
@@ -16,10 +15,7 @@ import {
 })
 export class NotiTray {
   @Prop({ reflect: true, mutable: true }) public opened = false
-  @Prop({ reflect: true, mutable: true }) public messages: object[]
-
-  @State() private counter: number = 0
-  @State() private oldStatus: object[]
+  @Prop({ reflect: true, mutable: true }) public messages: NotiMessageProps[]
 
   @Watch("opened")
   public openedChange(newValue: boolean, oldValue: boolean) {

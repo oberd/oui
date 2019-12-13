@@ -50,8 +50,8 @@ oui-noti-drawer .oui-noti-drawer__statuses ul {
   padding-bottom: 0.625em;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses ul li {
-  display: inline-flex;
+oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item {
+  display: flex;
   justify-content: space-evenly;
   align-self: flex-end;
   padding: 0.125em 0;
@@ -62,12 +62,14 @@ oui-noti-drawer .oui-noti-drawer__statuses ul li {
   transition: all 0.05s ease-in-out;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__status-text-div {
-  display: block;
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__content {
+  flex: 1 auto;
+  display: flex;
+  flex-direction: column;
   width: 9.625em;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__status-text-div p {
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__detail {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,7 +83,7 @@ oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light {
   border-radius: 50%;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__error-light {
+oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__fail-light {
   margin-left: 0.125em;
   width: calc(1.5em * 0.5);
   height: calc(1.5em * 0.5);
