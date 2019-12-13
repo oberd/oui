@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description                    | Type     | Default  |
-| -------- | --------- | ------------------------------ | -------- | -------- |
-| `count`  | `count`   | Number of unread notifications | `number` | `0`      |
-| `icon`   | `icon`    | Set the noti-try status icon   | `string` | `"read"` |
+| Property | Attribute | Description                    | Type     | Default |
+| -------- | --------- | ------------------------------ | -------- | ------- |
+| `count`  | `count`   | Number of unread notifications | `number` | `0`     |
+| `unread` | `unread`  | Number of unread notifications | `number` | `0`     |
 
 
 ## Dependencies
