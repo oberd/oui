@@ -12,7 +12,7 @@ import {
 } from './components/file-upload/FileUploadHandler';
 import {
   NotiMessageProps,
-} from './components/notifications/status-type';
+} from './components/notification-tray/status-type';
 import {
   SvgPack,
 } from './components/svg/svgs';

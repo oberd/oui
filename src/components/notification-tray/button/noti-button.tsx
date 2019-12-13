@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "oui-noti-button",
