@@ -50,7 +50,7 @@ export class Drawer {
         <aside style={{ width: this.size }}>
           <header class={cls}>
             <h1 class="oui-drawer__title">{this.drawerTitle}</h1>
-            <oui-svg name="icon-close" scale={1} onClick={this.onCloseDrawer} />
+            <oui-svg class="oui-drawer__close" name="icon-close" scale={1} onClick={this.onCloseDrawer} />
           </header>
           <slot />
         </aside>
