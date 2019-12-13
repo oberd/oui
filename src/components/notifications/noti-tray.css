@@ -21,7 +21,7 @@ body.dark oui-noti-tray aside {
   margin-left: -14.0625em;
   position: absolute;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   justify-content: flex-start;
   background-color: rgb(25, 37, 54);
   border-top: -0.9375em;
@@ -97,40 +97,40 @@ oui-noti-tray .oui-noti-tray__statuses ul {
   padding-bottom: 0.625em;
 }
 
-oui-noti-tray .oui-noti-tray__statuses ul li{
+oui-noti-tray .oui-noti-tray__statuses ul li {
   display: inline-flex;
   justify-content: space-evenly;
-  align-self: end; 
-  padding: 0.125em 0; 
-  text-align: center; 
-  width: 100%; 
-  margin: 0.25em 0em; 
+  align-self: end;
+  padding: 0.125em 0;
+  text-align: center;
+  width: 100%;
+  margin: 0.25em 0em;
   background-color: rgb(247, 247, 247);
   transition: all 0.05s;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
 
-body.dark oui-noti-tray .oui-noti-tray__statuses ul li{
+body.dark oui-noti-tray .oui-noti-tray__statuses ul li {
   display: inline-flex;
   justify-content: space-evenly;
-  align-self: end; 
-  color: white; 
-  padding: 0.125em 0; 
-  text-align: center; 
-  width: 100%; 
-  margin: 0.25em 0; 
+  align-self: end;
+  color: white;
+  padding: 0.125em 0;
+  text-align: center;
+  width: 100%;
+  margin: 0.25em 0;
   background-color: rgb(40, 51, 68);
   transition: all 0.05s;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
 
-body oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+3) {
+oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+3) {
   opacity: 0.6;
 }
 
-body oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+4) {
+oui-noti-tray .oui-noti-tray__statuses ul li:nth-of-type(1n+4) {
   display: none;
 }
 
@@ -147,7 +147,7 @@ oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__status-text-div {
 
 oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__status-text-div p {
   white-space: nowrap;
-  overflow: hidden;  
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -169,7 +169,7 @@ oui-noti-tray .oui-noti-tray__statuses ul li .oui-noti-tray__error-light {
   margin-left: 0.125em;
   width: calc(1.5em * 0.5);
   height: calc(1.5em * 0.5);
-  background-color: rgb(250,177,48);
+  background-color: rgb(250, 177, 48);
   border-radius: 50%;
 }
 
@@ -198,7 +198,7 @@ body.dark oui-noti-tray aside::-webkit-scrollbar-track {
 }
 
 body.dark oui-noti-tray aside::-webkit-scrollbar-thumb {
-  background-color: rgb(40,51,68);
+  background-color: rgb(40, 51, 68);
   border-radius: 3.125em;
   outline: 0.0625em solid slategrey;
 }

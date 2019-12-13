@@ -18,7 +18,7 @@ export class NotiButtons {
 
     const openTray = () => {
       const notiTray = document.querySelector("oui-noti-tray")
-      notiTray.open()
+      notiTray.opened = true
     }
 
     return (
@@ -39,7 +39,7 @@ export class NotiButtons {
     )
   }
 
-  @Listen("addStatusDone", {target: "body"})
+  @Listen("addStatusDone", { target: "body" })
   public addStatusDoneHandler(event: CustomEvent) {
     this.statusCounter++
     Notification.requestPermission().then(() => {
@@ -50,7 +50,7 @@ export class NotiButtons {
     })
   }
 
-  @Listen("clearStatusDone", {target: "body"})
+  @Listen("clearStatusDone", { target: "body" })
   public clearStatusDoneHandler(event: CustomEvent) {
     this.statusCounter = 0
     Notification.requestPermission().then(() => {

@@ -40,7 +40,6 @@ export namespace Components {
   interface OuiNavBar {}
   interface OuiNotiButtons {}
   interface OuiNotiTray {
-    'open': () => Promise<void>;
     'opened': boolean;
     'status': object[];
   }
@@ -162,8 +161,6 @@ declare namespace LocalJSX {
   interface OuiNavBar {}
   interface OuiNotiButtons {}
   interface OuiNotiTray {
-    'onAddStatusDone'?: (event: CustomEvent<any>) => void;
-    'onClearStatusDone'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
     'status'?: object[];
   }

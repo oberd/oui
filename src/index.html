@@ -20,32 +20,35 @@
 </head>
 
 <body>
-  <oui-card style="min-height: 400px;">
-    <oui-card-heading>
-      <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
-    </oui-card-heading>
-    <div>
-      <!-- File Upload Dialog Dropper -->
-      <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
-      <script>
-        const el = document.getElementById("files")
-        el.addEventListener("dropped", async (event) => {
-          const postResponse = await event.detail.uploadWith(async (formData) => {
-            const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
-            const response = await fetch(url, {
-              method: "POST",
-              body: formData,
-            })
-            if (!response.ok) {
-              throw new Error("problem uploading files.")
-            }
-            return response.status + " " + response.statusText
-          })
-          console.log("Uploaded files: " + postResponse)
-        })
-      </script>
-    </div>
-  </oui-card>
+  <button>Notify me</button>
+
+  <oui-nav-bar>
+    <oui-noti-tray></oui-noti-tray>
+  </oui-nav-bar>
+
+  <script>
+    const notiTray = document.querySelector("oui-noti-tray")
+    notiTray.status = [
+      {
+        notification: "Good Morning!",
+        link: "https://www.google.com",
+        linkType: "href",
+        info: "these are the details",
+        valence: "success"
+      },
+      {
+        notification: "Good Afternoon!",
+        link: "https://www.google.com",
+        linkType: "info",
+        info: "these are the details",
+        valence: "fail"
+      }
+    ]
+
+    document.querySelector("button").addEventListener("click", () => {
+      notiTray.opened = true
+    })
+  </script>
 </body>
 
 </html>
