@@ -34,12 +34,11 @@ export class NotiTray {
 
     return (
       <Host>
+        <oui-noti-button count={count} unread={unread} />
         {
           (!!this.opened && !!this.messages.length) &&
           <oui-noti-drawer messages={this.messages} />
         }
-
-        <oui-noti-button count={count} unread={unread} />
       </Host>
     )
   }

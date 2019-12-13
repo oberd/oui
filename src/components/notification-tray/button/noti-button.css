@@ -57,16 +57,16 @@ oui-noti-button>.oui-noti-button__unused {
   color: rgb(134, 134, 134);
 }
 
-body.dark oui-noti-button>.oui-noti-button__unread:hover, body.dark oui-noti-button>.oui-noti-button__read:hover, body.dark oui-noti-button>.oui-noti-button__unused:hover {
+body.dark oui-noti-button .oui-noti-button__unread:hover, body.dark oui-noti-button>.oui-noti-button__read:hover, body.dark oui-noti-button>.oui-noti-button__unused:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
-body.dark oui-noti-button>.oui-noti-button__unread:active, body.dark oui-noti-button>.oui-noti-button__read:active, body.dark oui-noti-button>.oui-noti-button__unused:active {
+body.dark oui-noti-button .oui-noti-button__unread:active, body.dark oui-noti-button>.oui-noti-button__read:active, body.dark oui-noti-button>.oui-noti-button__unused:active {
   transform: scale(1);
 }
 
-body.dark oui-noti-button>.oui-noti-button__unread {
+body.dark oui-noti-button .oui-noti-button__unread {
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -75,7 +75,7 @@ body.dark oui-noti-button>.oui-noti-button__unread {
   background-color: rgb(237, 237, 237);
 }
 
-body.dark oui-noti-button>.oui-noti-button__read {
+body.dark oui-noti-button .oui-noti-button__read {
   border: solid rgb(237, 237, 237);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -84,7 +84,7 @@ body.dark oui-noti-button>.oui-noti-button__read {
   background-color: rgb(237, 237, 237);
 }
 
-body.dark oui-noti-button>.oui-noti-button__unused {
+body.dark oui-noti-button .oui-noti-button__unused {
   border: solid rgb(69, 76, 85);
   border-radius: 50%;
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
@@ -94,10 +94,9 @@ body.dark oui-noti-button>.oui-noti-button__unused {
 }
 
 oui-noti-button .oui-noti-button__status-counter {
-  display: inline-block;
   color: white;
   background-color: red;
-  position: absolute;
+  position: fixed;
   align-self: flex-start;
   margin-right: -1.5em;
   margin-top: -0.75em;
@@ -109,15 +108,5 @@ oui-noti-button .oui-noti-button__status-counter {
 }
 
 body.dark oui-noti-button .oui-noti-button__status-counter {
-  display: inline-block;
-  color: white;
   background-color: rgb(40, 51, 68);
-  position: absolute;
-  align-self: flex-start;
-  margin-right: -1.5em;
-  margin-top: -0.75em;
-  border-radius: 50%;
-  padding-left: 0.1625em;
-  padding-right: 0.1625em;
-  z-index: 999;
 }

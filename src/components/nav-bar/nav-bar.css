@@ -1,7 +1,7 @@
 body.dark oui-nav-bar {
 display: flex;
 flex-direction: row;
-justify-content: flex-end;
+/* justify-content: flex-end; */
 list-style-type: none;
 padding: 3px 5px;
 margin-top: 3em;
@@ -11,14 +11,13 @@ top: 0;
 width: inherit;
 box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 border-radius: 50px;
-transition: all 1s ease-in-out;
-overflow: visible;
+/* overflow: visible; */
 }
 
 oui-nav-bar {
 display: flex;
 flex-direction: row;
-justify-content: flex-end;
+/* justify-content: flex-end; */
 list-style-type: none;
 padding: 3px 5px;
 margin-top: 3em;
@@ -28,6 +27,5 @@ top: 0;
 width: inherit;
 box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 border-radius: 50px;
-transition: all 1s ease-in-out;
-overflow: visible;
+/* overflow: visible; */
 } 
