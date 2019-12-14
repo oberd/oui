@@ -1,19 +1,27 @@
 oui-noti-drawer {
   display: flex;
   position: absolute;
-  right: 1em;
+  top: 96%;
   flex-direction: column;
   justify-content: flex-start;
   background-color: #FFF;
   border-radius: 0 0 1em 1em;
-  box-shadow: 0 0.15em 0.5em -0.15em rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.55em 0.5em -0.15em rgba(0, 0, 0, 0.25);
   width: 20em;
   max-height: 20em;
   padding: 1.8em 0 1em;
   overflow: none;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 1;
   transition: all 0.5s linear;
+}
+
+oui-noti-tray.to-left oui-noti-drawer {
+  right: 1em;
+}
+
+oui-noti-tray.to-right oui-noti-drawer {
+  left: 1em;
 }
 
 oui-noti-drawer .oui-noti-drawer__clear {

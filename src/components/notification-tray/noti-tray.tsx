@@ -13,8 +13,21 @@ import { NotiMessageProps } from "./status-type"
   styleUrl: "noti-tray.css",
 })
 export class NotiTray {
+
+  /**
+   *
+   */
   @Prop({ reflect: true, mutable: true }) public opened = false
+
+  /**
+   *
+   */
   @Prop() public messages: NotiMessageProps[] | null = []
+
+  /**
+   *
+   */
+  @Prop() public direction: "to-right" | "to-left" = "to-left"
 
   @Listen("click")
   public todoCompletedHandler(evt: UIEvent) {
@@ -33,7 +46,7 @@ export class NotiTray {
       : count
 
     return (
-      <Host>
+      <Host class={this.direction}>
         <oui-noti-button count={count} unread={unread} />
         {
           (!!this.opened && (this.messages && !!this.messages.length)) &&

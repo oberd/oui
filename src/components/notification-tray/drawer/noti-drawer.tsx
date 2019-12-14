@@ -2,8 +2,6 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 import { NotiMessageProps } from "../status-type"
 
-type positionEnum = "to-right" | "to-left"
-
 @Component({
   tag: "oui-noti-drawer",
   styleUrl: "noti-drawer.css",
@@ -13,11 +11,6 @@ export class NotiDrawer {
    * Messages array
    */
   @Prop() public messages: NotiMessageProps[] = []
-
-  /**
-   * Messages array
-   */
-  @Prop() public position: positionEnum = "to-left"
 
   @Event() public dismissall: EventEmitter
   public dismissAllHandler = (evt: UIEvent) => {

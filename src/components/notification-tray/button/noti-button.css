@@ -1,7 +1,19 @@
 oui-noti-button {
+  position: relative;
   order: 4;
   align-self: flex-end;
   justify-self: space-between;
+}
+
+oui-noti-button .oui-noti-button__status-counter {
+  position: absolute;
+  color: #fff;
+  font-weight: bold;
+  background-color: red;
+  border-radius: 50%;
+  box-shadow: 0.1em 0.15em 0.1em -1px rgba(0, 0, 0, 0.5);
+  padding: 0.1em 0.4em;
+  z-index: 999;
 }
 
 oui-noti-button>.oui-noti-button__unread,
@@ -16,20 +28,19 @@ oui-noti-button>.oui-noti-button__unused {
 
 oui-noti-button>.oui-noti-button__unread:hover,
 oui-noti-button>.oui-noti-button__read:hover {
-  transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   border: solid rgb(237, 237, 237);
 }
 
-oui-noti-button>.oui-noti-button__unused {
-  cursor: not-allowed;
+oui-noti-button>.oui-noti-button__unread:active,
+oui-noti-button>.oui-noti-button__read:active {
   opacity: 0.5;
 }
 
-oui-noti-button>.oui-noti-button__unread:active,
-oui-noti-button>.oui-noti-button__read:active{
-  transform: scale(1);
+oui-noti-button>.oui-noti-button__unused {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 oui-noti-button>.oui-noti-button__unread {
@@ -60,16 +71,13 @@ oui-noti-button>.oui-noti-button__unused {
 }
 
 body.dark oui-noti-button .oui-noti-button__unread:hover,
-body.dark oui-noti-button>.oui-noti-button__read:hover,
-body.dark oui-noti-button>.oui-noti-button__unused:hover {
-  transform: scale(1.05);
+body.dark oui-noti-button>.oui-noti-button__read:hover {
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
 body.dark oui-noti-button .oui-noti-button__unread:active,
-body.dark oui-noti-button>.oui-noti-button__read:active,
-body.dark oui-noti-button>.oui-noti-button__unused:active {
-  transform: scale(1);
+body.dark oui-noti-button>.oui-noti-button__read:active {
+  opacity: 0.5;
 }
 
 body.dark oui-noti-button .oui-noti-button__unread {
@@ -97,20 +105,6 @@ body.dark oui-noti-button .oui-noti-button__unused {
   padding: 0.5em;
   margin: 0.75em;
   background-color: rgb(40, 51, 68);
-}
-
-oui-noti-button .oui-noti-button__status-counter {
-  color: white;
-  background-color: red;
-  position: fixed;
-  align-self: flex-start;
-  margin-right: -1.5em;
-  margin-top: -0.75em;
-  border-radius: 50%;
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  padding-left: 0.1625em;
-  padding-right: 0.1625em;
-  z-index: 999;
 }
 
 body.dark oui-noti-button .oui-noti-button__status-counter {
