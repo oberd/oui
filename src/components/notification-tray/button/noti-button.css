@@ -16,67 +16,58 @@ oui-noti-button .oui-noti-button__status-counter {
   z-index: 999;
 }
 
-oui-noti-button>.oui-noti-button__unread,
-oui-noti-button>.oui-noti-button__read,
-oui-noti-button>.oui-noti-button__unused {
-  transition: all 0.05s;
-  cursor: pointer;
+oui-noti-button > button {
   outline: none;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-timing-function: ease-in-out;
+  border-radius: 50%;
+  padding: 0.5em;
+  margin: 0.75em;
+  border: solid #FFF;
+  background-color: #FFF;
+  cursor: pointer;
 }
 
-oui-noti-button>.oui-noti-button__unread:hover,
-oui-noti-button>.oui-noti-button__read:hover {
+oui-noti-button > oui-svg {
+  outline: none;
+  transition: all 0.05s linear;
+}
+
+oui-noti-button > .oui-noti-button__unread:hover,
+oui-noti-button > .oui-noti-button__read:hover {
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   border: solid rgb(237, 237, 237);
 }
 
-oui-noti-button>.oui-noti-button__unread:active,
-oui-noti-button>.oui-noti-button__read:active {
+oui-noti-button > .oui-noti-button__unread:active,
+oui-noti-button > .oui-noti-button__read:active {
   opacity: 0.5;
 }
 
-oui-noti-button>.oui-noti-button__unused {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-oui-noti-button>.oui-noti-button__unread {
-  border: solid white;
-  border-radius: 50%;
-  padding: 0.5em;
-  margin: 0.75em;
-  background-color: white;
+oui-noti-button > .oui-noti-button__unread {
   display: inline-flex;
   flex-direction: row-reverse;
 }
 
-oui-noti-button>.oui-noti-button__read {
-  border: solid white;
-  border-radius: 50%;
-  padding: 0.5em;
-  margin: 0.75em;
-  background-color: white;
+oui-noti-button > .oui-noti-button__unread svg {
+  stroke: red !important;
 }
 
-oui-noti-button>.oui-noti-button__unused {
+oui-noti-button > .oui-noti-button__unused {
   border: solid rgb(134, 134, 134);
-  border-radius: 50%;
-  padding: 0.5em;
-  margin: 0.75em;
-  background-color: white;
   color: rgb(134, 134, 134);
+  opacity: 0.5;
+  cursor: not-allowed;
 }
+
+/** Dark theme style */
 
 body.dark oui-noti-button .oui-noti-button__unread:hover,
-body.dark oui-noti-button>.oui-noti-button__read:hover {
+body.dark oui-noti-button > .oui-noti-button__read:hover {
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
 body.dark oui-noti-button .oui-noti-button__unread:active,
-body.dark oui-noti-button>.oui-noti-button__read:active {
+body.dark oui-noti-button > .oui-noti-button__read:active {
   opacity: 0.5;
 }
 

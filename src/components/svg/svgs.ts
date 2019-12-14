@@ -33,6 +33,10 @@ export const svgs: SvgMap = {
     loader: toString(() => import("./svg/icon-filter.svg")),
     ...iconSize,
   },
+  "noti-bell": {
+    loader: toString(() => import("./svg/noti-bell.svg")),
+    ...iconSize,
+  },
   "noti-bell-unread": {
     loader: toString(() => import("./svg/noti-bell-unread.svg")),
     width: 150,

@@ -25,7 +25,7 @@ export class NotiButton {
             (btnCls === "unread") &&
             <span class="oui-noti-button__status-counter">{this.unread}</span>
           }
-          <oui-svg name={`noti-bell-${btnCls}`} scale={0.25} />
+          <oui-svg name="noti-bell" scale={2} />
         </button>
       </Host>
     )
