@@ -14,7 +14,7 @@ import { NotiMessageProps } from "./status-type"
 })
 export class NotiTray {
   @Prop({ reflect: true, mutable: true }) public opened = false
-  @Prop() public messages: NotiMessageProps[]
+  @Prop() public messages: NotiMessageProps[] | null = []
 
   @Listen("click")
   public todoCompletedHandler(evt: UIEvent) {
@@ -25,7 +25,7 @@ export class NotiTray {
   }
 
   public render() {
-    const count = this.messages.length
+    const count = this.messages ? this.messages.length : 0
     const unread = count
       ? this.messages.reduce((acc, itm) => {
         return itm.read ? acc : ++acc
@@ -36,7 +36,7 @@ export class NotiTray {
       <Host>
         <oui-noti-button count={count} unread={unread} />
         {
-          (!!this.opened && !!this.messages.length) &&
+          (!!this.opened && (this.messages && !!this.messages.length)) &&
           <oui-noti-drawer messages={this.messages} />
         }
       </Host>

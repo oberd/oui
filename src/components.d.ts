@@ -56,6 +56,10 @@ export namespace Components {
     * Messages array
     */
     'messages': NotiMessageProps[];
+    /**
+    * Messages array
+    */
+    'position': positionEnum;
   }
   interface OuiNotiItem {
     /**
@@ -68,7 +72,7 @@ export namespace Components {
     'read': boolean;
   }
   interface OuiNotiTray {
-    'messages': NotiMessageProps[];
+    'messages': NotiMessageProps[] | null;
     'opened': boolean;
   }
   interface OuiSvg {
@@ -217,6 +221,10 @@ declare namespace LocalJSX {
     */
     'messages'?: NotiMessageProps[];
     'onDismissall'?: (event: CustomEvent<any>) => void;
+    /**
+    * Messages array
+    */
+    'position'?: positionEnum;
   }
   interface OuiNotiItem {
     /**
@@ -230,7 +238,7 @@ declare namespace LocalJSX {
     'read'?: boolean;
   }
   interface OuiNotiTray {
-    'messages'?: NotiMessageProps[];
+    'messages'?: NotiMessageProps[] | null;
     'opened'?: boolean;
   }
   interface OuiSvg {
