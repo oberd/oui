@@ -4,13 +4,15 @@ oui-noti-drawer {
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
-  border-radius: 0 0 0.9375em 0.9375em;
-  box-shadow: 0 0.125em 0.5em -0.125em rgba(0, 0, 0, 0.26);
-  width: 18.75em;
+  border-radius: 0 0 1em 1em;
+  box-shadow: 0 0.15em 0.5em -0.15em rgba(0, 0, 0, 0.25);
+  width: 20em;
   transition: all 0.5s ease-in-out;
-  z-index: 999;
-  height: 17.6875em;
-  overflow: auto;
+  max-height: 20em;
+  overflow: none;
+  overflow-y: auto;
+  z-index: 100;
+  right: 1em;
 }
 
 oui-noti-drawer .oui-noti-drawer__clear {
