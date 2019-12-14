@@ -4,7 +4,9 @@ oui-noti-button {
   justify-self: space-between;
 }
 
-oui-noti-button>.oui-noti-button__unread, oui-noti-button>.oui-noti-button__read, oui-noti-button>.oui-noti-button__unused {
+oui-noti-button>.oui-noti-button__unread,
+oui-noti-button>.oui-noti-button__read,
+oui-noti-button>.oui-noti-button__unused {
   transition: all 0.05s;
   cursor: pointer;
   outline: none;
@@ -12,21 +14,21 @@ oui-noti-button>.oui-noti-button__unread, oui-noti-button>.oui-noti-button__read
   transition-timing-function: ease-in-out;
 }
 
-oui-noti-button>.oui-noti-button__unread:hover, oui-noti-button>.oui-noti-button__read:hover {
+oui-noti-button>.oui-noti-button__unread:hover,
+oui-noti-button>.oui-noti-button__read:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
   background-color: rgb(237, 237, 237);
   border: solid rgb(237, 237, 237);
 }
 
-oui-noti-button>.oui-noti-button__unused:hover {
-  transform: scale(1.05);
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  background-color: rgb(237, 237, 237);
-  /* border: solid rgb(237, 237, 237); */
+oui-noti-button>.oui-noti-button__unused {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-oui-noti-button>.oui-noti-button__unread:active, oui-noti-button>.oui-noti-button__read:active, oui-noti-button>.oui-noti-button__unused:active {
+oui-noti-button>.oui-noti-button__unread:active,
+oui-noti-button>.oui-noti-button__read:active{
   transform: scale(1);
 }
 
@@ -57,12 +59,16 @@ oui-noti-button>.oui-noti-button__unused {
   color: rgb(134, 134, 134);
 }
 
-body.dark oui-noti-button .oui-noti-button__unread:hover, body.dark oui-noti-button>.oui-noti-button__read:hover, body.dark oui-noti-button>.oui-noti-button__unused:hover {
+body.dark oui-noti-button .oui-noti-button__unread:hover,
+body.dark oui-noti-button>.oui-noti-button__read:hover,
+body.dark oui-noti-button>.oui-noti-button__unused:hover {
   transform: scale(1.05);
   box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
 }
 
-body.dark oui-noti-button .oui-noti-button__unread:active, body.dark oui-noti-button>.oui-noti-button__read:active, body.dark oui-noti-button>.oui-noti-button__unused:active {
+body.dark oui-noti-button .oui-noti-button__unread:active,
+body.dark oui-noti-button>.oui-noti-button__read:active,
+body.dark oui-noti-button>.oui-noti-button__unused:active {
   transform: scale(1);
 }
 

@@ -19,16 +19,23 @@
 </head>
 
 <body>
-  <button id="open">Notify Open</button>
-  <button id="close">Notify Close</button>
+  <oui-nav-bar>
+    <div style="flex: 1;"></div>
+    <oui-noti-tray id="noti-one"></oui-noti-tray>
+  </oui-nav-bar>
 
   <oui-nav-bar>
     <div style="flex: 1;"></div>
-    <oui-noti-tray></oui-noti-tray>
+    <oui-noti-tray id="noti-two"></oui-noti-tray>
+  </oui-nav-bar>
+
+  <oui-nav-bar>
+    <div style="flex: 1;"></div>
+    <oui-noti-tray id="noti-three"></oui-noti-tray>
   </oui-nav-bar>
 
   <script>
-    let messages = [
+    let messagesUnread = [
       {
         title: "Good Morning!",
         link: "https://www.google.com",
@@ -44,33 +51,49 @@
       }
     ]
 
+    let messagesRead = [
+      {
+        title: "Good Morning!",
+        link: "https://www.google.com",
+        type: "link",
+        detail: "these are the details",
+        valence: "success",
+        read: true
+      },
+      {
+        title: "Good Afternoon!",
+        type: "info",
+        detail: "these are the details",
+        valence: "fail",
+        read: true
+      }
+    ]
+
+    const notiTrayOne = document.querySelector("#noti-one")
+    notiTrayOne.messages = messagesUnread
+
+    const notiTrayTwo = document.querySelector("#noti-two")
+    notiTrayTwo.messages = messagesRead
+
+    const notiTrayThree = document.querySelector("#noti-three")
+    notiTrayThree.messages = null
+
     document.addEventListener('dismiss', (evt) => {
-      messages = messages.map((msg) => {
+      messagesUnread = messagesUnread.map((msg) => {
         if (msg.title === evt.detail) { msg.read = true }
         return msg
       })
 
-      notiTray.messages = messages
+      notiTrayOne.messages = messagesUnread
     })
 
     document.addEventListener('dismissall', (evt) => {
-      messages = messages.map((msg) => {
+      messagesUnread = messagesUnread.map((msg) => {
         msg.read = true
         return msg
       })
 
-      notiTray.messages = messages
-    })
-
-    const notiTray = document.querySelector("oui-noti-tray")
-    notiTray.messages = messages
-
-    document.querySelector("#open").addEventListener("click", () => {
-      notiTray.opened = true
-    })
-
-    document.querySelector("#close").addEventListener("click", () => {
-      notiTray.opened = false
+      notiTrayOne.messages = messagesUnread
     })
   </script>
 </body>

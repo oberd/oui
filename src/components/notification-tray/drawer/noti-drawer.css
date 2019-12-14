@@ -1,40 +1,47 @@
 oui-noti-drawer {
-  position: absolute;
   display: flex;
+  position: absolute;
+  right: 1em;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: white;
+  background-color: #FFF;
   border-radius: 0 0 1em 1em;
   box-shadow: 0 0.15em 0.5em -0.15em rgba(0, 0, 0, 0.25);
   width: 20em;
-  transition: all 0.5s ease-in-out;
   max-height: 20em;
+  padding: 1.8em 0 1em;
   overflow: none;
   overflow-y: auto;
   z-index: 100;
-  right: 1em;
+  transition: all 0.5s linear;
 }
 
 oui-noti-drawer .oui-noti-drawer__clear {
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin: 1em;
-  margin-left: 14em;
-  border: 2px solid rgb(237, 237, 237);
-  border-radius: 1.25em;
-  padding: 0 0.625em;
-  background-color: rgb(237, 237, 237);
-  cursor: pointer;
+  position: absolute;
+  top: 0.8em;
+  right: 0.5em;
+  border: 1px solid rgb(200, 200, 200);
+  background-color: rgb(230, 230, 230);
+  border-radius: 0.1em;
+  margin: 0;
+  padding: 0.25em 0.65em;
+  font-size: 1em;
+  opacity: 0.8;
+  color: #333;
   outline: none;
-  transition: all 0.05s ease-in-out;
+  cursor: pointer;
+  transition: all 0.05s linear;
 }
 
 oui-noti-drawer .oui-noti-drawer__clear:not([disabled]):hover {
-  transform: scale(1.05);
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  background-color: rgb(237, 237, 237);
-  border-color: rgb(237, 237, 237);
+  box-shadow: 0 0 0.3em -0.1em rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+oui-noti-drawer .oui-noti-drawer__clear:not([disabled]):active {
+  box-shadow: inset 0 0 0.3em -0.1em rgba(0, 0, 0, 0.5);
+  background-color: rgb(210, 210, 210);
+  opacity: 1;
 }
 
 oui-noti-drawer .oui-noti-drawer__clear[disabled] {
@@ -69,7 +76,7 @@ oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item {
   padding: 0.125em;
   margin: 0.25em 0em;
   background-color: rgb(247, 247, 247);
-  transition: all 0.05s ease-in-out;
+  transition: all 0.05s linear;
   text-decoration: none;
   color: black;
 }
@@ -120,7 +127,8 @@ oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__title {
   font-weight: 500;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light, oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__fail-light {
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light,
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__fail-light {
   margin: 0 0.8em;
   width: calc(1.5em * 0.5);
   height: calc(1.5em * 0.5);
@@ -134,7 +142,7 @@ oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__success-light {
   border-color: #89CC00;
 }
 
-oui-noti-drawer .oui-noti-drawer__statuses ul li .oui-noti-drawer__fail-light {
+oui-noti-drawer .oui-noti-drawer__statuses .oui-noti-drawer__fail-light {
   background-color: rgb(255, 177, 48);
   border-color: rgb(250, 170, 45);
 }
@@ -166,8 +174,9 @@ body.dark oui-noti-drawer .oui-noti-drawer__clear {
   background-color: rgb(40, 51, 68);
 }
 
-body.dark oui-noti-drawer .oui-noti-drawer__clear:hover, oui-noti-drawer .oui-noti-drawer__clear:not(type="disabled") {
-  box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
+body.dark oui-noti-drawer .oui-noti-drawer__clear:hover,
+body.dark oui-noti-drawer .oui-noti-drawer__clear:not([disabled]) {
+  box-shadow: 0 0 0.65em 0 rgb(100, 200, 130, 0.8);
 }
 
 body.dark oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item {
@@ -176,7 +185,7 @@ body.dark oui-noti-drawer .oui-noti-drawer__statuses oui-noti-item {
 }
 
 body.dark oui-noti-drawer::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 0.375em rgb(101, 202, 130, 0.8);
+  box-shadow: inset 0 0 0.375em rgb(100, 200, 130, 0.8);
   background-color: rgb(40, 51, 68);
 }
 
