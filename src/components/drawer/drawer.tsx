@@ -18,7 +18,7 @@ export class Drawer {
   /**
    * Open and close drawer
    */
-  @Prop() public opened: boolean
+  @Prop({ reflect: true }) public opened: boolean
 
   /**
    * Set drawer size
@@ -37,9 +37,11 @@ export class Drawer {
 
   @Watch("opened")
   public openhandler(newValue: boolean) {
-    if (newValue) {
-      this.open.emit()
+    if (newValue === true) {
+      return this.open.emit()
     }
+
+    return this.close.emit()
   }
 
   public render() {
