@@ -48,8 +48,8 @@ oui-noti-button > .oui-noti-button__unread {
   flex-direction: row-reverse;
 }
 
-oui-noti-button > .oui-noti-button__unread svg {
-  stroke: red !important;
+oui-noti-button > .oui-noti-button__unread svg path {
+  fill: red;
 }
 
 oui-noti-button > .oui-noti-button__unused {
