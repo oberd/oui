@@ -82,33 +82,16 @@ body.dark oui-noti-button > .oui-noti-button__read:active {
   opacity: 0.5;
 }
 
+body.dark oui-noti-button .oui-noti-button__read,
 body.dark oui-noti-button .oui-noti-button__unread {
-  border: solid rgb(237, 237, 237);
-  border-radius: 50%;
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  padding: 0.5em;
-  margin: 0.75em;
-  background-color: rgb(237, 237, 237);
-}
-
-body.dark oui-noti-button .oui-noti-button__read {
-  border: solid rgb(237, 237, 237);
-  border-radius: 50%;
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  padding: 0.5em;
-  margin: 0.75em;
   background-color: rgb(237, 237, 237);
 }
 
 body.dark oui-noti-button .oui-noti-button__unused {
-  border: solid rgb(69, 76, 85);
-  border-radius: 50%;
-  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
-  padding: 0.5em;
-  margin: 0.75em;
   background-color: rgb(40, 51, 68);
+  border-color: #889;
 }
 
-body.dark oui-noti-button .oui-noti-button__status-counter {
-  background-color: rgb(40, 51, 68);
+body.dark oui-noti-button .oui-noti-button__unused svg path {
+  stroke: #889;
 }
