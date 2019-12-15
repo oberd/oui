@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
-import { NotiMessageProps } from "../status-type"
+import { NotificationProps } from "../status-type"
 
 @Component({
   tag: "oui-noti-drawer",
@@ -8,10 +8,13 @@ import { NotiMessageProps } from "../status-type"
 })
 export class NotiDrawer {
   /**
-   * Messages array
+   * Array of notifivation objects
    */
-  @Prop() public messages: NotiMessageProps[] = []
+  @Prop() public notifications: NotificationProps[] = []
 
+  /**
+   * Emited when the clear all btn is clicked
+   */
   @Event() public dismissall: EventEmitter
   public dismissAllHandler = (evt: UIEvent) => {
     evt.stopPropagation()
@@ -19,7 +22,7 @@ export class NotiDrawer {
   }
 
   public render() {
-    const disabled = !!this.messages.length && !!this.messages.every((msg) => msg.read)
+    const disabled = !!this.notifications.length && !!this.notifications.every((msg) => msg.read)
 
     return (
       <Host>
@@ -35,8 +38,8 @@ export class NotiDrawer {
           <ul class="oui-noti-drawer__status-list">
             <li class=".oui-noti-drawer__status-list">
               {
-                this.messages.map((msg: NotiMessageProps) =>
-                  (<oui-noti-item message={msg} read={msg.read} />))
+                this.notifications.map((noti: NotificationProps) =>
+                  (<oui-noti-item notification={noti} read={noti.read} />))
               }
             </li>
           </ul>

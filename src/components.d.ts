@@ -11,7 +11,7 @@ import {
   FileUploadHandler,
 } from './components/file-upload/FileUploadHandler';
 import {
-  NotiMessageProps,
+  NotificationProps,
 } from './components/notification-tray/status-type';
 import {
   SvgPack,
@@ -53,23 +53,32 @@ export namespace Components {
   }
   interface OuiNotiDrawer {
     /**
-    * Messages array
+    * Array of notifivation objects
     */
-    'messages': NotiMessageProps[];
+    'notifications': NotificationProps[];
   }
   interface OuiNotiItem {
     /**
     * A single noti message
     */
-    'message': NotiMessageProps;
+    'notification': NotificationProps;
     /**
-    * A single noti message
+    * A single notification object
     */
     'read': boolean;
   }
   interface OuiNotiTray {
+    /**
+    * Direction of the drawer
+    */
     'direction': "to-right" | "to-left";
-    'messages': NotiMessageProps[] | null;
+    /**
+    * Array of notification objects
+    */
+    'notifications': NotificationProps[] | null;
+    /**
+    * Open or close the notification drawer
+    */
     'opened': boolean;
   }
   interface OuiSvg {
@@ -214,25 +223,37 @@ declare namespace LocalJSX {
   }
   interface OuiNotiDrawer {
     /**
-    * Messages array
+    * Array of notifivation objects
     */
-    'messages'?: NotiMessageProps[];
+    'notifications'?: NotificationProps[];
+    /**
+    * Emited when the clear all btn is clicked
+    */
     'onDismissall'?: (event: CustomEvent<any>) => void;
   }
   interface OuiNotiItem {
     /**
     * A single noti message
     */
-    'message'?: NotiMessageProps;
+    'notification'?: NotificationProps;
     'onDismiss'?: (event: CustomEvent<any>) => void;
     /**
-    * A single noti message
+    * A single notification object
     */
     'read'?: boolean;
   }
   interface OuiNotiTray {
+    /**
+    * Direction of the drawer
+    */
     'direction'?: "to-right" | "to-left";
-    'messages'?: NotiMessageProps[] | null;
+    /**
+    * Array of notification objects
+    */
+    'notifications'?: NotificationProps[] | null;
+    /**
+    * Open or close the notification drawer
+    */
     'opened'?: boolean;
   }
   interface OuiSvg {

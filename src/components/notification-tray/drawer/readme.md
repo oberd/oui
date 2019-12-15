@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description           | Type               | Default     |
-| --------- | --------- | --------------------- | ------------------ | ----------- |
-| `message` | --        | A single noti message | `NotiMessageProps` | `undefined` |
-| `read`    | `read`    | A single noti message | `boolean`          | `false`     |
+| Property       | Attribute | Description                  | Type                | Default     |
+| -------------- | --------- | ---------------------------- | ------------------- | ----------- |
+| `notification` | --        | A single noti message        | `NotificationProps` | `undefined` |
+| `read`         | `read`    | A single notification object | `boolean`           | `false`     |
 
 
 ## Events

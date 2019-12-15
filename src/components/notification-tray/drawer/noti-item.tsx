@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
-import { NotiMessageProps } from "../status-type"
+import { NotificationProps } from "../status-type"
 
 @Component({
   tag: "oui-noti-item",
@@ -8,10 +8,10 @@ export class NotiItem {
   /**
    * A single noti message
    */
-  @Prop() public message: NotiMessageProps
+  @Prop() public notification: NotificationProps
 
   /**
-   * A single noti message
+   * A single notification object
    */
   @Prop() public read: boolean = false
 
@@ -22,7 +22,7 @@ export class NotiItem {
   }
 
   public render() {
-    const { detail, link = "", title, type, valence } = this.message
+    const { detail, link = "", title, type, valence } = this.notification
     const cls = this.read ? "oui-noti-item__read" : ""
 
     return (

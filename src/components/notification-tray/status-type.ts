@@ -1,8 +1,8 @@
-export interface NotiMessageProps {
+export interface NotificationProps {
   title: string
   link?: string
   type: "link" | "info"
-  detail: string
+  detail?: string
   valence: "success" | "fail",
   read?: boolean
 }
