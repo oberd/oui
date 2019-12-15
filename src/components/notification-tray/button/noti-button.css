@@ -9,7 +9,7 @@ oui-noti-button .oui-noti-button__status-counter {
   position: absolute;
   color: #fff;
   font-weight: bold;
-  background-color: red;
+  background-color: #F00;
   border-radius: 50%;
   box-shadow: 0.1em 0.15em 0.1em -1px rgba(0, 0, 0, 0.5);
   padding: 0.1em 0.4em;
@@ -49,8 +49,8 @@ oui-noti-button > .oui-noti-button__unread {
 }
 
 oui-noti-button > .oui-noti-button__unread svg path {
-  fill: #FF0000;
-  stroke: #FF0000;
+  fill: #F00;
+  stroke: #F00;
 }
 
 

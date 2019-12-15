@@ -1,6 +1,9 @@
 import { Component, h} from "@stencil/core"
 
-@Component({ tag: "oui-tm-switch", styleUrl: "tm-switch.css" })
+@Component({
+  tag: "oui-tm-switch",
+  styleUrl: "tm-switch.css",
+})
 export class ThemeSwitch {
 
   public render() {
