@@ -16,55 +16,36 @@
   </style>
   <script type="module" src="/build/oui.esm.js"></script>
   <script nomodule src="/build/oui.js"></script>
+
 </head>
 
-<body class="">
-  <oui-tm-switch></oui-tm-switch>
-
-  <oui-nav-bar>
-    <div style="flex: 1;"></div>
-    <oui-noti-tray id="noti-one"></oui-noti-tray>
-  </oui-nav-bar>
-
-
-  <script>
-    let messagesUnread = [
-      {
-        title: "Ubuntu Release",
-        link: "https://ubuntu.com",
-        type: "link",
-        detail: "Ubuntu 19.10 has been released",
-        valence: "success"
-      },
-      {
-        title: "Apple Release",
-        type: "info",
-        detail: "OSX Catalina has been released",
-        valence: "fail"
-      }
-    ]
-
-    const notiTrayOne = document.querySelector("#noti-one")
-    notiTrayOne.messages = messagesUnread
-
-    document.addEventListener('dismiss', (evt) => {
-      messagesUnread = messagesUnread.map((msg) => {
-        if (msg.title === evt.detail) { msg.read = true }
-        return msg
-      })
-
-      notiTrayOne.messages = messagesUnread
-    })
-
-    document.addEventListener('dismissall', (evt) => {
-      messagesUnread = messagesUnread.map((msg) => {
-        msg.read = true
-        return msg
-      })
-
-      notiTrayOne.messages = messagesUnread
-    })
-  </script>
+<body>
+  <oui-card style="min-height: 400px;">
+    <oui-card-heading>
+      <oui-svg name="logo-light-bg" scale="0.2"></oui-svg>
+    </oui-card-heading>
+    <div>
+      <!-- File Upload Dialog Dropper -->
+      <oui-file-upload id="files" accept="text/xml"></oui-file-upload>
+      <script>
+        const el = document.getElementById("files")
+        el.addEventListener("dropped", async (event) => {
+          const postResponse = await event.detail.uploadWith(async (formData) => {
+            const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
+            const response = await fetch(url, {
+              method: "POST",
+              body: formData,
+            })
+            if (!response.ok) {
+              throw new Error("problem uploading files.")
+            }
+            return response.status + " " + response.statusText
+          })
+          console.log("Uploaded files: " + postResponse)
+        })
+      </script>
+    </div>
+  </oui-card>
 </body>
 
 </html>
