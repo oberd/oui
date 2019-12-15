@@ -49,14 +49,25 @@ oui-noti-button > .oui-noti-button__unread {
 }
 
 oui-noti-button > .oui-noti-button__unread svg path {
-  fill: red;
+  fill: #FF0000;
+  stroke: #FF0000;
+}
+
+
+oui-noti-button > .oui-noti-button__read svg path {
+  fill: #335;
+  stroke: #335;
 }
 
 oui-noti-button > .oui-noti-button__unused {
-  border: solid rgb(134, 134, 134);
-  color: rgb(134, 134, 134);
-  opacity: 0.5;
+  border: 2px solid #667;
   cursor: not-allowed;
+  opacity: 0.8;
+}
+
+oui-noti-button > .oui-noti-button__unused svg path {
+  stroke: #557;
+  stroke-width: 1.3px;
 }
 
 /** Dark theme style */

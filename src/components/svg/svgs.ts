@@ -37,21 +37,6 @@ export const svgs: SvgMap = {
     loader: toString(() => import("./svg/noti-bell.svg")),
     ...iconSize,
   },
-  "noti-bell-unread": {
-    loader: toString(() => import("./svg/noti-bell-unread.svg")),
-    width: 150,
-    height: 150,
-  },
-  "noti-bell-read": {
-    loader: toString(() => import("./svg/noti-bell-read.svg")),
-    width: 150,
-    height: 150,
-  },
-  "noti-bell-unused": {
-    loader: toString(() => import("./svg/noti-bell-unused.svg")),
-    width: 150,
-    height: 150,
-  },
   "status-link": {
     loader: toString(() => import("./svg/status-link.svg")),
     width: 150,

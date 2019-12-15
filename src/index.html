@@ -34,6 +34,25 @@
     <oui-noti-tray id="noti-three"></oui-noti-tray>
   </oui-nav-bar>
 
+  <br />
+  <br />
+  <hr />
+
+  <oui-nav-bar>
+    <oui-noti-tray id="noti-four" direction="to-right"></oui-noti-tray>
+    <div style="flex: 1;"></div>
+  </oui-nav-bar>
+
+  <oui-nav-bar>
+    <oui-noti-tray id="noti-five" direction="to-right"></oui-noti-tray>
+    <div style="flex: 1;"></div>
+  </oui-nav-bar>
+
+  <oui-nav-bar>
+    <oui-noti-tray id="noti-six" direction="to-right"></oui-noti-tray>
+    <div style="flex: 1;"></div>
+  </oui-nav-bar>
+
   <script>
     let messagesUnread = [
       {
@@ -77,6 +96,15 @@
 
     const notiTrayThree = document.querySelector("#noti-three")
     notiTrayThree.messages = null
+
+    const notiTrayFour = document.querySelector("#noti-four")
+    notiTrayFour.messages = messagesUnread
+
+    const notiTrayFive = document.querySelector("#noti-five")
+    notiTrayFive.messages = messagesRead
+
+    const notiTraySix = document.querySelector("#noti-six")
+    notiTraySix.messages = null
 
     document.addEventListener('dismiss', (evt) => {
       messagesUnread = messagesUnread.map((msg) => {
