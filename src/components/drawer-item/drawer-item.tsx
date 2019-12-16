@@ -6,11 +6,6 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class DrawerItem {
   /**
-   * Set drawer item label
-   */
-  @Prop() public label: string
-
-  /**
    * Set drawer item link if string will be treated as a url or as a callback if it is a function
    */
   @Prop() public link: string
@@ -27,8 +22,8 @@ export class DrawerItem {
       <Host>
         {
           this.link
-            ? <a class="oui-drawer-item__label" href={this.link} {...extraProps}>{this.label}</a>
-            : <span class="oui-drawer-item__label">{this.label}</span>
+            ? <a class="oui-drawer-item__label" href={this.link} {...extraProps}><slot /></a>
+            : <span class="oui-drawer-item__label"><slot /></span>
         }
       </Host>
     )

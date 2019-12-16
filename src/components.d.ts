@@ -57,10 +57,6 @@ export namespace Components {
     */
     'external': boolean;
     /**
-    * Set drawer item label
-    */
-    'label': string;
-    /**
     * Set drawer item link if string will be treated as a url or as a callback if it is a function
     */
     'link': string;
@@ -220,10 +216,6 @@ declare namespace LocalJSX {
     * Open link in a new tab. Only for links
     */
     'external'?: boolean;
-    /**
-    * Set drawer item label
-    */
-    'label'?: string;
     /**
     * Set drawer item link if string will be treated as a url or as a callback if it is a function
     */

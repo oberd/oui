@@ -5,33 +5,20 @@ describe("Test oui-modal component", () => {
   it("should render oui-draw-item with label", async () => {
     const page = await newSpecPage({
       components: [DrawerItem],
-      html: `<oui-drawer-item label="Hello Test" />`,
+      html: `<oui-drawer-item>Hello Test</oui-drawer-item>`,
     })
 
     const content = page.doc
       .querySelector("oui-drawer-item")
-      .childNodes
+      .firstElementChild.textContent
 
-    expect(content[0].textContent).toBe("Hello Test")
-  })
-
-  it("should render oui-draw-item as a link (a tag)", async () => {
-    const page = await newSpecPage({
-      components: [DrawerItem],
-      html: `<oui-drawer-item label="Hello Test" link="https://ubuntu.com" />`,
-    })
-
-    const content = page.doc
-      .querySelector("oui-drawer-item")
-      .querySelector("a")
-
-    expect(content).not.toBeNull()
+    expect(content).toBe("Hello Test")
   })
 
   it("should render oui-draw-item with the a tag href to match link prop", async () => {
     const page = await newSpecPage({
       components: [DrawerItem],
-      html: `<oui-drawer-item label="Hello Test" link="https://ubuntu.com" />`,
+      html: `<oui-drawer-item link="https://ubuntu.com">Hello Test</oui-drawer-item>`,
     })
 
     const content = page.doc
@@ -44,7 +31,7 @@ describe("Test oui-modal component", () => {
   it("should render oui-draw-item with with target and rel attributes", async () => {
     const page = await newSpecPage({
       components: [DrawerItem],
-      html: `<oui-drawer-item label="Hello Test" link="https://ubuntu.com" external />`,
+      html: `<oui-drawer-item link="https://ubuntu.com" external>Hello Test</oui-drawer-item>`,
     })
 
     const content = page.doc

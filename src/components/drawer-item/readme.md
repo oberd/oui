@@ -13,8 +13,8 @@ A container for links or clickable elements to be used by the `oui-drawer` compo
 ```html
 <oui-drawer drawer-title="Oui Drawer" size="50%">
   <oui-collapsable label="Collapsable Group">
-    <oui-drawer-item label="Ubuntu" link="https://ubuntu.com"></oui-drawer-item>
-    <oui-drawer-item label="Fedora" link="https://getfedora.org"></oui-drawer-item>
+    <oui-drawer-item link="https://ubuntu.com">Ubuntu</oui-drawer-item>
+    <oui-drawer-item link="https://getfedora.org">Fedora</oui-drawer-item>
   </oui-collapsable>
 </oui-drawer>
 ```
@@ -27,7 +27,6 @@ A container for links or clickable elements to be used by the `oui-drawer` compo
 | Property   | Attribute  | Description                                                                                  | Type      | Default     |
 | ---------- | ---------- | -------------------------------------------------------------------------------------------- | --------- | ----------- |
 | `external` | `external` | Open link in a new tab. Only for links                                                       | `boolean` | `undefined` |
-| `label`    | `label`    | Set drawer item label                                                                        | `string`  | `undefined` |
 | `link`     | `link`     | Set drawer item link if string will be treated as a url or as a callback if it is a function | `string`  | `undefined` |
 
 
