@@ -1,6 +1,8 @@
 dist/
 www/
 loader/
+.stencil/
+src/index.html
 
 *~
 *.sw[mnpcod]
