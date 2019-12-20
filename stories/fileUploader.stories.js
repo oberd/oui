@@ -5,35 +5,32 @@ export default {
 }
 
 export const fileUploader = () => {
-  const [postResponse, setPostResponse] = React.useState('')
+  const ref = React.useRef()
 
-  const droppedHandler = async (evt) => {
-    const res = await evt.detail.uploadWith(async (formData) => {
-      const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
+  React.useEffect(() => {
+    if (!ref.current) { return }
+
+    const onFileDropped = async (evt) => {
+      // Pass an upload callback to the component
+      await evt.detail.uploadWith(async (formData) => {
+        const url = "https://httpbin.org/status/" + (Math.random() > 0.3 ? "200" : "400")
+        const response = await fetch(url, { method: "POST", body: formData })
+        if (!response.ok) { throw new Error("problem uploading files.") }
       })
+    }
 
-      if (!response.ok) {
-        throw new Error("problem uploading files.")
-      }
+    ref.current.addEventListener('dropped', onFileDropped)
 
-      return response.status + " " + response.statusText
-    })
-
-    setPostResponse(res)
-
-    console.log("Uploaded files: " + res)
-  }
+    return () => ref.current.removeEventListener('dropped', onFileDropped)
+  }, [])
 
   return (
-    <oui-file-upload
-      id="files"
-      accept="text/xml"
-      btn-label="Click Here To Upload A File"
-      modal-title="Oui File Upload"
-      onDropped={ droppedHandler }
-    />
+    <div ref={ ref } style={{ width: "50%", margin: "4em auto", textAlign: "center" }}>
+      <oui-file-upload
+        title="Oui File Uploader"
+        btn-label="Oui File Uploader"
+        accept="text/plain"
+      />
+    </div>
   )
 }
