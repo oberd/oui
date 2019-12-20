@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 export default {
   title: 'Card',
-};
+}
 
 const style = {
   padding: "1em",

@@ -5,13 +5,13 @@
       enumerable: true,
       configurable: true,
       get: function () {
-        var base = document.querySelector('base');
+        var base = document.querySelector('base')
         if (base && base.href) {
-          return base.href;
+          return base.href
         }
-        return document.URL;
+        return document.URL
       }
-    });
+    })
   }
 </script>
 <script type="module" src="/build/oui.esm.js"></script>
