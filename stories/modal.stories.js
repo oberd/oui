@@ -13,9 +13,9 @@ export const Modal = () => {
       <button onClick={ toggleModalHandler }>Open Modal</button>
 
       <div>
-      {
-        isOpen &&
-          <oui-modal onClose={toggleModalHandler}>
+        {
+          isOpen &&
+          <oui-modal onClose={ toggleModalHandler }>
             <span slot="title">Oui Modal</span>
             <h1>Lorem Ipsum</h1>
             <p>
@@ -30,7 +30,7 @@ export const Modal = () => {
               sequi vitae facilis, qui sint fugiat earum?
             </p>
           </oui-modal>
-      }
+        }
       </div>
     </div>
   )
