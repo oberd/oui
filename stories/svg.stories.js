@@ -1,38 +1,31 @@
 import React from 'react'
 
+import './svg.css'
+
 export default {
   title: 'Svg'
 }
 
-const containerStyle = {
-  width: '80%',
-  margin: '2em auto',
-  display: 'flex',
-  justifyContent: 'center'
-}
-
-const itmStyle = {
-  flex: '1 25%',
-  textAlign: 'center',
-  padding: '1em'
-}
-
 export const Svg = () => {
   return (
-    <div style={ containerStyle }>
-      <div style={ { ...itmStyle, backgroundColor: "#333" } }>
+    <div id="svg" className="container">
+      <div className="itm dark">
+        <label>logo</label>
         <oui-svg name="logo" scale={ 0.25 }></oui-svg>
       </div>
 
-      <div style={ itmStyle }>
+      <div className="itm">
+        <label>logo-light-bg</label>
         <oui-svg name="logo-light-bg" scale={ 0.25 }></oui-svg>
       </div>
 
-      <div style={ itmStyle }>
+      <div className="itm">
+        <label>icon-close</label>
         <oui-svg name="icon-close" scale={ 1 }></oui-svg>
       </div>
 
-      <div style={ itmStyle }>
+      <div className="itm">
+        <label>icon-filter</label>
         <oui-svg name="icon-filter" scale={ 1 }></oui-svg>
       </div>
     </div>
