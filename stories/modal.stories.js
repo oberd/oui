@@ -6,24 +6,32 @@ export default {
 
 export const Modal = () => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const openModal = React.useCallback(() => { setIsOpen(true) })
+  const toggleModalHandler = React.useCallback(() => { setIsOpen(!isOpen) })
 
   return (
     <div style={ { width: "50%", margin: "4em auto", textAlign: "center" } }>
-      <button onClick={ openModal }>Open Modal</button>
+      <button onClick={ toggleModalHandler }>Open Modal</button>
 
+      <div>
       {
         isOpen &&
-        <oui-modal>
-          <span slot="title">Oui Modal</span>
-          <h1>Lorem Ipsum</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam similique, quibusdam aliquid
-            officia eveniet, recusandae iste ab cupiditate pariatur accusamus alias ratione provident
-            sequi vitae facilis, qui sint fugiat earum?
-          </p>
-        </oui-modal>
+          <oui-modal onClose={toggleModalHandler}>
+            <span slot="title">Oui Modal</span>
+            <h1>Lorem Ipsum</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam similique, quibusdam aliquid
+              officia eveniet, recusandae iste ab cupiditate pariatur accusamus alias ratione provident
+              sequi vitae facilis, qui sint fugiat earum?
+            </p>
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam similique, quibusdam aliquid
+              officia eveniet, recusandae iste ab cupiditate pariatur accusamus alias ratione provident
+              sequi vitae facilis, qui sint fugiat earum?
+            </p>
+          </oui-modal>
       }
+      </div>
     </div>
   )
 }
