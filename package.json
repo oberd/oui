@@ -20,7 +20,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "storybook": "concurrently 'npm run start' 'npm run storybook:start'",
+    "storybook": "npm run build && concurrently 'npm run start' 'npm run storybook:start'",
     "storybook:start": "start-storybook  -s ./www,./workers -p 6006",
     "storybook:build": "build-storybook"
   },
@@ -33,14 +33,16 @@
     "@storybook/react": "^5.2.8",
     "@types/jest": "24.0.23",
     "@types/puppeteer": "1.20.3",
+    "babel-loader": "^8.0.6",
+    "concurrently": "^5.0.0",
+    "github-markdown-css": "^3.0.1",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
+    "marked": "^0.8.0",
     "puppeteer": "1.20.0",
     "stencil-inline-svg": "^1.0.1",
     "tslint": "^5.20.1",
-    "babel-loader": "^8.0.6",
-    "webpack-watch-files-plugin": "^1.0.3",
-    "concurrently": "^5.0.0"
+    "webpack-watch-files-plugin": "^1.0.3"
   },
   "license": "MIT"
 }
