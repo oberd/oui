@@ -2,7 +2,7 @@
 
 Upload files by drag and drop
 
-![file-upload](animation.gif)
+![file-upload](../../../static/images/file-upload-animation.gif)
 
 ## Usage
 ```html

@@ -10,7 +10,7 @@ export default {
 
 const style = {
   padding: "1em",
-  width: "80%",
+  width: "1024px",
   margin: " 2em auto 0",
   lineHeight: "1.5em",
   fontSize: "1.1em"
