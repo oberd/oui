@@ -1,5 +1,8 @@
 import React from 'react'
 
+import Readme from './Readme'
+import readme from '../src/components/file-upload/readme.md'
+
 export default {
   title: 'File Uploader'
 }
@@ -25,12 +28,15 @@ export const fileUploader = () => {
   }, [])
 
   return (
-    <div ref={ ref } style={{ width: "50%", margin: "4em auto", textAlign: "center" }}>
-      <oui-file-upload
-        title="Oui File Uploader"
-        btn-label="Oui File Uploader"
-        accept="text/plain"
-      />
-    </div>
+    <>
+      <div ref={ ref } style={ { width: "50%", margin: "4em auto", textAlign: "center" } }>
+        <oui-file-upload
+          title="Oui File Uploader"
+          btn-label="Oui File Uploader"
+          accept="text/plain"
+        />
+      </div>
+      <Readme content={ readme } />
+    </>
   )
 }
