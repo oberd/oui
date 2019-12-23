@@ -21,8 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "npm run build && concurrently 'npm run start' 'npm run storybook:start'",
-    "storybook:start": "start-storybook  -s ./www,./static -p 6006",
-    "storybook:build": "build-storybook"
+    "storybook:start": "start-storybook -s ./www,./static -p 6006"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
