@@ -1,33 +1,33 @@
 import React from 'react'
 
+import { svgs } from '../dist/collection/components/svg/svgs'
+
 import './svg.css'
 
 export default {
   title: 'Svg'
 }
 
+const useDarkBg = [
+  'logo'
+]
+
 export const Svg = () => {
   return (
     <div id="svg" className="container">
-      <div className="itm dark">
-        <label>logo</label>
-        <oui-svg name="logo" scale={ 0.25 }></oui-svg>
-      </div>
+      {
+        Object.keys(svgs).map((svg) => {
+          const itemCls = `itm ${useDarkBg.includes(svg) ? 'dark' : ''}`
+          const scale = (svgs[svg].width === 24) ? 2.5 : 0.5
 
-      <div className="itm">
-        <label>logo-light-bg</label>
-        <oui-svg name="logo-light-bg" scale={ 0.25 }></oui-svg>
-      </div>
-
-      <div className="itm">
-        <label>icon-close</label>
-        <oui-svg name="icon-close" scale={ 1 }></oui-svg>
-      </div>
-
-      <div className="itm">
-        <label>icon-filter</label>
-        <oui-svg name="icon-filter" scale={ 1 }></oui-svg>
-      </div>
+          return (
+            <div key={ svg } className={itemCls}>
+              <label>{ svg }</label>
+              <oui-svg name={ svg } scale={ scale } />
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
