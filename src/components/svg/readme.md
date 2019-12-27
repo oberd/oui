@@ -17,14 +17,14 @@
 
 ### Used by
 
- - [oui-noti-button](../notification-tray/button)
- - [oui-noti-item](../notification-tray/drawer)
+ - [oui-notification-button](../notification-tray/button)
+ - [oui-notification-item](../notification-tray/drawer)
 
 ### Graph
 ```mermaid
 graph TD;
-  oui-noti-button --> oui-svg
-  oui-noti-item --> oui-svg
+  oui-notification-button --> oui-svg
+  oui-notification-item --> oui-svg
   style oui-svg fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

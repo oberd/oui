@@ -1,0 +1,95 @@
+oui-notification-button {
+  position: relative;
+  order: 4;
+  align-self: flex-end;
+  justify-self: space-between;
+  border-radius: 50%;
+  padding: 0.5em;
+  margin: 0.75em;
+  border: solid #FFF;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+oui-notification-button .oui-notification-button__status-counter {
+  position: absolute;
+  top: 0.75em;
+  right: 0.5em;
+  color: #fff;
+  font-weight: bold;
+  background-color: #F00;
+  border-radius: 50%;
+  box-shadow: -0.1em 0.1em 0.5em -1px rgba(0, 0, 0, 0.5);
+  padding: 0.1em 0.5em;
+  z-index: 100;
+}
+
+oui-notification-button > oui-svg {
+  outline: none;
+  transition: all 0.05s linear;
+}
+
+oui-notification-button.oui-notification-button__unread:hover,
+oui-notification-button.oui-notification-button__read:hover {
+  box-shadow: 0.125em 0.125em 0.625em rgba(0, 0, 0, 0.2);
+  background-color: rgb(237, 237, 237);
+  border: solid rgb(237, 237, 237);
+}
+
+oui-notification-button.oui-notification-button__unread:active,
+oui-notification-button.oui-notification-button__read:active {
+  opacity: 0.5;
+}
+
+oui-notification-button.oui-notification-button__unread {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+oui-notification-button.oui-notification-button__unread svg path {
+  fill: #F00;
+  stroke: #F00;
+}
+
+
+oui-notification-button.oui-notification-button__read svg path {
+  fill: #335;
+  stroke: #335;
+}
+
+oui-notification-button.oui-notification-button__unused {
+  border: 2px solid #667;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+oui-notification-button.oui-notification-button__unused svg path {
+  stroke: #557;
+  stroke-width: 1.3px;
+}
+
+/** Dark theme style */
+
+body.dark oui-notification-button.oui-notification-button__unread:hover,
+body.dark oui-notification-button.oui-notification-button__read:hover {
+  box-shadow: 0.125em 0.125em 0.625em rgb(101, 202, 130, 0.8);
+}
+
+body.dark oui-notification-button.oui-notification-button__unread:active,
+body.dark oui-notification-button.oui-notification-button__read:active {
+  opacity: 0.5;
+}
+
+body.dark oui-notification-button.oui-notification-button__read,
+body.dark oui-notification-button.oui-notification-button__unread {
+  background-color: rgb(237, 237, 237);
+}
+
+body.dark oui-notification-button.oui-notification-button__unused {
+  background-color: rgb(40, 51, 68);
+  border-color: #889;
+}
+
+body.dark oui-notification-button.oui-notification-button__unused svg path {
+  stroke: #889;
+}

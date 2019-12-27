@@ -1,4 +1,4 @@
-# oui-noti-item
+# oui-notification-item
 
 
 
@@ -24,7 +24,7 @@
 
 ### Used by
 
- - [oui-noti-drawer]()
+ - [oui-notification-drawer]()
 
 ### Depends on
 
@@ -33,9 +33,9 @@
 ### Graph
 ```mermaid
 graph TD;
-  oui-noti-item --> oui-svg
-  oui-noti-drawer --> oui-noti-item
-  style oui-noti-item fill:#f9f,stroke:#333,stroke-width:4px
+  oui-notification-item --> oui-svg
+  oui-notification-drawer --> oui-notification-item
+  style oui-notification-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

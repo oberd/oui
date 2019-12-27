@@ -1,20 +1,20 @@
-# oui-noti-tray
+# oui-notification-tray
 
 Notification tray
 
 ### Light Theme
 
-![oui-noti-tray light](screenshot01.png)
+![oui-notification-tray light](screenshot01.png)
 
 ### Dark Theme
 
-![oui-noti-tray dark](screenshot02.png)
+![oui-notification-tray dark](screenshot02.png)
 
 ### States
 
-![oui-noti-tray states](screenshot03.png)
+![oui-notification-tray states](screenshot03.png)
 
-![oui-noti-tray states](animation01.gif)
+![oui-notification-tray states](animation01.gif)
 
 ## Notification Object
 
@@ -36,7 +36,7 @@ interface NotificationProps {
 
   <oui-nav-bar>
     <div style="flex: 1;"></div>
-    <oui-noti-tray id="noti-one"></oui-noti-tray>
+    <oui-notification-tray id="noti-one"></oui-notification-tray>
   </oui-nav-bar>
 
   <script>
@@ -98,18 +98,18 @@ interface NotificationProps {
 
 ### Depends on
 
-- [oui-noti-button](button)
-- [oui-noti-drawer](drawer)
+- [oui-notification-button](button)
+- [oui-notification-drawer](drawer)
 
 ### Graph
 ```mermaid
 graph TD;
-  oui-noti-tray --> oui-noti-button
-  oui-noti-tray --> oui-noti-drawer
-  oui-noti-button --> oui-svg
-  oui-noti-drawer --> oui-noti-item
-  oui-noti-item --> oui-svg
-  style oui-noti-tray fill:#f9f,stroke:#333,stroke-width:4px
+  oui-notification-tray --> oui-notification-button
+  oui-notification-tray --> oui-notification-drawer
+  oui-notification-button --> oui-svg
+  oui-notification-drawer --> oui-notification-item
+  oui-notification-item --> oui-svg
+  style oui-notification-tray fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

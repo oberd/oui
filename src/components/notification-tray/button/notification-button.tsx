@@ -1,8 +1,8 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-  tag: "oui-noti-button",
-  styleUrl: "noti-button.css",
+  tag: "oui-notification-button",
+  styleUrl: "notification-button.css",
 })
 export class NotiButton {
   /**
@@ -19,14 +19,12 @@ export class NotiButton {
     const btnCls = !this.count ? "unused" : (this.unread ? "unread" : "read")
 
     return (
-      <Host>
-        <button class={`oui-noti-button__${btnCls}`}>
-          {
-            (btnCls === "unread") &&
-            <span class="oui-noti-button__status-counter">{this.unread}</span>
-          }
-          <oui-svg name="noti-bell" scale={2} />
-        </button>
+      <Host class={`oui-notification-button__${btnCls}`} aria-role="button">
+        {
+          (btnCls === "unread") &&
+          <span class="oui-notification-button__status-counter">{this.unread}</span>
+        }
+        <oui-svg name="noti-bell" scale={2} />
       </Host>
     )
   }
