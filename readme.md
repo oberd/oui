@@ -12,6 +12,43 @@ npm commands:
 * **storybook** - Start both Stencil and Storybook dev servers and processes
 * **storybook:start** - Start Storybook dev server
 
+#### Add Component Stories
+
+1. Create a file i `.storybook/stories` using this pattern:
+
+    `.storybook/stories/<component>.stories.jsx`
+
+2. Basic story skel:
+
+    ```jsx
+    // import react
+    import React from 'react'
+
+    // import the Readme parser component
+    import Readme from './Readme'
+
+    // import the component readme file
+    import readmeCard from '../../src/components/card/readme.md'
+
+    // this is the stories section
+    export default {
+      title: 'Card',
+    }
+
+    // this is one story under the prev exported stories section
+    export const card = () => {
+      return (
+        <oui-card>
+          <p>
+            Hello world...
+          </p>
+        </oui-card>
+        <Readme content={ readmeCard } />
+      )
+    }
+
+    // Note: You can export more stories related to this section, by exporting more components...
+    ```
 
 ### Usage
 
