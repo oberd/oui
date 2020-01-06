@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Readme from './Readme'
-import readme from '../src/components/file-upload/readme.md'
+import readme from '../../src/components/file-upload/readme.md'
 
 export default {
   title: 'File Uploader'

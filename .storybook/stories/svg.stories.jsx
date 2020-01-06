@@ -1,9 +1,9 @@
 import React from 'react'
 
 import Readme from './Readme'
-import { svgs } from '../dist/collection/components/svg/svgs'
+import { svgs } from '../../dist/collection/components/svg/svgs'
 
-import readme from '../src/components/svg/readme.md'
+import readme from '../../src/components/svg/readme.md'
 
 import './svg.css'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 
 import Readme from './Readme'
-import readmeCard from '../src/components/card/readme.md'
-import readmeHeading from '../src/components/card-heading/readme.md'
+import readmeCard from '../../src/components/card/readme.md'
+import readmeHeading from '../../src/components/card-heading/readme.md'
 
 export default {
   title: 'Card',
