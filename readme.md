@@ -4,12 +4,12 @@
 
 npm commands:
 
-* **build** - Build Stencil distrivulable files and documentation
+* **build** - Build Stencil distributable files and documentation
 * **start** - Start Stencil's dev server and build process
 * **test** - Run all tests once
 * **test.watch** -  Run all tests and watch for changes
 * **generate** - Run the new component boilerplate wizard
-* **storybook** - Start both Stencil and Storybook dev servers and proccesses
+* **storybook** - Start both Stencil and Storybook dev servers and processes
 * **storybook:start** - Start Storybook dev server
 
 
