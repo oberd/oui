@@ -18,7 +18,7 @@ const style = {
 export const card = () => (
   <>
     <div style={ style }>
-      <oui-card style={{ padding: '0.5em 1em' }}>
+      <oui-card>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores
           repellat qui nobis mollitia aperiam architecto necessitatibus odit? Ullam,
@@ -42,7 +42,7 @@ export const card = () => (
 export const cardWithHeading = () => (
   <>
     <div style={ style }>
-      <oui-card style={{ padding: '0.5em 1em' }}>
+      <oui-card>
         <oui-card-heading>Oui Card</oui-card-heading>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores
