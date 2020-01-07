@@ -18,7 +18,7 @@ export class Svg {
             width: this.calculateDimension(width),
             height: this.calculateDimension(height),
         }
-        return <div class="oui-svg is-sized" innerHTML={this.content} style={style}></div>
+        return <div class="oui-svg is-sized" innerHTML={this.content} style={style} />
     }
     private calculateDimension(val: number): string {
         return (val * this.scale) + "px"

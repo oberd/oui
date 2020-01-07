@@ -1,6 +1,17 @@
 # oui-svg
 
+## Icons
 
+  * logo
+  * logo-light-bg
+  * icon-close
+  * icon-filter
+
+## Usage
+
+```html
+ <oui-svg name="logo" scale={1}></oui-svg>
+```
 
 <!-- Auto Generated Below -->
 
