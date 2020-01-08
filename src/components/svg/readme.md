@@ -29,7 +29,7 @@
 ### Used by
 
  - [oui-notification-button](../notification-tray/button)
- - [oui-notification-item](../notification-tray/drawer)
+ - [oui-notification-item](../notification-item)
 
 ### Graph
 ```mermaid

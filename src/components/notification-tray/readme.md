@@ -87,11 +87,12 @@ interface NotificationProps {
 
 ## Properties
 
-| Property        | Attribute   | Description                           | Type                      | Default     |
-| --------------- | ----------- | ------------------------------------- | ------------------------- | ----------- |
-| `direction`     | `direction` | Direction of the drawer               | `"to-left" \| "to-right"` | `"to-left"` |
-| `notifications` | --          | Array of notification objects         | `NotificationProps[]`     | `[]`        |
-| `opened`        | `opened`    | Open or close the notification drawer | `boolean`                 | `false`     |
+| Property    | Attribute   | Description                           | Type                      | Default     |
+| ----------- | ----------- | ------------------------------------- | ------------------------- | ----------- |
+| `count`     | `count`     |                                       | `number`                  | `0`         |
+| `direction` | `direction` | Direction of the drawer               | `"to-left" \| "to-right"` | `"to-left"` |
+| `opened`    | `opened`    | Open or close the notification drawer | `boolean`                 | `false`     |
+| `unread`    | `unread`    |                                       | `number`                  | `0`         |
 
 
 ## Dependencies
@@ -99,16 +100,12 @@ interface NotificationProps {
 ### Depends on
 
 - [oui-notification-button](button)
-- [oui-notification-drawer](drawer)
 
 ### Graph
 ```mermaid
 graph TD;
   oui-notification-tray --> oui-notification-button
-  oui-notification-tray --> oui-notification-drawer
   oui-notification-button --> oui-svg
-  oui-notification-drawer --> oui-notification-item
-  oui-notification-item --> oui-svg
   style oui-notification-tray fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
