@@ -1,0 +1,35 @@
+#svg.container {
+  width: 80%;
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#svg .itm {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+  text-align: center;
+  padding: 1em;
+  border: 1px solid #CCC;
+  margin: 1em;
+  border-radius: 8px;
+}
+
+#svg .itm.dark {
+  background-color: #333;
+  color: #CCC;
+}
+
+#svg .itm label{
+  display: block;
+  padding: 0 0.3em 0.3em;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+#svg .itm .oui-svg {
+  margin: auto;
+}

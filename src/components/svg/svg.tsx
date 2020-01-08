@@ -6,24 +6,22 @@ import { SvgPack, svgs } from "./svgs"
   styleUrl: "svg.css",
 })
 export class Svg {
-  @State() public content: string = "<svg></svg>"
-  @Prop({ reflect: true }) public name: SvgPack
-  @Prop({ reflect: true }) public scale: number = 1.0
-
-  public componentWillLoad() {
-    svgs[this.name].loader().then((data) => (this.content = data))
-  }
-
-  @Watch("name")
-  public updateContent() {
-    svgs[this.name].loader().then((data) => (this.content = data))
-  }
-
-  public render() {
-    const { width, height } = svgs[this.name]
-    const style = {
-      width: this.calculateDimension(width),
-      height: this.calculateDimension(height),
+    @State() public content: string = "<svg></svg>"
+    @Prop() public name: SvgPack
+    @Prop() public scale: number = 1.0
+    public componentWillLoad() {
+        return svgs[this.name].loader().then((data) => this.content = data)
+    }
+    public render() {
+        const { width, height } = svgs[this.name]
+        const style = {
+            width: this.calculateDimension(width),
+            height: this.calculateDimension(height),
+        }
+        return <div class="oui-svg is-sized" innerHTML={this.content} style={style} />
+    }
+    private calculateDimension(val: number): string {
+        return (val * this.scale) + "px"
     }
     return <div class="oui-svg is-sized" innerHTML={this.content} style={style}></div>
   }

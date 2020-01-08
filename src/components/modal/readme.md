@@ -1,10 +1,10 @@
 # oui-modal
 
-![oui-modal](./screenshot.png)
+![oui-modal](../../../static/images/modal-screenshot.png)
 
-![oui-modal](./animation01.gif)
+![oui-modal](../../../static/images/modal-animation01.gif)
 
-![oui-modal](./animation02.gif)
+![oui-modal](../../../static/images/modal-animation02.gif)
 
 ## Usage
 
