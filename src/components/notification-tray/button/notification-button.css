@@ -41,7 +41,9 @@ oui-notification-button.oui-notification-button__read:active {
   opacity: 0.5;
 }
 
-oui-notification-button.oui-notification-button__unread {
+oui-notification-button.oui-notification-button__unread,
+oui-notification-button.oui-notification-button__read,
+oui-notification-button.oui-notification-button__unused {
   display: inline-flex;
   flex-direction: row-reverse;
 }
@@ -50,7 +52,6 @@ oui-notification-button.oui-notification-button__unread svg path {
   fill: #F00;
   stroke: #F00;
 }
-
 
 oui-notification-button.oui-notification-button__read svg path {
   fill: #335;

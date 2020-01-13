@@ -4,17 +4,17 @@ Notification tray
 
 ### Light Theme
 
-![oui-notification-tray light](screenshot01.png)
+![oui-notification-tray light](../../../static/images/screenshot01.png)
 
 ### Dark Theme
 
-![oui-notification-tray dark](screenshot02.png)
+![oui-notification-tray dark](../../../static/images/screenshot02.png)
 
 ### States
 
-![oui-notification-tray states](screenshot03.png)
+![oui-notification-tray states](../../../static/images/screenshot03.png)
 
-![oui-notification-tray states](animation01.gif)
+![oui-notification-tray states](../../../static/images/animation01.gif)
 
 ## Notification Object
 
