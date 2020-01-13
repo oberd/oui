@@ -49,6 +49,9 @@ export namespace Components {
     'unread': number;
   }
   interface OuiNotificationDrawer {
+    /**
+    * This property enables/disables the "Clear All" Button
+    */
     'disabled': boolean;
   }
   interface OuiNotificationItem {
@@ -56,12 +59,21 @@ export namespace Components {
     * A single notification message
     */
     'detail': string;
+    /**
+    * Topic/Header of the notification message
+    */
     'name': string;
     /**
     * A single notification object
     */
     'read': boolean;
+    /**
+    * Types of the linkref
+    */
     'type': "link" | "info";
+    /**
+    * Status of the action represented by the message
+    */
     'valence': "success" | "fail";
   }
   interface OuiNotificationTray {
@@ -217,6 +229,9 @@ declare namespace LocalJSX {
     'unread'?: number;
   }
   interface OuiNotificationDrawer {
+    /**
+    * This property enables/disables the "Clear All" Button
+    */
     'disabled'?: boolean;
   }
   interface OuiNotificationItem {
@@ -224,12 +239,21 @@ declare namespace LocalJSX {
     * A single notification message
     */
     'detail'?: string;
+    /**
+    * Topic/Header of the notification message
+    */
     'name'?: string;
     /**
     * A single notification object
     */
     'read'?: boolean;
+    /**
+    * Types of the linkref
+    */
     'type'?: "link" | "info";
+    /**
+    * Status of the action represented by the message
+    */
     'valence'?: "success" | "fail";
   }
   interface OuiNotificationTray {

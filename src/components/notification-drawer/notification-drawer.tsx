@@ -6,7 +6,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class NotiDrawer {
   /**
-   *
+   * This property enables/disables the "Clear All" Button
    */
   @Prop() public disabled: boolean = false
 

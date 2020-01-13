@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property  | Attribute | Description                   | Type                  | Default     |
-| --------- | --------- | ----------------------------- | --------------------- | ----------- |
-| `detail`  | `detail`  | A single notification message | `string`              | `""`        |
-| `name`    | `name`    |                               | `string`              | `""`        |
-| `read`    | `read`    | A single notification object  | `boolean`             | `false`     |
-| `type`    | `type`    |                               | `"info" \| "link"`    | `"link"`    |
-| `valence` | `valence` |                               | `"fail" \| "success"` | `"success"` |
+| Property  | Attribute | Description                                     | Type                  | Default     |
+| --------- | --------- | ----------------------------------------------- | --------------------- | ----------- |
+| `detail`  | `detail`  | A single notification message                   | `string`              | `""`        |
+| `name`    | `name`    | Topic/Header of the notification message        | `string`              | `""`        |
+| `read`    | `read`    | A single notification object                    | `boolean`             | `false`     |
+| `type`    | `type`    | Types of the linkref                            | `"info" \| "link"`    | `"link"`    |
+| `valence` | `valence` | Status of the action represented by the message | `"fail" \| "success"` | `"success"` |
 
 
 ## Dependencies

@@ -98,7 +98,7 @@ export const NotificationTray = () => {
         </oui-nav-bar>
       </div>
 
-      <div style={ { width: "98%", margin: "4em auto", textAlign: "center" } }>
+      {/* <div style={ { width: "98%", margin: "4em auto", textAlign: "center" } }>
         <oui-nav-bar>
           <oui-notification-tray count={ iconState.count } unread={ iconState.unread } ref={ trayRef } direction="to-right">
             <oui-notification-drawer disabled={ !iconState.unread }>
@@ -120,7 +120,7 @@ export const NotificationTray = () => {
           </oui-notification-tray>
           <div style={ { flex: "1" } } />
         </oui-nav-bar>
-      </div>
+      </div> */}
       <Readme content={ readme } />
     </>
   )

@@ -11,17 +11,17 @@ export class NotificationItem {
   @Prop() public detail: string = ""
 
   /**
-   *
+   * Topic/Header of the notification message
    */
   @Prop() public name: string = ""
 
   /**
-   *
+   * Types of the linkref
    */
   @Prop() public type: "link" | "info" = "link"
 
   /**
-   *
+   * Status of the action represented by the message
    */
   @Prop() public valence: "success" | "fail" = "success"
 
