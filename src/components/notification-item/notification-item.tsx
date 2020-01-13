@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "oui-notification-item",
@@ -6,11 +6,23 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 })
 export class NotificationItem {
   /**
-   * A single noti message
+   * A single notification message
    */
   @Prop() public detail: string = ""
-  @Prop() public title: string = ""
+
+  /**
+   *
+   */
+  @Prop() public name: string = ""
+
+  /**
+   *
+   */
   @Prop() public type: "link" | "info" = "link"
+
+  /**
+   *
+   */
   @Prop() public valence: "success" | "fail" = "success"
 
   /**
@@ -18,20 +30,14 @@ export class NotificationItem {
    */
   @Prop() public read: boolean = false
 
-  @Event() public dismiss: EventEmitter
-  public dismissHandler = (evt: UIEvent) => {
-    evt.stopPropagation()
-    this.dismiss.emit((evt.currentTarget as HTMLLIElement).dataset.mst)
-  }
-
   public render() {
     const cls = this.read ? "oui-notification-item__read" : ""
 
     return (
-      <Host class={`${cls}`} onCLick={this.dismissHandler} data-mst={this.title}>
+      <Host class={`${cls}`} data-notification-name={this.name}>
         <div class={`oui-notification-item__${this.valence}-light`} />
         <div class="oui-notification-item__content">
-          <span class="oui-notification-item__title">{this.title}</span>
+          <span class="oui-notification-item__title">{this.name}</span>
           <span class="oui-notification-item__detail">{this.detail}</span>
         </div>
         <oui-svg name={`status-${this.type}`} scale={0.15} />

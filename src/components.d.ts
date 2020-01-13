@@ -48,17 +48,19 @@ export namespace Components {
     */
     'unread': number;
   }
-  interface OuiNotificationDrawer {}
+  interface OuiNotificationDrawer {
+    'disabled': boolean;
+  }
   interface OuiNotificationItem {
     /**
-    * A single noti message
+    * A single notification message
     */
     'detail': string;
+    'name': string;
     /**
     * A single notification object
     */
     'read': boolean;
-    'title': string;
     'type': "link" | "info";
     'valence': "success" | "fail";
   }
@@ -215,22 +217,18 @@ declare namespace LocalJSX {
     'unread'?: number;
   }
   interface OuiNotificationDrawer {
-    /**
-    * Emited when the clear all btn is clicked
-    */
-    'onDismissall'?: (event: CustomEvent<any>) => void;
+    'disabled'?: boolean;
   }
   interface OuiNotificationItem {
     /**
-    * A single noti message
+    * A single notification message
     */
     'detail'?: string;
-    'onDismiss'?: (event: CustomEvent<any>) => void;
+    'name'?: string;
     /**
     * A single notification object
     */
     'read'?: boolean;
-    'title'?: string;
     'type'?: "link" | "info";
     'valence'?: "success" | "fail";
   }
@@ -240,6 +238,8 @@ declare namespace LocalJSX {
     * Direction of the drawer
     */
     'direction'?: "to-right" | "to-left";
+    'onDismiss'?: (event: CustomEvent<any>) => void;
+    'onDismissall'?: (event: CustomEvent<any>) => void;
     /**
     * Open or close the notification drawer
     */

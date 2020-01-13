@@ -7,20 +7,13 @@
 
 ## Properties
 
-| Property  | Attribute | Description                  | Type                  | Default     |
-| --------- | --------- | ---------------------------- | --------------------- | ----------- |
-| `detail`  | `detail`  | A single noti message        | `string`              | `""`        |
-| `read`    | `read`    | A single notification object | `boolean`             | `false`     |
-| `title`   | `title`   |                              | `string`              | `""`        |
-| `type`    | `type`    |                              | `"info" \| "link"`    | `"link"`    |
-| `valence` | `valence` |                              | `"fail" \| "success"` | `"success"` |
-
-
-## Events
-
-| Event     | Description | Type               |
-| --------- | ----------- | ------------------ |
-| `dismiss` |             | `CustomEvent<any>` |
+| Property  | Attribute | Description                   | Type                  | Default     |
+| --------- | --------- | ----------------------------- | --------------------- | ----------- |
+| `detail`  | `detail`  | A single notification message | `string`              | `""`        |
+| `name`    | `name`    |                               | `string`              | `""`        |
+| `read`    | `read`    | A single notification object  | `boolean`             | `false`     |
+| `type`    | `type`    |                               | `"info" \| "link"`    | `"link"`    |
+| `valence` | `valence` |                               | `"fail" \| "success"` | `"success"` |
 
 
 ## Dependencies

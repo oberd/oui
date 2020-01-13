@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "oui-notification-drawer",
@@ -6,23 +6,17 @@ import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
 })
 export class NotiDrawer {
   /**
-   * Emited when the clear all btn is clicked
+   *
    */
-  @Event() public dismissall: EventEmitter
-  public dismissAllHandler = (evt: UIEvent) => {
-    evt.stopPropagation()
-    this.dismissall.emit()
-  }
+  @Prop() public disabled: boolean = false
 
   public render() {
-    const disabled = false
-
     return (
       <Host class="oui-notification-drawer__statuses">
         <button
-          disabled={disabled}
+          disabled={this.disabled}
           class="oui-notification-drawer__clear"
-          onClick={disabled ? () => {/*noop*/ } : this.dismissAllHandler}
+          onClick={(evt: UIEvent) => this.onClickHandler(evt, this.disabled)}
         >Clear All</button>
 
         <div class="oui-notification-drawer__status-list">
@@ -31,4 +25,12 @@ export class NotiDrawer {
       </Host>
     )
   }
+
+  private onClickHandler(evt: UIEvent, disabled: boolean) {
+    if (disabled) {
+      evt.stopPropagation()
+      evt.preventDefault()
+    }
+  }
+
 }

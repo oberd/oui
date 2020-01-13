@@ -95,6 +95,14 @@ interface NotificationProps {
 | `unread`    | `unread`    |                                       | `number`                  | `0`         |
 
 
+## Events
+
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `dismiss`    |             | `CustomEvent<any>` |
+| `dismissall` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Depends on
