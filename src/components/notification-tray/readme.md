@@ -31,69 +31,43 @@ interface NotificationProps {
 
 ## Usage
 
-```html
-
-  <div style="width: 98%; margin: 4em auto; text-align: center;">
+```js
+  <div style="width: 98%; margin: 4em auto;">
     <oui-tm-switch></oui-tm-switch>
     <oui-nav-bar>
-      <div style="flex: 1;"></div>
-      <oui-notification-tray>
-        <oui-notification-drawer></oui-notification-drawer>
+      <div style="flex: 1"></div>
+      <oui-notification-tray count="2" unread="2">
+        <oui-notification-drawer>
+          <oui-notification-item
+            name="Ubuntu"
+            type="info"
+            detail="Ubuntu 20.04 has been released"
+            valence="success"
+          ></oui-notification-item>
+          <oui-notification-item
+            name="OSX"
+            type="link"
+            detail="Catalina has been released"
+            valence="fail"
+          ></oui-notification-item>
+        </oui-notification-drawer>
       </oui-notification-tray>
     </oui-nav-bar>
   </div>
-  
   <script>
-    const notifications = [
-      { name: 'Ubuntu Release', type: 'link', detail: 'Ubuntu 19.10 has been released', valence: 'success', read: false },
-      { name: 'Apple Release', type: 'info', detail: 'OSX Catalina has been released', valence: 'fail', read: false }
-    ]
+    const tray = document.querySelector('oui-notification-tray')
+    tray.addEventListener('dismiss', (evt) => {
+      console.log('Dismiss ' + evt.detail)
+      tray.setAttribute('unread', tray.getAttribute('unread') - 1)
+      tray.querySelector('[name='+evt.detail+']').setAttribute('read', '')
+    })
 
-    console.log(this.event)
-
-    const dismiss = (evt) => {
-      alert(`Notification ${evt.detail} has been dismissed`)
-      if (tray.count > 0) {
-        tray.count--
-        console.log(tray.count)
-      }
-    }
-
-    const dismissAll = (evt) => {
-      alert('All notifications have been dismissed')
-      if (tray.unread > 0) {
-        tray.unread = 0
-        console.log(tray.unread)
-      }
-    }
-
-    const drawer = document.querySelector("oui-notification-drawer")
-
-    const tray = document.querySelector("oui-notification-tray")
-    tray.count = notifications.length
-    tray.unread = notifications.length
-
-    const notificationsMapper = () => {
-        notifications.map((n) => {
-          const item = document.createElement("oui-notification-item")
-          item.setAttribute("key", n.name)
-          item.setAttribute("name", n.name)
-          item.setAttribute("type", n.type)
-          item.setAttribute("detail", n.detail)
-          item.setAttribute("valence", n.valence)
-          item.setAttribute("read", n.read)
-          drawer.appendChild(item)
-        })
-      }
-
-    const addingEventListeners = () => {
-      drawer.addEventListener('dismiss', dismiss)
-      tray.addEventListener('dismissall', dismissAll)
-    }
-
-    notificationsMapper()
-    addingEventListeners()
-
+    tray.addEventListener('dismissall', (evt) => {
+      console.log('Dismiss all')
+      tray.querySelectorAll('oui-notification-item')
+        .forEach((itm) => itm.setAttribute('read', ''))
+      tray.setAttribute('unread', 0)
+    })
   </script>
 ```
 
