@@ -97,30 +97,6 @@ export const NotificationTray = () => {
           </oui-notification-tray>
         </oui-nav-bar>
       </div>
-
-      {/* <div style={ { width: "98%", margin: "4em auto", textAlign: "center" } }>
-        <oui-nav-bar>
-          <oui-notification-tray count={ iconState.count } unread={ iconState.unread } ref={ trayRef } direction="to-right">
-            <oui-notification-drawer disabled={ !iconState.unread }>
-              {
-                state.map((n) => {
-                  return (
-                    <oui-notification-item
-                      key={ n.name }
-                      name={ n.name }
-                      type={ n.type }
-                      detail={ n.detail }
-                      valence={ n.valence }
-                      read={ n.read }
-                    />
-                  )
-                })
-              }
-            </oui-notification-drawer>
-          </oui-notification-tray>
-          <div style={ { flex: "1" } } />
-        </oui-nav-bar>
-      </div> */}
       <Readme content={ readme } />
     </>
   )

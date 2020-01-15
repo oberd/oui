@@ -77,6 +77,9 @@ export namespace Components {
     'valence': "success" | "fail";
   }
   interface OuiNotificationTray {
+    /**
+    * Total count of the notifications
+    */
     'count': number;
     /**
     * Direction of the drawer
@@ -86,6 +89,9 @@ export namespace Components {
     * Open or close the notification drawer
     */
     'opened': boolean;
+    /**
+    * Total count of notifications left to read
+    */
     'unread': number;
   }
   interface OuiSvg {
@@ -257,17 +263,29 @@ declare namespace LocalJSX {
     'valence'?: "success" | "fail";
   }
   interface OuiNotificationTray {
+    /**
+    * Total count of the notifications
+    */
     'count'?: number;
     /**
     * Direction of the drawer
     */
     'direction'?: "to-right" | "to-left";
-    'onDismiss'?: (event: CustomEvent<any>) => void;
-    'onDismissall'?: (event: CustomEvent<any>) => void;
+    /**
+    * Event signifying current event has been read
+    */
+    'onDismiss'?: (event: CustomEvent<string>) => void;
+    /**
+    * Event signifying all events have been read
+    */
+    'onDismissall'?: (event: CustomEvent<string>) => void;
     /**
     * Open or close the notification drawer
     */
     'opened'?: boolean;
+    /**
+    * Total count of notifications left to read
+    */
     'unread'?: number;
   }
   interface OuiSvg {

@@ -27,27 +27,29 @@ export class NotificationTray {
   @Prop() public direction: "to-right" | "to-left" = "to-left"
 
   /**
-   *
+   * Total count of the notifications
    */
   @Prop({ reflect: true, mutable: true }) public count: number = 0
 
   /**
-   *
+   * Total count of notifications left to read
    */
   @Prop({ reflect: true, mutable: true }) public unread: number = 0
 
   /**
-   *
+   * Event signifying all events have been read
    */
-  @Event() public dismissall: EventEmitter
+  @Event() public dismissall: EventEmitter<string>
+
+  /**
+   * Event signifying current event has been read
+   */
+  @Event() public dismiss: EventEmitter<string>
+
   public dismissallHandler = () => {
     this.dismissall.emit()
   }
 
-  /**
-   *
-   */
-  @Event() public dismiss: EventEmitter
   public dismissHandler = (el: HTMLElement) => {
     this.dismiss.emit(el.dataset.notificationName)
   }
@@ -56,7 +58,7 @@ export class NotificationTray {
   public todoCompletedHandler(evt: UIEvent) {
     evt.preventDefault()
     evt.stopPropagation()
-    const target: HTMLElement = evt.target as HTMLElement
+    const target = evt.target as HTMLElement
 
     if (target.closest("oui-notification-item")) {
       this.dismissHandler(target.closest("oui-notification-item"))

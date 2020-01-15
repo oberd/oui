@@ -103,20 +103,20 @@ interface NotificationProps {
 
 ## Properties
 
-| Property    | Attribute   | Description                           | Type                      | Default     |
-| ----------- | ----------- | ------------------------------------- | ------------------------- | ----------- |
-| `count`     | `count`     |                                       | `number`                  | `0`         |
-| `direction` | `direction` | Direction of the drawer               | `"to-left" \| "to-right"` | `"to-left"` |
-| `opened`    | `opened`    | Open or close the notification drawer | `boolean`                 | `false`     |
-| `unread`    | `unread`    |                                       | `number`                  | `0`         |
+| Property    | Attribute   | Description                               | Type                      | Default     |
+| ----------- | ----------- | ----------------------------------------- | ------------------------- | ----------- |
+| `count`     | `count`     | Total count of the notifications          | `number`                  | `0`         |
+| `direction` | `direction` | Direction of the drawer                   | `"to-left" \| "to-right"` | `"to-left"` |
+| `opened`    | `opened`    | Open or close the notification drawer     | `boolean`                 | `false`     |
+| `unread`    | `unread`    | Total count of notifications left to read | `number`                  | `0`         |
 
 
 ## Events
 
-| Event        | Description | Type               |
-| ------------ | ----------- | ------------------ |
-| `dismiss`    |             | `CustomEvent<any>` |
-| `dismissall` |             | `CustomEvent<any>` |
+| Event        | Description                                  | Type                  |
+| ------------ | -------------------------------------------- | --------------------- |
+| `dismiss`    | Event signifying current event has been read | `CustomEvent<string>` |
+| `dismissall` | Event signifying all events have been read   | `CustomEvent<any>`    |
 
 
 ## Dependencies

@@ -1,3 +1,5 @@
+const buttonText: string = "Clear All"
+
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
@@ -17,7 +19,7 @@ export class NotiDrawer {
           disabled={this.disabled}
           class="oui-notification-drawer__clear"
           onClick={(evt: UIEvent) => this.onClickHandler(evt, this.disabled)}
-        >Clear All</button>
+    >{buttonText}</button>
 
         <div class="oui-notification-drawer__status-list">
           <slot />
