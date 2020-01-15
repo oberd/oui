@@ -13,43 +13,5 @@
 
 <body>
 </body>
-  <div style="width: 98%; margin: 4em auto;">
-    <oui-tm-switch></oui-tm-switch>
-    <oui-nav-bar>
-      <div style="flex: 1"></div>
-      <oui-notification-tray count="0" unread="0">
-        <oui-notification-drawer>
-          <oui-notification-item
-            name="Ubuntu"
-            type="info"
-            detail="Ubuntu 20.04 has been released"
-            valence="success"
-          ></oui-notification-item>
-          <oui-notification-item
-            name="OSX"
-            type="link"
-            detail="Catalina has been released"
-            valence="fail"
-          ></oui-notification-item>
-        </oui-notification-drawer>
-      </oui-notification-tray>
-    </oui-nav-bar>
-  </div>
-  <script>
-    const tray = document.querySelector('oui-notification-tray')
-    tray.addEventListener('dismiss', (evt) => {
-      console.log('Dismiss ' + evt.detail)
-      tray.setAttribute('unread', tray.getAttribute('unread') - 1)
-      tray.querySelector('[name='+evt.detail+']').setAttribute('read', '')
-    })
-
-    tray.addEventListener('dismissall', (evt) => {
-      console.log('Dismiss all')
-      tray.querySelectorAll('oui-notification-item')
-        .forEach((itm) => itm.setAttribute('read', ''))
-      tray.setAttribute('unread', 0)
-    })
-  </script>
-</body>
 
 </html>
