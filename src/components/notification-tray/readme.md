@@ -32,51 +32,41 @@ interface NotificationProps {
 ## Usage
 
 ```js
-<oui-tm-switch></oui-tm-switch>
-
-  <oui-nav-bar>
-    <div style="flex: 1;"></div>
-    <oui-notification-tray id="noti-one"></oui-notification-tray>
-  </oui-nav-bar>
-
+  <div style="width: 98%; margin: 4em auto;">
+    <oui-tm-switch></oui-tm-switch>
+    <oui-nav-bar>
+      <div style="flex: 1"></div>
+      <oui-notification-tray count="2" unread="2">
+        <oui-notification-drawer>
+          <oui-notification-item
+            name="Ubuntu"
+            type="info"
+            detail="Ubuntu 20.04 has been released"
+            valence="success"
+          ></oui-notification-item>
+          <oui-notification-item
+            name="OSX"
+            type="link"
+            detail="Catalina has been released"
+            valence="fail"
+          ></oui-notification-item>
+        </oui-notification-drawer>
+      </oui-notification-tray>
+    </oui-nav-bar>
+  </div>
   <script>
-    let notifications = [
-      {
-        title: "Ubuntu Release",
-        link: "https://ubuntu.com",
-        type: "link",
-        detail: "Ubuntu 19.10 has been released",
-        valence: "success"
-      },
-      {
-        title: "Apple Release",
-        type: "info",
-        detail: "OSX Catalina has been released",
-        valence: "fail"
-      }
-    ]
-
-    const notiTrayOne = document.querySelector("#noti-one")
-    notiTrayOne.notifications = notifications
-
-    // on single item dismiss event
-    document.addEventListener('dismiss', (evt) => {
-      notifications = notifications.map((noti) => {
-        if (noti.title === evt.detail) { noti.read = true }
-        return noti
-      })
-
-      notiTrayOne.notifications = notifications
+    const tray = document.querySelector('oui-notification-tray')
+    tray.addEventListener('dismiss', (evt) => {
+      console.log('Dismiss ' + evt.detail)
+      tray.setAttribute('unread', tray.getAttribute('unread') - 1)
+      tray.querySelector('[name='+evt.detail+']').setAttribute('read', '')
     })
 
-    // on dismiss all event
-    document.addEventListener('dismissall', (evt) => {
-      notifications = notifications.map((noti) => {
-        noti.read = true
-        return noti
-      })
-
-      notiTrayOne.notifications = notifications
+    tray.addEventListener('dismissall', (evt) => {
+      console.log('Dismiss all')
+      tray.querySelectorAll('oui-notification-item')
+        .forEach((itm) => itm.setAttribute('read', ''))
+      tray.setAttribute('unread', 0)
     })
   </script>
 ```
