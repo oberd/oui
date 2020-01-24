@@ -90,7 +90,7 @@ interface NotificationProps {
 | Event        | Description                                  | Type                  |
 | ------------ | -------------------------------------------- | --------------------- |
 | `dismiss`    | Event signifying current event has been read | `CustomEvent<string>` |
-| `dismissall` | Event signifying all events have been read   | `CustomEvent<any>`    |
+| `dismissall` | Event signifying all events have been read   | `CustomEvent<string>` |
 
 
 ## Dependencies
