@@ -1,0 +1,84 @@
+oui-notification-item {
+  display: flex;
+  padding: 0.15em;
+  margin: 0.25em 0em;
+  background-color: rgb(247, 247, 247);
+  transition: all 0.05s linear;
+  text-decoration: none;
+  color: black;
+}
+
+oui-notification-item:not(.oui-notification-item__read) {
+  opacity: 0.75;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+oui-notification-item:not(.oui-notification-item__read):hover {
+  opacity: 1;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+
+oui-notification-item.oui-notification-item__read {
+  opacity: 0.3;
+}
+
+oui-notification-item oui-svg {
+  align-self: center;
+  padding: 0.3em 1em;
+}
+
+oui-notification-item .oui-notification-item__content span {
+  justify-content: space-between;
+  margin: 0.1em 0;
+}
+
+oui-notification-item .oui-notification-item__content {
+  flex: 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-self: baseline;
+}
+
+oui-notification-item .oui-notification-item__detail {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: small;
+  color: gray;
+  width: 16em;
+}
+
+oui-notification-item .oui-notification-item__title {
+  font-variant-caps: all-small-caps;
+  font-size: larger;
+  font-weight: 500;
+}
+
+
+oui-notification-item .oui-notification-item__success-light,
+oui-notification-item .oui-notification-item__fail-light {
+  margin: 0 0.8em;
+  width: calc(1.5em * 0.5);
+  height: calc(1.5em * 0.5);
+  border-radius: 50%;
+  align-self: center;
+  border: 1px solid transparent;
+}
+
+oui-notification-item .oui-notification-item__success-light {
+  background-color: #9A0;
+  border-color: #560;
+}
+
+oui-notification-item .oui-notification-item__fail-light {
+  background-color: #F40;
+  border-color: #F20;
+}
+
+
+body.dark oui-notification-item {
+  color: #FFF;
+  background-color: rgb(40, 51, 68);
+}
