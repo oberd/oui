@@ -18,4 +18,7 @@ export const config: Config = {
     },
   ],
   plugins: [inlineSvg()],
+  devServer: {
+    openBrowser: false,
+  },
 }

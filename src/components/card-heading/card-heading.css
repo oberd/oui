@@ -1,9 +1,9 @@
 .oui-card-heading {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    padding: var(--oui-global-spacing);
-    text-transform: uppercase;
-    font-weight: bold;
-    min-height: var(--oui-card-heading-height);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--oui-global-spacing);
+  text-transform: uppercase;
+  font-weight: bold;
+  min-height: var(--oui-card-heading-height);
 }

@@ -1,0 +1,51 @@
+oui-tm-switch {
+    order: 1;
+    align-self: start;
+}
+
+oui-tm-switch .oui-tm-switch__Light {
+    margin: 1rem 0.625rem 1rem 1rem;
+    border: solid rgb(237, 237, 237);
+    border-radius: 1.25rem;
+    padding: 0 0.625rem;
+    background-color: rgb(237, 237, 237);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.05s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+oui-tm-switch .oui-tm-switch__Light:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: rgb(237, 237, 237);
+    border: solid rgb(237, 237, 237);
+}
+
+oui-tm-switch .oui-tm-switch__Light:active {
+    transform: scale(1);
+}
+
+oui-tm-switch .oui-tm-switch__Dark {
+    color: white;
+    margin: 1rem 0.625rem 1rem 0rem;
+    border: solid rgb(40, 51, 68);
+    border-radius: 1.25rem;
+    padding: 0 0.625rem;
+    background-color: rgb(40, 51, 68);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.05s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+oui-tm-switch .oui-tm-switch__Dark:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 10px rgb(101, 202, 130, 0.8);
+}
+
+oui-tm-switch .oui-tm-switch__Dark:active {
+    transform: scale(1);
+}
