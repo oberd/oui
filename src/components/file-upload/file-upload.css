@@ -1,34 +1,52 @@
-.oui-file-upload-modal {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    bottom: 1rem;
-    right: 1rem;
-    box-sizing: border-box;
-    border: 4px solid blue;
+oui-file-upload > oui-modal .oui-modal__content {
+  width: 96vw;
+  height: 96vh;
 }
-.oui-file-upload-modal-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+oui-file-upload > oui-modal .oui-modal__content > div,
+  oui-file-upload .oui-file-upload__drop-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  padding: 0;
 }
-.oui-file-upload-modal heading {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    text-transform: uppercase;
-    padding: 1rem;
-    background: blue;
-    color: white;
+
+oui-file-upload .oui-file-upload__drop-area {
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.15s linear;
 }
-.oui-file-upload-modal .file-upload-message {
-    text-align: center;
-    display: inline-block;
-    padding: 1rem;
-    background: #f0f0f0;
-    border-radius: 0.3rem;
+
+oui-file-upload .oui-file-upload__drop-area:hover {
+  opacity: 1;
 }
-.oui-file-upload-modal .oui-documents-icon {
-    margin: 10px auto;
+
+oui-file-upload > oui-modal .file-upload-message {
+  text-align: center;
+  display: inline-block;
+  padding: 1rem;
+  background: #f0f0f0;
+  border-radius: 0.3rem;
+}
+
+oui-file-upload > oui-modal .oui-documents-icon {
+  margin: 0 auto 2em;
+}
+
+oui-file-upload > oui-modal input[type="file"] {
+  visibility: hidden;
+}
+
+.oui-file-upload__superlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10000000000;
 }
