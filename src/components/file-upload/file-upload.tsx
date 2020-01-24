@@ -1,118 +1,179 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
-import { FileDropEvent } from "./FileDropEvent"
+import { DropOrPickEvent, FileUploadHandler } from "./FileUploadHandler"
 import { FileUploadAction, FileUploadActionType, FileUploadState } from "./FileUploadState"
 
 @Component({
-    tag: "oui-file-upload",
-    styleUrl: "file-upload.css",
+  tag: "oui-file-upload",
+  styleUrl: "file-upload.css",
 })
 export class FileUpload {
+  /**
+   * Specify mime types to accept (unrestricted by default)
+   * Separate by spaces for multiple:
+   * `text/html text/xml`
+   */
+  @Prop() public accept: string = FileUploadHandler.acceptAll
 
-    /**
-     * Specify mime types to accept (unrestricted by default)
-     * Separate by spaces for multiple:
-     * `text/html text/xml`
-     */
-    @Prop() public accept: string = FileDropEvent.acceptAll
+  /**
+   * Specify a label for the button.
+   */
+  @Prop() public btnLabel: string = "Upload"
 
-    /**
-     * Files dropped onto page, and validated. You can use this
-     * event to perform an upload in javscript
-     */
-    @Event() public dropped: EventEmitter<FileDropEvent>
+  /**
+   * Specify a title for the modal.
+   */
+  @Prop() public modalTitle: string = "Upload Files"
 
-    @State() public version: number = 0
+  /**
+   * Files dropped onto page, and validated. You can use this
+   * event to perform an upload in javscript
+   */
+  @Event() public dropped: EventEmitter<FileUploadHandler>
 
-    private state: FileUploadState = new FileUploadState({ status: "ready" })
-    private unsubscribe: () => void
+  @State() public version: number = 0
 
-    constructor() {
-        this.state = new FileUploadState({ status: "ready" })
+  private state: FileUploadState = new FileUploadState({ status: "ready" })
+  private unsubscribe: () => void
+  private inputRef!: HTMLInputElement
+
+  public connectedCallback() {
+    this.unsubscribe = this.state.onChange(() => { this.version++ })
+    this.dispatch({ type: "initialize-state", state: { status: "ready" } })
+    document.addEventListener("dragover", this.handleDragOver)
+    document.addEventListener("dragexit", this.handleDragExit)
+    document.addEventListener("dragleave", this.handleDragExit)
+    document.addEventListener("drop", this.handleDrop)
+  }
+
+  public disconnectedCallback() {
+    document.removeEventListener("dragover", this.handleDragOver)
+    document.removeEventListener("dragexit", this.handleDragExit)
+    document.removeEventListener("dragleave", this.handleDragExit)
+    document.removeEventListener("drop", this.handleDrop)
+    this.unsubscribe()
+  }
+
+  public render() {
+    return (
+      <Host>
+        {this.state.isUploading() && <div class="oui-file-upload__superlay" />}
+
+        <button class="oui-btn oui-btn__primary" onClick={this.handleButtonClick}>
+          {this.btnLabel}
+        </button>
+
+        {this.renderModal()}
+
+        <slot />
+      </Host>
+    )
+  }
+
+  private renderModal() {
+    return this.state.isModalShowing() && (
+      <oui-modal onClose={this.handleClose}>
+        <span slot="title">{this.modalTitle}</span>
+
+        <div class="oui-file-upload__drop-area" onClick={this.handleDropAreaClick}>
+          <oui-documents-icon
+            isFannedOut={this.state.isIconFannedOut()}
+            isHighlighted={this.state.isIconHighlighted()}
+            isAnimating={this.state.isUploading()}
+          />
+
+          <div class="file-upload-message">
+            {this.state.getCurrentMessage()}
+          </div>
+
+          <input
+            type="file"
+            accept={this.accept}
+            multiple
+            ref={(el: HTMLInputElement) => { this.inputRef = el }}
+            onChange={this.handleFileSelection}
+          />
+        </div>
+      </oui-modal>
+    )
+  }
+
+  private handleDropAreaClick = (evt: MouseEvent) => {
+    evt.stopPropagation()
+    this.inputRef.click()
+  }
+
+  private handleButtonClick = () => {
+    this.dispatchActionType("initialize-modal")
+  }
+
+  private handleClose = () => {
+    if (!this.state.isUploading()) {
+      this.dispatchActionType("modal-closed")
     }
+  }
 
-    public connectedCallback() {
-        this.unsubscribe = this.state.onChange(() => this.version++)
-        this.dispatch({ type: "initialize-state", state: { status: "ready" } })
-        document.addEventListener("dragover", this.handleDragOver)
-        document.addEventListener("dragexit", this.handleDragExit)
-        document.addEventListener("dragleave", this.handleDragExit)
-        document.addEventListener("drop", this.handleDrop)
+  private handleDragExit = () => {
+    this.dispatchActionType("drag-cancelled")
+  }
+
+  private handleDragOver = (e: DragEvent) => {
+    e.preventDefault()
+    if (!this.state.isUploading()) {
+      this.dispatchActionType("drag-start")
     }
+  }
 
-    public disconnectedCallback() {
-        document.removeEventListener("dragover", this.handleDragOver)
-        document.removeEventListener("dragexit", this.handleDragExit)
-        document.removeEventListener("dragleave", this.handleDragExit)
-        document.removeEventListener("drop", this.handleDrop)
-        this.unsubscribe()
+  private handleDrop = (evt: DragEvent) => {
+    evt.preventDefault()
+    if (!this.state.isUploading()) {
+      this.handleFileSelection(evt)
     }
+  }
 
-    public render() {
-        return (
-            <Host class="oui-file-upload">
-                <button onClick={this.handleButtonClick}>Upload</button>
-                {this.renderModal()}
-                <slot />
-            </Host>
-        )
+  private handleFileSelection = (evt: DropOrPickEvent) => {
+    try {
+      const event = this.makeUploadHandler(evt)
+      this.dispatch({ type: "files-dropped", files: event.files })
+      this.dropped.emit(event)
+    } catch (err) {
+      this.dispatch({
+        type: "dropped-bad-files",
+        message: "only files of type " + this.accept + " are supported",
+      })
     }
+  }
 
-    private renderModal() {
-        if (!this.state.isModalShowing()) {
-            return
-        }
-        return (
-            <oui-file-upload-modal onClose={this.handleClose}>
-                <span slot="title">Upload Files</span>
-                <div>
-                    <oui-documents-icon
-                        isFannedOut={this.state.isIconFannedOut()}
-                        isHighlighted={this.state.isIconHighlighted()}
-                        isAnimating={this.state.isUploading()} />
-                    <div class="file-upload-message">
-                        {this.state.getCurrentMessage()}
-                    </div>
-                </div>
-            </oui-file-upload-modal>
-        )
-    }
+  private makeUploadHandler(evt: DropOrPickEvent) {
+    const files = Array.from(
+      (evt instanceof DragEvent)
+        ? evt.dataTransfer.files
+        : this.inputRef.files,
+    )
 
-    private handleButtonClick = () => this.dispatchActionType("initialize-modal")
+    const handler = new FileUploadHandler(files, this.accept.split(/[\s]+/))
 
-    private handleClose = () => this.dispatchActionType("modal-closed")
+    handler.onStarted(() => {
+      this.dispatchActionType("upload-started")
+    })
 
-    private handleDragExit = () => this.dispatchActionType("drag-cancelled")
+    handler.onComplete(() => {
+      this.dispatchActionType("upload-finished")
+      this.inputRef.value = ""
+    })
 
-    private handleDragOver = (e: DragEvent) => {
-        e.preventDefault()
-        this.dispatchActionType("drag-start")
-    }
+    handler.onError((reason) => {
+      this.dispatch({ type: "upload-finished", error: reason })
+      this.inputRef.value = ""
+    })
 
-    private handleDrop = (e: DragEvent) => {
-        e.preventDefault()
-        const event = this.makeDropEvent(e)
-        if (!event.hasValidFiles) {
-            return this.dispatch({
-                type: "dropped-bad-files",
-                message: "only files of type " + this.accept + " are supported",
-            })
-        }
-        this.dispatch({ type: "files-dropped", files: event.files })
-        this.dropped.emit(event)
-    }
+    return handler
+  }
 
-    private makeDropEvent(e: DragEvent) {
-        const event = new FileDropEvent(e, this.accept.split(/[\s]+/))
-        event.onStarted(() => this.dispatchActionType("upload-started"))
-        event.onComplete(() => this.dispatchActionType("upload-finished"))
-        event.onError((reason) => this.dispatch({ type: "upload-finished", error: reason }))
-        return event
-    }
+  private dispatchActionType(type: FileUploadActionType) {
+    this.state.dispatch({ type } as FileUploadAction)
+  }
 
-    private dispatchActionType(type: FileUploadActionType) {
-        this.state.dispatch({ type } as FileUploadAction)
-    }
-    private dispatch(action: FileUploadAction) {
-        this.state.dispatch(action)
-    }
+  private dispatch(action: FileUploadAction) {
+    this.state.dispatch(action)
+  }
 }
