@@ -1,0 +1,49 @@
+:root {
+  --oui-global-spacing: 0.5rem;
+  --oui-card-heading-height: 2.4rem;
+
+  /* @var --oui-global-gray-light generally used light gray */
+  --oui-global-gray-light: #e8e8e8;
+
+  /* @var --oui-global-gray-light generally used base gray */
+  --oui-global-gray: #d9d9d9;
+
+  /* @var --oui-global-gray-light generally used dark gray */
+  --oui-global-gray-dark: #bfbfbf;
+
+
+  /* @var --oui-global-green-light generally used light green */
+  --oui-global-green-light: #24d98c;
+
+  /* @var --oui-global-green-light generally used base green */
+  --oui-global-green: #20c981;
+
+  /* @var --oui-global-green-light generally used dark green */
+  --oui-global-green-dark: #1db272;
+
+
+  /* @var --oui-global-red-light generally used light red */
+  --oui-global-red-light: #ff4d4f;
+
+  /* @var --oui-global-red-light generally used base red */
+  --oui-global-red: #f5222d;
+
+  /* @var --oui-global-red-light generally used dark red */
+  --oui-global-red-dark: #cf1322;
+}
+
+body {
+  font-size: calc(14px + 0.25vw);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:disabled {
+  cursor: not-allowed;
+}
+
+@import "./buttons.css";
