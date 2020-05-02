@@ -35,7 +35,7 @@
     "@types/jest": "24.9.1",
     "@types/puppeteer": "1.20.4",
     "babel-loader": "8.1.0",
-    "concurrently": "5.0.2",
+    "concurrently": "5.2.0",
     "github-markdown-css": "3.0.1",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
