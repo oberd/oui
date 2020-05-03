@@ -40,7 +40,7 @@
     "jest": "25.5.4",
     "jest-cli": "25.5.4",
     "marked": "0.8.2",
-    "puppeteer": "1.20.0",
+    "puppeteer": "3.0.2",
     "stencil-inline-svg": "1.0.1",
     "tslint": "5.20.1",
     "webpack-watch-files-plugin": "1.0.3"
