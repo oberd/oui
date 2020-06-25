@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/core": "7.10.3",
     "@stencil/core": "1.12.7",
-    "@stencil/core": "1.14.0",
+    "@stencil/core": "1.15.0",
     "@storybook/addon-actions": "5.3.19",
     "@storybook/addon-links": "5.3.19",
     "@storybook/addons": "5.3.19",
