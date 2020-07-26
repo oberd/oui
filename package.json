@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/core": "7.10.5",
     "@intuit/renovate-config": "1.2.3",
-    "@stencil/core": "1.17.0",
+    "@stencil/core": "1.17.1",
     "@storybook/addon-actions": "5.3.19",
     "@storybook/addon-links": "5.3.19",
     "@storybook/addons": "5.3.19",
