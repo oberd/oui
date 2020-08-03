@@ -27,6 +27,12 @@
     --space-50: 0.75rem;
     --space-100: 1.2rem;
     --space-200: 2rem;
+
+    --oui-font-family-large-headers: "Noto Sans", sans-serif;
+    --oui-font-family-body-headers: "Noto Serif", sans-serif;
+    --oui-font-family-body: "Noto Sans", sans-serif;
+
+    --sliding-transition: all 0.3s cubic-bezier(0.88, 0.01, 0.53, 1);
 }
 
 .dark-mode * {
@@ -58,6 +64,7 @@ body {
     overflow-x: auto;
     overflow-y: scroll;
     background: var(--grey-10);
+    font-family: var(--oui-font-family-body);
 }
 
 oui-sidebar {

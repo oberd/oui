@@ -9,6 +9,7 @@
 nav {
     width: 0;
     overflow: hidden;
+    transition: var(--sliding-transition);
 }
 
 nav.static,
@@ -31,7 +32,8 @@ nav.toggled {
 .static .sidebar-toggle,
 .toggled .sidebar-toggle {
     width: 0;
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .title-bar-slot {

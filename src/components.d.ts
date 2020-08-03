@@ -13,6 +13,7 @@ export namespace Components {
         "icon": string;
     }
     interface OuiSidebar {
+        "menuTitle": string;
     }
 }
 declare global {
@@ -48,6 +49,7 @@ declare namespace LocalJSX {
         "icon": string;
     }
     interface OuiSidebar {
+        "menuTitle"?: string;
     }
     interface IntrinsicElements {
         "oui-btn": OuiBtn;
