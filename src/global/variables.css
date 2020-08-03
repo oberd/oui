@@ -1,0 +1,68 @@
+:root {
+    --grey-light-0: white;
+    --grey-light-10: #f9f9f9;
+    --grey-light-20: #f0f0f0;
+    --grey-light-30: #e7e7e7;
+    --grey-light-40: #a0a0a0;
+    --grey-light-50: #999999;
+    --grey-light-60: #666666;
+    --grey-light-70: #555555;
+    --grey-light-80: #333333;
+    --grey-light-90: #111111;
+    --grey-light-100: black;
+
+    --grey-0: var(--grey-light-0);
+    --grey-10: var(--grey-light-10);
+    --grey-20: var(--grey-light-20);
+    --grey-30: var(--grey-light-30);
+    --grey-40: var(--grey-light-40);
+    --grey-50: var(--grey-light-50);
+    --grey-60: var(--grey-light-60);
+    --grey-70: var(--grey-light-70);
+    --grey-80: var(--grey-light-80);
+    --grey-90: var(--grey-light-90);
+    --grey-100: var(--grey-light-100);
+
+    --space-10: 0.4rem;
+    --space-50: 0.75rem;
+    --space-100: 1.2rem;
+    --space-200: 2rem;
+}
+
+.dark-mode * {
+    --grey-0: var(--grey-light-100);
+    --grey-10: var(--grey-light-90);
+    --grey-20: var(--grey-light-80);
+    --grey-30: var(--grey-light-70);
+    --grey-40: var(--grey-light-60);
+    --grey-50: var(--grey-light-50);
+    --grey-60: var(--grey-light-40);
+    --grey-70: var(--grey-light-30);
+    --grey-80: var(--grey-light-20);
+    --grey-90: var(--grey-light-10);
+    --grey-100: var(--grey-light-0);
+}
+
+.condensed {
+    --space-10: 0.2rem;
+    --space-50: 0.5rem;
+    --space-100: 1rem;
+    --space-200: 2rem;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: scroll;
+    background: var(--grey-10);
+}
+
+oui-sidebar {
+    visibility: hidden;
+}
+oui-sidebar.hydrated {
+    visibility: inherit;
+}

@@ -1,0 +1,32 @@
+{
+    "name": "oui",
+    "version": "0.0.1",
+    "description": "Stencil Component Starter",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "es2015": "dist/esm/index.mjs",
+    "es2017": "dist/esm/index.mjs",
+    "types": "dist/types/index.d.ts",
+    "collection": "dist/collection/collection-manifest.json",
+    "collection:main": "dist/collection/index.js",
+    "unpkg": "dist/oui/oui.js",
+    "files": [
+        "dist/",
+        "loader/"
+    ],
+    "scripts": {
+        "build": "npm run svg && stencil build --docs",
+        "start": "npm run svg && stencil build --dev --watch --serve",
+        "test": "stencil test --spec --e2e",
+        "test.watch": "stencil test --spec --e2e --watchAll",
+        "generate": "stencil generate",
+        "svg": "node scripts/svg.mjs"
+    },
+    "devDependencies": {
+        "@stencil/core": "^1.12.2",
+        "lodash.camelcase": "^4.3.0",
+        "prettier": "^2.0.5",
+        "stencil-inline-svg": "^1.0.1"
+    },
+    "license": "MIT"
+}
