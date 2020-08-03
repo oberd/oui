@@ -1,0 +1,5 @@
+app:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  encrypted_env_file: aws-credentials.encrypted

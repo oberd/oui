@@ -17,6 +17,7 @@
     "scripts": {
         "build": "npm run svg && stencil build --docs",
         "start": "npm run svg && stencil build --dev --watch --serve",
+        "ci": "NODE_ENV=production npm run build",
         "test": "stencil test --spec --e2e",
         "test.watch": "stencil test --spec --e2e --watchAll",
         "generate": "stencil generate",
