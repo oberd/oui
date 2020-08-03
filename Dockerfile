@@ -4,6 +4,7 @@ WORKDIR /var/www/app
 ENTRYPOINT ["/var/www/app/docker_entrypoint.sh"]
 
 FROM dev as ci
+ENTRYPOINT []
 # AWS cli
 RUN apt-get update \
     && apt-get install -y --no-install-recommends awscli \
