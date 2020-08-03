@@ -1,5 +1,5 @@
 FROM node:14.7-buster as dev
-RUN npm i -g http-server jest-cli --loglevel=error
+RUN npm i -g http-server --loglevel=error
 WORKDIR /var/www/app
 ENTRYPOINT ["/var/www/app/docker_entrypoint.sh"]
 
