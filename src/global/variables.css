@@ -62,7 +62,7 @@ body {
 }
 
 body {
-    overflow-x: auto;
+    /** this avoids jumpiness when the page is dynamically extended past viewport height **/
     overflow-y: scroll;
 }
 
