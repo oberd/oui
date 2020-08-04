@@ -10,7 +10,6 @@
     --grey-light-80: #333333;
     --grey-light-90: #111111;
     --grey-light-100: black;
-
     --grey-0: var(--grey-light-0);
     --grey-10: var(--grey-light-10);
     --grey-20: var(--grey-light-20);
@@ -22,16 +21,13 @@
     --grey-80: var(--grey-light-80);
     --grey-90: var(--grey-light-90);
     --grey-100: var(--grey-light-100);
-
     --space-10: 0.4rem;
     --space-50: 0.75rem;
     --space-100: 1.2rem;
     --space-200: 2rem;
-
     --oui-font-family-large-headers: "Noto Sans", sans-serif;
     --oui-font-family-body-headers: "Noto Serif", sans-serif;
     --oui-font-family-body: "Noto Sans", sans-serif;
-
     --sliding-transition: all 0.3s cubic-bezier(0.88, 0.01, 0.53, 1);
 }
 
@@ -61,15 +57,19 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow-x: auto;
-    overflow-y: scroll;
     background: var(--grey-10);
     font-family: var(--oui-font-family-body);
+}
+
+body {
+    overflow-x: auto;
+    overflow-y: scroll;
 }
 
 oui-sidebar {
     visibility: hidden;
 }
+
 oui-sidebar.hydrated {
     visibility: inherit;
 }
