@@ -67,6 +67,7 @@ body {
 }
 
 oui-sidebar {
+    /** to avoid FOUC, hide in the stylesheet before the elements are upgraded **/
     visibility: hidden;
 }
 
