@@ -39,7 +39,7 @@
     "github-markdown-css": "4.0.0",
     "jest": "26.2.2",
     "jest-cli": "26.2.2",
-    "marked": "1.1.1",
+    "marked": "1.2.5",
     "puppeteer": "5.2.1",
     "stencil-inline-svg": "1.0.1",
     "tslint": "6.1.3",
