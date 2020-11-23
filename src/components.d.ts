@@ -7,12 +7,21 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface OuiBtn {
+        /**
+          * standard html button type property
+         */
         "type": "button" | "submit";
     }
     interface OuiIcon {
+        /**
+          * one of the svg icons exported from assets/svg
+         */
         "icon": string;
     }
     interface OuiSidebar {
+        /**
+          * Message to show in place of hamburger
+         */
         "menuTitle": string;
     }
 }
@@ -43,12 +52,21 @@ declare global {
 }
 declare namespace LocalJSX {
     interface OuiBtn {
+        /**
+          * standard html button type property
+         */
         "type"?: "button" | "submit";
     }
     interface OuiIcon {
+        /**
+          * one of the svg icons exported from assets/svg
+         */
         "icon": string;
     }
     interface OuiSidebar {
+        /**
+          * Message to show in place of hamburger
+         */
         "menuTitle"?: string;
     }
     interface IntrinsicElements {

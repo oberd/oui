@@ -8,6 +8,9 @@ import * as Icons from "../../assets/svg"
     shadow: true,
 })
 export class OuiIcon implements ComponentInterface {
+    /**
+     * one of the svg icons exported from assets/svg
+     */
     @Prop() public icon!: string
     render() {
         return (

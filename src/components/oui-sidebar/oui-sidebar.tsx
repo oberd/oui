@@ -10,7 +10,10 @@ declare global {
     shadow: true,
 })
 export class OuiSidebar implements ComponentInterface {
-    @Element() el: HTMLElement
+    @Element() el: HTMLOuiSidebarElement
+    /**
+     * Message to show in place of hamburger
+     */
     @Prop() public menuTitle: string = "Menu"
     @State() private parentWidth: number = 480
     @State() private toggled = false
@@ -19,20 +22,20 @@ export class OuiSidebar implements ComponentInterface {
     constructor() {
         this.resizer = new ResizeObserver(this.onResize)
     }
-    onResize = (entries) => {
+    private onResize = (entries) => {
         this.parentWidth = entries[0].contentRect.width
     }
     connectedCallback() {
         this.resizer.observe(this.el.parentElement, { box: "content-box" })
     }
-    onToggle = () => {
-        this.slotWidth = this.el.querySelector(`[slot="sidebar"]`).scrollWidth
+    private onToggle = () => {
+        this.slotWidth = this.el.querySelector("[slot=\"sidebar\"]").scrollWidth
         this.toggled = true
         setTimeout(() => {
             window.addEventListener("click", this.untoggle)
         })
     }
-    untoggle = () => {
+    private untoggle = () => {
         this.toggled = false
         window.removeEventListener("click", this.untoggle)
     }

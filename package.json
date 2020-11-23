@@ -21,18 +21,26 @@
         "test": "stencil test --spec --e2e",
         "test.watch": "stencil test --spec --e2e --watchAll",
         "generate": "stencil generate",
-        "svg": "node scripts/svg.mjs"
+        "svg": "node scripts/svg.mjs",
+        "lint": "eslint src/**/*{.ts,.tsx}"
     },
     "devDependencies": {
         "@stencil/core": "^2.3.0",
+        "@stencil/eslint-plugin": "^0.3.1",
         "@types/jest": "26.0.15",
         "@types/puppeteer": "5.4.0",
+        "@typescript-eslint/eslint-plugin": "^4.8.1",
+        "@typescript-eslint/parser": "^4.8.1",
+        "eslint": "^7.14.0",
+        "eslint-plugin-react": "^7.21.5",
         "jest": "26.6.3",
         "jest-cli": "26.6.3",
         "lodash.camelcase": "^4.3.0",
-        "prettier": "^2.2.0",
         "puppeteer": "5.5.0",
         "stencil-inline-svg": "^1.0.1"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "typescript": "^4.1.2"
+    }
 }

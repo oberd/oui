@@ -7,7 +7,10 @@ import { withAttributes } from "../../dom/withAttributes"
     shadow: true,
 })
 export class OuiBtn implements ComponentInterface {
-    @Element() private ref: HTMLElement
+    @Element() private ref: HTMLOuiBtnElement
+    /**
+     * standard html button type property
+     */
     @Prop() public type: "button" | "submit" = "button"
     render() {
         return (
