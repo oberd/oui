@@ -33,7 +33,7 @@
     "@storybook/addons": "5.3.19",
     "@storybook/react": "5.3.19",
     "@types/jest": "26.0.7",
-    "@types/puppeteer": "3.0.1",
+    "@types/puppeteer": "3.0.5",
     "babel-loader": "8.1.0",
     "concurrently": "5.2.0",
     "github-markdown-css": "4.0.0",
