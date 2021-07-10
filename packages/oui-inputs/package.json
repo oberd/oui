@@ -2,7 +2,6 @@
     "name": "@oberd/oui-inputs",
     "version": "1.0.0",
     "description": "input widgets, mostly health related",
-    "main": "index.js",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,5 +11,9 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "exports": {
+        "default": "./index.js",
+        "import": "./index.js"
+    }
 }

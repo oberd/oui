@@ -1,6 +1,6 @@
 class InputBMI extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = "Hello, World! (oberd-inputs-bmi)"
+        this.innerHTML = "Hello, Worlds! (oberd-inputs-bmi)"
     }
 }
 

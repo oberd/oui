@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "dev": "pnpm -r dev",
         "format": "pnpm -r format",
         "lint": "pnpm -r lint",
         "test": "pnpm -r test"
