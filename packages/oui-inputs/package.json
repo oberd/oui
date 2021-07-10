@@ -1,0 +1,13 @@
+{
+  "name": "@oberd/oui-inputs",
+  "version": "1.0.0",
+  "description": "Input widgets, mostly health related",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
