@@ -1,1 +1,1 @@
-import "@oberd/oui-inputs";
+import "@oberd/oui-inputs"

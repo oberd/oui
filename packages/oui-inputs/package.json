@@ -1,13 +1,16 @@
 {
-  "name": "@oberd/oui-inputs",
-  "version": "1.0.0",
-  "description": "Input widgets, mostly health related",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "@oberd/oui-inputs",
+    "version": "1.0.0",
+    "description": "input widgets, mostly health related",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint --ignore-path .gitignore \"**/*.{ts,js}\" && npm run check-format",
+        "format": "prettier --write . --config ../../.prettierrc --ignore-path .gitignore",
+        "check-format": "prettier --check . --config ../../.prettierrc --ignore-path .gitignore"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }

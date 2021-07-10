@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "semi": ["error", "never"],
+        "indent": ["error", 4],
+        "no-extra-semi": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "quotes": ["error", "double"],
+        "no-console": "error"
+    }
+}

@@ -1,7 +1,7 @@
 class InputBMI extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = "Hello, World! (oberd-inputs-bmi)";
-  }
+    connectedCallback() {
+        this.innerHTML = "Hello, World! (oberd-inputs-bmi)"
+    }
 }
 
-customElements.define("oui-inputs-bmi", InputBMI);
+customElements.define("oui-inputs-bmi", InputBMI)
