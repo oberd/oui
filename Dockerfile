@@ -5,6 +5,6 @@ COPY package.json .
 COPY package-lock.json .
 COPY .npmrc .
 RUN npm install
-RUN npm ci
 COPY . .
+RUN npm ci
 RUN npm run ci
