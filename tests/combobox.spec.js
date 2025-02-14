@@ -20,3 +20,27 @@ test("expand dropdown by clicking button", async ({ page }) => {
   await expect(page.getByText("Björk")).toBeVisible();
   await expect(page.getByText("Radiohead")).toBeHidden();
 });
+
+test("keyboard access", async ({ page }) => {
+  await page.goto("http://localhost:5173/src/elements/combo-box.html");
+  await page.goto(baseUrl + "/src/elements/combo-box.html");
+  await page.getByTestId("2").getByPlaceholder("Search").focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press(" ");
+  await expect(page.getByTestId("2").getByText("3 Selected")).toBeVisible();
+  await page.keyboard.press(" ");
+  await expect(page.getByTestId("2").getByText("Authors (All)")).toBeVisible();
+  await page.getByTestId("2").getByLabel("All").click();
+  await page.getByTestId("2").getByPlaceholder("Search").focus();
+  await page.keyboard.type("cor");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press(" ");
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape");
+  await expect(
+    page.locator(
+      "[data-testid='2'] [aria-expanded='false'][title='Cormac McCarthy']"
+    )
+  ).toBeVisible();
+});

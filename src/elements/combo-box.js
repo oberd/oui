@@ -31,6 +31,7 @@ export default class ComboBox extends HTMLElement {
       .popover-content {
         display: flex;
         flex-direction: column;
+        gap: 4px;
       }
       .combo-box-menu-options {
         max-height: var(--content-height);
@@ -78,6 +79,7 @@ export default class ComboBox extends HTMLElement {
       this.updateButtonLabel(this.getSelectedOptions());
     }
     if (name === "open") {
+      this.currentIndex = null;
       this.updateExpandedDOM(newValue === "");
     }
   }
@@ -91,7 +93,7 @@ export default class ComboBox extends HTMLElement {
         "aria-haspopup": "true",
         "aria-expanded": "false",
       },
-      `<span></span><oui-icon name="chevron-down"></oui-icon>`,
+      `<span></span><oui-icon name="chevron-down"></oui-icon>`
     );
     this.toggleButton.querySelector("span").textContent =
       this.getAttribute("placeholder") ?? "All";
@@ -108,16 +110,15 @@ export default class ComboBox extends HTMLElement {
       [
         "<label><input type='checkbox' id='all' name='all' value='all'><div>All</div></label>",
         // "<oui-icon name='eye' title='Show Selected Only'></oui-icon>",
-      ],
+      ]
     );
-
     this.comboBoxSearch = appendNode(
       this.popoverContent,
       "div",
       {
         class: "combo-box-search",
       },
-      "<input type='search' placeholder='Search'>",
+      "<input type='search' placeholder='Search'>"
     );
     this.comboBoxSearchInput = this.comboBoxSearch.querySelector("input");
     this.allCheckbox = this.comboBoxMultiOptions.querySelector("input");
@@ -125,7 +126,7 @@ export default class ComboBox extends HTMLElement {
       this.popoverContent,
       "div",
       { class: "combo-box-menu-options" },
-      "<slot></slot>",
+      "<slot></slot>"
     );
   }
   connectedCallback() {
@@ -133,10 +134,11 @@ export default class ComboBox extends HTMLElement {
     this.shadowRoot.addEventListener("change:selected", this.changeSelected);
     this.allCheckbox.addEventListener("change", this.changeAll);
     this.comboBoxSearchInput.addEventListener("input", this.search);
+    this.comboBoxSearchInput.addEventListener("keydown", this.searchKeyPress);
     window.addEventListener("mousedown", this.checkClickOutside);
     const options = this.getSelectedOptions();
     this.value = Array.from(
-      options.selected.map((n) => n.getAttribute("value")),
+      options.selected.map((n) => n.getAttribute("value"))
     );
   }
   changeSelected = () => {
@@ -148,7 +150,7 @@ export default class ComboBox extends HTMLElement {
         detail: this.value,
         bubbles: true,
         composed: true,
-      }),
+      })
     );
   };
   changeAll = (event) => {
@@ -157,19 +159,21 @@ export default class ComboBox extends HTMLElement {
     for (const node of nodes) {
       if (node.tagName === "OUI-OPTION") {
         node.setSelected(isSelected);
+        node.classList.remove("active");
       }
     }
     const options = this.getSelectedOptions();
     this.value = Array.from(
-      options.selected.map((n) => n.getAttribute("value")),
+      options.selected.map((n) => n.getAttribute("value"))
     );
+    this.selectedIndex = null;
     this.updateButtonLabel(options);
     this.dispatchEvent(
       new CustomEvent("change", {
         detail: this.value,
         bubbles: true,
         composed: true,
-      }),
+      })
     );
   };
   toggle = () => {
@@ -181,15 +185,16 @@ export default class ComboBox extends HTMLElement {
     } else {
       this.removeAttribute("open");
     }
+    this.currentIndex = null;
     this.updateExpandedDOM(newExpanded);
     this.dispatchEvent(
-      new CustomEvent("toggle", { detail: { epanded: newExpanded } }),
+      new CustomEvent("toggle", { detail: { epanded: newExpanded } })
     );
   };
   updateExpandedDOM(isExpanded) {
     this.toggleButton.setAttribute(
       "aria-expanded",
-      isExpanded ? "true" : "false",
+      isExpanded ? "true" : "false"
     );
     if (isExpanded) {
       this.popoverMenu.setAttribute("open", "");
@@ -203,6 +208,10 @@ export default class ComboBox extends HTMLElement {
     this.shadowRoot.removeEventListener("change:selected", this.changeSelected);
     this.allCheckbox.removeEventListener("change", this.changeAll);
     this.comboBoxSearchInput.removeEventListener("input", this.search);
+    this.comboBoxSearchInput.removeEventListener(
+      "keydown",
+      this.searchKeyPress
+    );
     window.removeEventListener("mousedown", this.checkClickOutside);
   }
   checkClickOutside = (event) => {
@@ -281,6 +290,67 @@ export default class ComboBox extends HTMLElement {
       }
     }
   };
+  searchKeyPress = (event) => {
+    if (event.key === "Escape") {
+      if (this.comboBoxSearchInput.value) {
+        event.preventDefault();
+        this.comboBoxSearchInput.value = "";
+        const { all } = this.getSelectedOptions();
+        for (const node of all) {
+          node.style.display = "flex";
+        }
+        this.comboBoxSearchInput.focus();
+        return;
+      }
+      this.removeAttribute("open");
+      this.updateExpandedDOM(false);
+      return;
+    }
+    if (event.key === " " && this.currentIndex !== null && this.keySelectMode) {
+      event.preventDefault();
+      const { all } = this.getSelectedOptions();
+      const visible = all.filter((n) => n.style.display !== "none");
+      visible[this.currentIndex].toggle();
+      this.changeSelected();
+      this.comboBoxSearchInput.focus();
+      return;
+    }
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      const { all } = this.getSelectedOptions();
+      const visible = all.filter((n) => n.style.display !== "none");
+      this.keySelectMode = true;
+      let currentIndex = this.currentIndex ?? -1;
+      let nextIndex = this.currentIndex;
+      if (event.key === "ArrowDown") {
+        nextIndex = currentIndex + 1;
+      } else {
+        nextIndex = currentIndex - 1;
+      }
+      if (nextIndex < 0) {
+        nextIndex = all.length - 1;
+      }
+      if (nextIndex >= all.length) {
+        nextIndex = 0;
+      }
+      this.currentIndex = nextIndex;
+      for (const i in visible) {
+        if (i == this.currentIndex) {
+          visible[i].classList.add("active");
+        } else {
+          visible[i].classList.remove("active");
+        }
+      }
+      return;
+    }
+    if (this.keySelectMode === true) {
+      this.keySelectMode = false;
+      this.currentIndex = null;
+      const { all } = this.getSelectedOptions();
+      for (const node of all) {
+        node.classList.remove("active");
+      }
+    }
+  };
 }
 
 function fuzzyMatch(query, subject) {
@@ -307,7 +377,8 @@ class OuiOption extends HTMLElement {
         cursor: default;
         user-select: none;
       }
-      :host(:hover) {
+      :host(:hover),
+      :host(.active) {
         background-color: #f7f7f7;
       }
       oui-icon {
@@ -328,7 +399,7 @@ class OuiOption extends HTMLElement {
       this.shadowRoot,
       "div",
       {},
-      `<oui-icon name="check"></oui-icon>`,
+      `<oui-icon name="check"></oui-icon>`
     );
     this.icon = this.shadowRoot.querySelector("oui-icon");
     this.updateIcon();
@@ -345,7 +416,7 @@ class OuiOption extends HTMLElement {
         detail: { isSelected },
         bubbles: true,
         composed: true,
-      }),
+      })
     );
   };
   setSelected = (isSelected) => {
@@ -394,10 +465,7 @@ class PopoverMenu extends HTMLElement {
         /** exit state **/
         transform: translateY(0px);
         opacity: 0;
-        transition:
-          transform 0.2s,
-          opacity 0.2s,
-          display 0.2s allow-discrete;
+        transition: transform 0.2s, opacity 0.2s, display 0.2s allow-discrete;
       }
       :host([open]) .content {
         display: block;
