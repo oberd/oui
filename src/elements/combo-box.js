@@ -95,6 +95,7 @@ export default class ComboBox extends HTMLElement {
         role: "button",
         "aria-haspopup": "true",
         "aria-expanded": "false",
+        class: "combo-box-toggle",
       },
       `<span></span><oui-icon name="chevron-down"></oui-icon>`,
     );

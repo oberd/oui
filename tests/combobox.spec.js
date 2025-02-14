@@ -3,13 +3,9 @@ import { test, expect } from "@playwright/test";
 
 test("expand dropdown by clicking button", async ({ page }) => {
   await page.goto("/src/elements/combo-box.html");
-  await page
-    .getByTestId("1")
-    .getByRole("button")
-    .getByText("Miles Davis", { exact: false })
-    .click();
-  await expect(page.getByText("Radiohead")).toBeVisible();
-  await page.getByText("Radiohead").click();
+  await page.getByTestId("1").locator(".combo-box-toggle").click();
+  await expect(page.getByText("Portishead")).toBeVisible();
+  await page.getByText("Portishead").click();
   await expect(page.getByTestId("1").getByText("2 Selected")).toBeVisible();
   await page.getByTestId("1").getByText("2 Selected").click();
   await page.getByTestId("1").getByText("2 Selected").click();
