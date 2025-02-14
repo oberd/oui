@@ -4,7 +4,7 @@ export default class ComboBox extends HTMLElement {
   static styles() {
     return css`
       :host {
-        --max-height: 200px;
+        --content-height: 200px;
         display: block;
         position: relative;
         width: var(--width, 250px);
@@ -24,6 +24,17 @@ export default class ComboBox extends HTMLElement {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      .combo-box-menu {
+        --max-height: none;
+      }
+      .popover-content {
+        display: flex;
+        flex-direction: column;
+      }
+      .combo-box-menu-options {
+        max-height: var(--content-height);
+        overflow-y: auto;
       }
       .combo-box-multi-options {
         display: flex;
@@ -87,8 +98,11 @@ export default class ComboBox extends HTMLElement {
     this.popoverMenu = appendNode(this.shadowRoot, "oui-popover", {
       class: "combo-box-menu",
     });
+    this.popoverContent = appendNode(this.popoverMenu, "div", {
+      class: "popover-content",
+    });
     this.comboBoxMultiOptions = appendNode(
-      this.popoverMenu,
+      this.popoverContent,
       "div",
       { class: "combo-box-multi-options" },
       [
@@ -98,7 +112,7 @@ export default class ComboBox extends HTMLElement {
     );
 
     this.comboBoxSearch = appendNode(
-      this.popoverMenu,
+      this.popoverContent,
       "div",
       {
         class: "combo-box-search",
@@ -108,7 +122,7 @@ export default class ComboBox extends HTMLElement {
     this.comboBoxSearchInput = this.comboBoxSearch.querySelector("input");
     this.allCheckbox = this.comboBoxMultiOptions.querySelector("input");
     this.comboBoxMenuOptions = appendNode(
-      this.popoverMenu,
+      this.popoverContent,
       "div",
       { class: "combo-box-menu-options" },
       "<slot></slot>",
