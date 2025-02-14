@@ -10,7 +10,7 @@
     "preview-test": "vite preview -c vite.config.test.js",
     "ci": "npm run build-test && start-server-and-test 'preview-test' http://localhost:4173",
     "preview": "vite preview",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist"
