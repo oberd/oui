@@ -1,46 +1,21 @@
 {
-    "name": "oui",
-    "version": "0.0.1",
-    "description": "oberd ui",
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "es2015": "dist/esm/index.mjs",
-    "es2017": "dist/esm/index.mjs",
-    "types": "dist/types/index.d.ts",
-    "collection": "dist/collection/collection-manifest.json",
-    "collection:main": "dist/collection/index.js",
-    "unpkg": "dist/oui/oui.js",
-    "files": [
-        "dist/",
-        "loader/"
-    ],
-    "scripts": {
-        "build": "npm run svg && stencil build --docs",
-        "start": "npm run svg && stencil build --dev --watch --serve",
-        "ci": "NODE_ENV=production npm run build",
-        "test": "stencil test --spec --e2e",
-        "test.watch": "stencil test --spec --e2e --watchAll",
-        "generate": "stencil generate",
-        "svg": "node scripts/svg.mjs",
-        "lint": "eslint src/**/*{.ts,.tsx}"
-    },
-    "devDependencies": {
-        "@stencil/core": "^2.3.0",
-        "@stencil/eslint-plugin": "^0.3.1",
-        "@types/jest": "26.0.15",
-        "@types/puppeteer": "5.4.0",
-        "@typescript-eslint/eslint-plugin": "^4.8.1",
-        "@typescript-eslint/parser": "^4.8.1",
-        "eslint": "^7.14.0",
-        "eslint-plugin-react": "^7.21.5",
-        "jest": "26.6.3",
-        "jest-cli": "26.6.3",
-        "lodash.camelcase": "^4.3.0",
-        "puppeteer": "5.5.0",
-        "stencil-inline-svg": "^1.0.1"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "typescript": "^4.1.2"
-    }
+  "name": "@oberd/oui",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "test": "playwright test",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.4",
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "fuse.js": "^7.1.0"
+  }
 }

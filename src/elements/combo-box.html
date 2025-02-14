@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script type="module" src="./combo-box.js"></script>
+        <style>
+            html {
+                font-family: "Comic Sans", sans-serif;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: flex; flex-direction: column; gap: 150px">
+            <div style="display: grid; grid-template-columns: 1fr 1fr">
+                <oui-combo-box multiple data-testid="1" placeholder="Artists">
+                    <oui-option value="rh">Radiohead</oui-option>
+                    <oui-option value="mm" selected>
+                        Miles Davis and John Coltrane Play Newport
+                    </oui-option>
+                    <oui-option value="nin">Nine Inch Nails</oui-option>
+                    <oui-option value="ph">Portishead</oui-option>
+                    <oui-option value="bj">Björk</oui-option>
+                    <oui-option value="jw">John Williams</oui-option>
+                </oui-combo-box>
+                <div id="output-1" data-testid="output-1"></div>
+                <script>
+                    const output1 = document.querySelector(
+                        '[data-testid="output-1"]',
+                    );
+                    const test1 = document.querySelector('[data-testid="1"]');
+                    test1.addEventListener("change", (event) => {
+                        output1.innerHTML = JSON.stringify(event.detail);
+                    });
+                    setTimeout(() => {
+                        output1.innerHTML = JSON.stringify(test1.value);
+                    }, 10);
+                </script>
+            </div>
+            <div>
+                <oui-combo-box
+                    multiple
+                    data-testid="2"
+                    placeholder="Authors"
+                    open
+                    style="--max-height: 100px"
+                >
+                    <oui-option value="ob" selected>Octavia Butler</oui-option>
+                    <oui-option value="tp" selected>Thomas Pynchon</oui-option>
+                    <oui-option value="cm" selected>Cormac McCarthy</oui-option>
+                    <oui-option value="hm" selected>Haruki Murakami</oui-option>
+                </oui-combo-box>
+            </div>
+        </div>
+    </body>
+</html>
