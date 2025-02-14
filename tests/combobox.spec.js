@@ -1,10 +1,8 @@
 // @ts-check
 import { test, expect } from "@playwright/test";
 
-const baseUrl = "http://localhost:5173";
-
 test("expand dropdown by clicking button", async ({ page }) => {
-  await page.goto(baseUrl + "/src/elements/combo-box.html");
+  await page.goto("/src/elements/combo-box.html");
   await page
     .getByTestId("1")
     .getByRole("button")
@@ -22,8 +20,7 @@ test("expand dropdown by clicking button", async ({ page }) => {
 });
 
 test("keyboard access", async ({ page }) => {
-  await page.goto("http://localhost:5173/src/elements/combo-box.html");
-  await page.goto(baseUrl + "/src/elements/combo-box.html");
+  await page.goto("/src/elements/combo-box.html");
   await page.getByTestId("2").getByPlaceholder("Search").focus();
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
@@ -40,7 +37,7 @@ test("keyboard access", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(
     page.locator(
-      "[data-testid='2'] [aria-expanded='false'][title='Cormac McCarthy']"
-    )
+      "[data-testid='2'] [aria-expanded='false'][title='Cormac McCarthy']",
+    ),
   ).toBeVisible();
 });

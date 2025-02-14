@@ -1,4 +1,7 @@
-import { css, appendNode, divClass } from "./_lib.js";
+import { css, appendNode } from "./lib/html.js";
+import "./option.js";
+import "./icon.js";
+import "./popover.js";
 
 export default class ComboBox extends HTMLElement {
   static styles() {
@@ -93,7 +96,7 @@ export default class ComboBox extends HTMLElement {
         "aria-haspopup": "true",
         "aria-expanded": "false",
       },
-      `<span></span><oui-icon name="chevron-down"></oui-icon>`
+      `<span></span><oui-icon name="chevron-down"></oui-icon>`,
     );
     this.toggleButton.querySelector("span").textContent =
       this.getAttribute("placeholder") ?? "All";
@@ -110,7 +113,7 @@ export default class ComboBox extends HTMLElement {
       [
         "<label><input type='checkbox' id='all' name='all' value='all'><div>All</div></label>",
         // "<oui-icon name='eye' title='Show Selected Only'></oui-icon>",
-      ]
+      ],
     );
     this.comboBoxSearch = appendNode(
       this.popoverContent,
@@ -118,7 +121,7 @@ export default class ComboBox extends HTMLElement {
       {
         class: "combo-box-search",
       },
-      "<input type='search' placeholder='Search'>"
+      "<input type='search' placeholder='Search'>",
     );
     this.comboBoxSearchInput = this.comboBoxSearch.querySelector("input");
     this.allCheckbox = this.comboBoxMultiOptions.querySelector("input");
@@ -126,7 +129,7 @@ export default class ComboBox extends HTMLElement {
       this.popoverContent,
       "div",
       { class: "combo-box-menu-options" },
-      "<slot></slot>"
+      "<slot></slot>",
     );
   }
   connectedCallback() {
@@ -138,7 +141,7 @@ export default class ComboBox extends HTMLElement {
     window.addEventListener("mousedown", this.checkClickOutside);
     const options = this.getSelectedOptions();
     this.value = Array.from(
-      options.selected.map((n) => n.getAttribute("value"))
+      options.selected.map((n) => n.getAttribute("value")),
     );
   }
   changeSelected = () => {
@@ -150,7 +153,7 @@ export default class ComboBox extends HTMLElement {
         detail: this.value,
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   };
   changeAll = (event) => {
@@ -164,7 +167,7 @@ export default class ComboBox extends HTMLElement {
     }
     const options = this.getSelectedOptions();
     this.value = Array.from(
-      options.selected.map((n) => n.getAttribute("value"))
+      options.selected.map((n) => n.getAttribute("value")),
     );
     this.selectedIndex = null;
     this.updateButtonLabel(options);
@@ -173,7 +176,7 @@ export default class ComboBox extends HTMLElement {
         detail: this.value,
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   };
   toggle = () => {
@@ -188,13 +191,13 @@ export default class ComboBox extends HTMLElement {
     this.currentIndex = null;
     this.updateExpandedDOM(newExpanded);
     this.dispatchEvent(
-      new CustomEvent("toggle", { detail: { epanded: newExpanded } })
+      new CustomEvent("toggle", { detail: { epanded: newExpanded } }),
     );
   };
   updateExpandedDOM(isExpanded) {
     this.toggleButton.setAttribute(
       "aria-expanded",
-      isExpanded ? "true" : "false"
+      isExpanded ? "true" : "false",
     );
     if (isExpanded) {
       this.popoverMenu.setAttribute("open", "");
@@ -210,7 +213,7 @@ export default class ComboBox extends HTMLElement {
     this.comboBoxSearchInput.removeEventListener("input", this.search);
     this.comboBoxSearchInput.removeEventListener(
       "keydown",
-      this.searchKeyPress
+      this.searchKeyPress,
     );
     window.removeEventListener("mousedown", this.checkClickOutside);
   }
@@ -365,200 +368,3 @@ function fuzzyMatch(query, subject) {
 }
 
 customElements.define("oui-combo-box", ComboBox);
-
-class OuiOption extends HTMLElement {
-  static styles() {
-    return css`
-      :host {
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        justify-content: space-between;
-        cursor: default;
-        user-select: none;
-      }
-      :host(:hover),
-      :host(.active) {
-        background-color: #f7f7f7;
-      }
-      oui-icon {
-        transition: transform 0.2s;
-      }
-    `;
-  }
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.role = "button";
-    this.initDOM();
-  }
-  initDOM() {
-    this.shadowRoot.appendChild(OuiOption.styles());
-    appendNode(this.shadowRoot, "span", { class: "label" }, "<slot></slot>");
-    appendNode(
-      this.shadowRoot,
-      "div",
-      {},
-      `<oui-icon name="check"></oui-icon>`
-    );
-    this.icon = this.shadowRoot.querySelector("oui-icon");
-    this.updateIcon();
-  }
-  connectedCallback() {
-    this.addEventListener("mousedown", this.toggle);
-  }
-
-  toggle = () => {
-    const isSelected = !this.hasAttribute("selected");
-    this.setSelected(isSelected);
-    this.dispatchEvent(
-      new CustomEvent("change:selected", {
-        detail: { isSelected },
-        bubbles: true,
-        composed: true,
-      })
-    );
-  };
-  setSelected = (isSelected) => {
-    if (isSelected) {
-      this.setAttribute("selected", "");
-    } else {
-      this.removeAttribute("selected");
-    }
-    this.updateIcon();
-  };
-  updateIcon() {
-    const isSelected = this.hasAttribute("selected");
-    this.icon.style.transform = isSelected ? `scale(1)` : `scale(0)`;
-  }
-  disconnectedCallback() {
-    this.removeEventListener("mousedown", this.toggle);
-  }
-}
-
-customElements.define("oui-option", OuiOption);
-
-class PopoverMenu extends HTMLElement {
-  static styles() {
-    return css`
-      :host {
-        --width: 100%;
-        position: relative;
-        display: block;
-      }
-      .content {
-        box-sizing: border-box;
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        min-width: 100%;
-        max-height: var(--max-height, 230px);
-        padding: 5px;
-        overflow-y: auto;
-      }
-      .content {
-        /** exit state **/
-        transform: translateY(0px);
-        opacity: 0;
-        transition: transform 0.2s, opacity 0.2s, display 0.2s allow-discrete;
-      }
-      :host([open]) .content {
-        display: block;
-        transform: translateY(5px);
-        opacity: 1;
-
-        @starting-style {
-          transform: translateY(0px);
-          opacity: 0;
-        }
-      }
-    `;
-  }
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.initDOM();
-  }
-  get observedAttributes() {
-    return ["open"];
-  }
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "open") {
-      this.updateOpenState(newValue);
-    }
-  }
-  updateOpenState(isOpen) {
-    if (isOpen) {
-      this.classList.add("open");
-    } else {
-      this.classList.remove("open");
-    }
-  }
-  initDOM() {
-    this.shadowRoot.appendChild(PopoverMenu.styles());
-    appendNode(this.shadowRoot, "div", { class: "content" }, "<slot></slot>");
-  }
-}
-
-customElements.define("oui-popover", PopoverMenu);
-
-class OuiIcon extends HTMLElement {
-  static styles() {
-    return css`
-      :host {
-        display: inline-block;
-      }
-      svg {
-        width: 14px;
-        height: 14px;
-      }
-    `;
-  }
-  static iconMap = import.meta.glob("./icons/*.svg", {
-    import: "default",
-    query: "?raw",
-    eager: true,
-  });
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.initDOM();
-  }
-  get observedAttributes() {
-    return ["name"];
-  }
-  initDOM() {
-    this.updateNameDOM(this.getAttribute("name"));
-  }
-  connectedCallback() {
-    this.updateNameDOM(this.getAttribute("name"));
-  }
-  updateNameDOM(iconName) {
-    this.shadowRoot.innerHTML = "";
-    this.shadowRoot.appendChild(OuiIcon.styles());
-    this.shadowRoot.appendChild(this.svgNode(iconName));
-  }
-  svgNode(iconName) {
-    const element = document.createElement("div");
-    const svgContent = OuiIcon.iconMap[`./icons/${iconName}.svg`];
-    if (!svgContent) {
-      return element;
-    }
-    element.innerHTML = svgContent;
-    const child = element.children.item(0);
-    child.removeAttribute("width");
-    child.removeAttribute("height");
-    return child;
-  }
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "name") {
-      this.updateNameDOM(newValue);
-    }
-  }
-}
-customElements.define("oui-icon", OuiIcon);

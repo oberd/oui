@@ -4,7 +4,12 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "test": "playwright test",
+    "test": "npm run build-test && BASE_URL=http://localhost:4173 playwright test",
+    "test-ui": "BASE_URL=http://localhost:5173 playwright test --ui",
+    "build-test": "vite build -c vite.config.test.js",
+    "preview-test": "vite preview -c vite.config.test.js",
+    "ci": "npm run build-test && start-server-and-test 'preview-test' http://localhost:4173",
+    "preview": "vite preview",
     "prepublish": "npm run build"
   },
   "files": [
@@ -13,9 +18,16 @@
   "devDependencies": {
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.4",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^2.0.10",
     "vite": "^6.1.0"
   },
-  "dependencies": {
-    "fuse.js": "^7.1.0"
+  "main": "./dist/oui.umd.js",
+  "module": "./dist/oui.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/oui.mjs",
+      "require": "./dist/oui.umd.js"
+    }
   }
 }
