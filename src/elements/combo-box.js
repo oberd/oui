@@ -310,7 +310,12 @@ export default class ComboBox extends HTMLElement {
       this.updateExpandedDOM(false);
       return;
     }
-    if (event.key === " " && this.currentIndex !== null && this.keySelectMode) {
+    const actionKeys = [" ", "Enter"];
+    if (
+      actionKeys.includes(event.key) &&
+      this.currentIndex !== null &&
+      this.keySelectMode
+    ) {
       event.preventDefault();
       const { all } = this.getSelectedOptions();
       const visible = all.filter((n) => n.style.display !== "none");
