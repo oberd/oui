@@ -229,8 +229,14 @@ export default class ComboBox extends HTMLElement {
     }
   };
   updateButtonLabel({ selected, unselected }) {
-    const allLabel = (this.getAttribute("placeholder") + " (All)").trim();
-    const noneLabel = (this.getAttribute("placeholder") + " (None)").trim();
+    const withPlaceholder = (label) => {
+      if (this.getAttribute("placeholder")) {
+        return `${this.getAttribute("placeholder")} (${label})`;
+      }
+      return label;
+    };
+    const allLabel = withPlaceholder("All");
+    const noneLabel = withPlaceholder("None");
     const toggleText = this.toggleButton.querySelector("span");
     if (unselected.length === 0) {
       toggleText.textContent = allLabel;
