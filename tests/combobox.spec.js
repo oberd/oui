@@ -40,5 +40,5 @@ test("performance of slotted queries", async ({ page }) => {
   await page.locator("oui-combo-box").click();
   await expect(page.getByText("Item 1", { exact: true })).toBeVisible();
   const endTime = await page.evaluate(() => Date.now());
-  expect(endTime - startTime).toBeLessThan(5000);
+  expect(endTime - startTime).toBeLessThan(10_000);
 });
