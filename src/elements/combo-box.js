@@ -1,18 +1,61 @@
-import { css, appendNode } from "./lib/html.js";
+import { css, appendNode, html } from "./lib/html.js";
 import "./option.js";
 import "./icon.js";
 import "./popover.js";
 
+/**
+ * ComboBox provides an in-page searchable multi-select
+ * for use in standard filters
+ */
 export default class ComboBox extends HTMLElement {
+  static template() {
+    return html`
+      <!-- Toggle Button -->
+      <button
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        class="combo-box-toggle"
+      >
+        <span class="combo-box-label"></span>
+        <oui-icon name="chevron-down"></oui-icon>
+      </button>
+
+      <!-- Popover Menu -->
+      <oui-popover class="combo-box-menu">
+        <div class="popover-content">
+          <!-- Multi-Options -->
+          <div class="combo-box-multi-options">
+            <label>
+              <input type="checkbox" id="all" name="all" value="all" />
+              <div>All</div>
+            </label>
+            <!-- Optional: <oui-icon name="eye" title="Show Selected Only"></oui-icon> -->
+          </div>
+
+          <!-- Search Bar -->
+          <div class="combo-box-search">
+            <input type="search" placeholder="Search" />
+          </div>
+
+          <!-- Menu Options Slot -->
+          <div class="combo-box-menu-options">
+            <slot></slot>
+          </div>
+        </div>
+      </oui-popover>
+    `;
+  }
   static styles() {
     return css`
       :host {
+        /* height of the inner content list */
         --content-height: 200px;
         display: block;
         position: relative;
         width: var(--width, 250px);
       }
-      button[role="button"][aria-haspopup="true"] {
+      .combo-box-toggle {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -23,7 +66,7 @@ export default class ComboBox extends HTMLElement {
         border: var(--border, solid 1px #e7e7e7);
         padding: 5px 10px;
       }
-      button[role="button"][aria-haspopup="true"] span {
+      .combo-box-toggle span {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -77,7 +120,7 @@ export default class ComboBox extends HTMLElement {
   static get observedAttributes() {
     return ["placeholder", "open"];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name, _oldValue, newValue) {
     if (name === "placeholder") {
       this.updateButtonLabel(this.getSelectedOptions());
     }
@@ -88,50 +131,24 @@ export default class ComboBox extends HTMLElement {
   }
   initDOM() {
     this.shadowRoot.appendChild(ComboBox.styles());
-    this.toggleButton = appendNode(
-      this.shadowRoot,
-      "button",
-      {
-        role: "button",
-        "aria-haspopup": "true",
-        "aria-expanded": "false",
-        class: "combo-box-toggle",
-      },
-      `<span></span><oui-icon name="chevron-down"></oui-icon>`,
+    this.shadowRoot.appendChild(ComboBox.template().cloneNode(true));
+    this.toggleButton = this.shadowRoot.querySelector(".combo-box-toggle");
+    this.toggleLabel = this.shadowRoot.querySelector(".combo-box-label");
+    this.popoverMenu = this.shadowRoot.querySelector("oui-popover");
+    this.popoverContent = this.shadowRoot.querySelector(".popover-content");
+    this.comboBoxMultiOptions = this.shadowRoot.querySelector(
+      ".combo-box-multi-options",
     );
-    this.toggleButton.querySelector("span").textContent =
-      this.getAttribute("placeholder") ?? "All";
-    this.popoverMenu = appendNode(this.shadowRoot, "oui-popover", {
-      class: "combo-box-menu",
-    });
-    this.popoverContent = appendNode(this.popoverMenu, "div", {
-      class: "popover-content",
-    });
-    this.comboBoxMultiOptions = appendNode(
-      this.popoverContent,
-      "div",
-      { class: "combo-box-multi-options" },
-      [
-        "<label><input type='checkbox' id='all' name='all' value='all'><div>All</div></label>",
-        // "<oui-icon name='eye' title='Show Selected Only'></oui-icon>",
-      ],
-    );
-    this.comboBoxSearch = appendNode(
-      this.popoverContent,
-      "div",
-      {
-        class: "combo-box-search",
-      },
-      "<input type='search' placeholder='Search'>",
-    );
+    this.comboBoxSearch = this.shadowRoot.querySelector(".combo-box-search");
     this.comboBoxSearchInput = this.comboBoxSearch.querySelector("input");
     this.allCheckbox = this.comboBoxMultiOptions.querySelector("input");
-    this.comboBoxMenuOptions = appendNode(
-      this.popoverContent,
-      "div",
-      { class: "combo-box-menu-options" },
-      "<slot></slot>",
+    this.comboBoxMenuOptions = this.shadowRoot.querySelector(
+      ".combo-box-menu-options",
     );
+    this.toggleLabel.textContent = this.getAttribute("placeholder") ?? "All";
+    this.shadowRoot.addEventListener("slotchange", () => {
+      this.updateStateFromDOM();
+    });
   }
   connectedCallback() {
     this.toggleButton.addEventListener("mousedown", this.toggle);
@@ -140,11 +157,23 @@ export default class ComboBox extends HTMLElement {
     this.comboBoxSearchInput.addEventListener("input", this.search);
     this.comboBoxSearchInput.addEventListener("keydown", this.searchKeyPress);
     window.addEventListener("mousedown", this.checkClickOutside);
+    this.updateStateFromDOM();
+    this.dispatchEvent(
+      new CustomEvent("ready", { bubbles: true, composed: true }),
+    );
+  }
+  updateStateFromDOM = () => {
     const options = this.getSelectedOptions();
     this.value = Array.from(
       options.selected.map((n) => n.getAttribute("value")),
     );
-  }
+    this.allCheckbox.checked = this.value.length === options.total;
+    this.updateButtonLabel({
+      all: options.all,
+      selected: options.selected,
+      unselected: options.unselected,
+    });
+  };
   changeSelected = () => {
     const { selected, unselected } = this.getSelectedOptions();
     this.updateButtonLabel({ selected, unselected });
@@ -316,6 +345,11 @@ export default class ComboBox extends HTMLElement {
       this.updateExpandedDOM(false);
       return;
     }
+
+    /**
+     * if key select mode, toggle selected option on
+     * on enter or spacebar
+     */
     const actionKeys = [" ", "Enter"];
     if (
       actionKeys.includes(event.key) &&
@@ -330,6 +364,10 @@ export default class ComboBox extends HTMLElement {
       this.comboBoxSearchInput.focus();
       return;
     }
+
+    /**
+     * moves the focus to the next or previous option
+     */
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       const { all } = this.getSelectedOptions();
       const visible = all.filter((n) => n.style.display !== "none");

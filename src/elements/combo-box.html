@@ -2,55 +2,115 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <script type="module" src="./lib/testing.js"></script>
         <script type="module" src="./combo-box.js"></script>
         <style>
             html {
                 font-family: "Comic Sans", sans-serif;
                 font-size: 14px;
             }
+            #test-bin {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 20px 0;
+                align-items: stretch;
+                justify-items: stretch;
+            }
         </style>
     </head>
     <body>
-        <div style="display: flex; flex-direction: column; gap: 150px">
-            <div style="display: grid; grid-template-columns: 1fr 1fr">
-                <oui-combo-box multiple data-testid="1" placeholder="Artists">
-                    <oui-option value="rh" selected>Radiohead</oui-option>
-                    <oui-option value="mm">
-                        Miles Davis and John Coltrane Play Newport
-                    </oui-option>
-                    <oui-option value="nin">Nine Inch Nails</oui-option>
-                    <oui-option value="ph">Portishead</oui-option>
-                    <oui-option value="bj">Björk</oui-option>
-                    <oui-option value="jw">John Williams</oui-option>
-                </oui-combo-box>
-                <div id="output-1" data-testid="output-1"></div>
-                <script>
-                    const output1 = document.querySelector(
-                        '[data-testid="output-1"]',
+        <button data-load="#template-artists">Load Artists</button>
+        <button data-load="#template-authors">Load Authors</button>
+        <button id="perf">Load Perf</button>
+        <div id="test-bin"></div>
+        <template id="template-artists">
+            <oui-combo-box multiple placeholder="Artists" name="artists">
+                <oui-option value="rh" selected>Radiohead</oui-option>
+                <oui-option value="mm">
+                    Miles Davis and John Coltrane Play Newport
+                </oui-option>
+                <oui-option value="nin">Nine Inch Nails</oui-option>
+                <oui-option value="ph">Portishead</oui-option>
+                <oui-option value="bj">Björk</oui-option>
+                <oui-option value="jw">John Williams</oui-option>
+            </oui-combo-box>
+            <value-as-json target="oui-combo-box"></value-as-json>
+        </template>
+        <template id="template-authors">
+            <oui-combo-box
+                name="authors"
+                multiple
+                data-testid="2"
+                placeholder="Authors"
+                open
+                style="--content-height: 100px"
+            >
+                <oui-option value="ob" selected>Octavia Butler</oui-option>
+                <oui-option value="tp" selected>Thomas Pynchon</oui-option>
+                <oui-option value="cm" selected>Cormac McCarthy</oui-option>
+                <oui-option value="hm" selected>Haruki Murakami</oui-option>
+            </oui-combo-box>
+            <value-as-json target="oui-combo-box"></value-as-json>
+        </template>
+        <template id="template-perf">
+            <oui-combo-box name="perf" multiple></oui-combo-box>
+            <value-as-json target="oui-combo-box"></value-as-json>
+        </template>
+
+        <script>
+            function loadTemplateInto(target) {
+                return (templateSel) => {
+                    if (!templateSel) {
+                        console.error(
+                            "invalid loadTemplate: no data-load attribute found",
+                        );
+                    }
+                    const templateEl = document.querySelector(templateSel);
+                    if (!templateEl) {
+                        console.error(
+                            `invalid templateEl: template ${templateSel} not found`,
+                        );
+                    }
+                    const targetEl = document.querySelector(target);
+                    if (!targetEl) {
+                        console.error(
+                            `invalid target: element ${target} not found`,
+                        );
+                    }
+                    targetEl.innerHTML = "";
+                    targetEl.appendChild(templateEl.content.cloneNode(true));
+                    window.location.hash = templateSel;
+                };
+            }
+            document
+                .querySelector("#perf")
+                .addEventListener("mousedown", () => {
+                    loadTemplateInto("#test-bin")("#template-perf");
+                    initPerf();
+                });
+            function initPerf() {
+                const el = document.querySelector("[name=perf]");
+                let innerHTML = "";
+                for (let i = 1; i <= 10_000; i++) {
+                    innerHTML += `<oui-option value="${i}" selected>Item ${i}</oui-option>`;
+                }
+                el.innerHTML = innerHTML;
+            }
+            document.addEventListener("DOMContentLoaded", () => {
+                const testBinLoad = loadTemplateInto("#test-bin");
+                document.querySelectorAll("[data-load]").forEach((el) => {
+                    el.addEventListener("mousedown", (event) =>
+                        testBinLoad(event.target.getAttribute("data-load")),
                     );
-                    const test1 = document.querySelector('[data-testid="1"]');
-                    test1.addEventListener("change", (event) => {
-                        output1.innerHTML = JSON.stringify(event.detail);
-                    });
-                    setTimeout(() => {
-                        output1.innerHTML = JSON.stringify(test1.value);
-                    }, 500);
-                </script>
-            </div>
-            <div>
-                <oui-combo-box
-                    multiple
-                    data-testid="2"
-                    placeholder="Authors"
-                    open
-                    style="--content-height: 100px"
-                >
-                    <oui-option value="ob" selected>Octavia Butler</oui-option>
-                    <oui-option value="tp" selected>Thomas Pynchon</oui-option>
-                    <oui-option value="cm" selected>Cormac McCarthy</oui-option>
-                    <oui-option value="hm" selected>Haruki Murakami</oui-option>
-                </oui-combo-box>
-            </div>
-        </div>
+                });
+                if (window.location.hash) {
+                    testBinLoad(window.location.hash);
+                    if (window.location.hash === "#template-perf") {
+                        initPerf();
+                    }
+                }
+            });
+        </script>
     </body>
 </html>

@@ -1,3 +1,9 @@
+export function html(input) {
+  const node = document.createElement("template");
+  node.innerHTML = input[0];
+  return node.content;
+}
+
 export function css(input) {
   const node = document.createElement("style");
   node.innerHTML = input[0];
