@@ -1,9 +1,13 @@
 node_modules
 dist
 dist-test
+.DS_Store
 
 # Playwright
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/video-processing/sample-files/*
+!video-processing/sample-files/sample_videos_multi.sh
+!video-processing/sample-files/sample_1s*
