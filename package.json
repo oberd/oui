@@ -1,6 +1,6 @@
 {
   "name": "@oberd/oui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "build": "vite build && vite build -c vite.config.video.js",
     "dev": "vite",
