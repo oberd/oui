@@ -1,7 +1,7 @@
 export function html(input) {
   const node = document.createElement("template");
   node.innerHTML = input[0];
-  return node.content;
+  return node.content.cloneNode(true);
 }
 
 export function css(input) {
@@ -63,4 +63,28 @@ export function appendChild(element, child) {
   } else {
     element.appendChild(child);
   }
+}
+
+export function getSlotText(slot) {
+  const assignedNodes = slot.assignedNodes();
+  let output = [];
+  for (const node of assignedNodes) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      output.push(node.textContent);
+    }
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      output.push(node.innerText);
+    }
+    if (node instanceof HTMLSlotElement) {
+      output.push(getSlotText(node));
+    }
+  }
+  return output.join(" ").trim();
+}
+
+export function isOverflowing(element) {
+  return (
+    element.scrollHeight > element.clientHeight ||
+    element.scrollWidth > element.clientWidth
+  );
 }

@@ -69,3 +69,45 @@ class ValueAsJson extends HTMLElement {
 }
 
 customElements.define("value-as-json", ValueAsJson);
+
+class TestNav extends HTMLElement {
+  static template() {
+    return html`
+      <style>
+        :host {
+          display: block;
+        }
+        nav {
+          display: flex;
+          justify-content: space-between;
+          padding: 6px 8px;
+          background: #f0f0f0;
+          border-bottom: 1px solid #e9e9e9;
+        }
+        ul {
+          display: flex;
+          gap: 10px;
+          margin: 0;
+          padding: 0;
+        }
+        li {
+          list-style: none;
+        }
+      </style>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Testing Home</a>
+          </li>
+        </ul>
+      </nav>
+    `;
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(TestNav.template().cloneNode(true));
+  }
+}
+
+customElements.define("test-nav", TestNav);

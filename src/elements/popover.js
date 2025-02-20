@@ -1,8 +1,9 @@
-import { css, appendNode } from "./lib/html.js";
+import { html } from "./lib/html.js";
 
 export class OuiPopover extends HTMLElement {
-  static styles() {
-    return css`
+  static template() {
+    return html`
+      <style>
       :host {
         --width: 100%;
         position: relative;
@@ -20,8 +21,8 @@ export class OuiPopover extends HTMLElement {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         min-width: 100%;
         max-height: var(--max-height, 230px);
-        padding: 5px;
         overflow-y: auto;
+        max-width: 100%;
       }
       .content {
         /** exit state **/
@@ -42,6 +43,8 @@ export class OuiPopover extends HTMLElement {
           opacity: 0;
         }
       }
+      </style>
+      <div class="content"><slot></slot></div>
     `;
   }
   constructor() {
@@ -52,7 +55,7 @@ export class OuiPopover extends HTMLElement {
   get observedAttributes() {
     return ["open"];
   }
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name, _oldValue, newValue) {
     if (name === "open") {
       this.updateOpenState(newValue);
     }
@@ -65,8 +68,7 @@ export class OuiPopover extends HTMLElement {
     }
   }
   initDOM() {
-    this.shadowRoot.appendChild(OuiPopover.styles());
-    appendNode(this.shadowRoot, "div", { class: "content" }, "<slot></slot>");
+    this.shadowRoot.appendChild(OuiPopover.template());
   }
 }
 

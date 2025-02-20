@@ -2,24 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="./lib/testing.css" />
         <script type="module" src="./lib/testing.js"></script>
         <script type="module" src="./combo-box.js"></script>
         <style>
-            html {
-                font-family: "Comic Sans", sans-serif;
-                font-size: 14px;
-            }
             #test-bin {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
-                padding: 20px 0;
+                padding: 20px 10px;
                 align-items: stretch;
                 justify-items: stretch;
             }
         </style>
     </head>
     <body>
+        <test-nav></test-nav>
         <button data-load="#template-artists">Load Artists</button>
         <button data-load="#template-authors">Load Authors</button>
         <button id="perf">Load Perf</button>
@@ -27,9 +25,9 @@
         <template id="template-artists">
             <oui-combo-box multiple placeholder="Artists" name="artists">
                 <oui-option value="rh" selected>Radiohead</oui-option>
-                <oui-option value="mm">
-                    Miles Davis and John Coltrane Play Newport
-                </oui-option>
+                <oui-option value="mm"
+                    >Miles Davis and the Modern Jazz Giants</oui-option
+                >
                 <oui-option value="nin">Nine Inch Nails</oui-option>
                 <oui-option value="ph">Portishead</oui-option>
                 <oui-option value="bj">Björk</oui-option>

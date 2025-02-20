@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./lib/testing.css" />
+        <script type="module" src="./lib/testing.js"></script>
+        <script type="module" src="./icon.js"></script>
+        <script type="module" src="./button.js"></script>
+    </head>
+    <body>
+        <test-nav></test-nav>
+        <div class="section">
+            <h2>Sizes</h2>
+            <div class="button-group">
+                <oui-button variant="solid" size="xs">Button (xs)</oui-button>
+                <oui-button variant="solid" size="sm">Button (sm)</oui-button>
+                <oui-button variant="solid" size="md">Button (md)</oui-button>
+                <oui-button variant="solid" size="lg">Button (lg)</oui-button>
+                <oui-button variant="solid" size="xl">Button (xl)</oui-button>
+            </div>
+        </div>
+
+        <!-- Variants Section: Displays buttons with each variant using a default size -->
+        <div class="section">
+            <h2>Variants</h2>
+            <div class="button-group">
+                <oui-button variant="solid" size="md">Solid</oui-button>
+                <oui-button variant="subtle" size="md">Subtle</oui-button>
+                <oui-button variant="surface" size="md">Surface</oui-button>
+                <oui-button variant="outline" size="md">Outline</oui-button>
+                <oui-button variant="ghost" size="md">Ghost</oui-button>
+                <oui-button variant="plain" size="md">Plain</oui-button>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Icon</h2>
+            <div class="button-group">
+                <oui-button variant="solid" size="xs">
+                    <oui-icon name="eye"></oui-icon>
+                    <span>Icon (xs)</span>
+                </oui-button>
+                <oui-button variant="solid" size="sm">
+                    <oui-icon name="eye"></oui-icon>
+                    <span>Icon (sm)</span>
+                </oui-button>
+                <oui-button variant="solid" size="md">
+                    <oui-icon name="eye"></oui-icon>
+                    <span>Icon (md)</span>
+                </oui-button>
+                <oui-button variant="solid" size="lg">
+                    <oui-icon name="eye"></oui-icon>
+                    <span>Icon (lg)</span>
+                </oui-button>
+                <oui-button variant="solid" size="xl">
+                    <oui-icon name="eye"></oui-icon>
+                    <span>Icon (xl)</span>
+                </oui-button>
+            </div>
+        </div>
+    </body>
+</html>

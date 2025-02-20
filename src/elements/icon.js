@@ -11,10 +11,12 @@ export class OuiIcon extends HTMLElement {
     return css`
       :host {
         display: inline-block;
+        width: var(--oui-icon-size, 1em);
+        height: var(--oui-icon-size, 1em);
       }
       svg {
-        width: 14px;
-        height: 14px;
+        width: 100%;
+        height: 100%;
       }
     `;
   }

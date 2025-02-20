@@ -9,6 +9,10 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, "index.html"),
         "combo-box": resolve(__dirname, "src/elements/combo-box.html"),
+        "video-slice": resolve(
+          __dirname,
+          "src/elements/video/video-slice.html",
+        ),
       },
     },
   },

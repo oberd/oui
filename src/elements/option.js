@@ -1,22 +1,14 @@
 import { css, appendNode } from "./lib/html.js";
 
 export class OuiOption extends HTMLElement {
+  #check;
+  #active;
+  #selected;
   static styles() {
     return css`
-      :host {
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        justify-content: space-between;
-        cursor: default;
-        user-select: none;
-      }
-      :host(:hover),
-      :host(.active) {
-        background-color: #f7f7f7;
-      }
-      oui-icon {
-        transition: transform 0.2s;
+      :host oui-check {
+        box-sizing: border-box;
+        display: block;
       }
     `;
   }
@@ -28,20 +20,30 @@ export class OuiOption extends HTMLElement {
   }
   initDOM() {
     this.shadowRoot.appendChild(OuiOption.styles());
-    appendNode(this.shadowRoot, "span", { class: "label" }, "<slot></slot>");
-    appendNode(
-      this.shadowRoot,
-      "div",
-      {},
-      `<oui-icon name="check"></oui-icon>`,
-    );
-    this.icon = this.shadowRoot.querySelector("oui-icon");
+    this.#check = appendNode(this.shadowRoot, "oui-check", {}, "<slot></slot>");
+    this.#check.addEventListener("change", this.handleChange);
+    this.setSelected(this.hasAttribute("selected"));
     this.updateIcon();
   }
-  connectedCallback() {
-    this.addEventListener("mousedown", this.toggle);
+  disconnectedCallback() {
+    this.#check.removeEventListener("change", this.handleChange);
   }
-
+  static get observedAttributes() {
+    return ["selected", "wrap", "disabled"];
+  }
+  attributeChangedCallback() {
+    this.setSelected(this.hasAttribute("selected"));
+    this.updateIcon();
+    if (this.hasAttribute("wrap")) {
+      this.#check.setAttribute("wrap", "");
+    } else {
+      this.#check.removeAttribute("wrap");
+    }
+  }
+  handleChange = (e) => {
+    e.preventDefault();
+    this.toggle();
+  };
   toggle = () => {
     const isSelected = !this.hasAttribute("selected");
     this.setSelected(isSelected);
@@ -53,7 +55,14 @@ export class OuiOption extends HTMLElement {
       }),
     );
   };
+  get selected() {
+    return this.#selected;
+  }
   setSelected = (isSelected) => {
+    if (isSelected === this.#selected) {
+      return;
+    }
+    this.#selected = isSelected;
     if (isSelected) {
       this.setAttribute("selected", "");
     } else {
@@ -62,11 +71,23 @@ export class OuiOption extends HTMLElement {
     this.updateIcon();
   };
   updateIcon() {
-    const isSelected = this.hasAttribute("selected");
-    this.icon.style.transform = isSelected ? `scale(1)` : `scale(0)`;
+    this.#check.checked = this.#selected;
   }
   disconnectedCallback() {
     this.removeEventListener("mousedown", this.toggle);
+  }
+  get active() {
+    return this.#active;
+  }
+  set active(value) {
+    this.#active = value;
+    if (value) {
+      this.setAttribute("active", "");
+      this.#check.classList.add("active");
+    } else {
+      this.removeAttribute("active");
+      this.#check.classList.remove("active");
+    }
   }
 }
 
