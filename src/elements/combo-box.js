@@ -1,7 +1,8 @@
-import { css, appendNode, html } from "./lib/html.js";
+import { html } from "./lib/html.js";
 import "./option.js";
 import "./icon.js";
 import "./popover.js";
+import "./check.js";
 
 /**
  * ComboBox provides an in-page searchable multi-select
@@ -10,6 +11,66 @@ import "./popover.js";
 export default class ComboBox extends HTMLElement {
   static template() {
     return html`
+      <style>
+        :host {
+          /* height of the inner content list */
+          --content-height: 200px;
+          --border: solid 1px #e7e7e7;
+          display: block;
+          position: relative;
+          width: var(--width, 250px);
+        }
+        .combo-box-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-width: 100px;
+          width: 100%;
+          box-sizing: border-box;
+          background: none;
+          border: var(--border, solid 1px #e7e7e7);
+          padding: 5px 10px;
+          border-radius: 4px;
+          font-size: inherit;
+        }
+        .combo-box-toggle span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .combo-box-menu {
+          --max-height: none;
+        }
+        .popover-content {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .combo-box-menu-options {
+          max-height: var(--content-height);
+          overflow-y: auto;
+        }
+        .combo-box-search input {
+          padding: 8px;
+          border: none;
+          width: 100%;
+          box-sizing: border-box;
+          border-top-right-radius: 4px;
+          border-top-left-radius: 4px;
+          font-size: inherit;
+        }
+        .combo-box-search input:focus,
+        .combo-box-search input:focus-visible {
+          outline: none;
+        }
+        .combo-box-multi-options {
+          border-bottom: var(--border, solid 1px #e7e7e7);
+        }
+        oui-popover {
+          width: 100%;
+          max-width: 100%;
+        }
+      </style>
       <!-- Toggle Button -->
       <button
         role="button"
@@ -24,18 +85,14 @@ export default class ComboBox extends HTMLElement {
       <!-- Popover Menu -->
       <oui-popover class="combo-box-menu">
         <div class="popover-content">
-          <!-- Multi-Options -->
-          <div class="combo-box-multi-options">
-            <label>
-              <input type="checkbox" id="all" name="all" value="all" />
-              <div>All</div>
-            </label>
-            <!-- Optional: <oui-icon name="eye" title="Show Selected Only"></oui-icon> -->
-          </div>
-
           <!-- Search Bar -->
           <div class="combo-box-search">
             <input type="search" placeholder="Search" />
+          </div>
+
+          <!-- Multi-Options -->
+          <div class="combo-box-multi-options">
+            <oui-check name="all" id="all">All</oui-check>
           </div>
 
           <!-- Menu Options Slot -->
@@ -44,72 +101,6 @@ export default class ComboBox extends HTMLElement {
           </div>
         </div>
       </oui-popover>
-    `;
-  }
-  static styles() {
-    return css`
-      :host {
-        /* height of the inner content list */
-        --content-height: 200px;
-        display: block;
-        position: relative;
-        width: var(--width, 250px);
-      }
-      .combo-box-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-width: 100px;
-        width: 100%;
-        box-sizing: border-box;
-        background: none;
-        border: var(--border, solid 1px #e7e7e7);
-        padding: 5px 10px;
-      }
-      .combo-box-toggle span {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .combo-box-menu {
-        --max-height: none;
-      }
-      .popover-content {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .combo-box-menu-options {
-        max-height: var(--content-height);
-        overflow-y: auto;
-      }
-      .combo-box-multi-options {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .combo-box-multi-options label {
-        padding: 5px;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-      }
-      .combo-box-search {
-        padding: 5px;
-        border: var(--border, 1px solid #e7e7e7);
-      }
-      .combo-box-search input {
-        border: none;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .combo-box-search input:focus,
-      .combo-box-search input:focus-visible {
-        outline: none;
-      }
-      oui-popover {
-        width: 100%;
-      }
     `;
   }
   constructor() {
@@ -130,8 +121,7 @@ export default class ComboBox extends HTMLElement {
     }
   }
   initDOM() {
-    this.shadowRoot.appendChild(ComboBox.styles());
-    this.shadowRoot.appendChild(ComboBox.template().cloneNode(true));
+    this.shadowRoot.appendChild(ComboBox.template());
     this.toggleButton = this.shadowRoot.querySelector(".combo-box-toggle");
     this.toggleLabel = this.shadowRoot.querySelector(".combo-box-label");
     this.popoverMenu = this.shadowRoot.querySelector("oui-popover");
@@ -141,7 +131,7 @@ export default class ComboBox extends HTMLElement {
     );
     this.comboBoxSearch = this.shadowRoot.querySelector(".combo-box-search");
     this.comboBoxSearchInput = this.comboBoxSearch.querySelector("input");
-    this.allCheckbox = this.comboBoxMultiOptions.querySelector("input");
+    this.allCheckbox = this.comboBoxMultiOptions.querySelector("[name=all]");
     this.comboBoxMenuOptions = this.shadowRoot.querySelector(
       ".combo-box-menu-options",
     );
@@ -175,8 +165,9 @@ export default class ComboBox extends HTMLElement {
     });
   };
   changeSelected = () => {
-    const { selected, unselected } = this.getSelectedOptions();
+    const { all, selected, unselected } = this.getSelectedOptions();
     this.updateButtonLabel({ selected, unselected });
+    this.updateAllCheck(all);
     this.value = Array.from(selected.map((n) => n.getAttribute("value")));
     this.dispatchEvent(
       new CustomEvent("change", {
@@ -186,11 +177,16 @@ export default class ComboBox extends HTMLElement {
       }),
     );
   };
-  changeAll = (event) => {
+  changeAll = () => {
     const isSelected = this.allCheckbox.checked;
     const nodes = this.shadowRoot.querySelector("slot").assignedNodes();
+    let ignoredCount = 0;
     for (const node of nodes) {
       if (node.tagName === "OUI-OPTION") {
+        if (node.style.display === "none") {
+          ignoredCount++;
+          continue;
+        }
         node.setSelected(isSelected);
         node.classList.remove("active");
       }
@@ -208,6 +204,11 @@ export default class ComboBox extends HTMLElement {
         composed: true,
       }),
     );
+    // in the case that we have toggled a subset, its likely
+    // we want to now remove the filter, focus the box
+    if (ignoredCount > 0) {
+      this.comboBoxSearchInput.focus();
+    }
   };
   toggle = () => {
     const isExpanded =
@@ -279,15 +280,9 @@ export default class ComboBox extends HTMLElement {
     } else if (selected.length === 1) {
       toggleText.textContent = selected[0].textContent;
       this.toggleButton.title = selected[0].textContent;
-      if (unselected.length) {
-        this.allCheckbox.checked = true;
-        this.allCheckbox.style.opacity = 0.5;
-      }
     } else {
       toggleText.textContent = `${selected.length} selected`;
       this.toggleButton.title = `${selected.length} selected`;
-      this.allCheckbox.checked = true;
-      this.allCheckbox.style.opacity = 0.5;
     }
   }
   getSelectedOptions() {
@@ -312,21 +307,44 @@ export default class ComboBox extends HTMLElement {
       unselected: unselectedOptions,
     };
   }
-  search = (event) => {
+  search = () => {
     const value = this.comboBoxSearchInput.value;
     const { all } = this.getSelectedOptions();
     if (!value.trim()) {
       for (const node of all) {
-        node.style.display = "flex";
+        node.style.display = "block";
       }
+      this.allCheckbox.innerHTML = "All";
       return;
     }
+    this.updateSearchVisibility(all, value);
+    this.updateAllCheck(all);
+    this.allCheckbox.innerHTML = `"${value}"`;
+  };
+  updateSearchVisibility = (all, searchValue) => {
     for (let i = 0; i < all.length; i++) {
-      if (fuzzyMatch(value, all[i].textContent)) {
-        all[i].style.display = "flex";
+      if (strirange(searchValue, all[i].innerText)) {
+        all[i].style.display = all[i]._initialDisplay || "block";
       } else {
         all[i].style.display = "none";
       }
+    }
+  };
+  updateAllCheck = (all) => {
+    let checkedCount = 0;
+    let visibleCount = 0;
+    for (let i = 0; i < all.length; i++) {
+      if (all[i].style.display !== "none") {
+        visibleCount++;
+        if (all[i].selected) {
+          checkedCount++;
+        }
+      }
+    }
+    this.allCheckbox.checked = checkedCount > 0;
+    this.allCheckbox.style.opacity = 1.0;
+    if (checkedCount > 0 && checkedCount !== visibleCount) {
+      this.allCheckbox.style.opacity = 0.5;
     }
   };
   searchKeyPress = (event) => {
@@ -336,7 +354,7 @@ export default class ComboBox extends HTMLElement {
         this.comboBoxSearchInput.value = "";
         const { all } = this.getSelectedOptions();
         for (const node of all) {
-          node.style.display = "flex";
+          node.style.display = "block";
         }
         this.comboBoxSearchInput.focus();
         return;
@@ -357,9 +375,11 @@ export default class ComboBox extends HTMLElement {
       this.keySelectMode
     ) {
       event.preventDefault();
-      const { all } = this.getSelectedOptions();
-      const visible = all.filter((n) => n.style.display !== "none");
+      const visible = this.getSelectableOptions();
       visible[this.currentIndex].toggle();
+      if (this.currentIndex === 0) {
+        this.changeAll();
+      }
       this.changeSelected();
       this.comboBoxSearchInput.focus();
       return;
@@ -380,18 +400,20 @@ export default class ComboBox extends HTMLElement {
         nextIndex = currentIndex - 1;
       }
       if (nextIndex < 0) {
-        nextIndex = all.length - 1;
+        nextIndex = all.length;
       }
-      if (nextIndex >= all.length) {
+      if (nextIndex > all.length) {
         nextIndex = 0;
       }
       this.currentIndex = nextIndex;
+      if (this.currentIndex == 0) {
+        this.allCheckbox.active = true;
+      } else {
+        this.allCheckbox.active = false;
+      }
       for (const i in visible) {
-        if (i == this.currentIndex) {
-          visible[i].classList.add("active");
-        } else {
-          visible[i].classList.remove("active");
-        }
+        const index = parseInt(i, 10) + 1;
+        visible[i].active = index === this.currentIndex;
       }
       return;
     }
@@ -400,13 +422,21 @@ export default class ComboBox extends HTMLElement {
       this.currentIndex = null;
       const { all } = this.getSelectedOptions();
       for (const node of all) {
-        node.classList.remove("active");
+        node.active = false;
       }
+      this.allCheckbox.active = false;
     }
   };
+
+  getSelectableOptions() {
+    const { all } = this.getSelectedOptions();
+    let visible = all.filter((n) => n.style.display !== "none");
+    visible.unshift(this.allCheckbox);
+    return visible;
+  }
 }
 
-function fuzzyMatch(query, subject) {
+function strirange(query, subject) {
   const queryLower = query.toLowerCase();
   const subjectLower = subject.toLowerCase();
   const subMatch = subjectLower.indexOf(queryLower);

@@ -24,7 +24,7 @@ test("keyboard access", async ({ page }) => {
   await expect(page.getByText("3 Selected")).toBeVisible();
   await page.keyboard.press(" ");
   await expect(page.getByText("Authors (All)")).toBeVisible();
-  await page.getByLabel("All").click();
+  await page.locator("oui-check").getByText("All").click();
   await page.getByPlaceholder("Search").focus();
   await page.keyboard.type("cor");
   await page.keyboard.press("ArrowDown");
@@ -41,4 +41,19 @@ test("performance of slotted queries", async ({ page }) => {
   await expect(page.getByText("Item 1", { exact: true })).toBeVisible();
   const endTime = await page.evaluate(() => Date.now());
   expect(endTime - startTime).toBeLessThan(10_000);
+});
+
+test("toggle subset at once", async ({ page }) => {
+  await page.goto("/src/elements/combo-box.html#template-artists");
+  await page.locator("oui-combo-box").click();
+  await page.getByText("Nine Inch Nails").click();
+  await page.getByPlaceholder("Search").focus();
+  await page.keyboard.type("head");
+  await page.getByText(`"head"`, { exact: true }).click();
+  await page.getByText(`"head"`, { exact: true }).click();
+  await page.getByPlaceholder("Search").focus();
+  await page.keyboard.press("Escape");
+  await expect(
+    page.getByText(JSON.stringify(["rh", "nin", "ph"])),
+  ).toBeVisible();
 });

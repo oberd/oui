@@ -1,6 +1,5 @@
-import { html, css, appendNode } from "./lib/html.js";
-
-import "./icon.js";
+import { html, css, appendNode } from "../lib/html.js";
+import "../icon.js";
 
 class VideoSlice extends HTMLElement {
   /** @type {import("@ffmpeg/ffmpeg").FFmpeg} */
@@ -247,15 +246,16 @@ class VideoSlice extends HTMLElement {
     ]);
 
     const ffmpeg = new FFmpeg({ log: true });
-    await ffmpeg.load({
+    const ffmpegUrls = {
       coreURL: coreUrl,
       wasmURL: coreWasmUrl,
       workerURL: workerUrl,
-      classWorkerURL: new URL(workerUrl, import.meta.url).toString(),
-    });
+    };
+    await ffmpeg.load(ffmpegUrls);
     return (this.#ffmpeg = ffmpeg);
   }
   setError(err) {
+    console.error(err);
     this.#statusLine.textContent = String(err);
     this.#statusLine.classList.add("error");
   }

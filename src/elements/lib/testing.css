@@ -1,0 +1,14 @@
+html,
+body {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+section {
+    display: flex;
+    justify-content: center;
+}
+test-nav {
+    margin-bottom: 1rem;
+}

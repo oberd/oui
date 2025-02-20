@@ -2,23 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <script type="module" src="./lib/testing.js"></script>
+        <link rel="stylesheet" href="../lib/testing.css" />
+        <script type="module" src="../lib/testing.js"></script>
         <script type="module" src="./video-slice.js"></script>
         <style>
-            html,
             body {
-                font-family: "Comic Sans", sans-serif;
-                font-size: 14px;
-                margin: 0;
-                padding: 0;
+                padding: 20px;
             }
             oui-video-slice {
-                width: 100vw;
-                height: 100vh;
+                width: 100%;
             }
         </style>
     </head>
     <body>
+        <test-nav></test-nav>
         <oui-video-slice></oui-video-slice>
     </body>
 </html>

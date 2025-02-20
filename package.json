@@ -2,7 +2,7 @@
   "name": "@oberd/oui",
   "version": "0.0.1",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && vite build -c vite.config.video.js",
     "dev": "vite",
     "test": "npm run build-test && BASE_URL=http://localhost:4173 playwright test",
     "test-ui": "BASE_URL=http://localhost:5173 playwright test --ui",
@@ -10,7 +10,8 @@
     "preview-test": "vite preview -c vite.config.test.js",
     "ci": "npm run build-test && start-server-and-test 'preview-test' http://localhost:4173",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test:browser": "vitest --workspace=vitest.workspace.js"
   },
   "files": [
     "dist"
@@ -18,9 +19,12 @@
   "devDependencies": {
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.4",
+    "@vitest/browser": "^3.0.6",
     "http-server": "^14.1.1",
+    "playwright": "1.50.*",
     "start-server-and-test": "^2.0.10",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vitest": "^3.0.6"
   },
   "main": "./dist/oui.umd.js",
   "module": "./dist/oui.mjs",
@@ -28,6 +32,10 @@
     ".": {
       "import": "./dist/oui.mjs",
       "require": "./dist/oui.umd.js"
+    },
+    "./video": {
+      "import": "./dist/oui-video.mjs",
+      "require": "./dist/oui-video.umd.js"
     }
   },
   "dependencies": {
