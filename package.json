@@ -1,6 +1,6 @@
 {
   "name": "@oberd/oui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "clean": "node -e \"import fs from 'node:fs'; ['dist', 'dist-test', 'test-results'].forEach((d) => { try {fs.rmdir(d, { recursive: true, force: true })}catch(e) {}});\"",
     "build": "npm run clean && vite build && vite build -c vite.config.video.js",
