@@ -2,7 +2,8 @@
   "name": "@oberd/oui",
   "version": "0.0.3",
   "scripts": {
-    "build": "vite build && vite build -c vite.config.video.js",
+    "clean": "node -e \"import fs from 'node:fs'; ['dist', 'dist-test', 'test-results'].forEach((d) => { try {fs.rmdir(d, { recursive: true, force: true })}catch(e) {}});\"",
+    "build": "npm run clean && vite build && vite build -c vite.config.video.js",
     "dev": "vite",
     "test": "npm run build-test && BASE_URL=http://localhost:4173 playwright test",
     "test-ui": "BASE_URL=http://localhost:5173 playwright test --ui",
